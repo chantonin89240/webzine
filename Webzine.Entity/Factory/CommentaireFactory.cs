@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Webzine.Entity.Factory
 {
-    public class CommentaireFactory
+    public static class CommentaireFactory
     {
-        public IEnumerable<Commentaire> CreateCommentaire()
+        public static IEnumerable<Commentaire> CreateCommentaire()
         {
             return new List<Commentaire>()
             {
