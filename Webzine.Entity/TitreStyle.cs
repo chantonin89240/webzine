@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Webzine.Entity
 {
-    public class Style
+    public class TitreStyle
     {
+        public int IdTitre { get; set; }
         public int IdStyle { get; set; }
-        public string Libelle { get; set; }
-        public List<TitreStyle> TitresStyles { get; set; }
     }
 }
