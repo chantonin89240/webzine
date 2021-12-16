@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Webzine.Entity.Factory
 {
-    public class StyleFactory
+    public static class StyleFactory
     {
-        public IEnumerable<Style> CreateStyle()
+        public static IEnumerable<Style> CreateStyle()
         {
             return new List<Style>()
             {

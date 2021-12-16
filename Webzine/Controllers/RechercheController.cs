@@ -11,7 +11,7 @@ namespace Webzine.WebApplication.Controllers
             RechercheViewModel model = new RechercheViewModel();
             model.SearchedItem = searchedItem;
 
-
+            //model.Rechercher()
 
 
             return View(model);
