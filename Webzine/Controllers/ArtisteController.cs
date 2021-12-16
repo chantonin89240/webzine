@@ -7,6 +7,7 @@ namespace Webzine.WebApplication.Controllers
         public IActionResult Artiste()
         {
             return View();
+
         }
     }
 }
