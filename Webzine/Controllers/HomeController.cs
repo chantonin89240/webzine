@@ -12,7 +12,19 @@ namespace Webzine.Controllers
         }
 
         // GET: HomeController/Details/5
-        public ActionResult Details(int id)
+          public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        //GET: HomeController/Artiste
+        public IActionResult Artiste()
+        {
+            return View();
+        }
+
+        //GET: HomeController/Contact
+        public IActionResult Contact()
         {
             return View();
         }
