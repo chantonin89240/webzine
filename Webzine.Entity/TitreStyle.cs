@@ -8,7 +8,7 @@ namespace Webzine.Entity
 {
     public class TitreStyle
     {
-        public int IdTitre { get; set; }
         public int IdStyle { get; set; }
+        public int IdTitre { get; set; }
     }
 }
