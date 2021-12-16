@@ -12,7 +12,7 @@ namespace Webzine.Entity.Factory
         {
             return new List<Artiste>()
             {
-                new Artiste{IdArtiste = 1, Nom = "m", Biographie = "sf"}
+                //new Artiste{IdArtiste = 1, Nom = "m", Biographie = "sf"}
             };
         }
     }

@@ -10,5 +10,6 @@ namespace Webzine.Entity
     {
         public int IdStyle { get; set; }
         public string Libelle { get; set; }
+        public string TitresStyles { get; set; }
     }
 }
