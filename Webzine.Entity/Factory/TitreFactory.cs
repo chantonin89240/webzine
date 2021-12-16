@@ -12,8 +12,7 @@ namespace Webzine.Entity.Factory
         {
             return new List<Titre>()
             {
-                //new Titre{IdTitre = 1, Libelle = "queen", ContenuChronique = "blabla", ImageJacquette = "", Lien = "",
-                    //DateCreation = new DateTime(2021-12-10), DateSortie =  new DateTime(2021-12-11), Duree = 180, CompteurLecture = 20, CompteurLike = 7 }
+                new Titre{IdTitre = 1, IdArtiste = 1, Artiste = new Artiste(), Libelle = "queen", Chronique = "blabla", UrlJaquette = "", UrlEcoute = "", Lien = "",DateCreation = new DateTime(2021-12-10), DateSortie =  new DateTime(2021-12-11), Duree = 180, NbLectures = 20, NbLikes = 7, Commentaires = new List<Commentaire>(), TitresStyles = new List<TitreStyle>()}
             };
         }
     }
