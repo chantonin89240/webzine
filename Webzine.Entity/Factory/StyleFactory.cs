@@ -12,9 +12,9 @@ namespace Webzine.Entity.Factory
         {
             return new List<Style>()
             {
-                new Style{IdStyle = 1, Libelle = "pop"},
-                new Style{IdStyle = 2, Libelle = "jazz"},
-                new Style{IdStyle = 3, Libelle = "rock"}
+                //new Style{IdStyle = 1, Libelle = "pop"},
+                //new Style{IdStyle = 2, Libelle = "jazz"},
+                //new Style{IdStyle = 3, Libelle = "rock"}
             };
         }
     }
