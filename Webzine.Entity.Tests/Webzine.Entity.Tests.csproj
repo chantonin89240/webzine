@@ -17,5 +17,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Webzine.Entity\Webzine.Entity.csproj" />
   </ItemGroup>
-
+	
 </Project>

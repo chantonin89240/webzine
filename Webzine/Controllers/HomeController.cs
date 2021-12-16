@@ -1,27 +1,27 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Webzine.Entity;
+using Webzine.Entity.Factory;
 
 namespace Webzine.Controllers
 {
     public class HomeController : Controller
     {
+        public Titre[] Titres => TitreFactory.CreateTitre().ToArray();
         // GET: HomeController
-        public ActionResult Index()
+        public IActionResult Index()
         {
-            return View();
+            var ListeTitres = this.Titres;
+            return View(ListeTitres);
         }
 
         // GET: HomeController/Details/5
-        public ActionResult Details(int id)
+        public IActionResult Details(int id)
         {
+            var model = this.Titre.First(style => style.IdStyle == id);
             return View();
         }
 
-        // GET: HomeController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
         // POST: HomeController/Create
         [HttpPost]
