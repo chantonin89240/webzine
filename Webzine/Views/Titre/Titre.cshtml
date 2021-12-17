@@ -1,28 +1,28 @@
 ﻿@{
 
 }
-@using Webzine.Entity
-@model Titre
 
-<h1 class="ArtisteChronique"><a href="#">@Model.Artiste.Nom</a> - @Model.Libelle</h1>
+
+
+<h1 class="ArtisteChronique"><a href="#">@Model.Titre.Artiste.Nom</a> - @Model.Titre.Libelle</h1>
 
 <div>
 	<section class="infoTitre">
-		<p><i class="fas fa-calendar"></i>Le @Model.DateCreation</p>
-		<p><i class="fas fa-heart"></i> @Model.NbLikes</p>
+		<p><i class="fas fa-calendar"></i>Le @Model.Titre.DateCreation</p>
+		<p><i class="fas fa-heart"></i> @Model.Titre.NbLikes</p>
 		<p>
 			Style :
-			@*@if (@Model.TitresStyles.Count != 0)
+			@if (@Model.stylesTitre.Count != 0)
 			{
-				foreach (TitreStyle style in @Model.TitresStyles)
+				foreach (var style in @Model.stylesTitre)
 				{
-					<a href="#">@style.TitresStyles</a>
+					<a href="#">@style.Libelle</a>
 				}
 			}
 			else
 			{
 				<a href="#">il n'y a pas de style ! en ajouter</a>
-			}*@
+			}
 		</p>
 		<p><a href="#">Like</a></p>
 		<p><a href="#">Editer</a></p>
@@ -30,12 +30,12 @@
 
 </div>
 
-<div class="divImgChronique">
-	<img class="imgJaquetteTitre" src="@Model.UrlJaquette" alt="Img Titre" />
-	<p>@Model.Chronique</p>
+<div class="divImgChronique mb-4">
+	<img class="imgJaquetteTitre  mb-4" src="@Model.Titre.UrlJaquette" alt="Img Titre" />
+	<p>@Model.Titre.Chronique</p>
 </div>
 
-<iframe class="VideoEcoute" src="@Model.UrlEcoute" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="VideoEcoute" src="@Model.Titre.UrlEcoute" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <div class="formCommentaire">
 	<h2>Donne ton avis sur le titre</h2>
@@ -64,9 +64,9 @@
 
 <h2>Commentaires</h2>
 <div class="listeCommentaire">
-	@if (@Model.Commentaires.Count != 0)
+	@if (@Model.Titre.Commentaires.Count != 0)
 	{
-		@foreach (Commentaire leCommentaire in @Model.Commentaires)
+		@foreach (var leCommentaire in @Model.Titre.Commentaires)
 		{
 			<p>il y a des commentaire</p>
 		}

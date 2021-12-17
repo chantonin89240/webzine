@@ -7,11 +7,27 @@ namespace Webzine.WebApplication.ViewModels
     {
         public List<Titre> Titres { get; set; }
         public string LibelleStyle { get; set; }
+        public List<Style> stylesTitre { get; set; }
+        public Titre Titre { get; set; }
 
         public Titre GetTitre(int idTitre)
         {
-            Titre titre = TitreFactory.CreateTitre().ToList().FirstOrDefault(el => el.IdTitre == idTitre);
-            return titre;
+
+            this.Titre = TitreFactory.CreateTitre().ToList().FirstOrDefault(el => el.IdTitre == idTitre);
+            
+            return Titre;
+        }
+        public List<Style> GetStyles(Titre titre)
+        {
+            List<Style> styles = StyleFactory.CreateStyle().ToList();
+            this.stylesTitre = new List<Style>();
+
+            foreach (var item in titre.TitresStyles)
+            {
+                this.stylesTitre.Add(styles.First(el => el.IdStyle == item.IdStyle));
+            }
+
+            return this.stylesTitre;
         }
 
         public IEnumerable<Titre> GetTitres(int idStyle)

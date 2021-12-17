@@ -10,8 +10,10 @@
         public IActionResult Titre(int idTitre)
         {
             TitreViewModel vm = new TitreViewModel();
-            Titre titre = vm.GetTitre(idTitre);
-            return View(titre);
+            vm.GetTitre(idTitre);
+            vm.GetStyles(vm.Titre);
+
+            return View(vm);
 
         }
         public IActionResult TitresStyle(int idStyle)
