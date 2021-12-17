@@ -7,11 +7,16 @@
 
     public class TitreController : Controller
     {
-        public IActionResult TitresStyle(int idStyle)
+        public IActionResult Titre(int idTitre)
         {
             TitreViewModel vm = new TitreViewModel();
             Titre titre = vm.GetTitre(idTitre);
             return View(titre);
+
+        }
+        public IActionResult TitresStyle(int idStyle)
+        {
+
             TitreViewModel model = new TitreViewModel();
             model.GetTitres(idStyle).ToList();
             model.GetLibelle(idStyle);

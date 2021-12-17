@@ -13,50 +13,49 @@
 	<!-- Template Bootstrap 5 -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
-      <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">Webzine</a>
+			<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Webzine</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item ">
-							<a class="nav-link" aria-current="page" href="/">
-								<i class="fas fa-home"></i>
-								<span >Accueil</span>
-							</a>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								<i class="fas fa-tools"></i>
-								<span >Administration</span>
-							</a>
-							<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-             <li><a class="dropdown-item" asp-area="Admin" asp-controller="Artiste" asp-action="Index"><i class="fas fa-users me-1"></i>Artistes</a></li>
-			 <li><a class="dropdown-item" asp-area="Admin" asp-controller="Commentaire" asp-action="Index"><i class="fas fa-comments me-1"></i>Commentaires</a></li>
-			 <li><a class="dropdown-item" asp-area="Admin" asp-controller="Style" asp-action="Index"><i class="fas fa-tags me-1"></i>Styles</a></li>
-			 <li><a class="dropdown-item" asp-area="Admin" asp-controller="Titre" asp-action="Index"><i class="fas fa-music me-1"></i>Titres</a></li>
-							</ul>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" asp-controller="Contact" asp-action="Contact">
-								<i class="fas fa-envelope"></i>
-								<span >Contact</span>
-							</a>
-						</li>
-					</ul>
-          <form class="input group d-flex" action="/Recherche" method="post">
-            <input name="searchedItem" class="form-control me-1" type="search" placeholder="Trouver un artiste/titre" aria-label="Search">
-            <button class="btn btn-primary" type="submit"><svg style="vertical-align: -0.15em;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-            </svg></button>
-					</form>
+					<li class="nav-item ">
+						<a class="nav-link" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">
+							<i class="fas fa-home"></i>
+							<span >Accueil</span>
+						</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="fas fa-tools"></i>
+							<span >Administration</span>
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+							<li><a class="dropdown-item" asp-area="Admin" asp-controller="Artiste" asp-action="Index"><i class="fas fa-users me-1"></i>Artistes</a></li>
+							<li><a class="dropdown-item" asp-area="Admin" asp-controller="Commentaire" asp-action="Index"><i class="fas fa-comments me-1"></i>Commentaires</a></li>
+							<li><a class="dropdown-item" asp-area="Admin" asp-controller="Style" asp-action="Index"><i class="fas fa-tags me-1"></i>Styles</a></li>
+							<li><a class="dropdown-item" asp-area="Admin" asp-controller="Titre" asp-action="Index"><i class="fas fa-music me-1"></i>Titres</a></li>
+						</ul>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" asp-area="" asp-controller="Contact" asp-action="Contact">
+							<i class="fas fa-envelope"></i>
+							<span >Contact</span>
+						</a>
+					</li>
+				</ul>
+				<form class="input group d-flex" action="/Recherche" method="post">
+					<input name="searchedItem" class="form-control me-1" type="search" placeholder="Trouver un artiste/titre" aria-label="Search">
+					<button class="btn btn-primary" type="submit">
+						<i class="fas fa-search"></i>
+					</button>
+				</form>
 			</div>
 		</div>
 	</nav>
 
 	<div>
-        @RenderBody()
+		@RenderBody()
 	</div>
 
 	<!-- Pied de page -->

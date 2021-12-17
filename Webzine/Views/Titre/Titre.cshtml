@@ -1,43 +1,45 @@
-﻿@{ 
-    Layout = "_Layout"; 
+﻿@{
+
 }
 @using Webzine.Entity
 @model Titre
-		
+
 <h1 class="ArtisteChronique"><a href="#">@Model.Artiste.Nom</a> - @Model.Libelle</h1>
-		
+
 <div>
 	<section class="infoTitre">
 		<p><i class="fas fa-calendar"></i>Le @Model.DateCreation</p>
 		<p><i class="fas fa-heart"></i> @Model.NbLikes</p>
-		<p>Style : 
-			@if(@Model.TitresStyles.Count != 0)
+		<p>
+			Style :
+			@*@if (@Model.TitresStyles.Count != 0)
 			{
-				foreach(TitreStyle style in @Model.TitresStyles)
+				foreach (TitreStyle style in @Model.TitresStyles)
 				{
-					<a href="#">@Model.TitresStyles</a>
+					<a href="#">@style.TitresStyles</a>
 				}
-			}else
+			}
+			else
 			{
 				<a href="#">il n'y a pas de style ! en ajouter</a>
-			}
+			}*@
 		</p>
 		<p><a href="#">Like</a></p>
 		<p><a href="#">Editer</a></p>
 	</section>
-	
+
 </div>
 
 <div class="divImgChronique">
-	<img class="imgJaquetteTitre" src="@Model.UrlJaquette" alt="Img Titre"/>
+	<img class="imgJaquetteTitre" src="@Model.UrlJaquette" alt="Img Titre" />
 	<p>@Model.Chronique</p>
 </div>
 
 <iframe class="VideoEcoute" src="@Model.UrlEcoute" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-	
+
 <div class="formCommentaire">
 	<h2>Donne ton avis sur le titre</h2>
-	
+
 	<form action="">
 		<div class="mb-3 row">
 			<label for="nomCommentaire" class="col-sm-2 col-form-label">Nom <span style="color: red;">*</span></label>
@@ -61,18 +63,18 @@
 </div>
 
 <h2>Commentaires</h2>
-	<div class="listeCommentaire">
-		@if(@Model.Commentaires.Count != 0)
+<div class="listeCommentaire">
+	@if (@Model.Commentaires.Count != 0)
+	{
+		@foreach (Commentaire leCommentaire in @Model.Commentaires)
 		{
-			@foreach(Commentaire leCommentaire in @Model.Commentaires)
-			{
-				<p>il y a des commentaire</p>
-			}
+			<p>il y a des commentaire</p>
 		}
-		else
-		{
-			<p>il n'y a pas de commentaire</p>
-		}
-	</div>
+	}
+	else
+	{
+		<p>il n'y a pas de commentaire</p>
+	}
+</div>
 
-					
+

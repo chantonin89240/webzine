@@ -26,23 +26,34 @@ namespace Webzine.Entity.Factory
                     Duree = 180,
                     NbLectures = 20,
                     NbLikes = 8,
-                    Commentaires = new List<Commentaire>(),
+                    Commentaires = new List<Commentaire>()
+					{
+                        new Commentaire()
+                        {
+                            IdCommentaire = 1,
+                            Auteur = "michelle",
+                            Contenu = "lorem ipsum",
+                            DateCreation = new DateTime(2021-12-11),
+                            IdTitre = 1,
+                            Titre = new Titre(),
+                        },
+                    },
                     TitresStyles = new List<TitreStyle>()
                     {
                         new TitreStyle()
                         {
                             IdStyle = 1,
-                            IdTitre = 3,
+                            IdTitre = 1,
                         },
                         new TitreStyle()
                         {
                             IdStyle = 2,
-                            IdTitre = 3,
+                            IdTitre = 1,
                         },
                         new TitreStyle()
                         {
                             IdStyle = 3,
-                            IdTitre = 3,
+                            IdTitre = 1,
                         },
                     },
                 },
@@ -67,17 +78,17 @@ namespace Webzine.Entity.Factory
                         new TitreStyle()
                         {
                             IdStyle = 1,
-                            IdTitre = 3,
+                            IdTitre = 2,
                         },
                         new TitreStyle()
                         {
                             IdStyle = 2,
-                            IdTitre = 3,
+                            IdTitre = 2,
                         },
                         new TitreStyle()
                         {
                             IdStyle = 3,
-                            IdTitre = 3,
+                            IdTitre = 2,
                         },
                     },
                 },
@@ -228,15 +239,6 @@ namespace Webzine.Entity.Factory
                     },
                 },
             };
-        }
-
-        public static IEnumerable<Titre> StyleTitres(int idStyle)
-        {
-            return new List<Titre>()
-            {
-
-            };
-
         }
     }
 }
