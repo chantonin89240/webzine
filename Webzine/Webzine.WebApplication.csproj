@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\lib\fontawesome-free-5.15.4\**" />
+    <Content Remove="wwwroot\lib\fontawesome-free-5.15.4\**" />
+    <EmbeddedResource Remove="wwwroot\lib\fontawesome-free-5.15.4\**" />
+    <None Remove="wwwroot\lib\fontawesome-free-5.15.4\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="C:\Users\Kriqx\.nuget\packages\bootstrap\5.1.2\contentFiles\any\any\wwwroot\css\bootstrap-grid.css" />
     <Content Remove="C:\Users\Kriqx\.nuget\packages\bootstrap\5.1.2\contentFiles\any\any\wwwroot\css\bootstrap-grid.css.map" />
     <Content Remove="C:\Users\Kriqx\.nuget\packages\bootstrap\5.1.2\contentFiles\any\any\wwwroot\css\bootstrap-grid.min.css" />
@@ -56,6 +63,7 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\ViewModels\" />
+    <Folder Include="Areas\Admin\Views\Style\" />
     <Folder Include="wwwroot\lib\bootstrap5\css\" />
     <Folder Include="wwwroot\lib\bootstrap5\js\" />
   </ItemGroup>
@@ -63,7 +71,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,23 +2,25 @@
 
 }
 
-<h2>Derniers titres chroniqués</h2>
+<h2 class="mb-3">Derniers titres chroniqués</h2>
 <ul style="list-style: none;">
-    <li>
+    @foreach(var titre in Model.Titres)
+    {
+        <li>
         <div class="card bg-light mb-3">
             <div class="row">
                 <div class="col-3 col-md-3 col-sm-3">
-                    <img src="https://static.fnac-static.com/multimedia/Images/FR/NR/b1/00/59/5832881/1540-1/tsp20140313110023/Led-Zeppelin-II.jpg" class="card-img-top" alt="...">
+                    <img src=@titre.UrlJaquette class="card-img-top" alt="...">
                 </div>
-                <div class="d-flex flex-column justify-content-between card-body col-4 col-md-4 col-sm-4">
-                    <h5 class="card-title row"><a href="" style="text-decoration: none;">Card title</a></h5>
-                    <p class="card-text row">Some quick example text to build on the card title and make up the bulk of the card's content.qkhclhlhclhqcchqlcqqlqsch</p>
+                <div class="d-flex flex-column justify-content-between card-body col-4 col-md-4 col-sm-border-4">
+                    <h5 class="card-title row"><a href="" style="text-decoration: none;">@titre.Libelle</a></h5>
+                    <p class="card-text row p-4">@titre.Chronique</p>
                     <div class="row">
-                        <a href="#" class="btn btn-primary text-nowrap col-3 col-md-3 col-sm-3 ">Lire la suite</a>
+                        <a href="#" class="btn btn-primary text-nowrap col-3 col-md-3 col-sm-3">Lire la suite</a>
                         <p class="text-nowrap col-4 col-md-4 col-sm-4 offset-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-fill" viewBox="0 0 16 16">
                                 <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z" />
-                            </svg><span style="vertical-align: middle;margin-left: 2px;font-size: small;">2021/09/12 à 12H00</span>
+                            </svg><span style="vertical-align: middle;margin-left: 2px;font-size: small;">@titre.DateSortie</span>
                         </p>
                         <p class="text-nowrap col-3 col-md-3 col-sm-9 offset-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
@@ -31,60 +33,25 @@
             </div>
         </div>
     </li>
-    <li>
-        <div class="card bg-light mb-3">
-            <div class="row">
-                <div class="col-3 col-md-3 col-sm-3">
-                    <img src="https://static.fnac-static.com/multimedia/Images/FR/NR/b1/00/59/5832881/1540-1/tsp20140313110023/Led-Zeppelin-II.jpg" class="card-img-top" alt="...">
-                </div>
-                <div class="d-flex flex-column justify-content-between card-body col-4 col-md-4 col-sm-4">
-                    <h5 class="card-title row"><a href="" style="text-decoration: none;">Card title</a></h5>
-                    <p class="card-text row">Some quick example text to build on the card title and make up the bulk of the card's content.qkhclhlhclhqcchqlcqqlqsch</p>
-                    <div class="row">
-                        <a href="#" class="btn btn-primary text-nowrap col-3 col-md-3 col-sm-3 ">Lire la suite</a>
-                        <p class="text-nowrap col-4 col-md-4 col-sm-4 offset-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-fill" viewBox="0 0 16 16">
-                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z" />
-                            </svg><span style="vertical-align: middle;margin-left: 2px;font-size: small;">2021/09/12 à 12H00</span>
-                        </p>
-                        <p class=" text-nowrap col-3 col-md-3 col-sm-9 offset-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
-                                <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
-                                <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043-7.457-7.457z" />
-                            </svg><a href=""><span style="vertical-align: middle;margin-left: 2px;">Style</span></a>
-                        </p>
-                    </div>
+    @*<li>
+        <div class="card">
+        <div class="row no-gutters">
+            <div class="col-auto">
+                <img src=@titre.UrlJaquette class="card-img" alt="" style="max-height: 296px; max-width: 300px">
+            </div>
+            <div class="col">
+                <div class="card-block px-2">
+					<a href=""><h4 class="card-title">@titre.Libelle</h4></a>
+                    <p class="card-text">@titre.Chronique</p>
+                    <a href="#" class="btn btn-primary">Lire la suite</a>
                 </div>
             </div>
         </div>
-    </li>
-    <li>
-        <div class="card bg-light mb-3">
-            <div class="row">
-                <div class="col-3 col-md-3 col-sm-3">
-                    <img src="https://static.fnac-static.com/multimedia/Images/FR/NR/b1/00/59/5832881/1540-1/tsp20140313110023/Led-Zeppelin-II.jpg" class="card-img-top" alt="...">
-                </div>
-                <div class="d-flex flex-column justify-content-between card-body col-4 col-md-4 col-sm-4">
-                    <h5 class="card-title row"><a href="" style="text-decoration: none;">Card title</a></h5>
-                    <p class="card-text row">Some quick example text to build on the card title and make up the bulk of the card's content.qkhclhlhclhqcchqlcqqlqsch</p>
-                    <div class="row">
-                        <a href="#" class="btn btn-primary text-nowrap col-3 col-md-3 col-sm-3 ">Lire la suite</a>
-                        <p class="text-nowrap col-4 col-md-4 col-sm-4 offset-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-fill" viewBox="0 0 16 16">
-                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z" />
-                            </svg><span style="vertical-align: middle;margin-left: 2px; font-size: small;">2021/09/12 à 12H00</span>
-                        </p>
-                        <p class="text-nowrap col-3 col-md-3 col-sm-9 offset-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
-                                <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
-                                <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043-7.457-7.457z" />
-                            </svg><a href=""><span style="vertical-align: middle;margin-left: 2px;">Style</span></a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </li>
+		</div>
+    </li>*@
+    }
+    
+    
 </ul>
 <div class="d-flex justify-content-between mb-3">
     <button type="button" class="btn btn-secondary">
@@ -99,40 +66,21 @@
     </button>
 </div>
 <div>
-    <h2>Titres les plus populaires</h2>
+    <h2 class="mt-4 mb-3">Titres les plus populaires</h2>
     <ul class="d-flex flex-row justify-content-between" style="list-style: none;">
+        @foreach(var titre in Model.TitresPOP)
+        {
         <li>
             <div class="card me-3 bg-light">
-                <img class="card-img-top" src="https://static.fnac-static.com/multimedia/Images/FR/NR/b1/00/59/5832881/1540-1/tsp20140313110023/Led-Zeppelin-II.jpg" alt="Card image cap">
+                <img class="card-img-top" src=@titre.UrlJaquette alt="Card image cap" style="width: 355px; height: 355px">
                 <div class="card-body">
-                    <a href="" style="text-decoration: none;">Titre</a>
+                    <a href="" style="text-decoration: none;">@titre.Libelle</a>
                     <div class="">
                         <p>par <a href="" style="text-decoration: none;">Artiste</a></p>
                     </div>
                 </div>
             </div>
         </li>
-        <li>
-            <div class="card me-3 bg-light">
-                <img class="card-img-top" src="https://static.fnac-static.com/multimedia/Images/FR/NR/b1/00/59/5832881/1540-1/tsp20140313110023/Led-Zeppelin-II.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <a href="" style="text-decoration: none;">Titre</a>
-                    <div class="">
-                        <p>par <a href="" style="text-decoration: none;">Artiste</a></p>
-                    </div>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="card me-3 bg-light">
-                <img class="card-img-top" src="https://static.fnac-static.com/multimedia/Images/FR/NR/b1/00/59/5832881/1540-1/tsp20140313110023/Led-Zeppelin-II.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <a href="" style="text-decoration: none;">Titre</a>
-                    <div class="">
-                        <p>par <a href="" style="text-decoration: none;">Artiste</a></p>
-                    </div>
-                </div>
-            </div>
-        </li>
+        }
     </ul>
 </div>
