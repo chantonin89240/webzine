@@ -4,25 +4,25 @@
 
 
 <h2>Commentaires</h2>
-<table>
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>Titre</th>
-            <th>Nom</th>
-            <th>Commentaire</th>
-            <th>Date de création</th>
-            <th>Actions</th>
+            <th class="text-center">Titre</th>
+            <th class="text-center">Nom</th>
+            <th class="text-center">Commentaire</th>
+            <th class="text-center">Date de création</th>
+            <th class="text-center">Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach(Commentaire commentaire in Model.commentaires)
+        @foreach(Commentaire commentaire in Model.Commentaires)
         {
             <tr>
-                <td><a>placeholder</a></td>
-                <td>@commentaire.Auteur</td>
-                <td>@commentaire.Contenu</td>
-                <td>@commentaire.DateCreation</td>
-                <td><a href="/Admin/Commentaire/Supprimer/@commentaire.IdCommentaire">Supprimer</a></td>
+                <td class="text-center"><a asp-area="default" href="/Titre/Titre?idTitre=@Model.Titres.FirstOrDefault(Title => Title.IdTitre == commentaire.IdTitre).IdTitre">@Model.Titres.FirstOrDefault(Title => Title.IdTitre == commentaire.IdTitre).Libelle</a></td>
+                <td class="text-center">@commentaire.Auteur</td>
+                <td class="text-center">@commentaire.Contenu</td>
+                <td class="text-center">@commentaire.DateCreation.ToString()</td>
+                <td class="d-flex justify-content-center"><a href="/Admin/Commentaire/Supprimer?id=@commentaire.IdCommentaire"><i class="fas fa-trash"></i></a></td>
             </tr>
         }
     </tbody>

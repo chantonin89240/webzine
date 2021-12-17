@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Webzine.Entity.Factory
 {
-    public class ArtisteFactory
+    public static class ArtisteFactory
     {
-        public IEnumerable<Artiste> CreateArtiste()
+        public static IEnumerable<Artiste> CreateArtiste()
         {
             return new List<Artiste>()
             {

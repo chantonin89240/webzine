@@ -9,7 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.Entity", "Webzine.E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.Entity.Tests", "Webzine.Entity.Tests\Webzine.Entity.Tests.csproj", "{9F2B9B6C-D4AC-43DF-84B8-E9C4FBBE332F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webzine.Documentation", "Webzine.Documentation\Webzine.Documentation.csproj", "{AFF5B686-CB5C-42B4-BEA1-9D9D8F766316}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.Documentation", "Webzine.Documentation\Webzine.Documentation.csproj", "{AFF5B686-CB5C-42B4-BEA1-9D9D8F766316}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{91AD2E2B-2DFE-4452-948C-CA2555C7DD5D}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

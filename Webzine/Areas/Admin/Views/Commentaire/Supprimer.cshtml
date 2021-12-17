@@ -9,21 +9,26 @@
 @model Webzine.ViewModels.DeleteCommentaireViewModel
 
 <h1>Supprimer un commentaire</h1>
-<hr/>
-@*if (Model is null)
-{
-    <h2>Erreur!</h2>
-}else{*@
-<form>
-<h3>&Ecirc;tes vous s&ucirc;r de vouloir supprimer ce commentaire?</h3>
+<hr>
+@if (Model is null){
 
-<content>
-<blockquote>@Model.Commentaire.Contenu</blockquote>
-<span>--@Model.Commentaire.Auteur ,@Model.Commentaire.DateCreation sur <a href="chronique?idTitre=@Model.Titre.IdTitre">@Model.Titre.Libelle</a> </span> @*MAKE SURE THIS WORKS!*@
-</content>
+    <h2>Erreur! Modèle nul.</h2>
+}else{
 
-<button type="submit">Supprimer</button>
-</form>
-@*}*@
+    if(Model.Commentaire is null){
+        <h2>Erreur! Commentaire nul.</h2>
+    }else{
+
+        <form action="/Commentaire/Effacer?comment=@Model.Commentaire.IdCommentaire">
+        <h3>&Ecirc;tes vous s&ucirc;r de vouloir supprimer ce commentaire?</h3>
+
+        <content class="row">
+        <blockquote class="blockquote">@Model.Commentaire.Contenu</blockquote>
+        <span class="blockquote_footer">--<strong>@Model.Commentaire.Auteur</strong> le @Model.Commentaire.DateCreation sur <em><a asp-area="default" href="/Titre/Titre?idTitre=@Model.Titre.IdTitre">@Model.Titre.Libelle</a></em> </span> 
+        
+        </content>
+        <button type="submit" class="row btn btn-danger">Supprimer</button>
+        </form>
+}   }
 <a href="/Admin/Commentaire">Retour &agrave l'administration des commentaires</a>
 
