@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Webzine.Entity;
+using Webzine.WebApplication.ViewModels;
 
 namespace Webzine.WebApplication.Controllers
 {
@@ -7,7 +9,9 @@ namespace Webzine.WebApplication.Controllers
     {
         public IActionResult Titre(int idTitre)
         {
-            return View();
+            TitreViewModel vm = new TitreViewModel();
+            Titre titre = vm.GetTitre(idTitre);
+            return View(titre);
         }
         public IActionResult AdministrationTitre()
         {
