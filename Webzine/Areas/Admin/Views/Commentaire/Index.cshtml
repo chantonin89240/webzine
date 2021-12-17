@@ -18,7 +18,7 @@
         @foreach(Commentaire commentaire in Model.Commentaires)
         {
             <tr>
-                <td class="text-center"><a asp-area="default" href="/Titre/Titre?idTitre=@Model.Titres.FirstOrDefault(Title => Title.IdTitre == commentaire.IdTitre).IdTitre">@Model.Titres.FirstOrDefault(Title => Title.IdTitre == commentaire.IdTitre).Libelle</a></td>
+                <td class="text-center"><a href="/Titre/Titre?idTitre=@Model.Titres.FirstOrDefault(Title => Title.IdTitre == commentaire.IdTitre).IdTitre">@Model.Titres.FirstOrDefault(Title => Title.IdTitre == commentaire.IdTitre).Libelle</a></td>
                 <td class="text-center">@commentaire.Auteur</td>
                 <td class="text-center">@commentaire.Contenu</td>
                 <td class="text-center">@commentaire.DateCreation.ToString()</td>

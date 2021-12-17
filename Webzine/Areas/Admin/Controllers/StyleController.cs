@@ -2,6 +2,7 @@
 
 namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class StyleController : Controller
     {
         public IActionResult Index()
