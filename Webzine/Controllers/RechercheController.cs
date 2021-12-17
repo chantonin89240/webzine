@@ -8,11 +8,8 @@ namespace Webzine.WebApplication.Controllers
         public IActionResult Index()
         {
             string searchedItem = Request.Form["searchedItem"].ToString();
-            RechercheViewModel model = new RechercheViewModel();
-            model.SearchedItem = searchedItem;
-
+            RechercheViewModel model = new RechercheViewModel(searchedItem);
             //model.Rechercher()
-
 
             return View(model);
         }
