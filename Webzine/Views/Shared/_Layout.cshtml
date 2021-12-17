@@ -26,19 +26,14 @@
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item ">
 						<a class="nav-link" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">
-							<svg style="margin-right: 0.5px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
-								<path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
-								<path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
-							</svg>
-							<span style="vertical-align: middle;">Accueil</span>
+							<i class="fas fa-home"></i>
+							<span >Accueil</span>
 						</a>
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tools" viewBox="0 0 16 16">
-								<path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.356 3.356a1 1 0 0 0 1.414 0l1.586-1.586a1 1 0 0 0 0-1.414l-3.356-3.356a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0zm9.646 10.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708zM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11z" />
-							</svg>
-							<span style="vertical-align: middle;">Administration</span>
+							<i class="fas fa-tools"></i>
+							<span >Administration</span>
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
 							<li><a class="dropdown-item" asp-area="Admin" asp-controller="Artiste" asp-action="Index"><i class="fas fa-users me-1"></i>Artistes</a></li>
@@ -49,10 +44,8 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" asp-area="" asp-controller="Contact" asp-action="Contact">
-							<svg style="margin-right: 0.5px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
-								<path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
-							</svg>
-							<span style="vertical-align: middle;">Contact</span>
+							<i class="fas fa-envelope"></i>
+							<span >Contact</span>
 						</a>
 					</li>
 				</ul>
@@ -91,7 +84,7 @@
 						@foreach (var style in LayoutViewModel.Styles)
 						{
 							<li>
-								<a href="">@style.Libelle</a>
+								<a class="text-decoration-none" href="/Titre/TitresStyle?idStyle=@style.IdStyle">@style.Libelle</a>
 							</li>
 						}
 					</ul>

@@ -28,6 +28,23 @@ namespace Webzine.Entity.Factory
                     NbLikes = 8,
                     Commentaires = new List<Commentaire>(),
                     TitresStyles = new List<TitreStyle>()
+                    {
+                        new TitreStyle()
+                        {
+                            IdStyle = 1,
+                            IdTitre = 3,
+                        },
+                        new TitreStyle()
+                        {
+                            IdStyle = 2,
+                            IdTitre = 3,
+                        },
+                        new TitreStyle()
+                        {
+                            IdStyle = 3,
+                            IdTitre = 3,
+                        },
+                    },
                 },
                 new Titre()
                 {
@@ -46,6 +63,23 @@ namespace Webzine.Entity.Factory
                     NbLikes = 7,
                     Commentaires = new List<Commentaire>(),
                     TitresStyles = new List<TitreStyle>()
+                    {
+                        new TitreStyle()
+                        {
+                            IdStyle = 1,
+                            IdTitre = 3,
+                        },
+                        new TitreStyle()
+                        {
+                            IdStyle = 2,
+                            IdTitre = 3,
+                        },
+                        new TitreStyle()
+                        {
+                            IdStyle = 3,
+                            IdTitre = 3,
+                        },
+                    },
                 },
                 new Titre()
                 {
@@ -64,7 +98,24 @@ namespace Webzine.Entity.Factory
                     NbLikes = 7,
                     Commentaires = new List<Commentaire>(),
                     TitresStyles = new List<TitreStyle>()
-                }
+                    {
+                        new TitreStyle()
+                        {
+                            IdStyle = 1,
+                            IdTitre = 3,
+                        },
+                        new TitreStyle()
+                        {
+                            IdStyle = 2,
+                            IdTitre = 3,
+                        },
+                        new TitreStyle()
+                        {
+                            IdStyle = 3,
+                            IdTitre = 3,
+                        },
+                    },
+                },
             };
         }
 
@@ -88,6 +139,23 @@ namespace Webzine.Entity.Factory
                     NbLikes = 7,
                     Commentaires = new List<Commentaire>(),
                     TitresStyles = new List<TitreStyle>()
+                    {
+                        new TitreStyle()
+                        {
+                            IdStyle = 1,
+                            IdTitre = 1,
+                        },
+                        new TitreStyle()
+                        {
+                            IdStyle = 2,
+                            IdTitre = 1,
+                        },
+                        new TitreStyle()
+                        {
+                            IdStyle = 3,
+                            IdTitre = 1,
+                        },
+                    },
                 },
                 new Titre()
                 {
@@ -106,6 +174,23 @@ namespace Webzine.Entity.Factory
                     NbLikes = 7,
                     Commentaires = new List<Commentaire>(),
                     TitresStyles = new List<TitreStyle>()
+                    {
+                        new TitreStyle()
+                        {
+                            IdStyle = 1,
+                            IdTitre = 2,
+                        },
+                        new TitreStyle()
+                        {
+                            IdStyle = 2,
+                            IdTitre = 2,
+                        },
+                        new TitreStyle()
+                        {
+                            IdStyle = 3,
+                            IdTitre = 2,
+                        },
+                    },
                 },
                 new Titre()
                 {
@@ -124,8 +209,34 @@ namespace Webzine.Entity.Factory
                     NbLikes = 7,
                     Commentaires = new List<Commentaire>(),
                     TitresStyles = new List<TitreStyle>()
-                }
+                    {
+                        new TitreStyle()
+                        {
+                            IdStyle = 1,
+                            IdTitre = 3,
+                        },
+                        new TitreStyle()
+                        {
+                            IdStyle = 2,
+                            IdTitre = 3,
+                        },
+                        new TitreStyle()
+                        {
+                            IdStyle = 3,
+                            IdTitre = 3,
+                        },
+                    },
+                },
             };
-        }    
+        }
+
+        public static IEnumerable<Titre> StyleTitres(int idStyle)
+        {
+            return new List<Titre>()
+            {
+
+            };
+
+        }
     }
 }
