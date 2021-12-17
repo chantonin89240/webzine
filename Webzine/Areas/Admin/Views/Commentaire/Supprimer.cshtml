@@ -24,7 +24,7 @@
 
         <content>
         <blockquote>@Model.Commentaire.Contenu</blockquote>
-        <span>--@Model.Commentaire.Auteur ,@Model.Commentaire.DateCreation sur <a href="chronique?idTitre=@Model.Titre.IdTitre">@Model.Titre.Libelle</a> </span> @*MAKE SURE THIS WORKS!*@
+        <span>--@Model.Commentaire.Auteur ,@Model.Commentaire.DateCreation sur <a asp-area="default" href="/Titre/Titre?idTitre=@Model.Titre.IdTitre">@Model.Titre.Libelle</a> </span> @*MAKE SURE THIS WORKS!*@
         </content>
 
         <button type="submit">Supprimer</button>
