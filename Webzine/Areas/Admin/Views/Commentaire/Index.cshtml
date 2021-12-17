@@ -15,14 +15,14 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(Commentaire commentaire in Model.commentaires)
+        @foreach(Commentaire commentaire in Model.Commentaires)
         {
             <tr>
-                <td><a>placeholder</a></td>
+                <td><a asp-area="default" href="/Titre/Titre?idTitre=@Model.Titres.FirstOrDefault(Title => Title.IdTitre == commentaire.IdTitre).IdTitre">@Model.Titres.FirstOrDefault(Title => Title.IdTitre == commentaire.IdTitre).Libelle</a></td>
                 <td>@commentaire.Auteur</td>
                 <td>@commentaire.Contenu</td>
-                <td>@commentaire.DateCreation</td>
-                <td><a href="/Admin/Commentaire/Supprimer/@commentaire.IdCommentaire">Supprimer</a></td>
+                <td>@commentaire.DateCreation.ToString()</td>
+                <td><a href="/Admin/Commentaire/Supprimer?id=@commentaire.IdCommentaire">Supprimer</a></td>
             </tr>
         }
     </tbody>

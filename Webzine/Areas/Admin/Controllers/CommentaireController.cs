@@ -1,20 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Webzine.ViewModels;
 
 namespace Webzine.WebApplication.Controllers
 {
+    [Area("Admin")]
     public class CommentaireController : Controller
     {
         public IActionResult Index()
         {
 
-            //CommentaireViewModel model = GetCommentaires()
+            CommentairesViewModel model = new CommentairesViewModel();
+            model.Generate();
 
-            return View();
+
+            return View(model);
         }
 
-        public IActionResult Supprimer()
+        public IActionResult Supprimer(int id)
         {
-            return View();
+            DeleteCommentaireViewModel model= new DeleteCommentaireViewModel();
+            model.Acquire(id);
+
+            return View(model);
         }
 
     }

@@ -6,11 +6,13 @@ namespace Webzine.ViewModels
 {
     public class CommentairesViewModel : Controller
     {
-        public List<Commentaire> commentaires { get; set; }
+        public List<Commentaire> Commentaires { get; set; }
+        public List<Titre> Titres { get; set; }
 
         public void Generate()
         {
-            commentaires = CommentaireFactory.CreateCommentaire().ToList();
+            Commentaires = CommentaireFactory.CreateCommentaire().ToList();
+            Titres = TitreFactory.CreateTitre().ToList();
             //Get all commentaires from DB
         }
     }

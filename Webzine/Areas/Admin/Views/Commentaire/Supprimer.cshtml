@@ -10,20 +10,25 @@
 
 <h1>Supprimer un commentaire</h1>
 <hr/>
-@*if (Model is null)
-{
-    <h2>Erreur!</h2>
-}else{*@
-<form>
-<h3>&Ecirc;tes vous s&ucirc;r de vouloir supprimer ce commentaire?</h3>
+@if (Model is null){
 
-<content>
-<blockquote>@Model.Commentaire.Contenu</blockquote>
-<span>--@Model.Commentaire.Auteur ,@Model.Commentaire.DateCreation sur <a href="chronique?idTitre=@Model.Titre.IdTitre">@Model.Titre.Libelle</a> </span> @*MAKE SURE THIS WORKS!*@
-</content>
+    <h2>Erreur! Modèle nul.</h2>
+}else{
 
-<button type="submit">Supprimer</button>
-</form>
-@*}*@
+    if(Model.Commentaire is null){
+        <h2>Erreur! Commentaire nul.</h2>
+    }else{
+
+        <form action="/Commentaire/Effacer?comment=@Model.Commentaire.IdCommentaire">
+        <h3>&Ecirc;tes vous s&ucirc;r de vouloir supprimer ce commentaire?</h3>
+
+        <content>
+        <blockquote>@Model.Commentaire.Contenu</blockquote>
+        <span>--@Model.Commentaire.Auteur ,@Model.Commentaire.DateCreation sur <a href="chronique?idTitre=@Model.Titre.IdTitre">@Model.Titre.Libelle</a> </span> @*MAKE SURE THIS WORKS!*@
+        </content>
+
+        <button type="submit">Supprimer</button>
+        </form>
+}   }
 <a href="/Admin/Commentaire">Retour &agrave l'administration des commentaires</a>
 
