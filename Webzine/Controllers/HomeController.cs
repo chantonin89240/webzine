@@ -2,23 +2,24 @@
 using Microsoft.AspNetCore.Mvc;
 using Webzine.Entity;
 using Webzine.Entity.Factory;
+using Webzine.WebApplication.ViewModels;
 
 namespace Webzine.Controllers
 {
     public class HomeController : Controller
     {
-        public Titre[] Titres => TitreFactory.CreateTitre().ToArray();
+        public HomeViewModel model = new HomeViewModel();
         // GET: HomeController
         public IActionResult Index()
         {
-            var ListeTitres = this.Titres;
-            return View(ListeTitres);
+
+            return View(model);
         }
 
         // GET: HomeController/Details/5
         public IActionResult Details(int id)
         {
-            var model = this.Titre.First(style => style.IdStyle == id);
+            var model = this.model.Titres.First(style => style.IdTitre == id);
             return View();
         }
 
