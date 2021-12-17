@@ -16,16 +16,17 @@ namespace Webzine.Entity.Factory
                     IdStyle = 0,
                     Libelle =  "Tous",
                 },
-                new Style(){
-                    IdStyle = 132,
+                new Style()
+                {
+                    IdStyle = 1,
                     Libelle =  "Pop",
                 },
                 new Style(){
-                    IdStyle = 457,
+                    IdStyle = 2,
                     Libelle =  "Livres audio",
                 },
                 new Style(){
-                    IdStyle = 116,
+                    IdStyle = 3,
                     Libelle =  "Rap/Hip Hop",
                 },
                 new Style(){

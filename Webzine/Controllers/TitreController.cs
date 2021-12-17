@@ -1,13 +1,19 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Webzine.WebApplication.Controllers
+﻿namespace Webzine.WebApplication.Controllers
 {
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Webzine.Entity;
+    using Webzine.WebApplication.ViewModels;
+
     public class TitreController : Controller
     {
-        public IActionResult Titre(int idTitre)
+        public IActionResult TitresStyle(int idStyle)
         {
-            return View();
+            TitreViewModel model = new TitreViewModel();
+            model.GetTitres(idStyle).ToList();
+            model.GetLibelle(idStyle);
+
+            return this.View(model);
         }
         public IActionResult AdministrationTitre()
         {
