@@ -13,7 +13,7 @@ namespace Webzine.WebApplication.ViewModels
         public Titre GetTitre(int idTitre)
         {
 
-            this.Titre = TitreFactory.CreateTitre().ToList().FirstOrDefault(el => el.IdTitre == idTitre);
+            this.Titre = TitreFactory.CreateTitre().ToList().FirstOrDefault(titre => titre.IdTitre == idTitre);
             
             return Titre;
         }

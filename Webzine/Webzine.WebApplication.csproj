@@ -61,7 +61,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\ViewModels\" />
     <Folder Include="wwwroot\lib\bootstrap5\css\" />
     <Folder Include="wwwroot\lib\bootstrap5\js\" />
   </ItemGroup>
