@@ -11,8 +11,6 @@ namespace Webzine.WebApplication.Controllers
 
             CommentairesViewModel model = new CommentairesViewModel();
             model.Generate();
-
-
             return View(model);
         }
 
