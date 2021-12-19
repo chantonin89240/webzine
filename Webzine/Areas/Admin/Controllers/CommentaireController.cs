@@ -16,7 +16,7 @@ namespace Webzine.WebApplication.Controllers
 
         public IActionResult Supprimer(int id)
         {
-            DeleteCommentaireViewModel model= new DeleteCommentaireViewModel();
+            CommentairesViewModel model = new CommentairesViewModel();
             model.Acquire(id);
 
             return View(model);
