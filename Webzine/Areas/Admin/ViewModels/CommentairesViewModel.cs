@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Webzine.Entity;
+﻿using Webzine.Entity;
 using Webzine.Entity.Factory;
 
 namespace Webzine.ViewModels
 {
-    public class CommentairesViewModel : Controller
+    public class CommentairesViewModel
     {
         /// <summary>
         /// Renvoie ou modifie la base de commentaires utilisée

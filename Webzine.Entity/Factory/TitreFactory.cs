@@ -21,8 +21,8 @@ namespace Webzine.Entity.Factory
                     UrlJaquette = "https://img.discogs.com/B6iuYM2bOHOt4oFHSVAZT2n5_fM=/fit-in/300x300/filters:strip_icc():format(webp):mode_rgb():quality(40)/discogs-images/R-12114833-1529064355-3135.jpeg.jpg",
                     UrlEcoute = "https://www.youtube.com/embed/ow00U-slPYk",
                     Lien = "",
-                    DateCreation = new DateTime(2021-12-10),
-                    DateSortie =  new DateTime(2021-12-11),
+                    DateCreation = new DateTime(2021-07-22),
+                    DateSortie =  new DateTime(2021-07-22),
                     Duree = 180,
                     NbLectures = 20,
                     NbLikes = 8,
@@ -70,8 +70,8 @@ namespace Webzine.Entity.Factory
                     DateCreation = new DateTime(2021 - 12 - 10),
                     DateSortie = new DateTime(2021 - 12 - 11),
                     Duree = 180,
-                    NbLectures = 20,
-                    NbLikes = 7,
+                    NbLectures = 10,
+                    NbLikes = 4,
                     Commentaires = new List<Commentaire>(),
                     TitresStyles = new List<TitreStyle>()
                     {
@@ -105,8 +105,8 @@ namespace Webzine.Entity.Factory
                     DateCreation = new DateTime(2021 - 12 - 10),
                     DateSortie = new DateTime(2021 - 12 - 11),
                     Duree = 180,
-                    NbLectures = 20,
-                    NbLikes = 7,
+                    NbLectures = 345,
+                    NbLikes = 243,
                     Commentaires = new List<Commentaire>(),
                     TitresStyles = new List<TitreStyle>()
                     {
