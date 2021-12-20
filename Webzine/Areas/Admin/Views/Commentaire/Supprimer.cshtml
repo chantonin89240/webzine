@@ -1,12 +1,7 @@
 ﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-
-    
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860  
 *@
-@{
-}
-@model Webzine.ViewModels.DeleteCommentaireViewModel
+@model Webzine.ViewModels.CommentairesViewModel
 
 <div class="divSup">
     @if (Model is null){
@@ -14,7 +9,7 @@
         <h2>Erreur! Modèle nul.</h2>
     }else{
 
-        if(Model.Commentaire is null){
+        if(Model.ContextCommentaire is null){
             <h2>Erreur! Commentaire nul.</h2>
         }else{
 
@@ -24,8 +19,8 @@
 	        <hr />
 	        <div>
 		        <p class="row ms-0">Etes-vous sûr de vouloir supprimer le commentaire suivant ?</p>
-                <p>@Model.Commentaire.Contenu</p>
-                <p>-- @Model.Commentaire.Auteur le @Model.Commentaire.DateCreation sur <a href="/Titre/Titre?idTitre=@Model.Titre.IdTitre">@Model.Titre.Libelle</a></p>
+                <p>@Model.ContextCommentaire.Contenu</p>
+                <p>-- @Model.ContextCommentaire.Auteur le @Model.ContextCommentaire.DateCreation sur <a href="/Titre/Titre?idTitre=@Model.ContextTitre.IdTitre">@Model.ContextTitre.Libelle</a></p>
 
 		        <a href="#" class="btn btn-danger">Supprimer</a>
 
@@ -34,3 +29,4 @@
         }
     }
 </div>
+
