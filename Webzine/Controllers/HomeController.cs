@@ -1,27 +1,28 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Webzine.Entity;
+using Webzine.Entity.Factory;
+using Webzine.WebApplication.ViewModels;
 
 namespace Webzine.Controllers
 {
     public class HomeController : Controller
     {
+        public HomeViewModel model = new HomeViewModel();
         // GET: HomeController
-        public ActionResult Index()
+        public IActionResult Index()
         {
-            return View();
+
+            return View(model);
         }
 
         // GET: HomeController/Details/5
-        public ActionResult Details(int id)
+        public IActionResult Details(int id)
         {
+            var model = this.model.Titres.First(style => style.IdTitre == id);
             return View();
         }
 
-        // GET: HomeController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
         // POST: HomeController/Create
         [HttpPost]
@@ -79,5 +80,6 @@ namespace Webzine.Controllers
                 return View();
             }
         }
+
     }
 }

@@ -1,0 +1,17 @@
+﻿@*
+	For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class=" p-4">
+	<h2 class="mb-3">Editer un style</h2>
+	<hr />
+	<div class=" p-4">
+		<div class="input-group mb-5">
+			<label class="d-flex align-items-center me-2" for="libelleInput">Libellé<span class="text-danger">*</span></label>
+			<input type="text" class="form-control me-2 rounded" id="libelleInput" value=@Model.LibelleStyle  aria-describedby="styleCreate" />
+			<button type="submit" class="btn btn-primary rounded">Sauvegarder</button>
+		</div>
+		<a class="row text-decoration-none " href="/admin/style">Retour à l'administration des styles</a>
+	</div>
+</div>

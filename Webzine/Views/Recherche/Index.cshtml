@@ -1,0 +1,28 @@
+﻿@using Webzine.Entity
+@model Webzine.ViewModels.RechercheViewModel
+<h1>R&eacute;sultats de la recherche pour "@Model.SearchedItem"</h1>
+<hr/>
+<h2>Artistes</h2>
+
+@if (Model.Artistes.Count == 0) {
+    <content>Aucun artiste trouv&eacute</content>
+}
+else
+{
+    foreach (Artiste A in Model.Artistes)
+    {
+        <li>@A.Nom</li>
+    }
+}
+
+<h2>Titres</h2>
+@if (Model.Titres.Count == 0) {
+    <content>Aucun titre trouv&eacute</content>
+}
+else
+{
+    foreach (Titre T in Model.Titres)
+    {
+        <li>@T.Libelle</li>
+    }
+}

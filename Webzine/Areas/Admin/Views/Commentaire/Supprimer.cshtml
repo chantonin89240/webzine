@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860  
+*@
+@model Webzine.ViewModels.CommentairesViewModel
+
+<div class="divSup">
+    @if (Model is null){
+
+        <h2>Erreur! Modèle nul.</h2>
+    }else{
+
+        if(Model.ContextCommentaire is null){
+            <h2>Erreur! Commentaire nul.</h2>
+        }else{
+
+            <a href="/Admin/Commentaire">Retour &agrave l'administration des commentaires</a>
+
+            <h2>Supprimer un un commentaire</h2>
+	        <hr />
+	        <div>
+		        <p class="row ms-0">Etes-vous sûr de vouloir supprimer le commentaire suivant ?</p>
+                <p>@Model.ContextCommentaire.Contenu</p>
+                <p>-- @Model.ContextCommentaire.Auteur le @Model.ContextCommentaire.DateCreation sur <a href="/Titre/Titre?idTitre=@Model.ContextTitre.IdTitre">@Model.ContextTitre.Libelle</a></p>
+
+		        <a href="#" class="btn btn-danger">Supprimer</a>
+
+		        <a class="row text-decoration-none ms-0" href="/admin/commentaire">Retour à l'administration des commentaires</a>
+            </div>
+        }
+    }
+</div>
+

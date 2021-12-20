@@ -1,0 +1,90 @@
+﻿@{
+
+}
+
+<h1 class="ArtisteChronique"><a href="/Artiste/Artiste?idArtiste=@Model.Titre.IdArtiste">@Model.Titre.Artiste.Nom </a> - @Model.Titre.Libelle</h1>
+
+<div>
+	<section class="infoTitre">
+		<p><i class="fas fa-calendar"></i>Le @Model.Titre.DateCreation</p>
+		<p><i class="fas fa-heart"></i> @Model.Titre.NbLikes</p>
+		<p>
+			<i class="fas fa-tags"></i>
+			Style :
+			@if (@Model.stylesTitre.Count != 0)
+			{
+				foreach (var style in @Model.stylesTitre)
+				{
+					<a href="/Titre/TitresStyle?idStyle=@style.IdStyle">@style.Libelle</a>
+				}				
+			}
+			else
+			{
+				<a href="/admin/style/creation">il n'y a pas de style ! en ajouter</a>
+			}
+		</p>
+		<p class="boutonLike"><a href="#"><i class="fas fa-thumbs-up"></i> Like</a></p>
+		<p class="boutonEditer"><a href="#"><i class="fas fa-edit"></i> Editer</a></p>
+	</section>
+
+</div>
+
+<div class="divImgChronique">
+	<img class="imgJaquetteTitre" src="@Model.Titre.UrlJaquette" alt="Img Titre" />
+	<p>@Model.Titre.Chronique</p>
+</div>
+
+@if(@Model.Titre.UrlEcoute != "")
+{
+	<iframe class="VideoEcoute" src="@Model.Titre.UrlEcoute" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+}
+
+<div class="formCommentaire">
+	<h2>Donne ton avis sur le titre</h2>
+
+	<form action="">
+		<div class="mb-3 row">
+			<label for="nomCommentaire" class="col-sm-2 col-form-label">Nom <span style="color: red;">*</span></label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="nomCommentaire" required placeholder="Votre nom (exemple : Emmanuel)">
+			</div>
+		</div>
+		<div class="mb-3 row">
+			<label for="contenuCommentaire" class="col-sm-2 col-form-label">Commentaire <span style="color: red;">*</span></label>
+			<div class="col-sm-10">
+				<textarea class="form-control" id="contenuCommentaire" rows="3" required placeholder="Votre commentaire..."></textarea>
+			</div>
+		</div>
+		<div class="mb-3 row">
+			<label class="col-sm-2 col-form-label"></label>
+			<div class="col-sm-10">
+				<button type="button" class="btn btn-primary">Envoyer</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+<h2>Commentaires</h2>
+<div>
+	@if (@Model.Titre.Commentaires.Count != 0)
+	{
+		@foreach (var leCommentaire in @Model.Titre.Commentaires)
+		{
+			<div class="mb-3 row">
+				<div class="col-sm-2 iconCommentaire">
+					<i class="fas fa-user" style="width: 4em; height: 4em"></i>
+				</div>				
+				<div class="col-sm-10">
+					<p>@leCommentaire.Auteur, le @leCommentaire.DateCreation</p>
+					<p>@leCommentaire.Contenu</p>
+				</div>
+			</div>
+		}
+	}
+	else
+	{
+		<p>il n'y a pas de commentaire</p>
+	}
+</div>
+
+
