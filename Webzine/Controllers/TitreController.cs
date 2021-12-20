@@ -25,25 +25,6 @@
 
             return this.View(model);
         }
-        public IActionResult AdministrationTitre()
-        {
-            return View();
-        }
-
-        public IActionResult AjoutTitreAdmin()
-        {
-            return View();
-        }
-
-        public IActionResult EditerTitreAdmin()
-        {
-            return View();
-        }
-
-        public IActionResult SupprimerTitreAdmin()
-        {
-            return View();
-        }
 
     }
 }

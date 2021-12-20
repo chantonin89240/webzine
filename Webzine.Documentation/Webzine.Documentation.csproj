@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Installation\" />
-    <Folder Include="Rapport\" />
-  </ItemGroup>
-
 </Project>

@@ -2,28 +2,29 @@
 
 }
 
-<h1 class="ArtisteChronique"><a href="#">@Model.Titre.Artiste.Nom</a> @Model.Titre.Libelle</h1>
+<h1 class="ArtisteChronique"><a href="/Artiste/Artiste?idArtiste=@Model.Titre.IdArtiste">@Model.Titre.Artiste.Nom </a> - @Model.Titre.Libelle</h1>
 
 <div>
 	<section class="infoTitre">
 		<p><i class="fas fa-calendar"></i>Le @Model.Titre.DateCreation</p>
 		<p><i class="fas fa-heart"></i> @Model.Titre.NbLikes</p>
 		<p>
+			<i class="fas fa-tags"></i>
 			Style :
 			@if (@Model.stylesTitre.Count != 0)
 			{
 				foreach (var style in @Model.stylesTitre)
 				{
 					<a href="/Titre/TitresStyle?idStyle=@style.IdStyle">@style.Libelle</a>
-				}
+				}				
 			}
 			else
 			{
-				<a href="#">il n'y a pas de style ! en ajouter</a>
+				<a href="/admin/style/creation">il n'y a pas de style ! en ajouter</a>
 			}
 		</p>
 		<p class="boutonLike"><a href="#"><i class="fas fa-thumbs-up"></i> Like</a></p>
-		<p><a href="#">Editer</a></p>
+		<p class="boutonEditer"><a href="#"><i class="fas fa-edit"></i> Editer</a></p>
 	</section>
 
 </div>
