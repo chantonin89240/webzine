@@ -6,10 +6,8 @@ namespace Webzine.ViewModels
 {
     //using Webzine.Entity;
 
-    public class RechercheViewModel : Controller
+    public class RechercheViewModel
     {
-
-
         private string searchedItem;
 
         private List<Artiste> artistes;

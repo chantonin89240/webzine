@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Webzine.WebApplication.Areas.Admin.ViewModels;
-
-namespace Webzine.WebApplication.Areas.Admin.Controllers
+﻿namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using Webzine.WebApplication.Areas.Admin.ViewModels;
     [Area("Admin")]
+
     public class ArtisteController : Controller
     {
         public IActionResult Index()

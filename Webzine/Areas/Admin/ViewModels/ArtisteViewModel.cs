@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Webzine.Entity;
-using Webzine.Entity.Factory;
-
-namespace Webzine.WebApplication.Areas.Admin.ViewModels
+﻿namespace Webzine.WebApplication.Areas.Admin.ViewModels
 {
+    using Webzine.Entity;
+    using Webzine.Entity.Factory;
+
     public class ArtisteViewModel 
     {
         public List<Artiste> Artistes { get; set; }
