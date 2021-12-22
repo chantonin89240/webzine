@@ -32,13 +32,23 @@ a:active {
     margin: auto;
 }
 
-.divImgChronique {
-    min-height: 10em;
-    margin-bottom: 2vh;
+.boutonLike {
+    border: solid cornflowerblue 1px;
+    border-radius: 5px;
+    padding: 2px;
 }
 
-.imgJaquetteTitre{
+.divImgChronique {
+    min-height: 10em;
+    margin-bottom: 4em;
+}
+
+.imgJaquetteTitre {
     float: right;
+    margin-bottom: 0.8em;
+    margin-left: 0.8em;
+    min-height: 30vh;
+    max-height: 30vh;
 }
 
 .VideoEcoute{
@@ -55,14 +65,39 @@ a:active {
     margin-bottom: 3vh !important;
 }
 
-.listeCommentaire {
-    margin: auto;
-    width: 70%;
+.iconCommentaire{
+    text-align: right;
+}
+
+.iconCommentaire i{
+    
+}
+.contact {
+    text-align: center;
+    margin-bottom: 3em;
+    background-color: #F8F9FA;
 }
 
 @media screen and (max-width: 550px) {
     .imgJaquetteTitre {
         float: none;
         width: 100%;
+        margin-left: 0;
+        max-height: 60vh;
     }
+}
+
+/* css partie form admin editer / create */
+.formAdmin{
+    margin-bottom: 4em;
+}
+
+
+/* css partie suppression admin */
+.divSup {
+    margin: 2em;
+}
+
+.divSup a{
+    margin-bottom: 6em;
 }

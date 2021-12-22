@@ -1,8 +1,8 @@
-﻿using Webzine.Entity;
-using Webzine.Entity.Factory;
-
-namespace Webzine.WebApplication.ViewModels
+﻿namespace Webzine.WebApplication.ViewModels
 {
+    using Webzine.Entity;
+    using Webzine.Entity.Factory;
+
     public class TitreViewModel
     {
         public List<Titre> Titres { get; set; }
@@ -13,10 +13,11 @@ namespace Webzine.WebApplication.ViewModels
         public Titre GetTitre(int idTitre)
         {
 
-            this.Titre = TitreFactory.CreateTitre().ToList().FirstOrDefault(el => el.IdTitre == idTitre);
+            this.Titre = TitreFactory.CreateTitre().ToList().FirstOrDefault(titre => titre.IdTitre == idTitre);
             
             return Titre;
         }
+
         public List<Style> GetStyles(Titre titre)
         {
             List<Style> styles = StyleFactory.CreateStyle().ToList();

@@ -11,14 +11,12 @@ namespace Webzine.WebApplication.Controllers
 
             CommentairesViewModel model = new CommentairesViewModel();
             model.Generate();
-
-
             return View(model);
         }
 
         public IActionResult Supprimer(int id)
         {
-            DeleteCommentaireViewModel model= new DeleteCommentaireViewModel();
+            CommentairesViewModel model = new CommentairesViewModel();
             model.Acquire(id);
 
             return View(model);

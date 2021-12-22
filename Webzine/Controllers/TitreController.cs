@@ -9,11 +9,11 @@
     {
         public IActionResult Titre(int idTitre)
         {
-            TitreViewModel vm = new TitreViewModel();
-            vm.GetTitre(idTitre);
-            vm.GetStyles(vm.Titre);
+            TitreViewModel artiste = new TitreViewModel();
+            artiste.GetTitre(idTitre);
+            artiste.GetStyles(artiste.Titre);
 
-            return View(vm);
+            return View(artiste);
 
         }
         public IActionResult TitresStyle(int idStyle)
@@ -24,25 +24,6 @@
             model.GetLibelle(idStyle);
 
             return this.View(model);
-        }
-        public IActionResult AdministrationTitre()
-        {
-            return View();
-        }
-
-        public IActionResult AjoutTitreAdmin()
-        {
-            return View();
-        }
-
-        public IActionResult EditerTitreAdmin()
-        {
-            return View();
-        }
-
-        public IActionResult SupprimerTitreAdmin()
-        {
-            return View();
         }
 
     }
