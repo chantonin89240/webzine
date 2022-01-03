@@ -1,12 +1,17 @@
+//using Microsoft.Extensions.DependencyInjection;
+//using Webzine.Repository;
+//using Webzine.Repository.Contracts;
+
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+//builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
 
 var app = builder.Build();
+
 app.UseStaticFiles();
-
 app.UseRouting();
-
 
 app.UseEndpoints(endpoints =>
 {
