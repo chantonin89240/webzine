@@ -1,0 +1,21 @@
+﻿@{
+	@using Webzine.WebApplication.ViewModels
+}
+
+<aside class="sidebar col-xxl-2 col-xl-2 col-md-2 col-sm-12">
+	<div class="">
+		<h2>A propos</h2>
+		<p>Retrouvez les dernières pépites <br> sur notre webzine</p>
+	</div>
+	<div class="">
+		<h2>Styles</h2>
+		<ul>
+			@foreach (var style in LayoutViewModel.Styles)
+			{
+				<li>
+					<a class="text-decoration-none" href="/Titre/TitresStyle?idStyle=@style.IdStyle">@style.Libelle</a>
+				</li>
+			}
+		</ul>
+	</div>
+</aside>

@@ -6,6 +6,9 @@ using Webzine.WebApplication.ViewModels;
 
 namespace Webzine.Controllers
 {
+    /// <summary>
+    /// Page d'accueil.
+    /// </summary>
     public class HomeController : Controller
     {
         public HomeViewModel model = new HomeViewModel();

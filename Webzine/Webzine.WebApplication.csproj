@@ -61,6 +61,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Controllers\Components\Sidebar.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\lib\bootstrap5\css\" />
     <Folder Include="wwwroot\lib\bootstrap5\js\" />
   </ItemGroup>

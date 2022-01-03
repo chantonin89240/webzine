@@ -1,8 +1,6 @@
 ﻿namespace Webzine.WebApplication.Controllers
 {
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.Entity;
     using Webzine.ViewModels;
 
     public class ArtisteController : Controller
