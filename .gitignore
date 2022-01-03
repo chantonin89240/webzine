@@ -8,6 +8,12 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# File vscode
+.vscode
+
+# File Mac
+.DS_Store
+
 # User-specific files
 *.rsuser
 *.suo
