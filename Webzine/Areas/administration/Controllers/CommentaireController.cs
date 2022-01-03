@@ -3,7 +3,7 @@ using Webzine.ViewModels;
 
 namespace Webzine.WebApplication.Controllers
 {
-    [Area("Admin")]
+    [Area("administration")]
     public class CommentaireController : Controller
     {
         public IActionResult Index()
@@ -11,10 +11,10 @@ namespace Webzine.WebApplication.Controllers
 
             CommentairesViewModel model = new CommentairesViewModel();
             model.Generate();
-            return View(model);
+            return View("Commentaires",model);
         }
 
-        public IActionResult Supprimer(int id)
+        public IActionResult delete(int id)
         {
             CommentairesViewModel model = new CommentairesViewModel();
             model.Acquire(id);
