@@ -1,0 +1,125 @@
+﻿@{
+
+}
+
+<div>
+	<div class="divSup">
+	<h2>Editer un Titre</h2>
+	<hr />
+
+	<form class="formAdmin">
+		<div class="mb-3 row">
+			<label for="nomArtiste" class="col-sm-2 col-form-label">Nom de l'artiste<span style="color: red;">*</span></label>
+			<div class="col-sm-10">
+				<select class="form-select">
+					@foreach(var artiste in Model.Artistes)
+					{
+						@if(@artiste.Nom == @Model.Titre.Artiste.Nom){
+							<option value="@artiste.IdArtiste" selected>@artiste.Nom</option>		
+						}else{
+							<option value="@artiste.IdArtiste">@artiste.Nom</option>
+						}
+					}
+				</select>
+			</div>
+		</div>
+
+		<div class="mb-3 row">
+			<label for="libelleTitre" class="col-sm-2 col-form-label">Titre<span style="color: red;">*</span></label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="libelleTitre" value="@Model.Titre.Libelle" required placeholder="Libelle du Titre"></input>
+			</div>
+		</div>
+
+        <div class="mb-3 row">
+			<label for="chroniqueTitre" class="col-sm-2 col-form-label">Chronique<span style="color: red;">*</span></label>
+			<div class="col-sm-10">
+				<textarea class="form-control" id="chroniqueTitre" rows="8" required placeholder="Chronique du Titre">@Model.Titre.Chronique</textarea>
+			</div>
+		</div>
+
+        <div class="mb-3 row">
+			<label for="dateSortieTitre" class="col-sm-2 col-form-label">Date de sortie<span style="color: red;">*</span></label>
+			<div class="col-sm-4">
+				<input type="date" class="form-control" id="dateSortieTitre" value="@Model.Titre.DateSortie" required></input>
+			</div>
+
+            <label for="dureeTitre" class="col-sm-2 col-form-label">Durèe en seconde<span style="color: red;">*</span></label>
+			<div class="col-sm-4" style="display: inline-flex;">
+				<input type="number" class="form-control" id="dureeTitre" value="@Model.Titre.Duree" required></input>
+				<label class="input-group-text">Secondes</label>
+			</div>
+            
+		</div>
+
+        <div class="mb-3 row">
+			<label for="jaquetteTitre" class="col-sm-2 col-form-label">Jaquette de l'album<span style="color: red;">*</span></label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="jaquetteTitre" value="@Model.Titre.UrlJaquette" required placeholder="Jaquette de l'album"></input>
+			</div>
+		</div>
+
+        <div class="mb-3 row">
+			<label for="urlEcouteTitre" class="col-sm-2 col-form-label">URL d'écoute</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="urlEcouteTitre" value="@Model.Titre.UrlEcoute" placeholder="URL d'écoute"></input>
+			</div>
+		</div>
+
+        <div class="mb-5 row">
+			<label for="styleTitre" class="col-sm-2 col-form-label">Style</label>
+			<div class="col-sm-10">
+				<section class="row">
+					@foreach(var style in Model.Styles)
+					{
+						<div class="col-sm-4">
+							<div class="form-check">
+								@Model.Titre.TitresStyles
+								@*@if(@style.IdStyle == @Model.Titre.TitresStyles.IdStyle)
+								{
+									<input class="form-check-input" type="checkbox" checked value="@style.IdStyle" id="@style.Libelle">
+									<label class="form-check-label" for="@style.Libelle">@style.Libelle</label>
+								}
+								else
+								{
+									<input class="form-check-input" type="checkbox" value="@style.IdStyle" id="@style.Libelle">
+									<label class="form-check-label" for="@style.Libelle">@style.Libelle</label>
+								}
+
+								<input class="form-check-input" type="checkbox" value="@style.IdStyle" id="@style.Libelle">
+								<label class="form-check-label" for="@style.Libelle">@style.Libelle</label>*@
+							</div>
+						</div>
+					}
+					@foreach(var style in Model.Titre.TitresStyles)
+					{
+						<p>@style.IdStyle</p>
+					}
+				</section>
+			</div>
+		</div>
+
+		<div class="mb-3 row">
+			<label for="nbLectureTitre" class="col-sm-2 col-form-label">Nb ded lectures<span style="color: red;">*</span></label>
+			<div class="col-sm-10">
+				<p>@Model.Titre.NbLectures</p>
+			</div>
+		</div>
+
+        <div class="mb-3 row">
+			<label for="nbLikeTitre" class="col-sm-2 col-form-label">Nb de likes<span style="color: red;">*</span></label>
+			<div class="col-sm-10">
+				<p>@Model.Titre.NbLikes</p>
+			</div>
+		</div>
+
+		<div class="mb-3 row">
+			<label class="col-sm-2 col-form-label"></label>
+			<div class="col-sm-10">
+				<button type="button" class="btn btn-primary">Sauvegarder</button>
+			</div>
+		</div>
+	</form>
+
+	<a class="row text-decoration-none ms-0" href="/admin/titre">Retour à l'administration des titres</a>
+</div>
