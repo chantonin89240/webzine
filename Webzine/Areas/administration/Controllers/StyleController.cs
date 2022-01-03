@@ -3,7 +3,7 @@ using Webzine.WebApplication.ViewModels;
 
 namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("administration")]
     public class StyleController : Controller
     {
         TitreViewModel model = new TitreViewModel();

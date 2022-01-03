@@ -2,7 +2,7 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.WebApplication.Areas.Admin.ViewModels;
-    [Area("Admin")]
+    [Area("administration")]
 
     public class TitreController : Controller
     {
