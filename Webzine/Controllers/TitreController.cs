@@ -9,13 +9,15 @@
     {
         public IActionResult Titre(int idTitre)
         {
-            TitreViewModel artiste = new TitreViewModel();
-            artiste.GetTitre(idTitre);
-            artiste.GetStyles(artiste.Titre);
+            TitreViewModel model = new TitreViewModel();
+            model.GetTitre(idTitre);
+            model.GetStyles(model.Titre);
+            model.PrepareCommentaire();
 
-            return View(artiste);
+            return View(model);
 
         }
+
         public IActionResult TitresStyle(int idStyle)
         {
 
