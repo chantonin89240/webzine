@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Webzine.ViewModels;
-
-namespace Webzine.WebApplication.Controllers
+﻿namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using Webzine.ViewModels;
+
     [Area("administration")]
     public class CommentaireController : Controller
     {

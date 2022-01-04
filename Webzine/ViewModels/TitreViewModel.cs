@@ -6,15 +6,20 @@
     public class TitreViewModel
     {
         public List<Titre> Titres { get; set; }
+
         public string LibelleStyle { get; set; }
+
         public List<Style> stylesTitre { get; set; }
+
         public Titre Titre { get; set; }
+
+        public Commentaire commentaire { get; set; }
 
         public Titre GetTitre(int idTitre)
         {
 
             this.Titre = TitreFactory.CreateTitre().ToList().FirstOrDefault(titre => titre.IdTitre == idTitre);
-            
+
             return Titre;
         }
 
@@ -41,6 +46,13 @@
         {
             this.LibelleStyle = StyleFactory.CreateStyle().First(el => el.IdStyle == idStyle).Libelle;
             return this.LibelleStyle;
+        }
+
+        public void PrepareCommentaire()
+        {
+            this.commentaire = new Commentaire();
+            this.commentaire.Titre = this.Titre;
+            this.commentaire.IdTitre = this.Titre.IdTitre;
         }
     }
 }
