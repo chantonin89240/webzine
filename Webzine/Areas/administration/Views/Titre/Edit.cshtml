@@ -1,5 +1,5 @@
 ﻿@{
-
+	@model Webzine.WebApplication.Areas.Admin.ViewModels.TitreViewModel;
 }
 
 <div>
@@ -72,28 +72,20 @@
 				<section class="row">
 					@foreach(var style in Model.Styles)
 					{
-							<div class="col-sm-4">
-								<div class="form-check">
-									@*@if(@style.IdStyle == @Model.Titre.TitresStyles.IdStyle)
-									{
-										<input class="form-check-input" type="checkbox" checked value="@style.IdStyle" id="@style.Libelle">
-										<label class="form-check-label" for="@style.Libelle">@style.Libelle</label>
-									}
-									else
-									{
-										<input class="form-check-input" type="checkbox" value="@style.IdStyle" id="@style.Libelle">
-										<label class="form-check-label" for="@style.Libelle">@style.Libelle</label>
-									}*@
-
-
-								<input class="form-check-input" type="checkbox" value="@style.IdStyle" id="@style.Libelle">
-								<label class="form-check-label" for="@style.Libelle">@style.Libelle</label>
+						<div class="col-sm-4">
+							<div class="form-check">									
+								@if(@Model.Titre.TitresStyles.FirstOrDefault(s=> s.IdStyle == style.IdStyle) != null)
+								{
+									<input class="form-check-input" type="checkbox" checked value="@style.IdStyle" id="@style.Libelle">
+									<label class="form-check-label" for="@style.Libelle">@style.Libelle</label>
+								}
+								else
+								{
+									<input class="form-check-input" type="checkbox" value="@style.IdStyle" id="@style.Libelle">
+									<label class="form-check-label" for="@style.Libelle">@style.Libelle</label>
+								}
 							</div>
 						</div>
-					}
-					@foreach(var style in Model.Titre.TitresStyles)
-					{
-						<p>@style.IdStyle</p>
 					}
 				</section>
 			</div>
