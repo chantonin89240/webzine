@@ -24,26 +24,26 @@
         [MaxLength(4000)]
         public string Chronique { get; set; }
         [Required]
-        [Display(Name = "Jaquette de l'album")]
+        [Display(Name = "jaquette de l'album")]
         [MaxLength(250)]
         public string UrlJaquette { get; set; }
-        [Display(Name = "URL d'écoute")]
+        [Display(Name = "url d'écoute")]
         [MinLength(13)]
         [MaxLength(250)]
         public string UrlEcoute { get; set; }
         public string Lien { get; set; }
         [Required]
-        [Display(Name = "Date de création")]
+        [Display(Name = "date de création")]
         public DateTime DateCreation { get; set; }
         [Required]
-        [Display(Name = "Date de sortie")]
+        [Display(Name = "date de sortie")]
         public DateTime DateSortie { get; set; }
-        [Display(Name = "Durée en secondes")]
+        [Display(Name = "durée en secondes")]
         public int Duree { get; set; }
-        [Display(Name = "Nombre de lectures")]
+        [Display(Name = "nombre de lectures")]
         [Required]
         public int NbLectures { get; set; }
-        [Display(Name = "Nombre de likes")]
+        [Display(Name = "nombre de likes")]
         [Required]
         public int NbLikes { get; set; }
         public List<Commentaire> Commentaires { get; set; }

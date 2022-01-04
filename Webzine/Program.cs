@@ -1,12 +1,14 @@
+//using Microsoft.AspNetCore.Builder;
 //using Microsoft.Extensions.DependencyInjection;
-//using Webzine.Repository;
-//using Webzine.Repository.Contracts;
+using Webzine.Repository;
+using Webzine.Repository.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 //builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
+builder.Services.AddScoped<IStyleRepository, LocalStyleRepository>();
 
 var app = builder.Build();
 
