@@ -22,10 +22,10 @@
             return this.View(model);
         }
 
-        public IActionResult Edit(int IdTitre)
+        public IActionResult Edit(int id)
         {
             TitreViewModel model = new TitreViewModel();
-            model.GetTitre(IdTitre);
+            model.GetTitre(id);
             model.GetStyle(model.Titre);
             model.GetStyles();
             model.GetArtistes();
@@ -33,10 +33,10 @@
             return this.View(model);
         }
 
-        public IActionResult Suppression(int IdTitre)
+        public IActionResult Suppression(int id)
         {
             TitreViewModel model = new TitreViewModel();
-            model.GetTitre(IdTitre);
+            model.GetTitre(id);
             return this.View(model.Titre);
         }
 
