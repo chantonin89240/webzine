@@ -74,7 +74,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.1" />
@@ -86,7 +85,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Webzine.EntitiesContext\Webzine.EntitiesContext.csproj" />
     <ProjectReference Include="..\Webzine.Entity\Webzine.Entity.csproj" />
+    <ProjectReference Include="..\Webzine.Repository.Contracts\Webzine.Repository.Contracts.csproj" />
     <ProjectReference Include="..\Webzine.Repository\Webzine.Repository.csproj" />
   </ItemGroup>
 

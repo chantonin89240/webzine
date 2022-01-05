@@ -3,24 +3,25 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
+    using Webzine.Repository;
     using Webzine.WebApplication.ViewModels;
 
     public class TitreController : Controller
     {
+        
+ 
         public IActionResult Titre(int idTitre)
         {
-            TitreViewModel model = new TitreViewModel();
-            model.GetTitre(idTitre);
-            model.GetStyles(model.Titre);
-            model.PrepareCommentaire();
 
-            return View(model);
+            TitreViewModel titre = new TitreViewModel();
+            titre.GetTitre(idTitre);
+            titre.GetStyles(titre.Titre);
 
+            return this.View(titre);
         }
 
         public IActionResult TitresStyle(int idStyle)
         {
-
             TitreViewModel model = new TitreViewModel();
             model.GetTitres(idStyle).ToList();
             model.GetLibelle(idStyle);

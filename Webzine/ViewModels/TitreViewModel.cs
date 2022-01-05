@@ -2,12 +2,14 @@
 {
     using Webzine.Entity;
     using Webzine.Entity.Factory;
-
+    using Webzine.Repository;
     /// <summary>
     /// Modéle utilisé par la vue "Titre".
     /// </summary>
     public class TitreViewModel
     {
+        private LocalTitreRepository localTitreRepository = new LocalTitreRepository();
+
         public List<Titre> Titres { get; set; }
 
         public string LibelleStyle { get; set; }
@@ -23,10 +25,10 @@
 
         public Titre GetTitre(int idTitre)
         {
+            // this.Titre = TitreFactory.CreateTitre().ToList().FirstOrDefault(titre => titre.IdTitre == idTitre);
+            this.Titre = this.localTitreRepository.Find(idTitre);
 
-            this.Titre = TitreFactory.CreateTitre().ToList().FirstOrDefault(titre => titre.IdTitre == idTitre);
-
-            return Titre;
+            return this.Titre;
         }
 
         public List<Style> GetStyles(Titre titre)

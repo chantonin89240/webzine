@@ -10,7 +10,8 @@
     {
         public async Task<IViewComponentResult> InvokeAsync()
         {
-
+            var uri = HttpContext.GetRouteData();
+            Console.WriteLine(uri); 
             // du code ici, on peut faire comme dans un controller
             // à savoir, récupérer un model et le passer à la vue
             var model = LayoutViewModel.Styles;
