@@ -2,7 +2,7 @@
 	For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-	@using Webzine.WebApplication.ViewModels
+	@model Webzine.WebApplication.Areas.administration.ViewModels.StyleViewModel
 }
 <div class=" p-4">
 
@@ -18,7 +18,7 @@
 		</thead>
 		<tbody>
 
-			@foreach (var style in StyleViewModel.Styles)
+			@foreach (var style in @Model.Styles)
 			{
 				<tr>
 					<td>@style.Libelle</td>

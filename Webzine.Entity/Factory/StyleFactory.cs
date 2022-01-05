@@ -113,5 +113,27 @@
                 },
              };
         }
+
+        public static List<Style> GetStyles()
+        {
+
+            List<Style> Styles = CreateStyle().ToList();
+
+            return Styles;
+        }
+
+        public static List<Style> GetStyle(Titre titre)
+        {
+            List<Style> styles = CreateStyle().ToList();
+
+            List<Style> stylesTitre = new List<Style>();
+
+            foreach (var item in titre.TitresStyles)
+            {
+                stylesTitre.Add(styles.First(el => el.IdStyle == item.IdStyle));
+            }
+
+            return stylesTitre;
+        }
     }
 }
