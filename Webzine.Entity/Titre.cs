@@ -48,14 +48,14 @@
         /// URL de la Jaquette de l'Album lié au Titre.
         /// </summary>
         [Required]
-        [Display(Name = "Jaquette de l'album")]
+        [Display(Name = "jaquette de l'album")]
         [MaxLength(250)]
         public string UrlJaquette { get; set; }
 
         /// <summary>
         /// Lien pour écouter au Titre.
         /// </summary>
-        [Display(Name = "URL d'écoute")]
+        [Display(Name = "url d'écoute")]
         [MinLength(13)]
         [MaxLength(250)]
         public string UrlEcoute { get; set; }
@@ -69,33 +69,33 @@
         /// Date de création de la chronique du Titre.
         /// </summary>
         [Required]
-        [Display(Name = "Date de création")]
+        [Display(Name = "date de création")]
         public DateTime DateCreation { get; set; }
 
         /// <summary>
         /// Date de la sortie du Titre.
         /// </summary>
         [Required]
-        [Display(Name = "Date de sortie")]
+        [Display(Name = "date de sortie")]
         public DateTime DateSortie { get; set; }
 
         /// <summary>
         /// Durée du titre. En Secondes.
         /// </summary>
-        [Display(Name = "Durée en secondes")]
+        [Display(Name = "durée en secondes")]
         public int Duree { get; set; }
 
         /// <summary>
         /// Nombre de Lectures de la chronique du Titre.
         /// </summary>
-        [Display(Name = "Nombre de lectures")]
+        [Display(Name = "nombre de lectures")]
         [Required]
         public int NbLectures { get; set; }
 
         /// <summary>
         /// Nombre de Likes du titre.
         /// </summary>
-        [Display(Name = "Nombre de likes")]
+        [Display(Name = "nombre de likes")]
         [Required]
         public int NbLikes { get; set; }
 
