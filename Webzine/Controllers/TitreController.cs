@@ -11,12 +11,23 @@
         LocalTitreRepository LocalTitreRepository = new LocalTitreRepository();
         LocalStyleRepository LocalStyleRepository = new LocalStyleRepository();
 
-
         public IActionResult Titre(int idTitre)
         {
             Titre titre = this.LocalTitreRepository.Find(idTitre);
+            TitreViewModel model = new TitreViewModel()
+            {
+                Titre = titre,
+                stylesTitre = new List<Style>(),
+                commentaire = new Commentaire()
+                {
+                    IdTitre = titre.IdTitre,
+                    Titre = titre,
+                },
+            };
+            titre.TitresStyles.ForEach(ts => model.stylesTitre.Add(this.LocalStyleRepository.Find(ts.IdStyle)));
+            //model.PrepareCommentaire();
 
-            return this.View(titre);
+            return this.View(model);
         }
 
         //public IActionResult TitresStyle(int idStyle)
