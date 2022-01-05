@@ -3,9 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Entité représentant un Titre.
@@ -25,7 +22,7 @@
         /// <summary>
         /// Artiste ayant créé le Titre.
         /// </summary>
-        public Artiste Artiste { get; set; }
+        public Artiste? Artiste { get; set; }
 
         /// <summary>
         /// Libellé/Nom du Titre.
@@ -34,7 +31,7 @@
         [Required]
         [MinLength(1)]
         [MaxLength(200)]
-        public string Libelle { get; set; }
+        public string? Libelle { get; set; }
 
         /// <summary>
         /// Chronique liée au Titre.
@@ -42,7 +39,7 @@
         [Required]
         [MinLength(10)]
         [MaxLength(4000)]
-        public string Chronique { get; set; }
+        public string? Chronique { get; set; }
 
         /// <summary>
         /// URL de la Jaquette de l'Album lié au Titre.
@@ -50,7 +47,7 @@
         [Required]
         [Display(Name = "jaquette de l'album")]
         [MaxLength(250)]
-        public string UrlJaquette { get; set; }
+        public string? UrlJaquette { get; set; }
 
         /// <summary>
         /// Lien pour écouter au Titre.
@@ -58,12 +55,12 @@
         [Display(Name = "url d'écoute")]
         [MinLength(13)]
         [MaxLength(250)]
-        public string UrlEcoute { get; set; }
+        public string? UrlEcoute { get; set; }
 
         /// <summary>
-        /// WARN: TBD
+        /// WARN:TBD.
         /// </summary>
-        public string Lien { get; set; }
+        public string? Lien { get; set; }
 
         /// <summary>
         /// Date de création de la chronique du Titre.
@@ -110,15 +107,16 @@
         public List<TitreStyle> TitresStyles { get; set; }
 
         /// <summary>
-        /// Initialize une instance de <see cref="Titre"/>.
+        /// Initializes a new instance of the <see cref="Titre"/> class.
         /// </summary>
         public Titre()
         {
             this.Commentaires = new List<Commentaire>();
             this.TitresStyles = new List<TitreStyle>();
         }
+
         /// <summary>
-        /// Initialize une instance de <see cref="Titre"/>.
+        /// Initializes a new instance of the <see cref="Titre"/> class.
         /// </summary>
         /// <param name="idTitre">ID du Titre.</param>
         /// <param name="idArtiste">ID de l'Artiste créateur du Titre.</param>
@@ -133,7 +131,8 @@
         /// <param name="duree">Durée du Titre en Secondes.</param>
         /// <param name="nbLecture">Nombre de lectures de la chronique.</param>
         /// <param name="nbLike">Nombre de Likes du Titre.</param>
-        public Titre(int idTitre, int idArtiste, Artiste artiste, string libelle, string chronique, string urlJaquette, string urlEcoute, string lien, DateTime dateCreation , DateTime dateSortie, int duree, int nbLecture, int nbLike) : this()
+        public Titre(int idTitre, int idArtiste, Artiste artiste, string libelle, string chronique, string urlJaquette, string urlEcoute, string lien, DateTime dateCreation, DateTime dateSortie, int duree, int nbLecture, int nbLike)
+            : this()
         {
             this.IdTitre = idTitre;
             this.IdArtiste = idArtiste;

@@ -1,6 +1,7 @@
 ﻿namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Webzine.Repository;
     using Webzine.WebApplication.Areas.Admin.ViewModels;
 
     /// <summary>
@@ -9,6 +10,10 @@
     [Area("administration")]
     public class TitreController : Controller
     {
+        private LocalTitreRepository localTitreRepository = new LocalTitreRepository();
+        private LocalStyleRepository localStyleRepository = new LocalStyleRepository();
+        private LocalArtisteRepository localArtisteRepository = new LocalArtisteRepository();
+
         /// <summary>
         /// Page par défaut du controlleur: Une vue d'ensemble de tous les titres, en mode d'administration.
         /// </summary>
@@ -17,9 +22,11 @@
         /// </returns>
         public IActionResult Index()
         {
-            TitreViewModel model = new TitreViewModel();
-            model.GetTitres();
-            return this.View(model.Titres);
+            TitreViewModel model = new TitreViewModel()
+            {
+                Titres = this.localTitreRepository.FindAll().ToList(),
+            };
+            return this.View(model);
         }
 
         /// <summary>
@@ -30,10 +37,11 @@
         /// </returns>
         public IActionResult Creation()
         {
-            TitreViewModel model = new TitreViewModel();
-            //model.GetStyles();
-            model.GetArtistes();
-
+            TitreViewModel model = new TitreViewModel()
+            {
+                Artistes = this.localArtisteRepository.FindAll().ToList(),
+                Styles = this.localStyleRepository.FindAll().ToList(),
+            };
             return this.View(model);
         }
 
@@ -47,12 +55,12 @@
         /// </returns>
         public IActionResult Edit(int id)
         {
-            TitreViewModel model = new TitreViewModel();
-            model.GetTitre(id);
-           // model.GetStyle(model.Titre);
-            //model.GetStyles();
-            model.GetArtistes();
-
+            TitreViewModel model = new TitreViewModel()
+            {
+                Titre = this.localTitreRepository.Find(id),
+                Artistes = this.localArtisteRepository.FindAll().ToList(),
+                Styles = this.localStyleRepository.FindAll().ToList(),
+            };
             return this.View(model);
         }
 
@@ -66,9 +74,13 @@
         /// </returns>
         public IActionResult Suppression(int id)
         {
-            TitreViewModel model = new TitreViewModel();
-            model.GetTitre(id);
-            return this.View(model.Titre);
+            TitreViewModel model = new TitreViewModel()
+            {
+                Titre = this.localTitreRepository.Find(id),
+            };
+
+            this.localTitreRepository.Delete(model.Titre);
+            return this.View(model);
         }
 
     }

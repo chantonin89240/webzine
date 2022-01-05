@@ -17,29 +17,25 @@
             TitreViewModel model = new TitreViewModel()
             {
                 Titre = titre,
-                stylesTitre = new List<Style>(),
-                commentaire = new Commentaire()
+                StylesTitre = new List<Style>(),
+                Commentaire = new Commentaire()
                 {
                     IdTitre = titre.IdTitre,
                     Titre = titre,
                 },
             };
-            titre.TitresStyles.ForEach(ts => model.stylesTitre.Add(this.LocalStyleRepository.Find(ts.IdStyle)));
-            //model.PrepareCommentaire();
-
+            titre.TitresStyles.ForEach(ts => model.StylesTitre.Add(this.LocalStyleRepository.Find(ts.IdStyle)));
             return this.View(model);
         }
 
         public IActionResult TitresStyle(int idStyle)
         {
-            TitreViewModel model = new TitreViewModel();
-            model.Titres = this.LocalTitreRepository.
-            model.GetLibelle(idStyle);
-            List<Style> styles = new List<Style>();
-            Style style = this.LocalStyleRepository.
-
+            TitreViewModel model = new TitreViewModel()
+            {
+                LibelleStyle = this.LocalStyleRepository.Find(idStyle).Libelle,
+            };
+            model.Titres = this.LocalTitreRepository.SearchByStyle(model.LibelleStyle).ToList();
             return this.View(model);
         }
-
     }
 }
