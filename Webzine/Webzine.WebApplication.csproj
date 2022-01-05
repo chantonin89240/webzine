@@ -87,6 +87,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Webzine.Entity\Webzine.Entity.csproj" />
+    <ProjectReference Include="..\Webzine.Repository\Webzine.Repository.csproj" />
   </ItemGroup>
 
 </Project>

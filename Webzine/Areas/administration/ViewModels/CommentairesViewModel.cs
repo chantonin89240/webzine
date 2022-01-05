@@ -1,19 +1,23 @@
 ﻿using Webzine.Entity;
 using Webzine.Entity.Factory;
+using Webzine.Repository;
 
 namespace Webzine.ViewModels
 {
     public class CommentairesViewModel
     {
+
+        private LocalCommentaireRepository _commentaireRepository;
+
         /// <summary>
         /// Renvoie ou modifie la base de commentaires utilisée
         /// </summary>
-        public List<Commentaire> Commentaires { get; set; }
+        public List<Commentaire> commentaires { get; set; }
 
         /// <summary>
         /// Renvoie ou modifie la base de titres utilisée
         /// </summary>
-        public List<Titre> Titres { get; set; }
+        public List<Titre> titres { get; set; }
 
         /// <summary>
         /// Remplit toute la base du viewModel avec les données des Factory correspondant.
@@ -21,20 +25,22 @@ namespace Webzine.ViewModels
         /// </summary>
         public void Generate()
         {
-            Commentaires = CommentaireFactory.CreateCommentaire().ToList();
-            Titres = TitreFactory.CreateTitre().ToList();
+            _commentaireRepository = new LocalCommentaireRepository();
 
-            // Get all commentaires from DB HERE
+            commentaires = _commentaireRepository.FindAll().ToList();
+            titres = TitreFactory.CreateTitre().ToList();
+
         }
+
         /// <summary>
         /// Récupère ou modifie le commentaire de la vue
         /// </summary>
-        public Commentaire ContextCommentaire { get; set; }
+        public Commentaire contextCommentaire { get; set; }
 
         /// <summary>
         /// Récupère ou modifie le titre associé au commentaire
         /// </summary>
-        public Titre ContextTitre { get; set; }
+        public Titre contextTitre { get; set; }
 
         /// <summary>
         /// Récupère un commentaire et son titre correspondant
@@ -42,11 +48,14 @@ namespace Webzine.ViewModels
         /// <param name="id"> ID du commentaire </param>
         public void Acquire(int id)
         {
-            List<Commentaire> commentaires = CommentaireFactory.CreateCommentaire().ToList();
-            List<Titre> titres = TitreFactory.CreateTitre().ToList();
+            _commentaireRepository = new LocalCommentaireRepository();
 
-            ContextCommentaire = commentaires.FirstOrDefault(comment => comment.IdCommentaire == id);
-            ContextTitre = titres.FirstOrDefault(title => title.IdTitre == ContextCommentaire.IdTitre);
+            titres = TitreFactory.CreateTitre().ToList();
+
+            contextCommentaire = _commentaireRepository.Find(id);
+
+            // ContextTitre = titreRepository.Find(ContextCommentaire.IdTitre);
+            contextTitre = titres.FirstOrDefault(title => title.IdTitre == contextCommentaire.IdTitre);
 
         }
     }
