@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Webzine.ViewModels;
-
-namespace Webzine.WebApplication.Controllers
+﻿namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using Webzine.ViewModels;
+    using Webzine.Repository;
+
     [Area("administration")]
     public class CommentaireController : Controller
     {
@@ -11,7 +12,7 @@ namespace Webzine.WebApplication.Controllers
 
             CommentairesViewModel model = new CommentairesViewModel();
             model.Generate();
-            return View("Commentaires",model);
+            return this.View(model);
         }
 
         public IActionResult delete(int id)
@@ -19,7 +20,7 @@ namespace Webzine.WebApplication.Controllers
             CommentairesViewModel model = new CommentairesViewModel();
             model.Acquire(id);
 
-            return View(model);
+            return this.View(model);
         }
 
     }

@@ -9,7 +9,7 @@
         <h2>Erreur! Modèle nul.</h2>
     }else{
 
-        if(Model.ContextCommentaire is null){
+        if(Model.contextCommentaire is null){
             <h2>Erreur! Commentaire nul.</h2>
         }else{
 
@@ -19,12 +19,12 @@
 	        <hr />
 	        <div>
 		        <p class="row ms-0">Etes-vous sûr de vouloir supprimer le commentaire suivant ?</p>
-                <p>@Model.ContextCommentaire.Contenu</p>
-                <p>-- @Model.ContextCommentaire.Auteur le @Model.ContextCommentaire.DateCreation sur <a href="/Titre/Titre?idTitre=@Model.ContextTitre.IdTitre">@Model.ContextTitre.Libelle</a></p>
+                <p>@Model.contextCommentaire.Contenu</p>
+                <p>-- @Model.contextCommentaire.Auteur le @Model.contextCommentaire.DateCreation sur <a href="/Titre/Titre?idTitre=@Model.contextTitre.IdTitre">@Model.contextTitre.Libelle</a></p>
 
 		        <a href="#" class="btn btn-danger">Supprimer</a>
 
-		        <a class="row text-decoration-none ms-0" href="/administration/commentaires">Retour à l'administration des commentaires</a>
+		        <a class="row text-decoration-none ms-0" href="/administration/commentaire">Retour à l'administration des commentaires</a>
             </div>
         }
     }
