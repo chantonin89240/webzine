@@ -8,8 +8,6 @@
     /// </summary>
     public class TitreViewModel
     {
-        private LocalTitreRepository localTitreRepository = new LocalTitreRepository();
-
         public List<Titre> Titres { get; set; }
 
         public string LibelleStyle { get; set; }
@@ -23,37 +21,34 @@
         /// </summary>
         public Commentaire commentaire { get; set; }
 
-        public Titre GetTitre(int idTitre)
+        public Titre DisplayTitre(Titre titre)
         {
-            // this.Titre = TitreFactory.CreateTitre().ToList().FirstOrDefault(titre => titre.IdTitre == idTitre);
-            this.Titre = this.localTitreRepository.Find(idTitre);
-
-            return this.Titre;
+            return titre;
         }
 
         public List<Style> GetStyles(Titre titre)
         {
             List<Style> styles = StyleFactory.CreateStyle().ToList();
-            this.stylesTitre = new List<Style>();
+            stylesTitre = new List<Style>();
 
             foreach (var item in titre.TitresStyles)
             {
-                this.stylesTitre.Add(styles.First(el => el.IdStyle == item.IdStyle));
+               stylesTitre.Add(styles.First(el => el.IdStyle == item.IdStyle));
             }
 
-            return this.stylesTitre;
+            return stylesTitre;
         }
 
         public IEnumerable<Titre> GetTitres(int idStyle)
         {
-            this.Titres = TitreFactory.CreateTitre2().ToList().FindAll(titre => titre.TitresStyles.Exists(ts => ts.IdStyle == idStyle));
+            Titres = TitreFactory.CreateTitre2().ToList().FindAll(titre => titre.TitresStyles.Exists(ts => ts.IdStyle == idStyle));
             return Titres;
         }
 
         public string GetLibelle(int idStyle)
         {
-            this.LibelleStyle = StyleFactory.CreateStyle().First(el => el.IdStyle == idStyle).Libelle;
-            return this.LibelleStyle;
+            LibelleStyle = StyleFactory.CreateStyle().First(el => el.IdStyle == idStyle).Libelle;
+            return LibelleStyle;
         }
 
         /// <summary>
@@ -61,9 +56,9 @@
         /// </summary>
         public void PrepareCommentaire()
         {
-            this.commentaire = new Commentaire();
-            this.commentaire.Titre = this.Titre;
-            this.commentaire.IdTitre = this.Titre.IdTitre;
+            commentaire = new Commentaire();
+            commentaire.Titre = Titre;
+            commentaire.IdTitre = Titre.IdTitre;
         }
     }
 }
