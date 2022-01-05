@@ -25,6 +25,10 @@ namespace Webzine.Repository
         {
             return Titres.First(t => t.IdTitre == idTitre);
         }
+        public IEnumerable<Titre> FindAll()
+        {
+            return Titres;
+        }
         public IEnumerable<Titre> FindTitres(int offset, int limit)
         {
             return Titres.Skip(limit).Take(offset).ToList();
