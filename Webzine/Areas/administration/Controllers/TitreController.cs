@@ -31,7 +31,7 @@
         public IActionResult Creation()
         {
             TitreViewModel model = new TitreViewModel();
-            model.GetStyles();
+            //model.GetStyles();
             model.GetArtistes();
 
             return this.View(model);
@@ -49,8 +49,8 @@
         {
             TitreViewModel model = new TitreViewModel();
             model.GetTitre(id);
-            model.GetStyle(model.Titre);
-            model.GetStyles();
+           // model.GetStyle(model.Titre);
+            //model.GetStyles();
             model.GetArtistes();
 
             return this.View(model);
