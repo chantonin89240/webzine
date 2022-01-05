@@ -6,7 +6,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     [Area("administration")]
     public class StyleController : Controller
     {
-        TitreViewModel model = new TitreViewModel();
+        
         public IActionResult Index()
         {
             return View();
@@ -19,15 +19,16 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
 
         public IActionResult Edit(int idStyle)
         {
-            this.model.GetLibelle(idStyle);
+            TitreViewModel viewModel = new TitreViewModel();
 
-            return View(model);
+            return View(viewModel.GetLibelle(idStyle));
         }
 
         public IActionResult Suppression(int idStyle)
         {
-            this.model.GetLibelle(idStyle);
-            return View(model);
+            TitreViewModel viewModel = new TitreViewModel();
+
+            return View(viewModel.GetLibelle(idStyle));
         }
     }
 }

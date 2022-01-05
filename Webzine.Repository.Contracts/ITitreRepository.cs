@@ -8,6 +8,7 @@ namespace Webzine.Repository.Contracts
         int Count();
         void Delete(Titre titre);
         Titre Find(int idTitre);
+        IEnumerable<Titre> FindAll();
         IEnumerable<Titre> FindTitres(int offset, int limit);
         void IncrementNbLectures(Titre titre);
         void IncrementNbLikes(Titre titre);

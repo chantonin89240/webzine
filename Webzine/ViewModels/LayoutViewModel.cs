@@ -1,4 +1,4 @@
-﻿using Webzine.Entity;
+﻿ using Webzine.Entity;
 using Webzine.Entity.Factory;
 
 namespace Webzine.WebApplication.ViewModels
