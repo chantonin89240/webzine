@@ -30,16 +30,16 @@
             return this.View(model);
         }
 
-        //public IActionResult TitresStyle(int idStyle)
-        //{
-        //    TitreViewModel model = new TitreViewModel();
-        //    model.GetTitres(idStyle).ToList();
-        //    model.GetLibelle(idStyle);
-        //    List<Style> styles = new List<Style>();
-        //    Style style = this.LocalStyleRepository.
+        public IActionResult TitresStyle(int idStyle)
+        {
+            TitreViewModel model = new TitreViewModel();
+            model.Titres = this.LocalTitreRepository.
+            model.GetLibelle(idStyle);
+            List<Style> styles = new List<Style>();
+            Style style = this.LocalStyleRepository.
 
-        //    return this.View(model);
-        //}
+            return this.View(model);
+        }
 
     }
 }

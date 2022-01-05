@@ -41,8 +41,7 @@
             var style = this.LocalStyleRepository.Find(idStyle);
 
             var model = new StyleViewModel()
-            {
-                
+            {               
                 Style = style
             };
             return this.View(model);
