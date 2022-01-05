@@ -11,9 +11,9 @@
 		<p>
 			<i class="fas fa-tags"></i>
 			Style :
-			@if (@Model.stylesTitre.Count != 0)
+			@if (@Model.StylesTitre.Count != 0)
 			{
-				foreach (var style in @Model.stylesTitre)
+				foreach (var style in @Model.StylesTitre)
 				{
 					<a href="/Titre/TitresStyle?idStyle=@style.IdStyle">@style.Libelle</a>
 				}				
@@ -42,7 +42,7 @@
 <div class="formCommentaire">
 	<h2>Donne ton avis sur le titre</h2>
 
-	 @await Html.PartialAsync("_Commentaire.cshtml",@Model.commentaire)
+	 @await Html.PartialAsync("_Commentaire.cshtml",@Model.Commentaire)
 </div>
 
 <h2>Commentaires</h2>

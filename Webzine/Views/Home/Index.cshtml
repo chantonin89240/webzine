@@ -4,27 +4,27 @@
 
 <h2 class="mb-3">Derniers titres chroniqués</h2>
 <ul class="list-unstyled">
-	@foreach (var titre in Model.Titres)
+	@for(var i = 0; i < 2; i++)
 	{
 		<li>
 			<div class="card bg-light mb-3">
 				<div class="row">
 					<div class="col-3 col-md-3 col-sm-3">
-						<img src=@titre.UrlJaquette class="card-img-top" alt="...">
+						<img src=@Model.Titres[@i].UrlJaquette class="card-img-top" alt="...">
 					</div>
 					<div class="d-flex flex-column justify-content-between card-body col-4 col-md-4 col-sm-border-4">
-						<h5><a href="/Artiste/Artiste?idArtiste=@titre.IdArtiste">@titre.Artiste.Nom</a> - <a href="/Titre/Titre?idTitre=@titre.IdTitre">@titre.Libelle</a></h5>
-						<p class="card-text row p-4">@titre.Chronique.Substring(0, 250) ...</p>
+						<h5><a href="/Artiste/Artiste?idArtiste=@Model.Titres[@i].IdArtiste">@Model.Titres[@i].Artiste.Nom</a> - <a href="/Titre/Titre?idTitre=@Model.Titres[@i].IdTitre">@Model.Titres[@i].Libelle</a></h5>
+						<p class="card-text row p-4">@Model.Titres[@i].Chronique.Substring(0, 250) ...</p>
 						<div class="row">
-							<a href="/Titre/Titre?idTitre=@titre.IdTitre" class="btn btn-primary text-nowrap col-3 col-md-3 col-sm-3">Lire la suite</a>
+							<a href="/Titre/Titre?idTitre=@Model.Titres[@i].IdTitre" class="btn btn-primary text-nowrap col-3 col-md-3 col-sm-3">Lire la suite</a>
 							<p class="text-nowrap col-4 col-md-4 col-sm-4 offset-1">
-								<i class="fas fa-calendar"></i><span class="ms-1">@titre.DateSortie</span>
+								<i class="fas fa-calendar"></i><span class="ms-1">@Model.Titres[@i].DateSortie</span>
 							</p>
 							<p class="text-nowrap col-3 col-md-3 col-sm-9 offset-1">
 								<i class="fas fa-tags"></i> Style : 
-								@*@if (@titre.stylesTitre.Count != 0)
+								@*if (titre.stylesTitre.Count != 0)
 								{
-									foreach (var style in @titre.stylesTitre)
+									@foreach (var style in titre.stylesTitre)
 									{
 										<a href="#"><span class="ms-1"></span></a>
 									}				
@@ -43,16 +43,16 @@
 			@*<div class="card bg-light mb-3" style="">
 				<div class="row g-0">
 					<div class="col-md-4 col-sm-12">
-						<img src=@titre.UrlJaquette class="card-img-top rounded-start" alt="..." style="max-width: 330px; min-width: 275px;">
+						<img src=titre.UrlJaquette class="card-img-top rounded-start" alt="..." style="max-width: 330px; min-width: 275px;">
 					</div>
 					<div class="col-md-8">
 						<div class="card-body">
-							<h5 class="card-title"><a class="text-decoration-none" href="">@titre.Libelle</a></h5>
-							<p class="card-text row p-4">@titre.Chronique.Substring(0, 250) ...</p>
+							<h5 class="card-title"><a class="text-decoration-none" href="">titre.Libelle</a></h5>
+							<p class="card-text row p-4">titre.Chronique.Substring(0, 250) ...</p>
 							<div class="row">
 								<a href="#" class="btn btn-primary text-nowrap col-3 col-md-3 col-sm-3">Lire la suite</a>
 								<p class="text-nowrap col-4 col-md-4 col-sm-4 offset-1">
-									<i class="fas fa-calendar"></i><span class="ms-1">@titre.DateSortie</span>
+									<i class="fas fa-calendar"></i><span class="ms-1">titre.DateSortie</span>
 								</p>
 								<p class="text-nowrap col-3 col-md-3 col-sm-9 offset-1">
 									<i class="fas fa-tags"></i><a href=""><span class="ms-1">Style</span></a>
@@ -67,12 +67,12 @@
 			<div class="card">
 			<div class="row no-gutters">
 			<div class="col-auto">
-			<img src=@titre.UrlJaquette class="card-img" alt="" style="max-height: 296px; max-width: 300px">
+			<img src=titre.UrlJaquette class="card-img" alt="" style="max-height: 296px; max-width: 300px">
 			</div>
 			<div class="col">
 			<div class="card-block px-2">
-			<a href=""><h4 class="card-title">@titre.Libelle</h4></a>
-			<p class="card-text">@titre.Chronique</p>
+			<a href=""><h4 class="card-title">titre.Libelle</h4></a>
+			<p class="card-text">titre.Chronique</p>
 			<a href="#" class="btn btn-primary">Lire la suite</a>
 			</div>
 			</div>
@@ -98,13 +98,14 @@
 <div>
 	<h2 class="mt-4 mb-3">Titres les plus populaires</h2>
 	<ul class="d-flex flex-row justify-content-between list-unstyled">
-		@foreach (var titre in Model.TitresPOP)
+		@for(int i=2; i<5; i++)
+		//foreach (var titre in Model.TitresPOP)
 		{
 			<li>
 				<div class="card me-3 bg-light">
-					<img class="card-img-top" src=@titre.UrlJaquette alt="Card image cap" style="width: 355px; height: 355px">
+					<img class="card-img-top" src=@Model.Titres[@i].UrlJaquette alt="Card image cap" style="width: 355px; height: 355px">
 					<div class="card-body">
-						<a href="" style="text-decoration: none;">@titre.Libelle</a>
+						<a href="" style="text-decoration: none;">@Model.Titres[@i].Libelle</a>
 						<div class="">
 							<p>par <a href="" style="text-decoration: none;">Artiste</a></p>
 						</div>

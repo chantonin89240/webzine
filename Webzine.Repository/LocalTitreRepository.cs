@@ -6,8 +6,8 @@ namespace Webzine.Repository
 {
     public class LocalTitreRepository : ITitreRepository
     {
-        public List<Titre> Titres = TitreFactory.CreateTitre().ToList();
-        public List<Style> Styles = StyleFactory.CreateStyle().ToList();
+        private List<Titre> Titres = TitreFactory.CreateTitre().ToList();
+        private List<Style> Styles = StyleFactory.CreateStyle().ToList();
 
         public void Add(Titre titre)
         {
@@ -29,7 +29,6 @@ namespace Webzine.Repository
         {
             return Titres;
         }
-
         public IEnumerable<Titre> FindTitres(int offset, int limit)
         {
             return Titres.Skip(limit).Take(offset).ToList();
