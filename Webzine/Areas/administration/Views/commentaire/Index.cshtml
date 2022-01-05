@@ -14,11 +14,11 @@
             </tr>
         </thead>
 		<tbody>
-        @foreach(Commentaire commentaire in Model.Commentaires)
+        @foreach(Commentaire commentaire in Model.commentaires)
         {
             <tr>
-                <td class="text-center"><a href="/Titre/Titre?idTitre=@Model.Titres.FirstOrDefault(Title => Title.IdTitre == commentaire.IdTitre).IdTitre">
-                    @Model.Titres.FirstOrDefault(Title => Title.IdTitre == commentaire.IdTitre).Libelle</a>
+                <td class="text-center"><a href="/Titre/Titre?idTitre=@Model.titres.FirstOrDefault(Title => Title.IdTitre == commentaire.IdTitre).IdTitre">
+                    @Model.titres.FirstOrDefault(Title => Title.IdTitre == commentaire.IdTitre).Libelle</a>
                     </td>
                 <td>@commentaire.Auteur</td>
                 <td>@commentaire.Contenu</td>

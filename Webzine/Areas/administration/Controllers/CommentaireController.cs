@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.ViewModels;
+    using Webzine.Repository;
 
     [Area("administration")]
     public class CommentaireController : Controller
@@ -11,7 +12,7 @@
 
             CommentairesViewModel model = new CommentairesViewModel();
             model.Generate();
-            return View("Commentaires",model);
+            return this.View(model);
         }
 
         public IActionResult delete(int id)
@@ -19,7 +20,7 @@
             CommentairesViewModel model = new CommentairesViewModel();
             model.Acquire(id);
 
-            return View(model);
+            return this.View(model);
         }
 
     }
