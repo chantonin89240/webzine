@@ -2,6 +2,7 @@
 {
     using Webzine.Entity;
     using Webzine.Entity.Factory;
+    using Webzine.Repository;
 
     public class TitreViewModel
     {
@@ -10,17 +11,18 @@
         public List<Style> stylesTitre { get; set; }
         public Titre Titre { get; set; }
 
+        LocalStyleRepository LocalStyleRepository = new LocalStyleRepository();
+
         public Titre GetTitre(int idTitre)
         {
 
             this.Titre = TitreFactory.CreateTitre().ToList().FirstOrDefault(titre => titre.IdTitre == idTitre);
-            
             return Titre;
         }
 
         public List<Style> GetStyles(Titre titre)
         {
-            List<Style> styles = StyleFactory.CreateStyle().ToList();
+            List<Style> styles = LocalStyleRepository.FindAll().ToList();
             this.stylesTitre = new List<Style>();
 
             foreach (var item in titre.TitresStyles)
@@ -39,7 +41,7 @@
 
         public string GetLibelle(int idStyle)
         {
-            this.LibelleStyle = StyleFactory.CreateStyle().First(el => el.IdStyle == idStyle).Libelle;
+            this.LibelleStyle = LocalStyleRepository.Find(idStyle).Libelle;
             return this.LibelleStyle;
         }
     }
