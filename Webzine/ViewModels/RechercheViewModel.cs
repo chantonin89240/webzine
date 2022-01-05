@@ -40,20 +40,11 @@ namespace Webzine.ViewModels
             titres = new List<Titre>();
         }
 
-        /// <summary>
-        /// Génère une recherche automatique à partir d'une chaine clé.
-        /// </summary>
-        /// <param name="search">
-        /// La chaine de charactères à rechercher dans les données.
-        /// </param>
-        public RechercheViewModel(string search)
+        public RechercheViewModel(List<Artiste> artistes, List<Titre> titres, string search)
         {
-            artistes = new List<Artiste>();
-            titres = new List<Titre>();
-
-            searchedItem = search;
-            titres = TitreFactory.CreateTitre().ToList().FindAll(titre => titre.Libelle.ToLower().IndexOf(search.ToLower()) != -1);
-            artistes = ArtisteFactory.CreateArtiste().ToList().FindAll(artiste => artiste.Nom.ToLower().IndexOf(search.ToLower()) != -1);
+            this.searchedItem = search;
+            this.artistes = artistes;
+            this.titres = titres;
         }
 
     }
