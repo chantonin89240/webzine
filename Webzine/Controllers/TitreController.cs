@@ -8,10 +8,11 @@
 
     public class TitreController : Controller
     {
-        private LocalTitreRepository LocalTitreRepository = new LocalTitreRepository();
+        
  
         public IActionResult Titre(int idTitre)
         {
+
             TitreViewModel titre = new TitreViewModel();
             titre.GetTitre(idTitre);
             titre.GetStyles(titre.Titre);

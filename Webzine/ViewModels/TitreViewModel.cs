@@ -6,7 +6,7 @@
 
     public class TitreViewModel
     {
-        private LocalTitreRepository LocalTitreRepository = new LocalTitreRepository();
+        private LocalTitreRepository localTitreRepository = new LocalTitreRepository();
 
         public List<Titre> Titres { get; set; }
 
@@ -19,9 +19,9 @@
         public Titre GetTitre(int idTitre)
         {
             // this.Titre = TitreFactory.CreateTitre().ToList().FirstOrDefault(titre => titre.IdTitre == idTitre);
-            this.Titre = LocalTitreRepository.Find(idTitre);
+            this.Titre = this.localTitreRepository.Find(idTitre);
 
-            return Titre;
+            return this.Titre;
         }
 
         public List<Style> GetStyles(Titre titre)
