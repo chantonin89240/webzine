@@ -4,7 +4,7 @@ using Webzine.Entity;
 
 namespace Webzine.Repository
 {
-    internal class DbTitreRepository : ICommentaireRepository
+    internal class DbCommentaireRepository : ICommentaireRepository
     {
         public void Add(Commentaire commentaire)
         {
