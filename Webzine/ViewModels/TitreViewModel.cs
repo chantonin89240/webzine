@@ -3,6 +3,9 @@
     using Webzine.Entity;
     using Webzine.Entity.Factory;
 
+    /// <summary>
+    /// Modéle utilisé par la vue "Titre".
+    /// </summary>
     public class TitreViewModel
     {
         public List<Titre> Titres { get; set; }
@@ -13,6 +16,9 @@
 
         public Titre Titre { get; set; }
 
+        /// <summary>
+        /// Commentaire utilisé pour gérer l'envoi d'un commentaire au serveur.
+        /// </summary>
         public Commentaire commentaire { get; set; }
 
         public Titre GetTitre(int idTitre)
@@ -48,6 +54,9 @@
             return this.LibelleStyle;
         }
 
+        /// <summary>
+        /// Génère les données du commentaire après que le modèle soit préparé.
+        /// </summary>
         public void PrepareCommentaire()
         {
             this.commentaire = new Commentaire();
