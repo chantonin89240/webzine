@@ -1,9 +1,8 @@
-﻿using Webzine.Repository.Contracts;
-using Webzine.Entity;
-
-
-namespace Webzine.Repository
+﻿namespace Webzine.Repository
 {
+    using Webzine.Repository.Contracts;
+    using Webzine.Entity;
+
     internal class DbCommentaireRepository : ICommentaireRepository
     {
         public void Add(Commentaire commentaire)

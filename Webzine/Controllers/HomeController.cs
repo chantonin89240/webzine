@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Webzine.Entity;
-using Webzine.Entity.Factory;
-using Webzine.Repository;
-using Webzine.WebApplication.ViewModels;
-
-namespace Webzine.Controllers
+﻿namespace Webzine.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using Webzine.Repository;
+    using Webzine.WebApplication.ViewModels;
+
     /// <summary>
     /// Page d'accueil.
     /// </summary>

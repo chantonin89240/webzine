@@ -1,8 +1,8 @@
-﻿ using Webzine.Entity;
-using Webzine.Entity.Factory;
-
-namespace Webzine.WebApplication.ViewModels
+﻿namespace Webzine.WebApplication.ViewModels
 {
+    using Webzine.Entity;
+    using Webzine.Entity.Factory;
+
     public class StyleViewModel
     {
         public List<Style> Styles { get; set; }

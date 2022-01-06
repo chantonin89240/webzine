@@ -1,8 +1,8 @@
-﻿using Webzine.Entity;
-using Webzine.Entity.Factory;
-
-namespace Webzine.WebApplication.ViewModels
+﻿namespace Webzine.WebApplication.ViewModels
 {
+    using Webzine.Entity;
+    using Webzine.Entity.Factory;
+
     public class HomeViewModel
     {
         public List<Titre> Titres { get;  } = TitreFactory.CreateTitre().ToList();

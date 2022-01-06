@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace Webzine.WebApplication.Controllers
+﻿namespace Webzine.WebApplication.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+
     public class ContactController : Controller
     {
         public IActionResult Contact()
