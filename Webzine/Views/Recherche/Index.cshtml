@@ -1,5 +1,8 @@
 ﻿@using Webzine.Entity
 @model Webzine.ViewModels.RechercheViewModel
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 <h1>R&eacute;sultats de la recherche pour "@Model.SearchedItem"</h1>
 <hr/>
 <h2>Artistes</h2>
@@ -11,7 +14,7 @@ else
 {
     foreach (Artiste A in Model.Artistes)
     {
-        <li>@A.Nom</li>
+        <li class="list-unstyled"><i class="fas fa-user puce"></i><a asp-controller="Artiste" asp-action="Artiste" asp-route-id="@A.IdArtiste">@A.Nom</a></li>
     }
 }
 
@@ -21,8 +24,25 @@ else
 }
 else
 {
-    foreach (Titre T in Model.Titres)
-    {
-        <li>@T.Libelle</li>
-    }
+    <ul class="list-unstyled">
+        @foreach (Titre titre in Model.Titres)
+        {
+            <li class="media">
+                <a asp-controller="Titre" asp-action="Titre" asp-route-id="@titre.IdTitre">
+                    <img src=@titre.UrlJaquette class="icon mr-3" alt="..."/>
+                </a>
+                <div class="media-body">
+                    <a asp-controller="Titre" asp-action="Titre" asp-route-id="@titre.IdTitre">
+                        <h5 class="mt-0 mb-1">@titre.Libelle</h5>
+                    </a>
+                    Durée : @Model.FormatLength(titre)
+                </div>
+            </li>    
+        }
+    </ul>
 }
+
+<style>
+    .icon { max-width:60px; max-height:60px; margin-bottom:10px }
+    .puce { margin-right:5px;}
+</style>

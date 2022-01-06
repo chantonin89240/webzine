@@ -47,5 +47,21 @@ namespace Webzine.ViewModels
             this.titres = titres;
         }
 
+        /// <summary>
+        /// Formats the length of a title to m:ss format
+        /// </summary>
+        /// <param name="t">title to format</param>
+        /// <returns>mm:ss format.</returns>
+        public string FormatLength(Titre t)
+        {
+            string output = ((t.Duree - (t.Duree % 60)) / 60) + ":";
+            if (t.Duree % 60 < 60)
+            {
+                output += "0";
+            }
+
+            output += (t.Duree % 60).ToString();
+            return output;
+        }
     }
 }
