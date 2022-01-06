@@ -10,27 +10,27 @@
 
         public void Add(Style style)
         {
-            Styles.Add(style);
+            this.Styles.Add(style);
         }
 
         public void Delete(Style style)
         {
-            Styles.Remove(style);
+            this.Styles.Remove(style);
         }
 
         public Style Find(int id)
         {
-            return Styles.First(a => a.IdStyle == id);
+            return this.Styles.First(a => a.IdStyle == id);
         }
 
         public IEnumerable<Style> FindAll()
         {
-            return Styles;
+            return this.Styles;
         }
 
         public void Update(Style style)
         {
-            Styles.Find(a => a == style);
+            this.Styles.Find(a => a == style);
         }
 
     }

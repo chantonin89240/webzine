@@ -20,12 +20,12 @@
         [MinLength(1)]
         [MaxLength(50)]
         [Display(Name = "Nom de l'artiste")]
-        public string Nom { get; set; }
+        public string? Nom { get; set; }
 
         /// <summary>
         /// Biographie de l'artiste.
         /// </summary>
-        public string Biographie { get; set; }
+        public string? Biographie { get; set; }
 
         /// <summary>
         /// Liste des Titres créés par l'artiste.
@@ -33,6 +33,7 @@
         public List<Titre> Titres { get; set; }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Artiste"/> class.
         /// Initialize une instance de la classe <see cref="Artiste"/>.
         /// </summary>
         public Artiste()
@@ -41,6 +42,7 @@
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Artiste"/> class.
         /// Initialize une instance de la classe <see cref="Artiste"/>.
         /// </summary>
         /// <param name="id">ID de l'artiste.</param>

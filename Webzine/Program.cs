@@ -11,6 +11,8 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 //builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
 builder.Services.AddScoped<ITitreRepository, LocalTitreRepository>();
 
+NLog.LogManager.LoadConfiguration("nlog.config");
+
 builder.Services.AddDbContext<WebzineDbContext>(
         options => options.UseSqlite(builder.Configuration.GetConnectionString("WebzineDbContext"))
     );
@@ -29,12 +31,10 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
       name: "areas",
-      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-    );
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
     endpoints.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}"
-    );
+        pattern: "{controller=Home}/{action=Index}/{id?}");
 });
 
 app.Run();

@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Webzine.Entity;
-
-namespace Webzine.EntitiesContext
+﻿namespace Webzine.EntitiesContext
 {
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration; // a suppr si Configuration  dans onConfiguring n'est pas utilisé
+    using Webzine.Entity;
+
     public class WebzineDbContext : DbContext
     {
         // private IConfiguration Configuration;

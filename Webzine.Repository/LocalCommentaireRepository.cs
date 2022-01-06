@@ -10,30 +10,37 @@
 
         public void Add(Commentaire commentaire)
         {
-            commentaires.Add(commentaire);
+            this.commentaires.Add(commentaire);
         }
 
         public void Delete(int id)
         {
-            if (commentaires.Exists(C => C.IdCommentaire == id))
-                commentaires.Remove(commentaires.First(C => C.IdCommentaire == id));
+            if (this.commentaires.Exists(C => C.IdCommentaire == id))
+            {
+                this.commentaires.Remove(this.commentaires.First(C => C.IdCommentaire == id));
+            }
         }
 
         public Commentaire Find(int id)
         {
-            if (commentaires.Exists(C => C.IdCommentaire == id))
-                return commentaires.First(C => C.IdCommentaire == id);
-            else return new Commentaire();
+            if (this.commentaires.Exists(C => C.IdCommentaire == id))
+            {
+                return this.commentaires.First(C => C.IdCommentaire == id);
+            }
+            else
+            {
+                return new Commentaire();
+            }
         }
 
         public IEnumerable<Commentaire> FindAll()
         {
-            return commentaires;
+            return this.commentaires;
         }
 
         public LocalCommentaireRepository()
         {
-            commentaires = CommentaireFactory.CreateCommentaire().ToList();
+            this.commentaires = CommentaireFactory.CreateCommentaire().ToList();
         }
 
     }
