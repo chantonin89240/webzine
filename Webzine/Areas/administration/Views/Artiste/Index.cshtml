@@ -1,5 +1,6 @@
 ﻿@{
-	
+@model Webzine.WebApplication.Areas.Admin.ViewModels.ArtisteViewModel;
+}
 }
 
 <div class="p-4">
@@ -16,7 +17,7 @@
 		</thead>
 		<tbody>
 
-			@foreach (var artiste in Model)
+			@foreach (var artiste in @Model.Artistes)
 			{
 				<tr>
 					<td>@artiste.Nom</td>
