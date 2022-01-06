@@ -22,5 +22,7 @@
             return JsonConvert.DeserializeObject<List<T>>(json)
                 ?? throw new Exception("La liste ne doit pas être vide.");
         }
+
+        // addrange builder.services. create service provider
     }
 }
