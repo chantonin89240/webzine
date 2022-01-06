@@ -7,21 +7,22 @@
 
     public class CommentaireController : Controller
     {
-        private LocalCommentaireRepository LocalCommentaireRepository = new LocalCommentaireRepository();
+        private LocalCommentaireRepository localCommentaireRepository = new LocalCommentaireRepository();
+        private LocalTitreRepository localTitreRepository = new LocalTitreRepository();
 
         [HttpPost]
         public ActionResult Index(Commentaire model)
         {
-        
+
             if (this.ModelState.IsValid)
             {
                 // Send to Model to save into DB.
                 // WARN: IT WON'T HAVE IT'S CommentaireId SET!
                 model.DateCreation = DateTime.Now;
-                LocalCommentaireRepository.Add(model);
+                model.Titre = this.localTitreRepository.Find(model.IdTitre);
+                this.localCommentaireRepository.Add(model);
 
             }
-
             return this.Redirect("Titre/Titre?idTitre=" + model.IdTitre);
         }
     }

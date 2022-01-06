@@ -4,55 +4,119 @@
     using Webzine.Entity.Factory;
     using Webzine.Repository.Contracts;
 
+    /// <summary>
+    /// Represents the local repository for <see cref="Titre"/>s.
+    /// </summary>
     public class LocalTitreRepository : ITitreRepository
     {
-        private List<Titre> Titres = TitreFactory.CreateTitre().ToList();
-        private List<Style> Styles = StyleFactory.CreateStyle().ToList();
+        private List<Titre> titres = TitreFactory.CreateTitre().ToList();
+        private List<Style> styles = StyleFactory.CreateStyle().ToList();
 
+        /// <summary>
+        /// Adds a <see cref="Titre"/> to local repository.
+        /// </summary>
+        /// <param name="titre"><see cref="Titre"/> to add.</param>
         public void Add(Titre titre)
         {
-            Titres.Add(titre);
+            this.titres.Add(titre);
         }
-        public int Count() 
-        { 
-            return Titres.Count;
+
+        /// <summary>
+        /// Counts the amount of <see cref="Titre"/> in repository.
+        /// </summary>
+        /// <returns>how many <see cref="Titre"/>s are in the repository.</returns>
+        public int Count()
+        {
+            return this.titres.Count;
         }
+
+        /// <summary>
+        /// Deletes a <see cref="Titre"/> from the local repository.
+        /// </summary>
+        /// <param name="titre"><see cref="Titre"/> to remove.</param>
         public void Delete(Titre titre)
         {
-            Titres.Remove(titre);
+            this.titres.Remove(titre);
         }
+
+        /// <summary>
+        /// Finds a specific <see cref="Titre"/> in the local repository.
+        /// </summary>
+        /// <param name="idTitre">ID of the <see cref="Titre"/> to find.</param>
+        /// <returns><see cref="Titre"/> with given ID.</returns>
         public Titre Find(int idTitre)
         {
-            return Titres.First(t => t.IdTitre == idTitre);
+            return this.titres.First(t => t.IdTitre == idTitre);
         }
+
+        /// <summary>
+        /// Returns the entire repository of <see cref="Titre"/>s.
+        /// </summary>
+        /// <returns>whole <see cref="Titre"/> List.</returns>
         public IEnumerable<Titre> FindAll()
         {
-            return Titres;
+            return this.titres;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="offset"></param>
+        /// <param name="limit"></param>
+        /// <returns>List of <see cref="Titre"/>s.</returns>
         public IEnumerable<Titre> FindTitres(int offset, int limit)
         {
-            return Titres.Skip(limit).Take(offset).ToList();
+            return this.titres.Skip(limit).Take(offset);
         }
+
+        /// <summary>
+        /// increments the NbLectures value within a given <see cref="Titre"/>.
+        /// </summary>
+        /// <param name="titre"><see cref="Titre"/> to increment.</param>
         public void IncrementNbLectures(Titre titre)
         {
-            Titres.First(t => t == titre).NbLectures++;
+            this.titres.First(t => t == titre).NbLectures++;
         }
+
+        /// <summary>
+        /// increments the NvLikes value within a given <see cref="Titre"/>.
+        /// </summary>
+        /// <param name="titre"><see cref="Titre"/> to increment.</param>
         public void IncrementNbLikes(Titre titre)
         {
-            Titres.First(t => t == titre).NbLikes++; ;
+            this.titres.First(t => t == titre).NbLikes++; ;
         }
+
+        /// <summary>
+        /// Searches for specific <see cref="Titre"/>s which's names contain a keyword.
+        /// </summary>
+        /// <param name="mot">Keyword to search for.</param>
+        /// <returns><see cref="Titre"/>s containing given keyword.</returns>
         public IEnumerable<Titre> Search(string mot)
         {
-            return Titres.Where(t => t.Libelle.Contains(mot));
+            return this.titres.Where(t => t.Libelle.Contains(mot));
         }
+
+        /// <summary>
+        /// Searches for specific <see cref="Titre"/>s which have a specific <see cref="Style"/>.
+        /// </summary>
+        /// <param name="libelle">keyword for the <see cref="Style"/> to search for</param>
+        /// <returns><see cref="Titre"/>s with the given Style.</returns>
         public IEnumerable<Titre> SearchByStyle(string libelle)
         {
-            var idStyle = Styles.First(s => s.Libelle.Contains(libelle)).IdStyle;
-            return Titres.FindAll(t => t.TitresStyles.Exists(item => item.IdStyle == idStyle));
+            var idStyle = this.styles.First(s => s.Libelle.Contains(libelle)).IdStyle;
+            return this.titres.FindAll(t => t.TitresStyles.Exists(item => item.IdStyle == idStyle));
         }
+
+        /// <summary>
+        /// Updates a <see cref="Titre"/> based on ???.
+        /// </summary>
+        /// <param name="titre">Updated <see cref="Titre"/>.</param>
+        /// <exception cref="NotImplementedException">Not yet implemented.</exception>
         public void Update(Titre titre)
         {
-            //Titres.Find(t => t == titre).updateDbTitle(................);
+            //this.titres.Find(t => t == titre).updateDbTitle(................);
+            throw new NotImplementedException();
         }
     }
 }
