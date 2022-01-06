@@ -7,8 +7,7 @@
     public class CommentairesViewModel
     {
 
-        private LocalCommentaireRepository _commentaireRepository;
-
+        
         /// <summary>
         /// Renvoie ou modifie la base de commentaires utilisée
         /// </summary>
@@ -20,19 +19,6 @@
         public List<Titre> titres { get; set; }
 
         /// <summary>
-        /// Remplit toute la base du viewModel avec les données des Factory correspondant.
-        /// Mettre à jour dés que la BDD est en place!!!
-        /// </summary>
-        public void Generate()
-        {
-            _commentaireRepository = new LocalCommentaireRepository();
-
-            commentaires = _commentaireRepository.FindAll().ToList();
-            titres = TitreFactory.CreateTitre().ToList();
-
-        }
-
-        /// <summary>
         /// Récupère ou modifie le commentaire de la vue
         /// </summary>
         public Commentaire contextCommentaire { get; set; }
@@ -42,21 +28,23 @@
         /// </summary>
         public Titre contextTitre { get; set; }
 
-        /// <summary>
-        /// Récupère un commentaire et son titre correspondant
-        /// </summary>
-        /// <param name="id"> ID du commentaire </param>
-        public void Acquire(int id)
+        public CommentairesViewModel()
         {
-            _commentaireRepository = new LocalCommentaireRepository();
+            this.commentaires = new List<Commentaire>();
+            this.titres = new List<Titre>();
+        }
 
-            titres = TitreFactory.CreateTitre().ToList();
+        public CommentairesViewModel(IEnumerable<Commentaire> commentaires,IEnumerable<Titre> titres)
+        {
+            this.commentaires = commentaires.ToList();
+            this.titres = titres.ToList();
+        }
 
-            contextCommentaire = _commentaireRepository.Find(id);
-
-            // ContextTitre = titreRepository.Find(ContextCommentaire.IdTitre);
-            contextTitre = titres.FirstOrDefault(title => title.IdTitre == contextCommentaire.IdTitre);
-
+        public CommentairesViewModel(IEnumerable<Commentaire> commentaires, IEnumerable<Titre> titres, int idCommentaire)
+            : this(commentaires, titres)
+        {
+            contextCommentaire = this.commentaires.FirstOrDefault( C => C.IdCommentaire == idCommentaire);
+            contextTitre = this.titres.FirstOrDefault(T => T.IdTitre == contextCommentaire.IdTitre);
         }
     }
 }

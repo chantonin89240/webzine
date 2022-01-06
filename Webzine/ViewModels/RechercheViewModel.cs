@@ -40,21 +40,28 @@
             titres = new List<Titre>();
         }
 
-        /// <summary>
-        /// Génère une recherche automatique à partir d'une chaine clé.
-        /// </summary>
-        /// <param name="search">
-        /// La chaine de charactères à rechercher dans les données.
-        /// </param>
-        public RechercheViewModel(string search)
+        public RechercheViewModel(List<Artiste> artistes, List<Titre> titres, string search)
         {
-            artistes = new List<Artiste>();
-            titres = new List<Titre>();
-
-            searchedItem = search;
-            titres = TitreFactory.CreateTitre().ToList().FindAll(titre => titre.Libelle.ToLower().IndexOf(search.ToLower()) != -1);
-            artistes = ArtisteFactory.CreateArtiste().ToList().FindAll(artiste => artiste.Nom.ToLower().IndexOf(search.ToLower()) != -1);
+            this.searchedItem = search;
+            this.artistes = artistes;
+            this.titres = titres;
         }
 
+        /// <summary>
+        /// Formats the length of a title to m:ss format
+        /// </summary>
+        /// <param name="t">title to format</param>
+        /// <returns>mm:ss format.</returns>
+        public string FormatLength(Titre t)
+        {
+            string output = ((t.Duree - (t.Duree % 60)) / 60) + ":";
+            if (t.Duree % 60 < 60)
+            {
+                output += "0";
+            }
+
+            output += (t.Duree % 60).ToString();
+            return output;
+        }
     }
 }
