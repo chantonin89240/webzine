@@ -2,8 +2,8 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.WebApplication.Areas.Admin.ViewModels;
-    [Area("administration")]
 
+    [Area("administration")]
     public class ArtisteController : Controller
     {
         public IActionResult Index()

@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Webzine.ViewModels;
-
-namespace Webzine.WebApplication.Controllers
+﻿namespace Webzine.WebApplication.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using Webzine.ViewModels;
+
     public class RechercheController : Controller
     {
         public IActionResult Index()

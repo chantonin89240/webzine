@@ -1,9 +1,9 @@
-﻿using Webzine.Entity;
-using Webzine.Entity.Factory;
-using Webzine.Repository.Contracts;
-
-namespace Webzine.Repository
+﻿namespace Webzine.Repository
 {
+    using Webzine.Entity;
+    using Webzine.Entity.Factory;
+    using Webzine.Repository.Contracts;
+
     public class LocalCommentaireRepository : ICommentaireRepository
     {
         private List<Commentaire> commentaires;

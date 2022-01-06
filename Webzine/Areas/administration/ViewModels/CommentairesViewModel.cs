@@ -1,9 +1,9 @@
-﻿using Webzine.Entity;
-using Webzine.Entity.Factory;
-using Webzine.Repository;
-
-namespace Webzine.ViewModels
+﻿namespace Webzine.ViewModels
 {
+    using Webzine.Entity;
+    using Webzine.Entity.Factory;
+    using Webzine.Repository;
+
     public class CommentairesViewModel
     {
 

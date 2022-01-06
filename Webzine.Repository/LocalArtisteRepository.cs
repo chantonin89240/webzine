@@ -1,10 +1,10 @@
-﻿using Webzine.Entity;
-using Webzine.Entity.Factory;
-using Webzine.Repository.Contracts;
-
+﻿
 namespace Webzine.Repository 
 {
-   
+    using Webzine.Entity;
+    using Webzine.Entity.Factory;
+    using Webzine.Repository.Contracts;
+
     public  class LocalArtisteRepository : IArtisteRepository
     {
         public List<Artiste> Artiste = ArtisteFactory.CreateArtiste().ToList();

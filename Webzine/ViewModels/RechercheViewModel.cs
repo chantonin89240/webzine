@@ -1,9 +1,9 @@
-﻿using Webzine.Entity;
-using Microsoft.AspNetCore.Mvc;
-using Webzine.Entity.Factory;
-
-namespace Webzine.ViewModels
+﻿namespace Webzine.ViewModels
 {
+    using Microsoft.AspNetCore.Mvc;
+    using Webzine.Entity;
+    using Webzine.Entity.Factory;
+
     //using Webzine.Entity;
 
     public class RechercheViewModel

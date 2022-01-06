@@ -1,8 +1,7 @@
-﻿using Newtonsoft.Json;
-
-
-namespace Webzine.Entity.Data
+﻿namespace Webzine.Entity.Data
 {
+    using Newtonsoft.Json;
+
     /// <summary>
     /// Service d'importation des données de Factory dans la BDD.
     /// </summary>

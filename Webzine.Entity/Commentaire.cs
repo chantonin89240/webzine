@@ -59,6 +59,7 @@
         public Titre Titre { get; set; }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Commentaire"/> class.
         /// Initialize une nouvelle instance de la classe <see cref="Commentaire"/>.
         /// </summary>
         public Commentaire()
@@ -67,6 +68,7 @@
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Commentaire"/> class.
         /// Initialize une nouvelle instance de la classe <see cref="Commentaire"/>.
         /// </summary>
         /// <param name="id">Valeur d'Identification du commentaire.</param>
