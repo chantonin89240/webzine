@@ -20,5 +20,15 @@
         /// ID du Titre du lien.
         /// </summary>
         public int IdTitre { get; set; }
+
+        /// <summary>
+        /// Objet Titre.
+        /// </summary>
+        public Titre Titre { get; set; }
+
+        /// <summary>
+        /// Objet Style.
+        /// </summary>
+        public Style Style { get; set; }
     }
 }

@@ -18,6 +18,6 @@
         /// <summary>
         /// Commentaire utilisé pour gérer l'envoi d'un commentaire au serveur.
         /// </summary>
-        public Commentaire Commentaire { get; set; }
+        public Commentaire? Commentaire { get; set; }
     }
 }

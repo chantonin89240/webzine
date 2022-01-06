@@ -6,22 +6,25 @@
         {
             return new List<Style>()
              {
-                new Style(){
+                new Style()
+                {
                     IdStyle = 0,
-                    Libelle =  "Tous",
+                    Libelle = "Tous",
                 },
                 new Style()
                 {
                     IdStyle = 1,
-                    Libelle =  "Pop",
+                    Libelle = "Pop",
                 },
-                new Style(){
+                new Style()
+                {
                     IdStyle = 2,
-                    Libelle =  "Livres audio",
+                    Libelle = "Livres audio",
                 },
-                new Style(){
+                new Style()
+                {
                     IdStyle = 3,
-                    Libelle =  "Rap/Hip Hop",
+                    Libelle = "Rap/Hip Hop",
                 },
                 new Style(){
                     IdStyle = 152,

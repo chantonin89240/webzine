@@ -1,11 +1,7 @@
 ﻿namespace Webzine.Entity
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Entité pour gérer les données d'un commentaire.
@@ -28,7 +24,7 @@
         [Required]
         [MinLength(2)]
         [MaxLength(30)]
-        public string Auteur { get; set; }
+        public string? Auteur { get; set; }
 
         /// <summary>
         /// Contenu du commentaire.
@@ -38,7 +34,7 @@
         [Required]
         [MinLength(10)]
         [MaxLength(1000)]
-        public string Contenu { get; set; }
+        public string? Contenu { get; set; }
 
         /// <summary>
         /// Date de création du commentaire.

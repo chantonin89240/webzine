@@ -1,7 +1,7 @@
-﻿using Webzine.Entity;
-
-namespace Webzine.Repository.Contracts
+﻿namespace Webzine.Repository.Contracts
 {
+    using Webzine.Entity;
+
     public interface ITitreRepository
     {
         void Add(Titre titre);
