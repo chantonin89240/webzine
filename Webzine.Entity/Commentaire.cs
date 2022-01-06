@@ -56,7 +56,7 @@
         /// <summary>
         /// Titre ou est créé le commentaire.
         /// </summary>
-        public Titre Titre { get; set; }
+        public Titre? Titre { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Commentaire"/> class.
