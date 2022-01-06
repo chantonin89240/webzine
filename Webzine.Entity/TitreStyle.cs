@@ -24,11 +24,11 @@
         /// <summary>
         /// Objet Titre.
         /// </summary>
-        public Titre Titre { get; set; }
+        public Titre? Titre { get; set; }
 
         /// <summary>
         /// Objet Style.
         /// </summary>
-        public Style Style { get; set; }
+        public Style? Style { get; set; }
     }
 }

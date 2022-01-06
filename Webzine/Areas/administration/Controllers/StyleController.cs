@@ -7,15 +7,15 @@
     [Area("administration")]
     public class StyleController : Controller
     {
-        LocalStyleRepository LocalStyleRepository = new LocalStyleRepository();
-        
+        LocalStyleRepository localStyleRepository = new LocalStyleRepository();
+
         public IActionResult Index()
         {
-            var style = this.LocalStyleRepository.FindAll().ToList();
+            var style = this.localStyleRepository.FindAll().ToList();
 
             var model = new StyleViewModel()
             {
-                Styles = style
+                Styles = style,
             };
             return this.View(model);
         }
@@ -27,22 +27,22 @@
 
         public IActionResult Edit(int idStyle)
         {
-            var style = this.LocalStyleRepository.Find(idStyle);
+            var style = this.localStyleRepository.Find(idStyle);
 
             var model = new StyleViewModel()
             {
-                Style = style
+                Style = style,
             };
             return this.View(model);
         }
 
         public IActionResult Suppression(int idStyle)
         {
-            var style = this.LocalStyleRepository.Find(idStyle);
+            var style = this.localStyleRepository.Find(idStyle);
 
             var model = new StyleViewModel()
-            {               
-                Style = style
+            {
+                Style = style,
             };
             return this.View(model);
         }

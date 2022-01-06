@@ -6,7 +6,7 @@
     {
         public IActionResult Contact()
         {
-            return View();
+            return this.View();
         }
     }
 }

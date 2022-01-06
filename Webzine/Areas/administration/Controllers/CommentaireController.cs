@@ -1,9 +1,9 @@
 ﻿namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.ViewModels;
-    using Webzine.Repository;
     using Webzine.Entity;
+    using Webzine.Repository;
+    using Webzine.ViewModels;
 
     [Area("administration")]
     public class CommentaireController : Controller
@@ -13,8 +13,8 @@
 
         public IActionResult Index()
         {
-            List<Commentaire> commentaires = _commentaireRepository.FindAll().ToList();
-            List<Titre> titres = _titreRepository.FindAll().ToList();
+            List<Commentaire> commentaires = this._commentaireRepository.FindAll().ToList();
+            List<Titre> titres = this._titreRepository.FindAll().ToList();
 
             CommentairesViewModel model = new CommentairesViewModel(commentaires, titres);
             return this.View(model);
@@ -22,14 +22,11 @@
 
         public IActionResult delete(int id)
         {
-            List<Commentaire> commentaires = _commentaireRepository.FindAll().ToList();
-            List<Titre> titres = _titreRepository.FindAll().ToList();
+            List<Commentaire> commentaires = this._commentaireRepository.FindAll().ToList();
+            List<Titre> titres = this._titreRepository.FindAll().ToList();
 
             CommentairesViewModel model = new CommentairesViewModel(commentaires, titres, id);
-            
-
             return this.View(model);
         }
-
     }
 }

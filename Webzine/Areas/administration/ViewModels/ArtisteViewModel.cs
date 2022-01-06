@@ -3,10 +3,10 @@
     using Webzine.Entity;
     using Webzine.Entity.Factory;
 
-    public class ArtisteViewModel 
+    public class ArtisteViewModel
     {
-        public List<Artiste> Artistes { get; set; }
+        public List<Artiste>? Artistes { get; set; }
 
-        public Artiste Artiste { get; set; }
+        public Artiste? Artiste { get; set; }
     }
 }

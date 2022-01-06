@@ -8,41 +8,39 @@
     [Area("administration")]
     public class ArtisteController : Controller
     {
-        LocalArtisteRepository localArtisteRepository = new LocalArtisteRepository();
+        private LocalArtisteRepository localArtisteRepository = new LocalArtisteRepository();
 
         public IActionResult Index()
         {
 
-            List<Artiste> artistes = localArtisteRepository.FindAll().ToList();
+            List<Artiste> artistes = this.localArtisteRepository.FindAll().ToList();
             var model = new ArtisteViewModel() { Artistes = artistes };
-            return View(model);
+            return this.View(model);
         }
 
         public IActionResult Creation()
         {
-            return View();
+            return this.View();
         }
 
-        public IActionResult Edit(int IdArtiste)
+        public IActionResult Edit(int idArtiste)
         {
-            Artiste artiste = localArtisteRepository.Find(IdArtiste);
+            Artiste artiste = this.localArtisteRepository.Find(idArtiste);
             var model = new ArtisteViewModel()
             {
-                Artiste = artiste
-
+                Artiste = artiste,
             };
             return this.View(model);
         }
 
-        public IActionResult Suppression(int IdArtiste)
+        public IActionResult Suppression(int idArtiste)
         {
-            Artiste artiste = localArtisteRepository.Find(IdArtiste);
+            Artiste artiste = this.localArtisteRepository.Find(idArtiste);
             var model = new ArtisteViewModel()
             {
-                Artiste = artiste
+                Artiste = artiste,
             };
             return this.View(model);
         }
-
     }
 }
