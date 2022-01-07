@@ -1,12 +1,20 @@
 ﻿namespace Webzine.WebApplication.Areas.Admin.ViewModels
 {
     using Webzine.Entity;
-    using Webzine.Entity.Factory;
 
-    public class ArtisteViewModel 
+    /// <summary>
+    /// Représente le modèle utilisée par les vues d'administration d'<see cref="Artiste"/>s.
+    /// </summary>
+    public class ArtisteViewModel
     {
-        public List<Artiste> Artistes { get; set; }
+        /// <summary>
+        /// Liste d'<see cref="Entity.Artiste"/>s utilisé par la vue index.
+        /// </summary>
+        public List<Artiste> Artistes { get; set; } = new List<Artiste>();
 
-        public Artiste Artiste { get; set; }
+        /// <summary>
+        /// <see cref="Entity.Artiste"/> utilisé par le contexte (suppression, modif, création).
+        /// </summary>
+        public Artiste Artiste { get; set; } = new Artiste();
     }
 }

@@ -4,47 +4,54 @@
     using Webzine.Entity.Factory;
     using Webzine.Repository;
 
+    /// <summary>
+    /// Modèle utilisé par les vue d'administration des commentaires.
+    /// <para>See also: <seealso cref="Webzine.WebApplication.Areas.Admin.Controllers.CommentaireController"/>.</para>
+    /// </summary>
     public class CommentairesViewModel
     {
-
-        
         /// <summary>
-        /// Renvoie ou modifie la base de commentaires utilisée
+        /// Renvoie ou modifie la base de <see cref="Commentaire"/> utilisée dans la page index.
         /// </summary>
-        public List<Commentaire> commentaires { get; set; }
+        public List<Commentaire> Commentaires { get; set; } = new List<Commentaire>();
 
         /// <summary>
-        /// Renvoie ou modifie la base de titres utilisée
+        /// Renvoie ou modifie la base de titres utilisée.
         /// </summary>
-        public List<Titre> titres { get; set; }
+        public List<Titre> Titres { get; set; } = new List<Titre>();
 
         /// <summary>
-        /// Récupère ou modifie le commentaire de la vue
+        /// Récupère ou modifie le <see cref="Commentaire"/> de la vue de vérification du suppression.
         /// </summary>
-        public Commentaire contextCommentaire { get; set; }
+        public Commentaire ContextCommentaire { get; set; } = new Commentaire();
 
         /// <summary>
-        /// Récupère ou modifie le titre associé au commentaire
+        /// Récupère ou modifie le titre associé au commentaire.
         /// </summary>
-        public Titre contextTitre { get; set; }
+        public Titre ContextTitre { get; set; } = new Titre();
 
         public CommentairesViewModel()
         {
-            this.commentaires = new List<Commentaire>();
-            this.titres = new List<Titre>();
+
         }
 
-        public CommentairesViewModel(IEnumerable<Commentaire> commentaires,IEnumerable<Titre> titres)
+        public CommentairesViewModel(IEnumerable<Commentaire> commentaires, IEnumerable<Titre> titres)
         {
-            this.commentaires = commentaires.ToList();
-            this.titres = titres.ToList();
+            this.Commentaires = commentaires.ToList();
+            this.Titres = titres.ToList();
         }
 
+        /// <summary>
+        /// Génère une instance de <see cref="CommentairesViewModel"/>.
+        /// </summary>
+        /// <param name="commentaires"></param>
+        /// <param name="titres"></param>
+        /// <param name="idCommentaire"></param>
         public CommentairesViewModel(IEnumerable<Commentaire> commentaires, IEnumerable<Titre> titres, int idCommentaire)
             : this(commentaires, titres)
         {
-            contextCommentaire = this.commentaires.FirstOrDefault( C => C.IdCommentaire == idCommentaire);
-            contextTitre = this.titres.FirstOrDefault(T => T.IdTitre == contextCommentaire.IdTitre);
+            this.ContextCommentaire = this.Commentaires.FirstOrDefault( C => C.IdCommentaire == idCommentaire);
+            this.ContextTitre = this.Titres.FirstOrDefault(T => T.IdTitre == ContextCommentaire.IdTitre);
         }
     }
 }

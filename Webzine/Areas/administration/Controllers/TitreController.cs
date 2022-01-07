@@ -5,7 +5,7 @@
     using Webzine.WebApplication.Areas.Admin.ViewModels;
 
     /// <summary>
-    /// Représente le controlleur pour la partie des Titres dans la zone d'administration.
+    /// Représente le controlleur pour la partie des <see cref="Titre"/>s dans la zone d'administration.
     /// </summary>
     [Area("administration")]
     public class TitreController : Controller
@@ -15,10 +15,10 @@
         private LocalArtisteRepository localArtisteRepository = new LocalArtisteRepository();
 
         /// <summary>
-        /// Page par défaut du controlleur: Une vue d'ensemble de tous les titres, en mode d'administration.
+        /// Page par défaut du controlleur: Une vue d'ensemble de tous les <see cref="Titre"/>s, en mode d'administration.
         /// </summary>
         /// <returns>
-        /// La vue correspondante à l'administration des titres.
+        /// La vue correspondante à l'administration des <see cref="Titre"/>s.
         /// </returns>
         public IActionResult Index()
         {
@@ -30,10 +30,10 @@
         }
 
         /// <summary>
-        /// Page de création d'un nouveau titre.
+        /// Page de création d'un nouveau <see cref="Titre"/>.
         /// </summary>
         /// <returns>
-        /// Une page permettant la création d'un nouveau titre.
+        /// Une page permettant la création d'un nouveau <see cref="Titre"/>.
         /// </returns>
         public IActionResult Creation()
         {
@@ -46,12 +46,12 @@
         }
 
         /// <summary>
-        /// Page permettant la modification des données enregistrées sur un titre.
+        /// Page permettant la modification des données enregistrées sur un <see cref="Titre"/>.
         /// Préchargé avec les données déja enregistrées.
         /// </summary>
-        /// <param name="id">ID Du titre à éditer.</param>
+        /// <param name="id">ID Du <see cref="Titre"/> à éditer.</param>
         /// <returns>
-        /// La page de modification d'un titre.
+        /// La page de modification d'un <see cref="Titre"/>.
         /// </returns>
         public IActionResult Edit(int id)
         {
@@ -65,10 +65,10 @@
         }
 
         /// <summary>
-        /// Page de vérification de la suppression d'un titre.
-        /// Charge certaines données du titre.
+        /// Page de vérification de la suppression d'un <see cref="Titre"/>.
+        /// Charge certaines données du <see cref="Titre"/>.
         /// </summary>
-        /// <param name="id">ID du titre à supprimer.</param>
+        /// <param name="id">ID du <see cref="Titre"/> à supprimer.</param>
         /// <returns>
         /// Page de vérification de suppression.
         /// </returns>
