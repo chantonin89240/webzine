@@ -5,18 +5,27 @@
     using Webzine.Repository;
     using Webzine.ViewModels;
 
+    /// <summary>
+    /// Contrôleur pour la vue d'Artistes.
+    /// </summary>
     public class ArtisteController : Controller
     {
-        LocalArtisteRepository localArtisteRepository = new LocalArtisteRepository();
+        private LocalArtisteRepository localArtisteRepository = new LocalArtisteRepository();
+
+        /// <summary>
+        /// Produit la vue Artiste.
+        /// </summary>
+        /// <param name="idArtiste">id de l'Artiste documenté par la vue.</param>
+        /// <returns>Vue correspondant à un artiste.</returns>
         public IActionResult Artiste(int idArtiste)
         {
-            Artiste artiste = localArtisteRepository.Find(idArtiste);
+            Artiste artiste = this.localArtisteRepository.Find(idArtiste);
             var model = new ArtisteViewModel()
             {
-                Artiste = artiste
+                Artiste = artiste,
             };
 
-            return View(model);
+            return this.View(model);
         }
     }
 }
