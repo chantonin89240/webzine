@@ -1,28 +1,31 @@
-﻿namespace Webzine.Repository
-{
-    using Webzine.Repository.Contracts;
-    using Webzine.Entity;
+﻿using Webzine.Repository.Contracts;
+using Webzine.Entity;
+using Webzine.EntitiesContext;
 
-    internal class DbCommentaireRepository : ICommentaireRepository
+namespace Webzine.Repository
+{
+    public class DbCommentaireRepository : ICommentaireRepository
     {
+        WebzineDbContext context = new WebzineDbContext();
+
         public void Add(Commentaire commentaire)
         {
-            throw new NotImplementedException();
+            this.context.Commentaires.Add(commentaire);
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            context.Commentaires.Remove(this.Find(id));
         }
 
-        public Commentaire Find(int id)
+        public Commentaire? Find(int id)
         {
-            throw new NotImplementedException();
+            return context.Commentaires.Find(id);
         }
 
         public IEnumerable<Commentaire> FindAll()
         {
-            throw new NotImplementedException();
+            return context.Commentaires;
         }
     }
 }

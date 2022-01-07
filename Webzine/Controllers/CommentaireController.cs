@@ -10,7 +10,7 @@ namespace Webzine.WebApplication.Controllers
 
     public class CommentaireController : Controller
     {
-        private LocalCommentaireRepository localCommentaireRepository = new LocalCommentaireRepository();
+        private DbCommentaireRepository commentaireRepository = new DbCommentaireRepository();
         private LocalTitreRepository localTitreRepository = new LocalTitreRepository();
 
         [HttpPost]
@@ -22,7 +22,7 @@ namespace Webzine.WebApplication.Controllers
                 // WARN: IT WON'T HAVE IT'S CommentaireId SET!
                 model.DateCreation = DateTime.Now;
                 model.Titre = this.localTitreRepository.Find(model.IdTitre);
-                this.localCommentaireRepository.Add(model);
+                this.commentaireRepository.Add(model);
             }
 
             return this.Redirect("Titre/Titre?idTitre=" + model.IdTitre);
