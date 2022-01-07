@@ -32,8 +32,8 @@
         /// </summary>
         /// <param name="id">id du <see cref="Commentaire"/> qui sera effacé.</param>
         /// <returns>Page web de vérification.</returns>
-        [ActionName("delete")]
-        public IActionResult Delete(int id)
+        [ActionName("suppression")]
+        public IActionResult Suppression(int id)
         {
             List<Commentaire> commentaires = this.commentaireRepository.FindAll().ToList();
             List<Titre> titres = this.titreRepository.FindAll().ToList();
@@ -45,7 +45,7 @@
                 Commentaires = commentaires,
                 Titres = titres,
                 ContextCommentaire = contextComment,
-                ContextTitre = titres.FirstOrDefault(title => title.Commentaires.Contains(contextComment)),
+                ContextTitre = titres.FirstOrDefault(title => title.IdTitre==contextComment.IdTitre),
             };
 
             return this.View(model);
