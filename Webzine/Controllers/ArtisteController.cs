@@ -3,14 +3,22 @@
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.Repository;
+    using Webzine.Repository.Contracts;
     using Webzine.ViewModels;
+    using Webzine.WebApplication.ViewModels;
 
     /// <summary>
     /// Contrôleur pour la vue d'Artistes.
     /// </summary>
     public class ArtisteController : Controller
     {
-        private LocalArtisteRepository localArtisteRepository = new LocalArtisteRepository();
+        private IArtisteRepository _artisteRepository;
+        private ArtisteViewModel model = new ArtisteViewModel();
+
+        public ArtisteController(IArtisteRepository artisteRepository)
+        {
+            this._artisteRepository = artisteRepository;
+        }
 
         /// <summary>
         /// Produit la vue Artiste.
@@ -19,11 +27,7 @@
         /// <returns>Vue correspondant à un artiste.</returns>
         public IActionResult Artiste(int idArtiste)
         {
-            Artiste artiste = this.localArtisteRepository.Find(idArtiste);
-            var model = new ArtisteViewModel()
-            {
-                Artiste = artiste,
-            };
+            model.Artiste = _artisteRepository.Find(idArtiste);
 
             return this.View(model);
         }
