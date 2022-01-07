@@ -45,7 +45,7 @@
                 Commentaires = commentaires,
                 Titres = titres,
                 ContextCommentaire = contextComment,
-                ContextTitre = titres.FirstOrDefault(title => title.Commentaires.Contains(contextComment)),
+                ContextTitre = titres.FirstOrDefault(title => title.IdTitre==contextComment.IdTitre),
             };
 
             return this.View(model);
