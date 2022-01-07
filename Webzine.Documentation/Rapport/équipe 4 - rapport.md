@@ -81,12 +81,25 @@ Jalon 1 :
 			L'une des difficultés a été la mise en place et le respect du design pour les développeurs.
 			Il y a juste eu un petit temps d'adaptation pour certains pour les Factory et la compréhension des Areas.
 			Nous n'avons pas eu de retard particulier pour ce projet, juste quelques petits détails n'ont pas été mis en place comme vu ci-dessus(cf : #Jalons/Jalon1).
+			Pour les réseaux la mise en place du reverse proxy a été un peu du car les tutoriels qu'ils trouvaient sur le sujet se faisaient avec un DNS, mais nous n'en
+			avons pas dans notre projet. Ils ont donc du faire une redirection des ports.
+			Le réseau ayant aussi été validé tardivement tout l'adressage IP a dû être modifier ce qui a créé des conflits sur Zabbix qui ont dû être fixés. Cela s'en est 
+			résulté d'un léger retard.
+			Ceratins membres du groupe ont aussi trouvé que le temps accordé pour le projet était un peu court pour tout ce que l'on avait à faire (nouvelles informations, les cours,
+			les rendus, ....).
 
 Jalon 2 :
 
 			Pour ce jalon la difficulté a été la mise en place de la base de données et des repositories au sein du projet.
 			Il y eu la création de l'image de l'application par docker et sont déploiement. lors du déploiement, 
-			nous avons remarqués que tous les styles (css, bootstrap) liés à notre partie administration ne s'affichaient plus.   
+			nous avons remarqués que tous les styles (css, bootstrap) liés à notre partie administration ne s'affichaient plus. 
+			Ce problème venait du lien du script dans le layout de notre administration, il a été réglé le lendemain et est maintenant
+			fonctionnel.
+			Les Ops n'ont pas eu de réel problème sur ce jalon, juste une diférence entre les jalons du cahier des charges et celuis des clauses techniques
+			sur le traitement du firewalling qui pourrait les retarder. Ils ont aussi soulevé un manque de cours sur certaines notions qui les ralentit sur
+			certains points.
+			Comme lors du jalon précédent au niveau timing qui semble un peu court par rapport à la demande.
+
 
 ## Conclusion 
 
