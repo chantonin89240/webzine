@@ -1,16 +1,20 @@
 ﻿namespace Webzine.Repository
 {
+    using Webzine.EntitiesContext;
     using Webzine.Entity;
+    using Webzine.Repository.Contracts;
 
-    public class DbStyleRepository
+    public class DbStyleRepository : IStyleRepository 
     {
+        WebzineDbContext Context = new WebzineDbContext();
+
         /// <summary>
         /// Ajout du style
         /// </summary>
         /// <param name="style"></param>
         public void Add(Style style)
         {
-            
+            Context.Add(style);
         }
 
         /// <summary>
@@ -19,7 +23,7 @@
         /// <param name="style"></param>
         public void Delete(Style style)
         {
-            
+            Context.Remove(style);
         }
 
         /// <summary>
@@ -29,7 +33,8 @@
         /// <returns></returns>
         public Style Find(int id)
         {
-            return null;
+            Style style = this.Context.Styles.First(s => s.IdStyle == id);
+            return style;
         }
 
         /// <summary>
@@ -38,7 +43,8 @@
         /// <returns></returns>
         public IEnumerable<Style> FindAll()
         {
-            return null;
+            IEnumerable<Style> styles = this.Context.Styles.ToList();
+            return styles;
         }
 
         /// <summary>
@@ -47,7 +53,7 @@
         /// <param name="style"></param>
         public void Update(Style style)
         {
-            
+            Context.Styles.Update(style);
         }
     }
 }

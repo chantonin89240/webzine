@@ -1,7 +1,8 @@
 ﻿namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.Repository;
+    using Webzine.Entity;
+    using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Areas.administration.ViewModels;
 
     /// <summary>
@@ -10,21 +11,23 @@
     [Area("administration")]
     public class StyleController : Controller
     {
-        LocalStyleRepository LocalStyleRepository = new LocalStyleRepository();
-        
+        private IStyleRepository _styleRepository;
+        private StyleViewModel model = new StyleViewModel();
+
+        public StyleController(IStyleRepository styleRepository)
+        {
+            this._styleRepository = styleRepository;
+        }
+
         /// <summary>
         /// Page par défaut de la partie administration de Style
         /// </summary>
         /// <returns></returns>
         public IActionResult Index()
         {
-            var style = this.LocalStyleRepository.FindAll().ToList();
-
-            var model = new StyleViewModel()
-            {
-                Styles = style
-            };
-            return this.View(model);
+            var style = this._styleRepository.FindAll().ToList();
+            this.model.Styles = style;
+            return this.View(this.model);
         }
 
         /// <summary>
@@ -43,13 +46,9 @@
         /// <returns></returns>
         public IActionResult Edit(int idStyle)
         {
-            var style = this.LocalStyleRepository.Find(idStyle);
-
-            var model = new StyleViewModel()
-            {
-                Style = style
-            };
-            return this.View(model);
+            var style = this._styleRepository.Find(idStyle);
+            this.model.Style = style;
+            return this.View(this.model);
         }
 
         /// <summary>
@@ -59,13 +58,16 @@
         /// <returns></returns>
         public IActionResult Suppression(int idStyle)
         {
-            var style = this.LocalStyleRepository.Find(idStyle);
+            var style = this._styleRepository.Find(idStyle);
+            this.model.Style = style;
+            return this.View(this.model);
+        }
 
-            var model = new StyleViewModel()
-            {               
-                Style = style
-            };
-            return this.View(model);
+        public IActionResult ValidSuppression(int idStyle)
+        {
+            Style leStyle = this._styleRepository.Find(idStyle);
+            this._styleRepository.Delete(leStyle);
+            return this.RedirectToAction("Index");
         }
     }
 }
