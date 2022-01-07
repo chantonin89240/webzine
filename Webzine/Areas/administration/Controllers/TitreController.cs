@@ -75,7 +75,7 @@
         public IActionResult Suppression(int id)
         {
             this.model.Titre = this._titreRepository.Find(id);
-            this._titreRepository.Delete(model.Titre);
+            //this._titreRepository.Delete(model.Titre);
             return this.View(model);
         }
     }
