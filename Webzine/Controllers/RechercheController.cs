@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Webzine.ViewModels;
-using Webzine.Repository;
-using Webzine.Entity;
-
-namespace Webzine.WebApplication.Controllers
+﻿namespace Webzine.WebApplication.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using Webzine.ViewModels;
+    using Webzine.Repository;
+    using Webzine.Entity;
+
     public class RechercheController : Controller
     {
         private LocalArtisteRepository _artisteRepository = new LocalArtisteRepository();
@@ -19,7 +19,7 @@ namespace Webzine.WebApplication.Controllers
             RechercheViewModel model = new RechercheViewModel(artistes, titres, searchedItem);
             //model.Rechercher()
 
-            return View(model);
+            return this.View(model);
         }
 
         //[HttpPost]

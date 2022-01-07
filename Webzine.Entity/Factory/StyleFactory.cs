@@ -8,12 +8,12 @@
              {
                 new Style()
                 {
-                    IdStyle = 0,
+                    IdStyle = 1,
                     Libelle = "Tous",
                 },
                 new Style()
                 {
-                    IdStyle = 1,
+                    IdStyle = 999,
                     Libelle = "Pop",
                 },
                 new Style()
@@ -95,7 +95,7 @@
                     Libelle =  "Latino",
                 },
                 new Style(){
-                    IdStyle = 2,
+                    IdStyle = 99,
                     Libelle =  "Musique africaine",
                 },
                 new Style(){

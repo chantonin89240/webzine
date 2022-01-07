@@ -10,7 +10,7 @@
 	<div class="">
 		<h2>Styles</h2>
 		<ul>
-			@foreach (var style in Model)
+			@foreach (var style in Model.Styles)
 			{
 				<li>
 					<a class="text-decoration-none" href="/Titre/TitresStyle?idStyle=@style.IdStyle">@style.Libelle</a>

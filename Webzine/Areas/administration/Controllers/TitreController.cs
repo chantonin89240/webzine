@@ -82,6 +82,5 @@
             this.localTitreRepository.Delete(model.Titre);
             return this.View(model);
         }
-
     }
 }

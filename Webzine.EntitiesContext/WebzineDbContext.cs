@@ -34,6 +34,7 @@
             {
                 //optionsBuilder.UseSqlServer("Server=.;Database=WebzineDb;Trusted_Connection=True;MultipleActiveResultSets=true");
                 optionsBuilder.UseSqlite("Data Source=Webzine.db");
+                // optionsBuilder.EnableSensitiveDataLogging();
             }
             base.OnConfiguring(optionsBuilder);
         }
@@ -90,8 +91,8 @@
                     t.Property("Chronique");
                     t.Property("UrlJaquette");
                     t.Property("UrlEcoute");
-                    t.Property("DateCreation");
-                    t.Property("DateSortie");
+                    t.Property("DateCreation").HasColumnType("datetime");
+                    t.Property("DateSortie").HasColumnType("datetime");
                     t.Property("Duree");
                     t.Property("NbLectures");
                     t.Property("NbLikes");
@@ -110,7 +111,7 @@
                     c.Property("IdCommentaire").ValueGeneratedOnAdd();
                     c.Property("Auteur");
                     c.Property("Contenu");
-                    c.Property("DateCreation");
+                    c.Property("DateCreation").HasColumnType("datetime");
 
                     c.HasKey(c => c.IdCommentaire);
                     c.HasOne(c => c.Titre).WithMany(t => t.Commentaires).HasForeignKey("IdTitre");

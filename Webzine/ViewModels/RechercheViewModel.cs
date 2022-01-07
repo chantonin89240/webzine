@@ -35,9 +35,9 @@
         /// </summary>
         public RechercheViewModel()
         {
-            searchedItem = string.Empty;
-            artistes = new List<Artiste>();
-            titres = new List<Titre>();
+            this.searchedItem = string.Empty;
+            this.artistes = new List<Artiste>();
+            this.titres = new List<Titre>();
         }
 
         public RechercheViewModel(List<Artiste> artistes, List<Titre> titres, string search)

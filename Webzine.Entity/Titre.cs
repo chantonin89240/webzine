@@ -67,6 +67,7 @@
         /// </summary>
         [Required]
         [Display(Name = "date de création")]
+        [DataType(DataType.DateTime)]
         public DateTime DateCreation { get; set; }
 
         /// <summary>
@@ -74,6 +75,7 @@
         /// </summary>
         [Required]
         [Display(Name = "date de sortie")]
+        [DataType(DataType.DateTime)]
         public DateTime DateSortie { get; set; }
 
         /// <summary>
