@@ -29,6 +29,8 @@
         public Titre Find(int idTitre)
         {
             var titre = context.Titres.FirstOrDefault(t => t.IdTitre == idTitre);
+            titre.Artiste = context.Artistes.FirstOrDefault(a => a.IdArtiste == titre.IdArtiste);
+            titre.TitresStyles = context.TitreStyles.Where(s => s.IdTitre == titre.IdTitre).ToList();
             return titre;
         }
 

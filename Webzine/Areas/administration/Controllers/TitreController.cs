@@ -15,10 +15,11 @@
         private IArtisteRepository _artisteRepository;
         private TitreViewModel model = new TitreViewModel();
 
-        public TitreController(ITitreRepository titreRepository, IStyleRepository styleRepository)
+        public TitreController(ITitreRepository titreRepository, IStyleRepository styleRepository, IArtisteRepository artisteRepository)
         {
             this._titreRepository = titreRepository;
             this._styleRepository = styleRepository;
+            this._artisteRepository = artisteRepository;
         }
         /// <summary>
         /// Page par défaut du controlleur: Une vue d'ensemble de tous les <see cref="Titre"/>s, en mode d'administration.
@@ -71,12 +72,19 @@
         /// <returns>
         /// Page de vérification de suppression.
         /// </returns>
-        [HttpPost]
+        
         public IActionResult Suppression(int id)
         {
             this.model.Titre = this._titreRepository.Find(id);
-            //this._titreRepository.Delete(model.Titre);
             return this.View(model);
+        }
+
+        [HttpPost]
+        public IActionResult ValidSuppression(int id)
+        {
+            this.model.Titre = this._titreRepository.Find(id);
+            this._titreRepository.Delete(model.Titre);
+            return this.RedirectToAction("Index");
         }
     }
 }
