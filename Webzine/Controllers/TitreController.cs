@@ -36,5 +36,13 @@
             model.Titres = this.LocalTitreRepository.SearchByStyle(model.LibelleStyle).ToList();
             return this.View(model);
         }
+
+        public IActionResult like(int id)
+        {
+            Titre titre = this.LocalTitreRepository.Find(id);
+            this.LocalTitreRepository.IncrementNbLikes(titre);
+
+            return this.Redirect("../../Titre/Titre?idTitre=" + id);
+        }
     }
 }
