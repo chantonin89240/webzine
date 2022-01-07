@@ -19,7 +19,7 @@
                     UrlJaquette = "https://img.discogs.com/B6iuYM2bOHOt4oFHSVAZT2n5_fM=/fit-in/300x300/filters:strip_icc():format(webp):mode_rgb():quality(40)/discogs-images/R-12114833-1529064355-3135.jpeg.jpg",
                     UrlEcoute = "https://www.youtube.com/embed/ow00U-slPYk",
                     Lien = string.Empty,
-                    DateCreation = new DateTime(2021, 07, 22),
+                    DateCreation = new DateTime(2021, 07, 22, 18, 00, 05),
                     DateSortie = new DateTime(2021, 07, 22),
                     Duree = 180,
                     NbLectures = 20,
