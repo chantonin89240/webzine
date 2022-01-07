@@ -91,4 +91,6 @@
     <ProjectReference Include="..\Webzine.Repository\Webzine.Repository.csproj" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties stylecop_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
 </Project>

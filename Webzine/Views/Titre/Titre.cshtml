@@ -23,7 +23,7 @@
 				<a href="/admin/style/creation">il n'y a pas de style ! en ajouter</a>
 			}
 		</p>
-		<p class="boutonLike"><a href="#"><i class="fas fa-thumbs-up"></i> Like</a></p>
+		<p class="boutonLike"><a asp-controller="Titre" asp-action="like" asp-route-id="@Model.Titre.IdTitre"><i class="fas fa-thumbs-up"></i> Like</a></p>
 		<p class="boutonEditer"><a asp-area="administration" asp-controller="Titre" asp-action="Edit" asp-route-id="@Model.Titre.IdTitre"><i class="fas fa-edit"></i> Editer</a></p>
 	</section>
 

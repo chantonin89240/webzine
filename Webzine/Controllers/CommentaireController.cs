@@ -1,6 +1,9 @@
-﻿namespace Webzine.WebApplication.Controllers
+﻿// <copyright file="CommentaireController.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Webzine.WebApplication.Controllers
 {
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.Repository;
@@ -13,7 +16,6 @@
         [HttpPost]
         public ActionResult Index(Commentaire model)
         {
-
             if (this.ModelState.IsValid)
             {
                 // Send to Model to save into DB.
@@ -21,8 +23,8 @@
                 model.DateCreation = DateTime.Now;
                 model.Titre = this.localTitreRepository.Find(model.IdTitre);
                 this.localCommentaireRepository.Add(model);
-
             }
+
             return this.Redirect("Titre/Titre?idTitre=" + model.IdTitre);
         }
     }

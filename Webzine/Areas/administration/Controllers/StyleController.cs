@@ -10,7 +10,7 @@
     [Area("administration")]
     public class StyleController : Controller
     {
-        private LocalStyleRepository LocalStyleRepository = new LocalStyleRepository();
+        private LocalStyleRepository localStyleRepository = new LocalStyleRepository();
 
         /// <summary>
         /// Page administrative listant tous les <see cref="Style"/>s.
@@ -18,7 +18,7 @@
         /// <returns>Page web correspondante.</returns>
         public IActionResult Index()
         {
-            var style = this.LocalStyleRepository.FindAll().ToList();
+            var style = this.localStyleRepository.FindAll().ToList();
 
             var model = new StyleViewModel()
             {
@@ -43,7 +43,7 @@
         /// <returns>page web correspondante.</returns>
         public IActionResult Edit(int idStyle)
         {
-            var style = this.LocalStyleRepository.Find(idStyle);
+            var style = this.localStyleRepository.Find(idStyle);
 
             var model = new StyleViewModel()
             {
@@ -59,11 +59,11 @@
         /// <returns>Page correspondante.</returns>
         public IActionResult Suppression(int idStyle)
         {
-            var style = this.LocalStyleRepository.Find(idStyle);
+            var style = this.localStyleRepository.Find(idStyle);
 
             var model = new StyleViewModel()
-            {               
-                Style = style
+            {
+                Style = style,
             };
             return this.View(model);
         }
