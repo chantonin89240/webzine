@@ -7,16 +7,15 @@
 
     public class ArtisteController : Controller
     {
-        LocalArtisteRepository localArtisteRepository = new LocalArtisteRepository();
+        private LocalArtisteRepository localArtisteRepository = new LocalArtisteRepository();
         public IActionResult Artiste(int idArtiste)
         {
-            Artiste artiste = localArtisteRepository.Find(idArtiste);
+            Artiste artiste = this.localArtisteRepository.Find(idArtiste);
             var model = new ArtisteViewModel()
             {
-                Artiste = artiste
+                Artiste = artiste,
             };
-
-            return View(model);
+            return this.View(model);
         }
     }
 }

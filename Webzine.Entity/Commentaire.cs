@@ -42,6 +42,7 @@
         /// </summary>
         [Required]
         [Display(Name = "Date de création")]
+        [DataType(DataType.DateTime)]
         public DateTime DateCreation { get; set; }
 
         /// <summary>
