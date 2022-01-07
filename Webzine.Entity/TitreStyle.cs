@@ -1,11 +1,5 @@
 ﻿namespace Webzine.Entity
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
     /// <summary>
     /// Entité représentant un lien entre un Titre et un Style.
     /// </summary>

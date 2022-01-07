@@ -14,7 +14,7 @@
             return this.View(model);
         }
 
-        public IActionResult delete(int id)
+        public IActionResult Suppression(int id)
         {
             CommentairesViewModel model = new CommentairesViewModel();
             model.Acquire(id);

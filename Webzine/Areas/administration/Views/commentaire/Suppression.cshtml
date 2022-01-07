@@ -3,7 +3,8 @@
 *@
 @model Webzine.ViewModels.CommentairesViewModel
 
-<div class="divSup">
+<div class="mb-5">
+    <!-- condition qui vérifie si le model est null puis si le commentaire est null -->
     @if (Model is null){
 
         <h2>Erreur! Modèle nul.</h2>
@@ -13,10 +14,9 @@
             <h2>Erreur! Commentaire nul.</h2>
         }else{
 
-            <a href="/Admin/Commentaire">Retour &agrave l'administration des commentaires</a>
-
-            <h2>Supprimer un un commentaire</h2>
+            <h2>Supprimer un commentaire</h2>
 	        <hr />
+
 	        <div>
 		        <p class="row ms-0">Etes-vous sûr de vouloir supprimer le commentaire suivant ?</p>
                 <p>@Model.contextCommentaire.Contenu</p>

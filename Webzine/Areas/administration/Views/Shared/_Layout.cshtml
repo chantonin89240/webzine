@@ -9,6 +9,7 @@
 	<script src="~/lib/font-awesome/js/all.js"></script>
 	<script src="~/lib/Bootstrap/js/bootstrap.bundle.js"></script>
 </head>
+
 <body>
 	<!-- Barre de navigation -->
 	<!-- Template Bootstrap 5 -->
@@ -55,17 +56,21 @@
 		</div>
 	</nav>
 
-	<div>
+	<!-- container bootstrap contenant le contenu des pages -->
+	<div class="container-fluid">
 		@RenderBody()
 	</div>
 
 	<!-- Pied de page -->
 	<!-- Template Bootstrap 5 -->
-	<nav class="navbar fixed-bottom navbar-dark bg-dark">
-		<div class="container-fluid d-flex justify-content-center">
-			<a class="navbar-brand h6" href="#" style="font-size: medium;">Webzine - Tous droits réservés © RakletTeam 2021 </a>
-		</div>
-	</nav>
+	<footer>
+		<nav class="navbar fixed-bottom navbar-dark bg-dark">
+			<div class="container-fluid d-flex justify-content-center">
+				<a class="navbar-brand h6" href="#" style="font-size: medium;">Webzine - Tous droits réservés © RakletTeam 2021 </a>
+			</div>
+		</nav>
+	</footer>
+	
 
 </body>
 </html>

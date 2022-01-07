@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Webzine.Entity.Factory
+﻿namespace Webzine.Entity.Factory
 {
     public static class TitreFactory
     {
@@ -22,8 +16,8 @@ namespace Webzine.Entity.Factory
                     UrlJaquette = "https://img.discogs.com/B6iuYM2bOHOt4oFHSVAZT2n5_fM=/fit-in/300x300/filters:strip_icc():format(webp):mode_rgb():quality(40)/discogs-images/R-12114833-1529064355-3135.jpeg.jpg",
                     UrlEcoute = "https://www.youtube.com/embed/ow00U-slPYk",
                     Lien = string.Empty,
-                    DateCreation = new DateTime(2021, 07, 22),
-                    DateSortie = new DateTime(2021, 07, 22),
+                    DateCreation = new DateTime(2021, 07, 22, 22, 13, 09),
+                    DateSortie = new DateTime(2021, 07, 22, 14, 56, 32),
                     Duree = 180,
                     NbLectures = 20,
                     NbLikes = 8,
@@ -34,13 +28,18 @@ namespace Webzine.Entity.Factory
                             IdCommentaire = 1,
                             Auteur = "michelle",
                             Contenu = "lorem ipsum",
-                            DateCreation = new DateTime(2021, 12, 11),
+                            DateCreation = new DateTime(2021, 12, 11, 22, 37, 47),
                             IdTitre = 1,
                             Titre = new Titre(),
                         },
                     },
                     TitresStyles = new List<TitreStyle>()
                     {
+                        new TitreStyle()
+                        {
+                            IdStyle = 0,
+                            IdTitre = 1,
+                        },
                         new TitreStyle()
                         {
                             IdStyle = 1,
@@ -53,7 +52,7 @@ namespace Webzine.Entity.Factory
                         },
                         new TitreStyle()
                         {
-                            IdStyle = 3,
+                            IdStyle = 152,
                             IdTitre = 1,
                         },
                     },
@@ -68,8 +67,8 @@ namespace Webzine.Entity.Factory
                     UrlJaquette = "https://img.discogs.com/Lt0SDzF84Mi_dDAnT_kb2fN7I-A=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-6190573-1413305948-2894.jpeg.jpg",
                     UrlEcoute = string.Empty,
                     Lien = string.Empty,
-                    DateCreation = new DateTime(2021, 12, 10),
-                    DateSortie = new DateTime(2021, 12, 11),
+                    DateCreation = new DateTime(2021, 12, 10, 14, 56, 32),
+                    DateSortie = new DateTime(2021, 12, 11, 15, 57, 12),
                     Duree = 180,
                     NbLectures = 10,
                     NbLikes = 4,
@@ -78,12 +77,17 @@ namespace Webzine.Entity.Factory
                     {
                         new TitreStyle()
                         {
+                            IdStyle = 0,
+                            IdTitre = 2,
+                        },
+                        new TitreStyle()
+                        {
                             IdStyle = 1,
                             IdTitre = 2,
                         },
                         new TitreStyle()
                         {
-                            IdStyle = 2,
+                            IdStyle = 165,
                             IdTitre = 2,
                         },
                         new TitreStyle()
@@ -103,8 +107,8 @@ namespace Webzine.Entity.Factory
                     UrlJaquette = "https://www.guettapen.com/wp-content/uploads/2016/12/Oxygene-3.jpg",
                     UrlEcoute = string.Empty,
                     Lien = string.Empty,
-                    DateCreation = new DateTime(2021, 12, 10),
-                    DateSortie = new DateTime(2021, 12, 11),
+                    DateCreation = new DateTime(2021, 12, 10, 14, 56, 32),
+                    DateSortie = new DateTime(2021, 12, 11, 17, 12, 52),
                     Duree = 180,
                     NbLectures = 345,
                     NbLikes = 243,
@@ -113,7 +117,12 @@ namespace Webzine.Entity.Factory
                     {
                         new TitreStyle()
                         {
-                            IdStyle = 1,
+                            IdStyle = 0,
+                            IdTitre = 3,
+                        },
+                        new TitreStyle()
+                        {
+                            IdStyle = 85,
                             IdTitre = 3,
                         },
                         new TitreStyle()
@@ -138,14 +147,19 @@ namespace Webzine.Entity.Factory
                     UrlJaquette = "https://images-na.ssl-images-amazon.com/images/I/51z6pNALiiL._SY355_.jpg",
                     UrlEcoute = string.Empty,
                     Lien = string.Empty,
-                    DateCreation = new DateTime(2021, 12, 10),
-                    DateSortie = new DateTime(2021, 12, 11),
+                    DateCreation = new DateTime(2021, 12, 10, 14, 56, 32),
+                    DateSortie = new DateTime(2021, 12, 11, 23, 56, 32),
                     Duree = 180,
                     NbLectures = 20,
                     NbLikes = 7,
                     Commentaires = new List<Commentaire>(),
                     TitresStyles = new List<TitreStyle>()
                     {
+                        new TitreStyle()
+                        {
+                            IdStyle = 0,
+                            IdTitre = 1,
+                        },
                         new TitreStyle()
                         {
                             IdStyle = 1,
@@ -173,14 +187,19 @@ namespace Webzine.Entity.Factory
                     UrlJaquette = "https://img.discogs.com/OQJ30JshYpPG0E7eFpKJgEKF1zs=/fit-in/300x300/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/R-7283481-1437975825-6839.jpeg.jpg",
                     UrlEcoute = string.Empty,
                     Lien = string.Empty,
-                    DateCreation = new DateTime(2021, 12, 10),
-                    DateSortie = new DateTime(2021, 12, 11),
+                    DateCreation = new DateTime(2021, 12, 10, 14, 56, 32),
+                    DateSortie = new DateTime(2021, 12, 11, 14, 56, 32),
                     Duree = 180,
                     NbLectures = 20,
                     NbLikes = 7,
                     Commentaires = new List<Commentaire>(),
                     TitresStyles = new List<TitreStyle>()
                     {
+                        new TitreStyle()
+                        {
+                            IdStyle = 0,
+                            IdTitre = 2,
+                        },
                         new TitreStyle()
                         {
                             IdStyle = 1,
@@ -208,14 +227,19 @@ namespace Webzine.Entity.Factory
                     UrlJaquette = "https://i1.sndcdn.com/artworks-000014228197-duydcr-t500x500.jpg",
                     UrlEcoute = string.Empty,
                     Lien = string.Empty,
-                    DateCreation = new DateTime(2021, 12, 10),
-                    DateSortie = new DateTime(2021, 12, 11),
+                    DateCreation = new DateTime(2021, 12, 10, 14, 56, 32),
+                    DateSortie = new DateTime(2021, 12, 11, 14, 56, 32),
                     Duree = 180,
                     NbLectures = 20,
                     NbLikes = 7,
                     Commentaires = new List<Commentaire>(),
                     TitresStyles = new List<TitreStyle>()
                     {
+                        new TitreStyle()
+                        {
+                            IdStyle = 0,
+                            IdTitre = 3,
+                        },
                         new TitreStyle()
                         {
                             IdStyle = 1,
@@ -249,14 +273,19 @@ namespace Webzine.Entity.Factory
                     UrlJaquette = "https://images-na.ssl-images-amazon.com/images/I/51z6pNALiiL._SY355_.jpg",
                     UrlEcoute = string.Empty,
                     Lien = string.Empty,
-                    DateCreation = new DateTime(2021, 12, 10),
-                    DateSortie = new DateTime(2021, 12, 11),
+                    DateCreation = new DateTime(2021, 12, 10, 14, 56, 32),
+                    DateSortie = new DateTime(2021, 12, 11, 14, 56, 32),
                     Duree = 180,
                     NbLectures = 20,
                     NbLikes = 7,
                     Commentaires = new List<Commentaire>(),
                     TitresStyles = new List<TitreStyle>()
                     {
+                        new TitreStyle()
+                        {
+                            IdStyle = 0,
+                            IdTitre = 1,
+                        },
                         new TitreStyle()
                         {
                             IdStyle = 1,
@@ -284,14 +313,19 @@ namespace Webzine.Entity.Factory
                     UrlJaquette = "https://img.discogs.com/OQJ30JshYpPG0E7eFpKJgEKF1zs=/fit-in/300x300/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/R-7283481-1437975825-6839.jpeg.jpg",
                     UrlEcoute = string.Empty,
                     Lien = string.Empty,
-                    DateCreation = new DateTime(2021, 12, 10),
-                    DateSortie = new DateTime(2021, 12, 11),
+                    DateCreation = new DateTime(2021, 12, 10, 14, 56, 32),
+                    DateSortie = new DateTime(2021, 12, 11, 14, 56, 32),
                     Duree = 180,
                     NbLectures = 20,
                     NbLikes = 7,
                     Commentaires = new List<Commentaire>(),
                     TitresStyles = new List<TitreStyle>()
                     {
+                        new TitreStyle()
+                        {
+                            IdStyle = 0,
+                            IdTitre = 2,
+                        },
                         new TitreStyle()
                         {
                             IdStyle = 1,
@@ -319,14 +353,19 @@ namespace Webzine.Entity.Factory
                     UrlJaquette = "https://i1.sndcdn.com/artworks-000014228197-duydcr-t500x500.jpg",
                     UrlEcoute = string.Empty,
                     Lien = string.Empty,
-                    DateCreation = new DateTime(2021, 12, 10),
-                    DateSortie = new DateTime(2021, 12, 11),
+                    DateCreation = new DateTime(2021, 12, 10, 14, 56, 32),
+                    DateSortie = new DateTime(2021, 12, 11, 14, 56, 32),
                     Duree = 180,
                     NbLectures = 20,
                     NbLikes = 7,
                     Commentaires = new List<Commentaire>(),
                     TitresStyles = new List<TitreStyle>()
                     {
+                        new TitreStyle()
+                        {
+                            IdStyle = 0,
+                            IdTitre = 3,
+                        },
                         new TitreStyle()
                         {
                             IdStyle = 1,
