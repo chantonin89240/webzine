@@ -2,7 +2,10 @@
 @model Webzine.ViewModels.CommentairesViewModel
 
 <div class="p-4">
-	<h2 class="mb-3">Commentaires</h2>
+	<h2 class="mb-4">Commentaires</h2>
+    <hr />
+
+    <!-- tableau qui affiche la liste des commentaires ainsi que le lien qui permet de supprimer le commentaire -->
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr class="table-active">
@@ -13,6 +16,7 @@
                 <th class="col-2" scope="col"><span class="d-flex justify-content-center">Actions</span></th>
             </tr>
         </thead>
+
 		<tbody>
         @foreach(Commentaire commentaire in Model.Commentaires)
         {
@@ -23,10 +27,10 @@
                 <td>@commentaire.Auteur</td>
                 <td>@commentaire.Contenu</td>
                 <td>@commentaire.DateCreation.ToString()</td>
-                <td class="d-flex justify-content-center"><a href="/administration/commentaire/delete/@commentaire.IdCommentaire"><i class="fas fa-trash"></i></a></td>
+                <td class="d-flex justify-content-center"><a href="/administration/commentaire/Suppression/@commentaire.IdCommentaire"><i class="fas fa-trash"></i></a></td>
             </tr>
         }
-    </tbody>
+        </tbody>
 	</table>
 
 </div>

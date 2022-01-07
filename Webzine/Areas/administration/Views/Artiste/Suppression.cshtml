@@ -3,13 +3,16 @@
 *@
 	@model Webzine.WebApplication.Areas.Admin.ViewModels.ArtisteViewModel;
 
-<div class="divSup">
+<div class="mb-5">
 	<h2>Supprimer un artiste</h2>
 	<hr />
 	<div>
 		<p class="row ms-0">Etes-vous sûr de vouloir supprimer l'artiste "@Model.Artiste.Nom" ?</p>
+
+		<!-- lien de suppression de l'artiste -->
 		<a href="#" class="btn btn-danger">Supprimer</a>
 
-		<a class="row text-decoration-none ms-0" href="/administration/artiste">Retour à l'administration des artistes</a>
+		<!-- lien de retour vers la page Index de artiste admin-->
+		<a class="row text-decoration-none ms-0 mt-4" href="/administration/artiste">Retour à l'administration des artistes</a>
 	</div>
 </div>

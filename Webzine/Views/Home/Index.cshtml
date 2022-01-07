@@ -12,7 +12,7 @@
                     <div class="col-3 col-md-3 col-sm-3">
                         <img src=@Model.Titres[@i].UrlJaquette class="card-img-top" alt="...">
                     </div>
-                    <div class="d-flex flex-column justify-content-between card-body col-4 col-md-4 col-sm-border-4">
+					<div class="d-flex flex-column justify-content-between card-body col-9 col-md-9 col-sm-border-9">
                         <h5><a href="/Artiste/Artiste?idArtiste=@Model.Titres[@i].IdArtiste">@Model.Titres[@i].Artiste.Nom</a> - <a href="/Titre/Titre?idTitre=@Model.Titres[@i].IdTitre">@Model.Titres[@i].Libelle</a></h5>
                         <p class="card-text row p-4">@Model.Titres[@i].Chronique.Substring(0, 250) ...</p>
                         <div class="row">
@@ -54,20 +54,20 @@
 </div>
 <div>
     <h2 class="mt-4 mb-3">Titres les plus populaires</h2>
-    <ul class="d-flex flex-row justify-content-between list-unstyled">
-        @for (int i = 2; i < 5; i++)
+	<div class="row">
+		@for(int i=2; i<5; i++) //foreach (var titre in Model.TitresPOP)
         {  
-            <li>
-                <div class="card me-3 bg-light">
-                    <img class="card-img-top" src=@Model.Titres[@i].UrlJaquette alt="Card image cap" style="width: 355px; height: 355px">
+			<div class="col-md-4">	
+				<div class="card mb-3 bg-light">
+					<img class="card-img-top imPopHome" src=@Model.Titres[@i].UrlJaquette alt="Card image cap">
                     <div class="card-body">
                         <a href="" style="text-decoration: none;">@Model.Titres[@i].Libelle</a>
                         <div class="">
                             <p>par <a href="" style="text-decoration: none;">Artiste</a></p>
-                        </div>
-                    </div>
-                </div>
-            </li>
+						</div>
+					</div>
+				</div>
+			</div>
         }
-    </ul>
+	</div>
 </div>

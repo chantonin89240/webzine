@@ -1,12 +1,18 @@
-﻿body {
-}
-
+﻿/* css général*/
 
 h1 {
     font-size: 3em !important;
     margin-bottom: 3vh !important;
 }
+h2{
 
+}
+span{
+    
+}
+.etoileRequired {
+    color: red;
+}
 a:link {
     text-decoration: none;
 }
@@ -77,6 +83,9 @@ a:active {
     margin-bottom: 3em;
     background-color: #F8F9FA;
 }
+.imPopHome{
+    max-height: 33vh;
+}
 
 @media screen and (max-width: 550px) {
     .imgJaquetteTitre {
@@ -87,6 +96,12 @@ a:active {
     }
 }
 
+@media screen and (max-width: 550px){
+    .imPopHome{
+        max-height: 50vh;
+    }
+}
+
 /* css partie form admin editer / create */
 .formAdmin{
     margin-bottom: 4em;
@@ -94,10 +109,4 @@ a:active {
 
 
 /* css partie suppression admin */
-.divSup {
-    margin: 2em;
-}
-
-.divSup a{
-    margin-bottom: 6em;
-}
+l

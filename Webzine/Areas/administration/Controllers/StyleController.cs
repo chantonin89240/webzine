@@ -5,65 +5,65 @@
     using Webzine.WebApplication.Areas.administration.ViewModels;
 
     /// <summary>
-    /// Contrôleur des pages administrative en rapport avec les <see cref="Style"/>s.
+    /// Représente le controlleur pour la partie des Styles dans la zone d'administration.
     /// </summary>
     [Area("administration")]
     public class StyleController : Controller
     {
-        private LocalStyleRepository localStyleRepository = new LocalStyleRepository();
-
+        LocalStyleRepository LocalStyleRepository = new LocalStyleRepository();
+        
         /// <summary>
-        /// Page administrative listant tous les <see cref="Style"/>s.
+        /// Page par défaut de la partie administration de Style
         /// </summary>
-        /// <returns>Page web correspondante.</returns>
+        /// <returns></returns>
         public IActionResult Index()
         {
-            var style = this.localStyleRepository.FindAll().ToList();
+            var style = this.LocalStyleRepository.FindAll().ToList();
 
             var model = new StyleViewModel()
             {
-                Styles = style,
+                Styles = style
             };
             return this.View(model);
         }
 
         /// <summary>
-        /// Page permettant la création d'un nouveau <see cref="Style"/>.
+        /// Page de création d'un Style  
         /// </summary>
-        /// <returns>page web correspondante.</returns>
+        /// <returns></returns>
         public IActionResult Creation()
         {
             return this.View();
         }
 
         /// <summary>
-        /// Page permettant la modification d'un <see cref="Style"/>.
+        /// Page de modification du style passé en paramètre
         /// </summary>
-        /// <param name="idStyle">ID du <see cref="Style"/> qui sera modifié.</param>
-        /// <returns>page web correspondante.</returns>
+        /// <param name="idStyle"></param>
+        /// <returns></returns>
         public IActionResult Edit(int idStyle)
         {
-            var style = this.localStyleRepository.Find(idStyle);
+            var style = this.LocalStyleRepository.Find(idStyle);
 
             var model = new StyleViewModel()
             {
-                Style = style,
+                Style = style
             };
             return this.View(model);
         }
 
         /// <summary>
-        /// Page vérifiant la suppression d'un <see cref="Style"/>.
+        /// Page de suppression du Style passé en paramètre
         /// </summary>
-        /// <param name="idStyle">ID du <see cref="Style"/> à supprimer.</param>
-        /// <returns>Page correspondante.</returns>
+        /// <param name="idStyle"></param>
+        /// <returns></returns>
         public IActionResult Suppression(int idStyle)
         {
-            var style = this.localStyleRepository.Find(idStyle);
+            var style = this.LocalStyleRepository.Find(idStyle);
 
             var model = new StyleViewModel()
-            {
-                Style = style,
+            {               
+                Style = style
             };
             return this.View(model);
         }

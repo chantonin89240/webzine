@@ -4,57 +4,53 @@
     using Webzine.Entity.Factory;
     using Webzine.Repository.Contracts;
 
-    /// <summary>
-    /// Represents the local repository for <see cref="Style"/>s.
-    /// </summary>
     public class LocalStyleRepository : IStyleRepository
     {
-        private List<Style> styles = StyleFactory.CreateStyle().ToList();
+        public List<Style> Styles = StyleFactory.CreateStyle().ToList();
 
         /// <summary>
-        /// Adds a <see cref="Style"/> to the local repository.
-        /// </summary>
-        /// <param name="style"><see cref="Style"/> to add.</param>
+        /// Ajout d'un style        /// </summary>
+        /// <param name="style"></param>
         public void Add(Style style)
         {
-            this.styles.Add(style);
+            Styles.Add(style);
         }
 
         /// <summary>
-        /// Deletes a <see cref="Style"/> from the local repository.
+        /// Suppression d'un style
         /// </summary>
-        /// <param name="style"><see cref="Style"/> to remove.</param>
+        /// <param name="style"></param>
         public void Delete(Style style)
         {
-            this.styles.Remove(style);
+            Styles.Remove(style);
         }
 
         /// <summary>
-        /// Searches for a specific <see cref="Style"/> in the local repository.
+        /// Récupération d'un style
         /// </summary>
-        /// <param name="id">ID of the <see cref="Style"/> to find.</param>
-        /// <returns><see cref="Style"/> with given ID.</returns>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Style Find(int id)
         {
-            return this.styles.First(a => a.IdStyle == id);
+            return Styles.First(a => a.IdStyle == id);
         }
 
         /// <summary>
-        /// returns all <see cref="Style"/>s in repository.
+        /// Récupération de tout les styles 
         /// </summary>
-        /// <returns>complete <see cref="Style"/> List.</returns>
+        /// <returns></returns>
         public IEnumerable<Style> FindAll()
         {
-            return this.styles;
+            return Styles;
         }
 
         /// <summary>
-        /// Updates a <see cref="Style"/> based on ???.
+        /// Modification d'un style
         /// </summary>
-        /// <param name="style">Updated <see cref="Style"/>.</param>
+        /// <param name="style"></param>
         public void Update(Style style)
         {
-            this.styles.Find(a => a == style);
+            Styles.Find(a => a == style);
         }
 
     }
