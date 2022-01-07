@@ -22,9 +22,9 @@
                 <p>@Model.ContextCommentaire.Contenu</p>
                 <p>-- @Model.ContextCommentaire.Auteur le @Model.ContextCommentaire.DateCreation sur <a href="/Titre/Titre?idTitre=@Model.ContextTitre.IdTitre">@Model.ContextTitre.Libelle</a></p>
 
-		        <a href="#" class="btn btn-danger">Supprimer</a>
+		        <a asp-action="supprimer" asp-route-id="@Model.ContextCommentaire.IdCommentaire" class="btn btn-danger">Supprimer</a>
 
-		        <a class="row text-decoration-none ms-0" href="/administration/commentaire">Retour à l'administration des commentaires</a>
+		        <a class="row text-decoration-none ms-0" asp-action="Index" >Retour à l'administration des commentaires</a>
             </div>
         }
     }

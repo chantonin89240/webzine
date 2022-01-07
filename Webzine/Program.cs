@@ -10,12 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+//builder.Services.AddScoped<ITitreRepository, LocalTitreRepository>();
+builder.Services.AddScoped<ITitreRepository, DbTitreRepository>();
 // builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
 builder.Services.AddScoped<IArtisteRepository, DbArtisteRepository>();
 
-builder.Services.AddScoped<ITitreRepository, LocalTitreRepository>();
 builder.Services.AddScoped<IStyleRepository, LocalStyleRepository>();
-builder.Services.AddScoped<ICommentaireRepository, LocalCommentaireRepository>();
+builder.Services.AddScoped<ICommentaireRepository, DbCommentaireRepository>();
 
 builder.Services.AddDbContext<WebzineDbContext>(
         options => options.UseSqlite(builder.Configuration.GetConnectionString("WebzineDbContext"))

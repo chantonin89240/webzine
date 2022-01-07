@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.Repository;
+    using Webzine.Repository.Contracts;
     using Webzine.ViewModels;
 
     /// <summary>
@@ -11,8 +12,14 @@
     [Area("administration")]
     public class CommentaireController : Controller
     {
-        private LocalCommentaireRepository commentaireRepository = new LocalCommentaireRepository();
-        private LocalTitreRepository titreRepository = new LocalTitreRepository();
+        private ICommentaireRepository commentaireRepository;
+        private ITitreRepository titreRepository;
+
+        public CommentaireController(ICommentaireRepository commentaireRepository, ITitreRepository titreRepository)
+        {
+            this.commentaireRepository = commentaireRepository;
+            this.titreRepository = titreRepository;
+        }
 
         /// <summary>
         /// Génère la page listant tous les <see cref="Commentaire"/>s dans la partie Administrateur.
@@ -51,5 +58,11 @@
             return this.View(model);
         }
 
+        [ActionName("supprimer")]
+        public IActionResult Supprimer(int id)
+		{
+            commentaireRepository.Delete(id);
+            return this.RedirectToAction("Index");
+		}
     }
 }

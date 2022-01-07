@@ -1,10 +1,13 @@
 ﻿namespace Webzine.Repository
 {
     using System.Collections.Generic;
+    using Webzine.EntitiesContext;
+    using Webzine.Repository.Contracts;
     using Webzine.Entity;
 
-    public class DbTitreRepository
+    public class DbTitreRepository : ITitreRepository
     {
+        WebzineDbContext context = new WebzineDbContext();
         public void Add(Titre titre)
         {
 
@@ -17,7 +20,8 @@
 
         public void Delete(Titre titre)
         {
-
+            context.Titres.Remove(titre);
+            context.SaveChanges();
         }
 
         public Titre Find(int idTitre)
@@ -27,7 +31,10 @@
 
         public IEnumerable<Titre> FindAll()
         {
-            return Enumerable.Empty<Titre>();
+            var Titres = context.Titres;
+            Titres.ToList().ForEach(t => t.Artiste = context.Artistes.FirstOrDefault(a => a.IdArtiste == t.IdArtiste));
+            Titres.ToList().ForEach(t => t.TitresStyles.AddRange(context.TitreStyles.Where(ts => ts.IdTitre == t.IdTitre)));
+            return Titres;
         }
 
         public IEnumerable<Titre> FindTitres(int offset, int limit)
@@ -57,7 +64,8 @@
 
         public void Update(Titre titre)
         {
-
+            context.Titres.Update(titre);
+            context.SaveChanges();
         }
     }
 }

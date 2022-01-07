@@ -1,7 +1,7 @@
 ﻿namespace Webzine.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.Repository;
+    using Webzine.Repository.Contracts;
     using Webzine.WebApplication.ViewModels;
 
     /// <summary>
@@ -9,19 +9,19 @@
     /// </summary>
     public class HomeController : Controller
     {
-        //private HomeViewModel model = new HomeViewModel();
-        private LocalTitreRepository localTitreRepository = new LocalTitreRepository();
-        private LocalStyleRepository localStyleRepository = new LocalStyleRepository();
+        private ITitreRepository _titreRepository;
+        private TitreViewModel model = new TitreViewModel();
+
+        public HomeController(ITitreRepository titreRepository)
+        {
+            this._titreRepository = titreRepository;
+        }
 
         // GET: HomeController
         public IActionResult Index()
         {
-            //HomeViewModel model = new HomeViewModel()
+            model.Titres = _titreRepository.FindAll().ToList();
 
-            TitreViewModel model = new TitreViewModel()
-            {
-                Titres = this.localTitreRepository.FindAll().ToList(),
-            }; 
             //model.Titres.ForEach(titre => titre.TitresStyles.ForEach(ts => model.StylesTitre.Add(this.localStyleRepository.Find(ts.IdStyle))));
             return this.View(model);
         }
