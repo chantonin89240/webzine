@@ -84,7 +84,7 @@
         /// <param name="titre"><see cref="Titre"/> to increment.</param>
         public void IncrementNbLikes(Titre titre)
         {
-            this.titres.First(t => t == titre).NbLikes++; ;
+            this.titres.First(t => t == titre).NbLikes++;
         }
 
         /// <summary>

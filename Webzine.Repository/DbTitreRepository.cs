@@ -2,20 +2,22 @@
 {
     using System.Collections.Generic;
     using Webzine.EntitiesContext;
+    using Webzine.Entity.Factory;
     using Webzine.Repository.Contracts;
     using Webzine.Entity;
 
     public class DbTitreRepository : ITitreRepository
     {
+        private List<Style> styles = StyleFactory.CreateStyle().ToList();
         WebzineDbContext context = new WebzineDbContext();
         public void Add(Titre titre)
         {
-
+            context.Titres.Add(titre);
         }
 
         public int Count()
         {
-            return 0;
+            return context.Titres.Count();
         }
 
         public void Delete(Titre titre)
@@ -26,40 +28,45 @@
 
         public Titre Find(int idTitre)
         {
-            return null;
+            var titre = context.Titres.FirstOrDefault(t => t.IdTitre == idTitre);
+            return titre;
         }
 
         public IEnumerable<Titre> FindAll()
         {
-            var Titres = context.Titres;
-            Titres.ToList().ForEach(t => t.Artiste = context.Artistes.FirstOrDefault(a => a.IdArtiste == t.IdArtiste));
-            Titres.ToList().ForEach(t => t.TitresStyles.AddRange(context.TitreStyles.Where(ts => ts.IdTitre == t.IdTitre)));
-            return Titres;
+            var titres = context.Titres;
+            titres.ToList().ForEach(t => t.Artiste = context.Artistes.FirstOrDefault(a => a.IdArtiste == t.IdArtiste));
+            titres.ToList().ForEach(t => t.TitresStyles.AddRange(context.TitreStyles.Where(ts => ts.IdTitre == t.IdTitre)));
+            return titres;
         }
 
         public IEnumerable<Titre> FindTitres(int offset, int limit)
         {
-            return Enumerable.Empty<Titre>();
+            var titres = context.Titres.Skip(limit).Take(offset);
+            return titres;
         }
 
         public void IncrementNbLectures(Titre titre)
         {
-
+            context.Titres.First(t => t == titre).NbLectures++;
         }
 
         public void IncrementNbLikes(Titre titre)
         {
-
+            context.Titres.First(t => t == titre).NbLikes++; 
         }
 
         public IEnumerable<Titre> Search(string mot)
         {
-            return new List<Titre>();
+            var titres = context.Titres.Where(t => t.Libelle.Contains(mot));
+            return titres;
         }
+
 
         public IEnumerable<Titre> SearchByStyle(string libelle)
         {
-            return Search(libelle);
+            var idStyle = this.styles.First(s => s.Libelle.Contains(libelle)).IdStyle;
+            return context.Titres.ToList().FindAll(t => t.TitresStyles.Exists(item => item.IdStyle == idStyle));
         }
 
         public void Update(Titre titre)
