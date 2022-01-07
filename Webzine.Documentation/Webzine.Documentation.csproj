@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Installation Ops\" />
     <Folder Include="Installation\" />
     <Folder Include="Rapport\" />
   </ItemGroup>
