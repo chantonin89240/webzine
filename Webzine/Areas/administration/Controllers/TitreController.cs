@@ -1,7 +1,7 @@
 ﻿namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.Repository;
+    using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Areas.Admin.ViewModels;
 
     /// <summary>
@@ -10,10 +10,16 @@
     [Area("administration")]
     public class TitreController : Controller
     {
-        private LocalTitreRepository localTitreRepository = new LocalTitreRepository();
-        private LocalStyleRepository localStyleRepository = new LocalStyleRepository();
-        private LocalArtisteRepository localArtisteRepository = new LocalArtisteRepository();
+        private ITitreRepository _titreRepository;
+        private IStyleRepository _styleRepository;
+        private IArtisteRepository _artisteRepository;
+        private TitreViewModel model = new TitreViewModel();
 
+        public TitreController(ITitreRepository titreRepository, IStyleRepository styleRepository)
+        {
+            this._titreRepository = titreRepository;
+            this._styleRepository = styleRepository;
+        }
         /// <summary>
         /// Page par défaut du controlleur: Une vue d'ensemble de tous les <see cref="Titre"/>s, en mode d'administration.
         /// </summary>
@@ -22,10 +28,7 @@
         /// </returns>
         public IActionResult Index()
         {
-            TitreViewModel model = new TitreViewModel()
-            {
-                Titres = this.localTitreRepository.FindAll().ToList(),
-            };
+            this.model.Titres = this._titreRepository.FindAll().ToList();
             return this.View(model);
         }
 
@@ -37,11 +40,9 @@
         /// </returns>
         public IActionResult Creation()
         {
-            TitreViewModel model = new TitreViewModel()
-            {
-                Artistes = this.localArtisteRepository.FindAll().ToList(),
-                Styles = this.localStyleRepository.FindAll().ToList(),
-            };
+
+            this.model.Artistes = this._artisteRepository.FindAll().ToList();
+            this.model.Styles = this._styleRepository.FindAll().ToList();
             return this.View(model);
         }
 
@@ -55,12 +56,10 @@
         /// </returns>
         public IActionResult Edit(int id)
         {
-            TitreViewModel model = new TitreViewModel()
-            {
-                Titre = this.localTitreRepository.Find(id),
-                Artistes = this.localArtisteRepository.FindAll().ToList(),
-                Styles = this.localStyleRepository.FindAll().ToList(),
-            };
+            this.model.Titre = this._titreRepository.Find(id);
+            this.model.Artistes = this._artisteRepository.FindAll().ToList();
+            this.model.Styles = this._styleRepository.FindAll().ToList();
+
             return this.View(model);
         }
 
@@ -72,14 +71,11 @@
         /// <returns>
         /// Page de vérification de suppression.
         /// </returns>
+        [HttpPost]
         public IActionResult Suppression(int id)
         {
-            TitreViewModel model = new TitreViewModel()
-            {
-                Titre = this.localTitreRepository.Find(id),
-            };
-
-            this.localTitreRepository.Delete(model.Titre);
+            this.model.Titre = this._titreRepository.Find(id);
+            this._titreRepository.Delete(model.Titre);
             return this.View(model);
         }
     }
