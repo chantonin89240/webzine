@@ -1,8 +1,10 @@
 ﻿namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Webzine.EntitiesContext;
     using Webzine.Entity;
     using Webzine.Repository;
+    using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Areas.Admin.ViewModels;
 
     /// <summary>
@@ -11,7 +13,14 @@
     [Area("administration")]
     public class ArtisteController : Controller
     {
-        private LocalArtisteRepository localArtisteRepository = new LocalArtisteRepository();
+        private IArtisteRepository _artisteRepository;
+        private ArtisteViewModel model = new ArtisteViewModel();
+
+        public ArtisteController(IArtisteRepository artisteRepository)
+        {
+            this._artisteRepository = artisteRepository;
+
+        }
 
         /// <summary>
         /// Renvoie la vue sur chemin "/administration/<see cref="Artiste"/>".
@@ -19,9 +28,7 @@
         /// <returns>vue d'ensemble de tous les <see cref="Artiste"/>s.</returns>
         public IActionResult Index()
         {
-
-            List<Artiste> artistes = this.localArtisteRepository.FindAll().ToList();
-            var model = new ArtisteViewModel() { Artistes = artistes };
+            model.Artistes = this._artisteRepository.FindAll().ToList();
             return this.View(model);
         }
 
@@ -41,12 +48,8 @@
         /// <returns>Vue web pour l'édition d'un <see cref="Artiste"/> qui sera modifié.</returns>
         public IActionResult Edit(int idArtiste)
         {
-            Artiste artiste = this.localArtisteRepository.Find(idArtiste);
-            var model = new ArtisteViewModel()
-            {
-                Artiste = artiste,
-
-            };
+            Artiste artiste = this._artisteRepository.Find(idArtiste);
+            this.model.Artiste = artiste;
             return this.View(model);
         }
 
@@ -57,12 +60,16 @@
         /// <returns>Vue web pour la suppression d'un <see cref="Artiste"/>.</returns>
         public IActionResult Suppression(int idArtiste)
         {
-            Artiste artiste = this.localArtisteRepository.Find(idArtiste);
-            var model = new ArtisteViewModel()
-            {
-                Artiste = artiste,
-            };
+            Artiste artiste = this._artisteRepository.Find(idArtiste);
+            this.model.Artiste = artiste;
             return this.View(model);
+        }
+
+        public IActionResult ValiderSuppression(int idArtiste)
+        {
+            Artiste lartiste = this._artisteRepository.Find(idArtiste);
+            this._artisteRepository.Delete(lartiste);
+            return this.RedirectToAction("Index");
         }
 
     }
