@@ -28,7 +28,7 @@
         /// La vue correspondante à l'administration des <see cref="Titre"/>s.
         /// </returns>
         public IActionResult Index()
-        {
+        {   var url = this.Url.ActionContext.HttpContext.Request.RouteValues["area"];
             this.model.Titres = this._titreRepository.FindAll().ToList();
             return this.View(model);
         }
@@ -46,6 +46,12 @@
             return this.View(model);
         }
 
+        [ActionName("new")]
+        public IActionResult Creer()
+        {
+            //this._titreRepository.Add(titre);
+            return this.RedirectToAction("Index");
+        }
         /// <summary>
         /// Page permettant la modification des données enregistrées sur un <see cref="Titre"/>.
         /// Préchargé avec les données déja enregistrées.
@@ -63,6 +69,14 @@
             return this.View(model);
         }
 
+        [ActionName("update")]
+        public IActionResult Maj(int id)
+        {
+            var titre = this._titreRepository.Find(id);
+            this._titreRepository.Update(titre);
+            return this.RedirectToAction("Index");
+        }
+
         /// <summary>
         /// Page de vérification de la suppression d'un <see cref="Titre"/>.
         /// Charge certaines données du <see cref="Titre"/>.
@@ -78,7 +92,7 @@
             return this.View(model);
         }
 
-        [ActionName("supprimer")]
+        [ActionName("delete")]
         public IActionResult Supprimer(int id)
         {
             var titre = this._titreRepository.Find(id);

@@ -14,6 +14,7 @@
         public void Add(Titre titre)
         {
             this.context.Titres.Add(titre);
+            context.SaveChanges();
         }
 
         public int Count()
