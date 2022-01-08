@@ -10,22 +10,26 @@ namespace Webzine.Repository
 
         public void Add(Commentaire commentaire)
         {
-            this.context.Commentaires.Add(commentaire);
+            this.context.Add(commentaire);
+            //this.context.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            context.Commentaires.Remove(this.Find(id));
+            this.context.Remove(this.Find(id));
+            this.context.SaveChanges();
         }
 
-        public Commentaire? Find(int id)
+        public Commentaire Find(int id)
         {
-            return context.Commentaires.Find(id);
+            {
+                return this.context.Commentaires.Find(id);
+            }
         }
 
         public IEnumerable<Commentaire> FindAll()
         {
-            return context.Commentaires;
+            return this.context.Commentaires;
         }
     }
 }
