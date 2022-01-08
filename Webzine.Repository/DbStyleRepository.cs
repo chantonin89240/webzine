@@ -23,7 +23,9 @@
         /// <param name="style"></param>
         public void Delete(Style style)
         {
+            
             Context.Remove(style);
+            Context.SaveChanges();
         }
 
         /// <summary>
