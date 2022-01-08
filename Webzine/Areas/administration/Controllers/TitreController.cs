@@ -78,13 +78,13 @@
             return this.View(model);
         }
 
-        [HttpPost]
-        public IActionResult ValidSuppression(int id)
+        [ActionName("supprimer")]
+        public IActionResult Supprimer(int id)
         {
-            this.model.Titre = this._titreRepository.Find(id);
-            this._titreRepository.Delete(this.model.Titre);
+            var titre = this._titreRepository.Find(id);
+            this._titreRepository.Delete(titre);
 
-            return this.RedirectToAction("Index", "Titre");
+            return this.RedirectToAction("Index");
         }
     }
 }

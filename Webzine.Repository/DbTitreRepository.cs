@@ -23,10 +23,7 @@
 
         public void Delete(Titre titre)
         {
-            this.context.Titres.Attach(titre);
             this.context.Titres.Remove(titre);
-            // Alternative solution
-            // this.context.Entry(titre).State = EntityState.Deleted;
             this.context.SaveChanges();
         }
 
