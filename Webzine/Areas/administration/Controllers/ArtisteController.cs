@@ -46,9 +46,9 @@
         /// </summary>
         /// <param name="idArtiste">Id de l'<see cref="Artiste"/> géré par la vue.</param>
         /// <returns>Vue web pour l'édition d'un <see cref="Artiste"/> qui sera modifié.</returns>
-        public IActionResult Edit(int idArtiste)
+        public IActionResult Edit(int id)
         {
-            Artiste artiste = this._artisteRepository.Find(idArtiste);
+            var artiste = this._artisteRepository.Find(id);
             this.model.Artiste = artiste;
             return this.View(model);
         }
@@ -58,17 +58,18 @@
         /// </summary>
         /// <param name="idArtiste">ID de l'<see cref="Artiste"/> à supprimer par la vue.</param>
         /// <returns>Vue web pour la suppression d'un <see cref="Artiste"/>.</returns>
-        public IActionResult Suppression(int idArtiste)
+        public IActionResult Suppression(int id)
         {
-            Artiste artiste = this._artisteRepository.Find(idArtiste);
+            var artiste = this._artisteRepository.Find(id);
             this.model.Artiste = artiste;
             return this.View(model);
         }
 
-        public IActionResult ValiderSuppression(int idArtiste)
+        [ActionName("supprimer")]
+        public IActionResult ValiderSuppression(int id)
         {
-            Artiste lartiste = this._artisteRepository.Find(idArtiste);
-            this._artisteRepository.Delete(lartiste);
+            var artiste = this._artisteRepository.Find(id);
+            this._artisteRepository.Delete(artiste);
             return this.RedirectToAction("Index");
         }
 
