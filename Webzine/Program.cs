@@ -22,9 +22,9 @@ try
   builder.Services.AddControllersWithViews();
   builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
   builder.Services.AddScoped<ITitreRepository, DbTitreRepository>();
-builder.Services.AddScoped<IArtisteRepository, DbArtisteRepository>();
+  builder.Services.AddScoped<IArtisteRepository, DbArtisteRepository>();
   builder.Services.AddScoped<ICommentaireRepository, DbCommentaireRepository>();
-builder.Services.AddScoped<IStyleRepository, DbStyleRepository>();
+  builder.Services.AddScoped<IStyleRepository, DbStyleRepository>();
 
   WebzineDbContext webzineDbContext = new WebzineDbContext();
 

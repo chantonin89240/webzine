@@ -2,9 +2,7 @@
 {
     using System.Collections.Generic;
     using Webzine.EntitiesContext;
-    using Webzine.Entity.Factory;
     using Webzine.Repository.Contracts;
-    using Microsoft.EntityFrameworkCore;
     using Webzine.Entity;
     using System.Linq;
 

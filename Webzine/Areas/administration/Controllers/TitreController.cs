@@ -46,12 +46,15 @@
             return this.View(model);
         }
 
+        [HttpPost]
+        // [ValidateAntiForgeryToken]
         [ActionName("new")]
         public IActionResult Creer()
         {
             //this._titreRepository.Add(titre);
             return this.RedirectToAction("Index");
         }
+
         /// <summary>
         /// Page permettant la modification des données enregistrées sur un <see cref="Titre"/>.
         /// Préchargé avec les données déja enregistrées.
@@ -69,6 +72,8 @@
             return this.View(model);
         }
 
+        [HttpPost]
+        // [ValidateAntiForgeryToken]
         [ActionName("update")]
         public IActionResult Maj(int id)
         {
@@ -98,7 +103,7 @@
             var titre = this._titreRepository.Find(id);
             this._titreRepository.Delete(titre);
 
-            return this.RedirectToAction("Index");
+            return this.RedirectToAction(nameof(Index));
         }
     }
 }
