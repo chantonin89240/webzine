@@ -1,8 +1,7 @@
 ﻿namespace Webzine.WebApplication.Controllers.Components.Sidebar
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.Entity;
-    using Webzine.Repository;
+    using Webzine.Repository.Contracts;
     using Webzine.WebApplication.ViewModels;
 
     /// <summary>
@@ -10,17 +9,18 @@
     /// </summary>
     public class SidebarViewComponent : ViewComponent
     {
-        private List<Style> Styles = new LocalStyleRepository().FindAll().ToList();
+        private IStyleRepository _styleRepository;
+        private StyleViewModel model = new StyleViewModel();
+
+        public SidebarViewComponent(IStyleRepository styleRepository)
+        {
+            this._styleRepository = styleRepository;
+        }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var uri = HttpContext.GetRouteData();
-            Console.WriteLine(uri);
-            StyleViewModel vm = new StyleViewModel()
-            {
-                Styles = this.Styles,
-            }; 
-            return this.View(vm);
+            this.model.Styles = this._styleRepository.FindAll().ToList();
+            return this.View(this.model);
         }
     }
 }

@@ -13,7 +13,7 @@
 			@foreach (var style in Model.Styles)
 			{
 				<li>
-					<a class="text-decoration-none" href="/Titre/TitresStyle?idStyle=@style.IdStyle">@style.Libelle</a>
+					<a class="text-decoration-none" asp-action="TitresStyle" asp-controller="Titre" asp-route-id="@style.IdStyle">@style.Libelle</a>
 				</li>
 			}
 		</ul>
