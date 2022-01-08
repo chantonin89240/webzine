@@ -20,11 +20,11 @@
                             <h5><a href="/Artiste/Artiste?idArtiste=@titre.IdArtiste">@titre.Artiste.Nom</a> - <a href="/Titre/Titre?idTitre=@titre.IdTitre">@titre.Libelle</a></h5>
                             <p class="card-text row p-4">@titre.Chronique.Substring(0, 250) ...</p>
                             <div class="row ms-1">
-                                <a href="/Titre/Titre?idTitre=@titre.IdTitre" class="btn btn-primary text-nowrap col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 m-1">Lire la suite</a>
-                                <p class="text-nowrap col-xxl-3 col-xl-3 col-lg-3 col-md-8 col-sm-border-12 col-xs-border-12 offset-xxl-2 offset-xl-2 offset-lg-2 m-1 ms-2">
+                                <a href="/Titre/Titre?idTitre=@titre.IdTitre" class="btn btn-primary text-nowrap col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-5 col-xs-5 m-1" style="max-width: 150px">Lire la suite</a>
+                                <p class="text-nowrap col-xxl-3 col-xl-3 col-lg-3 col-md-8 col-sm-12 col-xs-12 m-1">
                                     <i class="fas fa-calendar"></i><span class="ms-1">@titre.DateSortie</span>
                                 </p>
-                                <p class="col-xxl-4 col-xl-4 col-lg-12 col-md-12 col-sm-border-12 col-xs-border-12 text-nowrap m-1">
+                                <p class="col-xxl-4 col-xl-4 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-nowrap m-1">
                                     <i class="fas fa-tags"></i> Style :
                                     @foreach (var ts in @titre.TitresStyles)
                                     {

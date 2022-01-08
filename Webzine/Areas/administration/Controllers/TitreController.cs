@@ -28,7 +28,10 @@
         /// La vue correspondante à l'administration des <see cref="Titre"/>s.
         /// </returns>
         public IActionResult Index()
-        {   var url = this.Url.ActionContext.HttpContext.Request.RouteValues["area"];
+        {   
+            var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+            logger.Debug("Entrée dans index.");
+        
             this.model.Titres = this._titreRepository.FindAll().ToList();
             return this.View(model);
         }
