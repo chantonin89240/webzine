@@ -2,20 +2,20 @@
 	
 }
 
-<aside class="sidebar col-xxl-2 col-xl-2 col-md-2 col-sm-12">
-	<div class="">
-		<h2>A propos</h2>
-		<p>Retrouvez les dernières pépites <br> sur notre webzine</p>
-	</div>
-	<div class="">
-		<h2>Styles</h2>
-		<ul>
-			@foreach (var style in Model.Styles)
-			{
-				<li>
-					<a class="text-decoration-none" asp-action="TitresStyle" asp-controller="Titre" asp-route-id="@style.IdStyle">@style.Libelle</a>
-				</li>
-			}
-		</ul>
-	</div>
-</aside>
+
+<div class="col-12">
+	<h2>A propos</h2>
+	<p>Retrouvez les dernières pépites <br> sur notre webzine</p>
+</div>
+<div class="col-12">
+	<h2>Styles</h2>
+	<ul class="d-flex flex-wrap col-12">
+		@foreach (var style in Model.Styles)
+		{
+			<li class="col-xxl-12 col-xl-12 col-xl-12 col-md-6 col-sm-6">
+				<a class="text-decoration-none" asp-action="TitresStyle" asp-controller="Titre" asp-route-id="@style.IdStyle">@style.Libelle</a>
+			</li>
+		}
+	</ul>
+</div>
+

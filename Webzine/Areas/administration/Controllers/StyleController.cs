@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
+    using Microsoft.EntityFrameworkCore;
     using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Areas.administration.ViewModels;
 
@@ -13,6 +14,9 @@
     {
         private IStyleRepository _styleRepository;
         private StyleViewModel model = new StyleViewModel();
+
+        [BindProperty]
+        public Style  style { get; set; }
 
         public StyleController(IStyleRepository styleRepository)
         {
@@ -39,6 +43,29 @@
         public IActionResult Creation()
         {
             return this.View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("creer")]
+        public async Task<IActionResult> Creer([Bind("Libelle")] Style style)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    this._styleRepository.Add(style);
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch (DbUpdateException /* ex */)
+            {
+            //Log the error (uncomment ex variable name and write a log.
+            ModelState.AddModelError("", "Unable to save changes. " +
+                "Try again, and if the problem persists " +
+                "see your system administrator.");
+            }
+            return this.View(style);
         }
 
         /// <summary>

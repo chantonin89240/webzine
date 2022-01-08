@@ -2,12 +2,10 @@
 	For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
-@model Webzine.WebApplication.ViewModels.TitreViewModel
 
 <div class=" p-4">
 	<h2 class="mb-3">Titres ayant le style @Model.LibelleStyle</h2>
 	<hr />
-
 	@if(@Model.Titres.Count > 0){
 		<ul class="list-unstyled">
 			@foreach (var titre in Model.Titres)

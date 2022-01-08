@@ -2,7 +2,7 @@
 	@model Webzine.WebApplication.ViewModels.TitreViewModel
 }
 @**@
-<h1 class="ArtisteChronique"><a href="/Artiste/Artiste?idArtiste=@Model.Titre.IdArtiste">@Model.Titre.Artiste.Nom </a> - @Model.Titre.Libelle</h1>
+<h1 class="ArtisteChronique"><a asp-controller="Artiste" asp-action="Artiste" asp-route-idArtiste="@Model.Titre.IdArtiste">@Model.Titre.Artiste.Nom </a> - @Model.Titre.Libelle</h1>
 
 <div>
 	<section class="infoTitre">
