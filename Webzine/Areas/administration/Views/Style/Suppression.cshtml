@@ -11,7 +11,7 @@
 	<hr />
 	<div class="ms-4">
 		<p class="row ">Etes-vous sûr de vouloir supprimer le style de musique "@Model.Style.Libelle"?</p>
-		<a asp-action="Supprimer" asp-route-idStyle="@Model.Style.IdStyle" class="row btn btn-danger text-nowrap col-3 col-md-3 col-sm-3 mb-5">Supprimer</a>
+		<a asp-action="supprimer" asp-route-id="@Model.Style.IdStyle" class="row btn btn-danger text-nowrap col-3 col-md-3 col-sm-3 mb-5">Supprimer</a>
 
 		<a class="row text-decoration-none" asp-action="Index">Retour à l'administration des styles</a>
 	</div>

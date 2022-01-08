@@ -1,6 +1,4 @@
-﻿
-@{
-}
+﻿@model Webzine.WebApplication.Areas.Admin.ViewModels.TitreViewModel
 
 <div class="p-4">
 <h2 class="mb-3">Titres</h2>
@@ -27,7 +25,7 @@
 			<tr>
 				<td>@titre.Artiste.Nom</td>
 				<td>@titre.Libelle</td>
-				<td>@titre.Duree</td>
+				<td>@Model.FormatLength(titre)</td>
 				<td>@titre.DateSortie</td>
 				<td>@titre.NbLectures</td>
 				<td>@titre.NbLikes</td>

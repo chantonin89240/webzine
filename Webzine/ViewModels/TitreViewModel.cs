@@ -19,5 +19,17 @@
         /// Commentaire utilisé pour gérer l'envoi d'un commentaire au serveur.
         /// </summary>
         public Commentaire? Commentaire { get; set; }
+
+        public string FormatLength(Titre titre)
+        {
+            string output = ((titre.Duree - (titre.Duree % 60)) / 60) + ":";
+            if (titre.Duree % 60 < 10)
+            {
+                output += "0";
+            }
+
+            output += (titre.Duree % 60).ToString();
+            return output;
+        }
     }
 }

@@ -23,6 +23,7 @@
         /// Page par défaut de la partie administration de Style
         /// </summary>
         /// <returns></returns>
+        [ActionName("index")]
         public IActionResult Index()
         {
             var style = this._styleRepository.FindAll().ToList();
@@ -34,6 +35,7 @@
         /// Page de création d'un Style  
         /// </summary>
         /// <returns></returns>
+        [ActionName("creation")]
         public IActionResult Creation()
         {
             return this.View();
@@ -44,9 +46,10 @@
         /// </summary>
         /// <param name="idStyle"></param>
         /// <returns></returns>
-        public IActionResult Edit(int idStyle)
+        [ActionName("edit")]
+        public IActionResult Edit(int id)
         {
-            var style = this._styleRepository.Find(idStyle);
+            var style = this._styleRepository.Find(id);
             this.model.Style = style;
             return this.View(this.model);
         }
@@ -56,18 +59,19 @@
         /// </summary>
         /// <param name="idStyle"></param>
         /// <returns></returns>
-        public IActionResult Suppression(int idStyle)
+        [ActionName("suppression")]
+        public IActionResult Suppression(int id)
         {
-            var style = this._styleRepository.Find(idStyle);
+            var style = this._styleRepository.Find(id);
             this.model.Style = style;
             return this.View(this.model);
         }
 
-        [ActionName("Supprimer")]
-        public IActionResult ValidSuppression(int idStyle)
+        [ActionName("supprimer")]
+        public IActionResult ValidSuppression(int id)
         {
-            Style leStyle = this._styleRepository.Find(idStyle);
-            this._styleRepository.Delete(leStyle);
+            Style style = this._styleRepository.Find(id);
+            this._styleRepository.Delete(style);
             return this.RedirectToAction("Index");
         }
     }

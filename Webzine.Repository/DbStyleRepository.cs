@@ -14,7 +14,8 @@
         /// <param name="style"></param>
         public void Add(Style style)
         {
-            Context.Add(style);
+            this.Context.Add(style);
+            this.Context.SaveChanges();
         }
 
         /// <summary>
@@ -23,9 +24,8 @@
         /// <param name="style"></param>
         public void Delete(Style style)
         {
-            
-            Context.Remove(style);
-            Context.SaveChanges();
+            this.Context.Remove(style);
+            this.Context.SaveChanges();
         }
 
         /// <summary>
@@ -55,7 +55,8 @@
         /// <param name="style"></param>
         public void Update(Style style)
         {
-            Context.Styles.Update(style);
+            this.Context.Update(style);
+            this.Context.SaveChanges();
         }
     }
 }

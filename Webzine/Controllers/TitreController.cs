@@ -10,6 +10,7 @@
         LocalTitreRepository LocalTitreRepository = new LocalTitreRepository();
         LocalStyleRepository LocalStyleRepository = new LocalStyleRepository();
 
+        [ActionName("titre")]
         public IActionResult Titre(int idTitre)
         {
             Titre titre = this.LocalTitreRepository.Find(idTitre);
