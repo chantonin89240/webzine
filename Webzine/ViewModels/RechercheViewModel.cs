@@ -55,7 +55,7 @@
         public string FormatLength(Titre t)
         {
             string output = ((t.Duree - (t.Duree % 60)) / 60) + ":";
-            if (t.Duree % 60 < 60)
+            if (t.Duree % 60 < 10)
             {
                 output += "0";
             }

@@ -16,6 +16,8 @@
             this._titreRepository = titreRepository;
             this._styleRepository = styleRepository;
         }
+
+        [ActionName("titre")]
         public IActionResult Titre(int idTitre)
         {
             Titre titre = this._titreRepository.Find(idTitre);

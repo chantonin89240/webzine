@@ -1,31 +1,38 @@
 ﻿@*
 	For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{
 
-}
+@model Webzine.WebApplication.ViewModels.TitreViewModel
 
 <div class=" p-4">
 	<h2 class="mb-3">Titres ayant le style @Model.LibelleStyle</h2>
 	<hr />
-	<ul class="list-unstyled">
-		@foreach (var titre in Model.Titres)
-		{
-			<li>
-				<div class="card mb-3 border-0" style="max-width: 540px;">
-					<div class="row g-0">
-						<div class="col-md-4">
-							<img src=@titre.UrlJaquette class="img-fluid rounded-start" alt="...">
-						</div>
-						<div class="col-md-8">
-							<div class="card-body">
-								<h5 class="card-title"><a class="text-decoration-none" href="">@titre.Libelle</a></h5>
-								<p class="card-text"><small class="text-muted">Durée : @titre.Duree</small></p>
+
+	@if(@Model.Titres.Count > 0){
+		<ul class="list-unstyled">
+			@foreach (var titre in Model.Titres)
+			{
+				<li>
+					<div class="card mb-3 border-0" style="max-width: 540px;">
+						<div class="row g-0">
+							<div class="col-md-4">
+								<img src=@titre.UrlJaquette class="img-fluid rounded-start" alt="...">
+							</div>
+							<div class="col-md-8">
+								<div class="card-body">
+									<h5 class="card-title"><a class="text-decoration-none" asp-action="titre" asp-route-idTitre="@titre.IdTitre">@titre.Libelle</a></h5>
+									<p class="card-text"><small class="text-muted">Durée : @Model.FormatLength(titre)</small></p>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</li>
-		}
-	</ul>
+				</li>
+			}
+		</ul>
+	}
+	else{ 
+		<p>Il n'y a pas de titres possédant le style : @Model.LibelleStyle</p>
+	}
+
+	
 </div>

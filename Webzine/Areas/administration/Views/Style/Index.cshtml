@@ -1,14 +1,14 @@
 ﻿@*
 	For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{
-	@model Webzine.WebApplication.Areas.administration.ViewModels.StyleViewModel
-}
+
+@model Webzine.WebApplication.Areas.administration.ViewModels.StyleViewModel
+
 <div class=" p-4">
 
 	<h2 class="mb-3">Styles</h2>
 	<hr />
-	<a href="/administration/style/creation" class="btn btn-primary text-nowrap col-3 col-md-3 col-sm-3 mb-3"><i class="fas fa-plus me-2"></i>Ajouter un nouvel style</a>
+	<a asp-action="creation" class="btn btn-primary text-nowrap col-3 col-md-3 col-sm-3 mb-3"><i class="fas fa-plus me-2"></i>Ajouter un nouvel style</a>
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr class="table-active">
@@ -22,7 +22,7 @@
 			{
 				<tr>
 					<td>@style.Libelle</td>
-					<td class="d-flex justify-content-center"><a href="/administration/style/edit?idStyle=@style.IdStyle"><i class="fas fa-edit me-2"></i></a><a href="/administration/style/suppression?idStyle=@style.IdStyle"><i class="fas fa-trash"></i></a></td>
+					<td class="d-flex justify-content-center"><a asp-action="edit" asp-route-id="@style.IdStyle"><i class="fas fa-edit me-2"></i></a><a asp-action="suppression" asp-route-id="@style.IdStyle"><i class="fas fa-trash"></i></a></td>
 				</tr>
 			}
 
