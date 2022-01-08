@@ -1,7 +1,6 @@
 ﻿namespace Webzine.EntitiesContext
 {
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration; // a suppr si Configuration  dans onConfiguring n'est pas utilisé
     using Webzine.Entity;
 
     public class WebzineDbContext : DbContext
@@ -30,11 +29,11 @@
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.LogTo(NLog.LogManager.GetCurrentClassLogger().Info, Microsoft.Extensions.Logging.LogLevel.Information);
             if (!optionsBuilder.IsConfigured)
             {
                 //optionsBuilder.UseSqlServer("Server=.;Database=WebzineDb;Trusted_Connection=True;MultipleActiveResultSets=true");
                 optionsBuilder.UseSqlite("Data Source=Webzine.db");
-                // optionsBuilder.EnableSensitiveDataLogging();
             }
             base.OnConfiguring(optionsBuilder);
         }

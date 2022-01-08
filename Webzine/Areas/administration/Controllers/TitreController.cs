@@ -41,7 +41,6 @@
         /// </returns>
         public IActionResult Creation()
         {
-
             this.model.Artistes = this._artisteRepository.FindAll().ToList();
             this.model.Styles = this._styleRepository.FindAll().ToList();
             return this.View(model);
@@ -79,11 +78,12 @@
             return this.View(model);
         }
 
-        [HttpPost]
-        public IActionResult ValidSuppression(int id)
+        [ActionName("supprimer")]
+        public IActionResult Supprimer(int id)
         {
-            this.model.Titre = this._titreRepository.Find(id);
-            this._titreRepository.Delete(model.Titre);
+            var titre = this._titreRepository.Find(id);
+            this._titreRepository.Delete(titre);
+
             return this.RedirectToAction("Index");
         }
     }
