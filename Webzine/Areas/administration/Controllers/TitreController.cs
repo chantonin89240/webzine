@@ -41,7 +41,6 @@
         /// </returns>
         public IActionResult Creation()
         {
-
             this.model.Artistes = this._artisteRepository.FindAll().ToList();
             this.model.Styles = this._styleRepository.FindAll().ToList();
             return this.View(model);
@@ -83,8 +82,9 @@
         public IActionResult ValidSuppression(int id)
         {
             this.model.Titre = this._titreRepository.Find(id);
-            this._titreRepository.Delete(model.Titre);
-            return this.RedirectToAction("Index");
+            this._titreRepository.Delete(this.model.Titre);
+
+            return this.RedirectToAction("Index", "Titre");
         }
     }
 }
