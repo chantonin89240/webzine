@@ -71,9 +71,7 @@
         {
             var idStyle = this.context.Styles.First(s => s.Libelle == libelle).IdStyle;
 
-            var titres = new List<Titre>();
-
-            this.context.TitreStyles.ToList().FindAll(ts => ts.IdStyle == idStyle).ForEach(ts => titres.Add(this.context.Titres.First(t => t.IdTitre == ts.IdTitre)));
+            var titres = this.context.Titres.ToList().FindAll(t => this.context.TitreStyles.ToList().FindAll(ts => ts.IdStyle == idStyle).Exists(ts => ts.IdTitre == t.IdTitre));
             return titres;
         }
 
