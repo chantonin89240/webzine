@@ -17,6 +17,9 @@ try
   //builder.Logging.ClearProviders();
   builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
 
+  var Seed = builder.Configuration.GetSection("ConnectionData");
+  Console.WriteLine(Seed);
+
   builder.Host.UseNLog();
 
   builder.Services.AddControllersWithViews();
