@@ -6,10 +6,10 @@
     using Webzine.Repository.Contracts;
     using Microsoft.EntityFrameworkCore;
     using Webzine.Entity;
+    using System.Linq;
 
     public class DbTitreRepository : ITitreRepository
     {
-        private List<Style> styles = StyleFactory.CreateStyle().ToList();
         private WebzineDbContext context = new WebzineDbContext();
         public void Add(Titre titre)
         {
@@ -69,8 +69,12 @@
 
         public IEnumerable<Titre> SearchByStyle(string libelle)
         {
-            var idStyle = this.styles.First(s => s.Libelle.Contains(libelle)).IdStyle;
-            return this.context.Titres.ToList().FindAll(t => t.TitresStyles.Exists(item => item.IdStyle == idStyle));
+            var idStyle = this.context.Styles.First(s => s.Libelle == libelle).IdStyle;
+
+            var titres = new List<Titre>();
+
+            this.context.TitreStyles.ToList().FindAll(ts => ts.IdStyle == idStyle).ForEach(ts => titres.Add(this.context.Titres.First(t => t.IdTitre == ts.IdTitre)));
+            return titres;
         }
 
         public void Update(Titre titre)

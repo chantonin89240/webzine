@@ -32,9 +32,9 @@
             return this.View(model);
         }
 
-        public IActionResult TitresStyle(int idStyle)
+        public IActionResult TitresStyle(int id)
         {
-            this.model.LibelleStyle = this._styleRepository.Find(idStyle).Libelle;
+            this.model.LibelleStyle = this._styleRepository.Find(id).Libelle;
             this.model.Titres = this._titreRepository.SearchByStyle(this.model.LibelleStyle).ToList();
             return this.View(model);
         }

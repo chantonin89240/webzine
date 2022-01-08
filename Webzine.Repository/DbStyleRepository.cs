@@ -35,7 +35,7 @@
         /// <returns></returns>
         public Style Find(int id)
         {
-            Style style = this.Context.Styles.First(s => s.IdStyle == id);
+            var style = this.Context.Styles.First(s => s.IdStyle == id);
             return style;
         }
 
