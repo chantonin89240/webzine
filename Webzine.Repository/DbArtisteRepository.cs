@@ -29,6 +29,7 @@ namespace Webzine.Repository
         public void Delete(Artiste artiste)
         {
             context.Remove(artiste);
+            context.SaveChanges();
         }
 
         /// <summary>
@@ -38,8 +39,8 @@ namespace Webzine.Repository
         /// <returns><see cref="Artiste"/> with given ID.</returns>
         public Artiste Find(int id)
         {
-            Artiste artistes = this.context.Artistes.First(a => a.IdArtiste == id);
-            return artistes;
+            Artiste artiste = this.context.Artistes.First(a => a.IdArtiste == id);
+            return artiste;
         }
 
         /// <summary>
