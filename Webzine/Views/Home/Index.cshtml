@@ -1,40 +1,49 @@
 ﻿@{
-
+    var i = 0;
+    var j = 0;
 }
 
 <h2 class="mb-3">Derniers titres chroniqués</h2>
 <ul class="list-unstyled">
-    @for (var i = 0; i < 3; i++)
+    @foreach(var titre in Model.Titres)
     {
-        <li>
-            <div class="card bg-light mb-3">
-                <div class="row">
-                    <div class="col-3 col-md-3 col-sm-3">
-                        <img src=@Model.Titres[@i].UrlJaquette class="card-img-top" alt="...">
-                    </div>
-					<div class="d-flex flex-column justify-content-between card-body col-9 col-md-9 col-sm-border-9">
-                        <h5><a href="/Artiste/Artiste?idArtiste=@Model.Titres[@i].IdArtiste">@Model.Titres[@i].Artiste.Nom</a> - <a href="/Titre/Titre?idTitre=@Model.Titres[@i].IdTitre">@Model.Titres[@i].Libelle</a></h5>
-                        <p class="card-text row p-4">@Model.Titres[@i].Chronique.Substring(0, 250) ...</p>
-                        <div class="row">
-                            <a href="/Titre/Titre?idTitre=@Model.Titres[@i].IdTitre" class="btn btn-primary text-nowrap col-3 col-md-3 col-sm-3">Lire la suite</a>
-                            <p class="text-nowrap col-4 col-md-4 col-sm-4 offset-1">
-                                <i class="fas fa-calendar"></i><span class="ms-1">@Model.Titres[@i].DateSortie</span>
-                            </p>
-                            <p class="col-3 col-md-3 col-sm-9 offset-1">
-                                <i class="fas fa-tags"></i> Style :
-                                @foreach (var ts in @Model.Titres[@i].TitresStyles)
-                                {
-                                    <a href="/Titre/TitresStyle?idStyle=@ts.IdStyle" class="text-decoration-none">
-                                        <span>@ts.Style.Libelle</span>
-                                    </a> 
-                                }
+        if (i < 3)
+        {
+            i++;
+            <li>
+                <div class="card bg-light mb-3">
+                    <div class="row">
+                        <div class="col-3 col-md-3 col-sm-3">
+                            <img src=@titre.UrlJaquette class="card-img-top" alt="...">
+                        </div>
+                        <div class="d-flex flex-column justify-content-between card-body col-9 col-md-9 col-sm-border-9">
+                            <h5><a href="/Artiste/Artiste?idArtiste=@titre.IdArtiste">@titre.Artiste.Nom</a> - <a href="/Titre/Titre?idTitre=@titre.IdTitre">@titre.Libelle</a></h5>
+                            <p class="card-text row p-4">@titre.Chronique.Substring(0, 250) ...</p>
+                            <div class="row">
+                                <a href="/Titre/Titre?idTitre=@titre.IdTitre" class="btn btn-primary text-nowrap col-3 col-md-3 col-sm-3">Lire la suite</a>
+                                <p class="text-nowrap col-4 col-md-4 col-sm-4 offset-1">
+                                    <i class="fas fa-calendar"></i><span class="ms-1">@titre.DateSortie</span>
+                                </p>
+                                <p class="col-3 col-md-3 col-sm-9 offset-1">
+                                    <i class="fas fa-tags"></i> Style :
+                                    @foreach (var ts in @titre.TitresStyles)
+                                    {
+                                        <a href="/Titre/TitresStyle?idStyle=@ts.IdStyle" class="text-decoration-none">
+                                            <span>@ts.Style.Libelle</span>
+                                        </a>
+                                    }
 
-                            </p>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </li>
+            </li>
+        }
+        else
+        {
+            break;
+        }
 
     }
 
@@ -55,19 +64,27 @@
 <div>
     <h2 class="mt-4 mb-3">Titres les plus populaires</h2>
 	<div class="row">
-		@for(int i=2; i<5; i++) //foreach (var titre in Model.TitresPOP)
-        {  
-			<div class="col-md-4">	
-				<div class="card mb-3 bg-light">
-					<img class="card-img-top imPopHome" src=@Model.Titres[@i].UrlJaquette alt="Card image cap">
-                    <div class="card-body">
-                        <a href="" style="text-decoration: none;">@Model.Titres[@i].Libelle</a>
-                        <div class="">
-                            <p>par <a href="" style="text-decoration: none;">Artiste</a></p>
-						</div>
-					</div>
-				</div>
-			</div>
+		@foreach(var titre in Model.Titres)
+        {
+            if (j < 3)
+            {
+                j++;
+                <div class="col-md-4">	
+                    <div class="card mb-3 bg-light">
+                        <img class="card-img-top imPopHome" src=@titre.UrlJaquette alt="Card image cap">
+                        <div class="card-body">
+                            <a href="" style="text-decoration: none;">@titre.Libelle</a>
+                            <div class="">
+                                <p>par <a href="" style="text-decoration: none;">@titre.Artiste.Nom</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                break;
+            }
         }
 	</div>
 </div>
