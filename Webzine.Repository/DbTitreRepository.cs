@@ -40,7 +40,10 @@
         {
             var titres = this.context.Titres;
             titres.ToList().ForEach(t => t.Artiste = this.context.Artistes.FirstOrDefault(a => a.IdArtiste == t.IdArtiste));
-            titres.ToList().ForEach(t => t.TitresStyles.AddRange(this.context.TitreStyles.Where(ts => ts.IdTitre == t.IdTitre)));
+            titres.ToList().ForEach(t => t.TitresStyles = this.context.TitreStyles.Where(ts => ts.IdTitre == t.IdTitre).ToList());
+            //titres.ToList().ForEach(t => t.TitresStyles.AddRange(this.context.TitreStyles.Where(ts => ts.IdTitre == t.IdTitre)));
+            titres.ToList().ForEach(t => t.TitresStyles.ForEach(ts => ts.Style = this.context.Styles.Find(ts.IdStyle)));
+           
             return titres;
         }
 

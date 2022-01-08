@@ -10,5 +10,8 @@
 
         public List<Titre> TitresPOP { get; } = TitreFactory.CreateTitre2().ToList();
 
+
+     
+
     }
 }

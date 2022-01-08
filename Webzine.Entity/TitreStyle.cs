@@ -24,5 +24,6 @@
         /// Objet Style.
         /// </summary>
         public Style? Style { get; set; }
+
     }
 }
