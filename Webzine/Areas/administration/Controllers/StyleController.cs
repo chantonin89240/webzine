@@ -63,6 +63,7 @@
             return this.View(this.model);
         }
 
+        [ActionName("Supprimer")]
         public IActionResult ValidSuppression(int idStyle)
         {
             Style leStyle = this._styleRepository.Find(idStyle);

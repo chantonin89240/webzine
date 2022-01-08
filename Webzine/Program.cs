@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Webzine.EntitiesContext;
 using Webzine.Repository;
 using Webzine.Repository.Contracts;
@@ -22,16 +21,13 @@ try
 
   builder.Services.AddControllersWithViews();
   builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
-  //builder.Services.AddScoped<ITitreRepository, LocalTitreRepository>();
   builder.Services.AddScoped<ITitreRepository, DbTitreRepository>();
-  // builder.Services.AddScoped<IArtisteRepository, DbArtisteRepository>();
-// builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
 builder.Services.AddScoped<IArtisteRepository, DbArtisteRepository>();
-
-  builder.Services.AddScoped<IStyleRepository, LocalStyleRepository>();
   builder.Services.AddScoped<ICommentaireRepository, DbCommentaireRepository>();
+builder.Services.AddScoped<IStyleRepository, DbStyleRepository>();
 
   WebzineDbContext webzineDbContext = new WebzineDbContext();
+
   builder.Services.AddDbContext<WebzineDbContext>(
           options => options.UseSqlite(builder.Configuration.GetConnectionString("WebzineDbContext"))
       );
