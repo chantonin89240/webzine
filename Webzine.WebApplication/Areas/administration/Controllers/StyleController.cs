@@ -36,7 +36,7 @@
         }
 
         /// <summary>
-        /// Page de création d'un Style  
+        /// Page de création d'un Style.
         /// </summary>
         /// <returns></returns>
         [ActionName("creation")]
@@ -45,10 +45,15 @@
             return this.View();
         }
 
+        /// <summary>
+        /// Méthode implémentant l'action de créer un nouveau style.
+        /// </summary>
+        /// <param name="style"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ActionName("creer")]
-        public async Task<IActionResult> Creer([Bind("Libelle")] Style style)
+        [ActionName("create")]
+        public IActionResult Create(Style style)
         {
             try
             {
@@ -60,7 +65,7 @@
             }
             catch (DbUpdateException /* ex */)
             {
-            //Log the error (uncomment ex variable name and write a log.
+            //Log the error (uncomment ex variable name and write a log).
             ModelState.AddModelError("", "Unable to save changes. " +
                 "Try again, and if the problem persists " +
                 "see your system administrator.");
@@ -74,11 +79,10 @@
         /// <param name="idStyle"></param>
         /// <returns></returns>
         [ActionName("edit")]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(Style style)
         {
-            var style = this._styleRepository.Find(id);
-            this.model.Style = style;
-            return this.View(this.model);
+            this._styleRepository.Update(style);
+            return this.RedirectToAction(nameof(Index));
         }
 
         /// <summary>

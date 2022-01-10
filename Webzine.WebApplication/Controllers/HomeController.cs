@@ -23,12 +23,11 @@
         }
 
         // GET: HomeController
+        // [Route("page")]
         public IActionResult Index()
         {
             _logger.LogInformation("Hello, this is the index!");
             this.model.Titres = _titreRepository.FindAll().ToList();
-            
-            //model.Titres.ForEach(titre => titre.TitresStyles.ForEach(ts => model.StylesTitre.Add(this.localStyleRepository.Find(ts.IdStyle))));
              _logger.LogInformation("Log en place - Reste plus qu'à les rendre croustillant");
             return this.View(model);
         }

@@ -1,0 +1,23 @@
+﻿@model Webzine.Entity.Style
+@{
+}
+
+
+<div class=" p-4">
+	<h2 class="mb-3">Créer un style</h2>
+	<hr />
+	<form class=" p-4" method="post" asp-action="create">
+		<div class="input-group mb-5">
+			<label class="d-flex align-items-center me-2" for="libelleInput">Libellé<span class="text-danger">*</span></label>
+			<input name="style.Libelle" type="text" class="form-control me-2 rounded col-2" value="" id="libelleInput" aria-describedby="styleCreate" placeholder="">
+			@* @Html.ValidationMessageFor(s => s.Libelle, "Message", new { @class="text-danger"}) *@
+			<button type="submit" class="btn btn-primary rounded">Sauvegarder</button>
+		</div>
+		@* <div>
+			@Html.LabelFor(s => s.Libelle, new{ @class="d-flex align-items-center me-2" })
+			@Html.TextBoxFor(s => s.Libelle, new{ @class="form-control me-2 rounded col-2"})
+			@Html.ValidationMessageFor(s => s.Libelle, "Message", new { @class="text-danger"})
+		</div> *@
+		<a class="row text-decoration-none" asp-action="Index">Retour à l'administration des styles</a>
+	</form>
+</div>

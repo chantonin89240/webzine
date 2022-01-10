@@ -91,7 +91,7 @@
                     t.Property("UrlJaquette");
                     t.Property("UrlEcoute");
                     t.Property("DateCreation").HasColumnType("datetime");
-                    t.Property("DateSortie").HasColumnType("datetime");
+                    t.Property("DateSortie").HasColumnType("date");
                     t.Property("Duree");
                     t.Property("NbLectures");
                     t.Property("NbLikes");
@@ -118,25 +118,5 @@
 
             base.OnModelCreating(modelBuilder);
         }
-
-        // Ajouter
-        // context.Add<Titre>(obj);
-        // Modifier
-        // context.Update<Titre>(obj);
-        // Ou plus simple
-        // passer par le suivi des changements
-        // Suppr
-        // context.Titres.Remove(object);
-
-        // Persistance des données, envoi en bdd
-        // context.SaveChanges();
-
-        // Suivi des changements
-        // Pour desactiver
-        // AsNotracking()
-        // context.ChangeTracker.AutoDetectChangesEnabled=false
-
-        // EntityState
-        // Attached ou Detattached
     }
 }

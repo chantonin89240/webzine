@@ -5,7 +5,6 @@
 
 
 Le projet est la création d'un site Webzine. 
-Le projet est la création d'un site Webzine. 
 
 Le site webzine est magazine web entièrement dédié à la musique. Les visiteurs pourront lire des chroniques de leurs titres  préférés.  
 Ce  webzine  est  également  interactif;  les  visiteurs  pourront  donner  leur  avis  sur chaque titre.

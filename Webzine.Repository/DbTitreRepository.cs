@@ -1,16 +1,20 @@
 ﻿namespace Webzine.Repository
 {
     using System.Collections.Generic;
+    using System.Linq;
     using Webzine.EntitiesContext;
+    using Microsoft.EntityFrameworkCore;
     using Webzine.Repository.Contracts;
     using Webzine.Entity;
-    using System.Linq;
 
     public class DbTitreRepository : ITitreRepository
     {
         private WebzineDbContext context = new WebzineDbContext();
         public void Add(Titre titre)
         {
+            // titre.Artiste = null;
+            // context.Entry(titre.Artiste).State = EntityState.Modified;
+            titre.DateCreation = DateTime.Now;
             this.context.Titres.Add(titre);
             context.SaveChanges();
         }
@@ -36,12 +40,12 @@
 
         public IEnumerable<Titre> FindAll()
         {
-            var titres = this.context.Titres;
-            titres.ToList().ForEach(t => t.Artiste = this.context.Artistes.FirstOrDefault(a => a.IdArtiste == t.IdArtiste));
-            titres.ToList().ForEach(t => t.TitresStyles = this.context.TitreStyles.Where(ts => ts.IdTitre == t.IdTitre).ToList());
-            //titres.ToList().ForEach(t => t.TitresStyles.AddRange(this.context.TitreStyles.Where(ts => ts.IdTitre == t.IdTitre)));
-            titres.ToList().ForEach(t => t.TitresStyles.ForEach(ts => ts.Style = this.context.Styles.Find(ts.IdStyle)));
-           
+            var titres = this.context.Titres.Include(t => t.TitresStyles).Include(t => t.Artiste);
+            // this.context.Titres.TitresStyles.Include(t => t.Styles);
+            //titres.ToList().ForEach(t => t.Artiste = this.context.Artistes.FirstOrDefault(a => a.IdArtiste == t.IdArtiste));
+            //titres.ToList().ForEach(t => t.TitresStyles = this.context.TitreStyles.Where(ts => ts.IdTitre == t.IdTitre).ToList());
+            // Mauvais titres.ToList().ForEach(t => t.TitresStyles.AddRange(this.context.TitreStyles.Where(ts => ts.IdTitre == t.IdTitre)));
+            titres.ToList().ForEach(t => t.TitresStyles.ForEach(ts => ts.Style = this.context.Styles.Find(ts.IdStyle)));    
             return titres;
         }
 
@@ -78,6 +82,8 @@
 
         public void Update(Titre titre)
         {
+            context.Entry(titre).State = EntityState.Modified;
+            titre.DateCreation = DateTime.Now;
             this.context.Titres.Update(titre);
             this.context.SaveChanges();
         }
