@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Builder;
 using NLog;
 using NLog.Web;
 using Webzine.EntitiesContext;
@@ -35,7 +36,7 @@ namespace Webzine.WebApplication
         // var Seed = builder.Configuration.GetSection("ConnectionData");
         // Console.WriteLine(Seed);
 
-        builder.Host.UseNLog();
+        //builder.Host.UseNLog();
 
         builder.Services.AddControllersWithViews();
         builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
