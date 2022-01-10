@@ -5,7 +5,7 @@ using Webzine.EntitiesContext;
 using Webzine.Repository;
 using Webzine.Repository.Contracts;
 
-namespace Webzine
+namespace Webzine.WebApplication
 {
   public class Program
   {
