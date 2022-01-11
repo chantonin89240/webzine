@@ -1,10 +1,8 @@
 namespace Webzine.WebApplication
 {
-    using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
-    using NLog;
     using NLog.Web;
     using Webzine.EntitiesContext;
     using Webzine.Repository;

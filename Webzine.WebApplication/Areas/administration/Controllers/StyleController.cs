@@ -16,7 +16,7 @@
         private StyleViewModel model = new StyleViewModel();
 
         [BindProperty]
-        public Style  style { get; set; }
+        public Style style { get; set; }
 
         public StyleController(IStyleRepository styleRepository)
         {
@@ -36,7 +36,7 @@
         }
 
         /// <summary>
-        /// Page de création d'un Style.
+        /// Page de création d'un Style  
         /// </summary>
         /// <returns></returns>
         [ActionName("creation")]
@@ -46,31 +46,32 @@
         }
 
         /// <summary>
-        /// Méthode implémentant l'action de créer un nouveau style.
+        /// method qui créer un style 
         /// </summary>
-        /// <param name="style"></param>
+        /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ActionName("create")]
-        public IActionResult Create(Style style)
+        [ActionName("creer")]
+        public async Task<IActionResult> Creer(StyleViewModel model)
         {
             try
             {
-                if (ModelState.IsValid)
+                if (this.ModelState.IsValid)
                 {
-                    this._styleRepository.Add(style);
+                    this._styleRepository.Add(model.Style);
+                    var tot = model.Style;
                     return RedirectToAction(nameof(Index));
                 }
             }
             catch (DbUpdateException /* ex */)
             {
-            //Log the error (uncomment ex variable name and write a log).
-            ModelState.AddModelError("", "Unable to save changes. " +
-                "Try again, and if the problem persists " +
-                "see your system administrator.");
+                //Log the error (uncomment ex variable name and write a log.
+                ModelState.AddModelError("", "Unable to save changes. " +
+                    "Try again, and if the problem persists " +
+                    "see your system administrator.");
             }
-            return this.View(style);
+            return this.View(model.Style);
         }
 
         /// <summary>
@@ -79,10 +80,41 @@
         /// <param name="idStyle"></param>
         /// <returns></returns>
         [ActionName("edit")]
-        public IActionResult Edit(Style style)
+        public IActionResult Edit(int id)
         {
-            this._styleRepository.Update(style);
-            return this.RedirectToAction(nameof(Index));
+            var style = this._styleRepository.Find(id);
+            this.model.Style = style;
+            return this.View(this.model);
+        }
+
+        /// <summary>
+        /// method qui réalise la modification du style
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("modifier")]
+        public async Task<IActionResult> Modifier(StyleViewModel model, int id)
+        {
+            try
+            {
+                if (this.ModelState.IsValid)
+                {
+                    model.Style.IdStyle = id;
+                    this._styleRepository.Update(model.Style);
+                    var tot = model.Style;
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch (DbUpdateException /* ex */)
+            {
+                //Log the error (uncomment ex variable name and write a log.
+                ModelState.AddModelError("", "Unable to save changes. " +
+                    "Try again, and if the problem persists " +
+                    "see your system administrator.");
+            }
+            return this.View(model.Style);
         }
 
         /// <summary>
