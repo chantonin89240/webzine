@@ -14,8 +14,12 @@
         /// <param name="style"></param>
         public void Add(Style style)
         {
-            this.Context.Add(style);
-            this.Context.SaveChanges();
+            var styles = this.Context.Styles.FirstOrDefault(s => s.Libelle.ToLower() == style.Libelle.ToLower());
+            if (styles == null)
+            {
+                this.Context.Add(style);
+                this.Context.SaveChanges();
+            }
         }
 
         /// <summary>
@@ -55,8 +59,12 @@
         /// <param name="style"></param>
         public void Update(Style style)
         {
-            this.Context.Update(style);
-            this.Context.SaveChanges();
+            var styles = this.Context.Styles.FirstOrDefault(s => s.Libelle.ToLower() == style.Libelle.ToLower());
+            if (styles == null)
+            {
+                this.Context.Update(style);
+                this.Context.SaveChanges();
+            }
         }
     }
 }

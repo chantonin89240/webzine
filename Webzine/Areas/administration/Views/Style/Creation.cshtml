@@ -4,17 +4,16 @@
 @{
 	@model Webzine.WebApplication.Areas.administration.ViewModels.StyleViewModel
 }
-
-<div class=" p-4">
-	<h2 class="mb-3">Editer un style</h2>
+<div class="p-4">
+	<h2 class="mb-3">Créer un style</h2>
 	<hr />
-
-	<form class="p-4" method="post" asp-action="modifier" asp-route-id="@Model.Style.IdStyle">
+	<form class="p-4" method="post" asp-action="creer" >
 		<div class="input-group mb-5">
 			<label class="d-flex align-items-center me-2" for="libelleInput">Libellé<span class="text-danger">*</span></label>
-			<input asp-for="@Model.Style.Libelle" value=@Model.Style.Libelle required name="Style.Libelle" class="form-control me-2 rounded col-2" id="libelleInput" aria-describedby="styleCreate" placeholder="Style">
+			<input asp-for="@Model.Style.Libelle" required name="Style.Libelle" class="form-control me-2 rounded col-2" id="libelleInput" aria-describedby="styleCreate" placeholder="Style">
 			<button type="submit" class="btn btn-primary rounded">Sauvegarder</button>
 		</div>
-		<a class="row text-decoration-none" asp-action="Index">Retour à l'administration des styles</a>
 	</form>
+
+	<a class="row text-decoration-none" asp-action="Index">Retour à l'administration des styles</a>
 </div>
