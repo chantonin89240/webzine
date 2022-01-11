@@ -26,11 +26,9 @@
                 ?? throw new Exception("La liste ne doit pas être vide.");
         }
 
-        // addrange builder.services. create service provider
-
         public static void InitialisationDB(WebzineDbContext context)
         {
-            var Styles = StyleFactory.GetStyles().Select(style => new Style { Libelle = style.Libelle });
+            var Styles = StyleFactory.GetStyles().Select(style => new Style { Libelle = style.Libelle }).OrderBy(s => s.Libelle);
             context.AddRange(Styles);
 
             var Artistes = ArtisteFactory.CreateArtiste().Select(artiste => new Artiste { Nom =artiste.Nom, Biographie = artiste.Biographie });

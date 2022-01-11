@@ -64,11 +64,11 @@
 			@if(!this.Url.ActionContext.HttpContext.Request.RouteValues.Values.Contains("administration"))
 			{
 				<div class="row">
-					<div class="section col-xxl-10 col-xl-10 col-md-12 col-sm-12 col-xs-12">
+					<div class="section col-xxl-10 col-xl-10 col-md-9 col-sm-12 col-xs-12">
 						<!-- Render -->
 						@RenderBody()
 					</div>
-					<aside class="sidebar col-xxl-2 col-xl-2 col-xl-2 col-md-12 col-sm-12 col-xs-12">
+					<aside class="sidebar col-xxl-2 col-xl-2 col-xl-2 col-md-3 col-sm-12 col-xs-12">
 						<!-- Sidebar coté droit -->
 						<!-- Template Bootstrap 5 -->
 						@await Component.InvokeAsync("Sidebar")

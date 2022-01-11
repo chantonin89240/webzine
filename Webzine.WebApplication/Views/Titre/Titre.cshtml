@@ -1,14 +1,14 @@
-﻿@{
-	@model Webzine.WebApplication.ViewModels.TitreViewModel
+﻿@model Webzine.WebApplication.ViewModels.TitreViewModel
+@{
 }
-@**@
+
 <h1 class="ArtisteChronique"><a asp-controller="Artiste" asp-action="Artiste" asp-route-idArtiste="@Model.Titre.IdArtiste">@Model.Titre.Artiste.Nom </a> - @Model.Titre.Libelle</h1>
 
 <div>
-	<section class="infoTitre">
-		<p><i class="fas fa-calendar"></i>Le @Model.Titre.DateCreation</p>
-		<p><i class="fas fa-heart"></i> @Model.Titre.NbLikes</p>
-		<p>
+	<section class="d-flex justify-content-between mb-2">
+		<p class="col-xxl-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12 align-text-bottom"><i class="fas fa-calendar me-1"></i>Le @Model.Titre.DateCreation</p>
+		<p class="col-xxl-1 col-xl-1 col-lg-1 col-md-12 col-sm-12 col-xs-12 align-bottom"><i class="fas fa-heart"></i> @Model.Titre.NbLikes</p>
+		<p class="col-xxl-5 col-xl-5 col-lg-5 col-md-12 col-sm-12 col-xs-12 align-middle">
 			<i class="fas fa-tags"></i>
 			Style :
 			@if (@Model.StylesTitre.Count != 0)
@@ -23,8 +23,8 @@
 				<a href="/admin/style/creation">il n'y a pas de style ! en ajouter</a>
 			}
 		</p>
-		<p class="boutonLike"><a asp-controller="Titre" asp-action="like" asp-route-id="@Model.Titre.IdTitre"><i class="fas fa-thumbs-up"></i> Like</a></p>
-		<p class="boutonEditer"><a asp-area="administration" asp-controller="Titre" asp-action="Edit" asp-route-id="@Model.Titre.IdTitre"><i class="fas fa-edit"></i> Editer</a></p>
+		<a class="col-xxl-1 col-xl-1 col-lg-1 col-md-12 col-sm-12 col-xs-12 btn btn-outline-primary" asp-controller="Titre" asp-action="liker" asp-route-id="@Model.Titre.IdTitre"><i class="fas fa-thumbs-up"></i> Like</a>
+		<a class="col-xxl-1 col-xl-1 col-lg-6 col-md-12 col-sm-12 col-xs-12  offset-1 align-text-bottom" asp-area="administration" asp-controller="Titre" asp-action="Edit" asp-route-id="@Model.Titre.IdTitre"><i class="fas fa-edit"></i> Editer</a>
 	</section>
 
 </div>

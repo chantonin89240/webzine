@@ -5,7 +5,7 @@
     public interface ITitreRepository
     {
         void Add(Titre titre);
-
+        void AddStyles(Titre titre, List<string> styles);
         int Count();
 
         void Delete(Titre titre);

@@ -76,7 +76,7 @@
         [Required]
         [Display(Name = "date de sortie")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = @"{0:dd\/MM\/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateSortie { get; set; }
 
         /// <summary>

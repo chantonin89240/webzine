@@ -30,20 +30,6 @@ a:active {
 }
 
 /* css de la page titre partie utilisateur */
-.infoTitre {
-    display: -webkit-box;
-    margin-bottom: 4vh;
-}
-.infoTitre p{
-    margin: auto;
-}
-
-.boutonLike {
-    border: solid cornflowerblue 1px;
-    border-radius: 5px;
-    padding: 2px;
-}
-
 .divImgChronique {
     min-height: 10em;
     margin-bottom: 4em;

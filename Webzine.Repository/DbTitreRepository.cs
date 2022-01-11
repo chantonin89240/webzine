@@ -19,6 +19,16 @@
             context.SaveChanges();
         }
 
+        public void AddStyles(Titre titre, List<string> listeStyles)
+        {   
+            listeStyles.ForEach(style =>
+                this.context.TitreStyles.Add(new TitreStyle(){
+                    IdTitre = titre.IdTitre,
+                    IdStyle = Int32.Parse(style),
+                }));
+            context.SaveChanges();
+        }
+
         public int Count()
         {
             return this.context.Titres.Count();
@@ -40,12 +50,11 @@
 
         public IEnumerable<Titre> FindAll()
         {
-            var titres = this.context.Titres.Include(t => t.TitresStyles).Include(t => t.Artiste);
-            // this.context.Titres.TitresStyles.Include(t => t.Styles);
-            //titres.ToList().ForEach(t => t.Artiste = this.context.Artistes.FirstOrDefault(a => a.IdArtiste == t.IdArtiste));
-            //titres.ToList().ForEach(t => t.TitresStyles = this.context.TitreStyles.Where(ts => ts.IdTitre == t.IdTitre).ToList());
-            // Mauvais titres.ToList().ForEach(t => t.TitresStyles.AddRange(this.context.TitreStyles.Where(ts => ts.IdTitre == t.IdTitre)));
-            titres.ToList().ForEach(t => t.TitresStyles.ForEach(ts => ts.Style = this.context.Styles.Find(ts.IdStyle)));    
+            var titres = this.context.Titres
+            .Include(t => t.TitresStyles)
+            .ThenInclude(ts => ts.Style)
+            .Include(t => t.Artiste)
+            .Include(t => t.Commentaires);
             return titres;
         }
 
@@ -62,7 +71,8 @@
 
         public void IncrementNbLikes(Titre titre)
         {
-            this.context.Titres.First(t => t == titre).NbLikes++; 
+            this.context.Titres.First(t => t == titre).NbLikes++;
+            this.context.SaveChanges();
         }
 
         public IEnumerable<Titre> Search(string mot)
@@ -75,16 +85,15 @@
         public IEnumerable<Titre> SearchByStyle(string libelle)
         {
             var idStyle = this.context.Styles.First(s => s.Libelle == libelle).IdStyle;
-
             var titres = this.context.Titres.ToList().FindAll(t => this.context.TitreStyles.ToList().FindAll(ts => ts.IdStyle == idStyle).Exists(ts => ts.IdTitre == t.IdTitre));
             return titres;
         }
 
         public void Update(Titre titre)
         {
-            context.Entry(titre).State = EntityState.Modified;
             titre.DateCreation = DateTime.Now;
             this.context.Titres.Update(titre);
+            context.Entry(titre).State = EntityState.Modified;
             this.context.SaveChanges();
         }
     }

@@ -21,6 +21,11 @@
             this.titres.Add(titre);
         }
 
+        public void AddStyles(Titre titre, List<string> styles)
+        {
+            
+        }
+
         /// <summary>
         /// Counts the amount of <see cref="Titre"/> in repository.
         /// </summary>
