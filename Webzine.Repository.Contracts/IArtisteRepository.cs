@@ -1,6 +1,7 @@
 ﻿namespace Webzine.Repository.Contracts
 {
     using Webzine.Entity;
+
     public interface IArtisteRepository
     {
         void Add(Artiste artiste);
@@ -12,5 +13,6 @@
         IEnumerable<Artiste> FindAll();
 
         void Update(Artiste artiste);
+
     }
 }
