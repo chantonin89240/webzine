@@ -7,25 +7,25 @@
 	<hr />
 
 	<!-- formulaire de création d'un artiste -->
-	<form class="formAdmin">
+	<form class="formAdmin" method="post" asp-action="Create">
 		<div class="mb-3 row">
 			<label for="nomArtiste" class="col-sm-2 col-form-label">Nom de l'artiste<span class="etoileRequired">*</span></label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="nomArtiste" required placeholder="Nom de l'artiste">
+				<input name="Artiste.Nom" aria-describedby="artisteCreate" type="text" class="form-control" id="nomArtiste" required placeholder="Nom de l'artiste">
 			</div>
 		</div>
 
 		<div class="mb-3 row">
 			<label for="biographieArtiste" class="col-sm-2 col-form-label">Biographie</label>
 			<div class="col-sm-10">
-				<textarea class="form-control" id="biographieArtiste" rows="3" required placeholder="Biographie de l'artiste"></textarea>
+				<textarea name="Artiste.Biographie" aria-describedby="artisteCreate" class="form-control" id="biographieArtiste" rows="3" placeholder="Biographie de l'artiste"></textarea>
 			</div>
 		</div>
 
 		<div class="mb-3 row">
 			<label class="col-sm-2 col-form-label"></label>
 			<div class="col-sm-10">
-				<button type="button" class="btn btn-primary">Sauvegarder</button>
+				<button type="submit" class="btn btn-primary">Sauvegarder</button>
 			</div>
 		</div>
 	</form>

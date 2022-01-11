@@ -1,13 +1,13 @@
-﻿using Webzine.EntitiesContext;
+﻿using Microsoft.EntityFrameworkCore;
+using Webzine.EntitiesContext;
 using Webzine.Entity;
 using Webzine.Repository.Contracts;
 
 namespace Webzine.Repository
 {
-    public  class DbArtisteRepository : IArtisteRepository
+    public class DbArtisteRepository : IArtisteRepository
     {
         WebzineDbContext context = new WebzineDbContext();
-
 
         /// <summary>
         /// Adds an <see cref="Artiste"/> to the local repository.
@@ -16,9 +16,15 @@ namespace Webzine.Repository
         /// <exception cref="NotImplementedException">Not yet implemented.</exception>
         public void Add(Artiste artiste)
         {
-            throw new NotImplementedException();
+            // recherceh si l' artiste existe déjà
+            var artistes = this.context.Artistes.FirstOrDefault(art => art.Nom.ToLower() == artiste.Nom.ToLower());
 
-            // artistes.Add(artiste);
+            // s'il n'existe pas on le crée
+            if (artistes == null)
+            {
+                this.context.Add(artiste);
+                this.context.SaveChanges();
+            }
         }
 
         /// <summary>
@@ -28,8 +34,8 @@ namespace Webzine.Repository
         /// <exception cref="NotImplementedException">Not yet implemented.</exception>
         public void Delete(Artiste artiste)
         {
-            context.Remove(artiste);
-            context.SaveChanges();
+            this.context.Remove(artiste);
+            this.context.SaveChanges();
         }
 
         /// <summary>
@@ -51,8 +57,6 @@ namespace Webzine.Repository
         {
             IEnumerable<Artiste> artistes = this.context.Artistes.ToList();
             return artistes;
-
-            // .FindAll(a => a.IdArtiste != null).ToList();
         }
 
         /// <summary>
@@ -62,8 +66,22 @@ namespace Webzine.Repository
         /// <exception cref="NotImplementedException">Not yet implemented.</exception>
         public void Update(Artiste artiste)
         {
-           context.Artistes.Update(artiste);
+            var artistes = this.context.Artistes.Where(a => a.IdArtiste != artiste.IdArtiste);
+            var result = false;
+            foreach (var artis in artistes)
+            {
+                if (artiste.Nom == artis.Nom )
+                {
+                    result = true;
+                }
+            }
+            if (result != true )
+            {
+                this.context.Artistes.Update(artiste);
+                this.context.SaveChanges();
+            }
 
+            this.context.Entry(artiste).State = EntityState.Modified;
         }
     }
 }
