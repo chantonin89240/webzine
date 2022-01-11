@@ -4,8 +4,10 @@
 
     public class StyleViewModel
     {
-        public List<Style> Styles { get; set; }
+        public List<Style>? Styles { get; set; }
 
         public Style Style { get; set; }
+
+
     }
 }

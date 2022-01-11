@@ -34,5 +34,12 @@ namespace Webzine.Repository.Contracts
         /// </summary>
         /// <param name="style"></param>
         void Update(Style style);
+
+        /// <summary>
+        /// Recherche qui vérifie que le libelle de style n'existe pas déjà
+        /// </summary>
+        /// <param name="style"></param>
+        /// <returns></returns>
+        Style rechercheStyle(Style style);
     }
 }

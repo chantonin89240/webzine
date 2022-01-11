@@ -48,14 +48,21 @@
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("creer")]
-        public async Task<IActionResult> Creer([Bind("Libelle")] Style style)
+        public async Task<IActionResult> Creer(StyleViewModel model)
         {
             try
             {
-                if (ModelState.IsValid)
+                if (this.ModelState.IsValid)
                 {
-                    this._styleRepository.Add(style);
-                    return RedirectToAction(nameof(Index));
+                    //var styleIsOk = this._styleRepository.rechercheStyle(model.Style);
+                    //if (styleIsOk == true)
+                    //{
+
+                        this._styleRepository.Add(model.Style);
+                        var tot = model.Style;
+                        return RedirectToAction(nameof(Index));
+                    //}
+                    
                 }
             }
             catch (DbUpdateException /* ex */)
@@ -65,7 +72,7 @@
                 "Try again, and if the problem persists " +
                 "see your system administrator.");
             }
-            return this.View(style);
+            return this.View(model.Style);
         }
 
         /// <summary>

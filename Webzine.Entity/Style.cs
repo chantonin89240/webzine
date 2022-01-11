@@ -18,7 +18,7 @@
         /// <summary>
         /// Libellé / Nom du style.
         /// </summary>
-        [Display(Name = "Libellé")]
+        //[Display(Name = "Libellé")]
         [Required(ErrorMessage = "Libellé requis.")]
         [MinLength(2, ErrorMessage ="Taille mini : 2 caractères")]
         [MaxLength(50, ErrorMessage = "Taille maxi : 50 caractères")]
