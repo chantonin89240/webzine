@@ -45,7 +45,7 @@
         /// <returns></returns>
         public IEnumerable<Style> FindAll()
         {
-            IEnumerable<Style> styles = this.Context.Styles.ToList();
+            IEnumerable<Style> styles = this.Context.Styles.ToList().OrderBy(s => s.Libelle);
             return styles;
         }
 

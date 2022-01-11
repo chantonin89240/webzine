@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.WebApplication", "Webzine\Webzine.WebApplication.csproj", "{74939484-2F1D-4173-8ED3-1F20ED61FA34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.WebApplication", "Webzine.Application\Webzine.WebApplication.csproj", "{74939484-2F1D-4173-8ED3-1F20ED61FA34}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.Entity", "Webzine.Entity\Webzine.Entity.csproj", "{569321EF-03CD-424A-BCDC-5CD02B4D77C9}"
 EndProject

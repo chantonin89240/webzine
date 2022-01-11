@@ -1,0 +1,35 @@
+﻿@using Webzine.Entity
+@model Webzine.ViewModels.CommentairesViewModel
+
+<div class="p-4">
+	<h2 class="mb-4">Commentaires</h2>
+    <hr />
+
+    <!-- tableau qui affiche la liste des commentaires ainsi que le lien qui permet de supprimer le commentaire -->
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr class="table-active">
+				<th class="col-3" scope="col"><span class="d-flex justify-content-center">Titre</span></th>
+				<th class="col-1" scope="col"><span class="d-flex justify-content-center">Nom</span></th>
+                <th class="col-4" scope="col"><span class="d-flex justify-content-center">Commentaire</span></th>
+                <th class="col-2" scope="col"><span class="d-flex justify-content-center">Date de création</span></th>
+                <th class="col-2" scope="col"><span class="d-flex justify-content-center">Actions</span></th>
+            </tr>
+        </thead>
+
+		<tbody>
+        @foreach(Commentaire commentaire in Model.Commentaires)
+        {
+            <tr>
+                <td class="text-center"><a href="/Titre/Titre?idTitre=@Model.Titres.FirstOrDefault(Title => Title.IdTitre == commentaire.IdTitre).IdTitre">
+                    @Model.Titres.FirstOrDefault(Title => Title.IdTitre == commentaire.IdTitre).Libelle</a>
+                    </td>
+                <td>@commentaire.Auteur</td>
+                <td>@commentaire.Contenu</td>
+                <td class="text-center">@commentaire.DateCreation.ToString("dd/MM/yyyy")</td>
+                <td class="d-flex justify-content-center"><a href="/administration/commentaire/suppression/@commentaire.IdCommentaire"><i class="fas fa-trash"></i></a></td>            </tr>
+        }
+        </tbody>
+	</table>
+
+</div>

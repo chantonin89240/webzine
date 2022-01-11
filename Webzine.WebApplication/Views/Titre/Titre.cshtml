@@ -1,0 +1,71 @@
+﻿@model Webzine.WebApplication.ViewModels.TitreViewModel
+@{
+}
+
+<h1 class="ArtisteChronique"><a asp-controller="Artiste" asp-action="Artiste" asp-route-idArtiste="@Model.Titre.IdArtiste">@Model.Titre.Artiste.Nom </a> - @Model.Titre.Libelle</h1>
+
+<div>
+	<section class="d-flex justify-content-between mb-2">
+		<p class="col-xxl-3 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12 align-text-bottom"><i class="fas fa-calendar me-1"></i>Le @Model.Titre.DateCreation</p>
+		<p class="col-xxl-1 col-xl-1 col-lg-1 col-md-12 col-sm-12 col-xs-12 align-bottom"><i class="fas fa-heart"></i> @Model.Titre.NbLikes</p>
+		<p class="col-xxl-5 col-xl-5 col-lg-5 col-md-12 col-sm-12 col-xs-12 align-middle">
+			<i class="fas fa-tags"></i>
+			Style :
+			@if (@Model.StylesTitre.Count != 0)
+			{
+				foreach (var style in @Model.StylesTitre)
+				{
+					<a href="/Titre/TitresStyle?idStyle=@style.IdStyle">@style.Libelle</a>
+				}				
+			}
+			else
+			{
+				<a href="/admin/style/creation">il n'y a pas de style ! en ajouter</a>
+			}
+		</p>
+		<a class="col-xxl-1 col-xl-1 col-lg-1 col-md-12 col-sm-12 col-xs-12 btn btn-outline-primary" asp-controller="Titre" asp-action="liker" asp-route-id="@Model.Titre.IdTitre"><i class="fas fa-thumbs-up"></i> Like</a>
+		<a class="col-xxl-1 col-xl-1 col-lg-6 col-md-12 col-sm-12 col-xs-12  offset-1 align-text-bottom" asp-area="administration" asp-controller="Titre" asp-action="Edit" asp-route-id="@Model.Titre.IdTitre"><i class="fas fa-edit"></i> Editer</a>
+	</section>
+
+</div>
+
+<div class="divImgChronique">
+	<img class="imgJaquetteTitre" src="@Model.Titre.UrlJaquette" alt="Img Titre" />
+	<p>@Model.Titre.Chronique</p>
+</div>
+
+@if(@Model.Titre.UrlEcoute != "")
+{
+	<iframe class="VideoEcoute" src="@Model.Titre.UrlEcoute" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+}
+
+<div class="formCommentaire">
+	<h2>Donne ton avis sur le titre</h2>
+
+	 @await Html.PartialAsync("_Commentaire.cshtml",@Model.Commentaire)
+</div>
+
+<h2>Commentaires</h2>
+<div>
+	@if (@Model.Titre.Commentaires.Count != 0)
+	{
+		@foreach (var leCommentaire in @Model.Titre.Commentaires)
+		{
+			<div class="mb-3 row">
+				<div class="col-sm-2 iconCommentaire">
+					<i class="fas fa-user" style="width: 4em; height: 4em"></i>
+				</div>				
+				<div class="col-sm-10">
+					<p>@leCommentaire.Auteur, le @leCommentaire.DateCreation</p>
+					<p>@leCommentaire.Contenu</p>
+				</div>
+			</div>
+		}
+	}
+	else
+	{
+		<p>il n'y a pas de commentaire</p>
+	}
+</div>
+
+

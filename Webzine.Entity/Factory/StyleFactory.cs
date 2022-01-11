@@ -8,11 +8,6 @@
              {
                 new Style()
                 {
-                    IdStyle = 1,
-                    Libelle = "Tous",
-                },
-                new Style()
-                {
                     IdStyle = 999,
                     Libelle = "Pop",
                 },
