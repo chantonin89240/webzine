@@ -25,5 +25,14 @@
         /// </summary>
         public Style? Style { get; set; }
 
+        public TitreStyle(){
+            
+        }
+        public TitreStyle(int idStyle, int idTitre)
+        {
+            this.IdStyle = idStyle;
+            this.IdTitre = idTitre;
+        }
+
     }
 }

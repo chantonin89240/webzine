@@ -79,6 +79,19 @@ namespace Webzine.WebApplication
                 endpoints.MapControllerRoute(
                     name: "admin creation",
                     pattern: "{area:exists}/{controller=Home}/create",
+                    defaults: new { action = "CreateAsk" });
+                endpoints.MapControllerRoute(
+                    name: "admin deletion",
+                    pattern: "{area:exists}/{controller=Home}/delete/{id:int}",
+                    defaults: new { action = "DeleteAsk" });
+                endpoints.MapControllerRoute(
+                    name: "admin edition",
+                    pattern: "{area:exists}/{controller=Home}/edit/{id:int}",
+                    defaults: new { action = "Edit" });
+                // Route admin action form
+                endpoints.MapControllerRoute(
+                    name: "admin creation",
+                    pattern: "{area:exists}/{controller=Home}/create",
                     defaults: new { action = "creation" });
                 endpoints.MapControllerRoute(
                     name: "admin deletion",

@@ -17,6 +17,8 @@
         private IStyleRepository _styleRepository;
         private IArtisteRepository _artisteRepository;
         private TitreViewModel model = new TitreViewModel();
+        private static List<string> _editStylesTitre = new List<string>();
+        private static DateTime _dateCréation;
 
         public TitreController(ITitreRepository titreRepository, IStyleRepository styleRepository, IArtisteRepository artisteRepository)
         {
@@ -101,6 +103,8 @@
         public IActionResult Edit(int id)
         {
             this.model.Titre = this._titreRepository.Find(id);
+            _editStylesTitre = this.model.Titre.TitresStyles.Select(ts => ts.IdStyle.ToString()).Distinct().ToList();
+            _dateCréation = this.model.Titre.DateCreation;
             this.model.Artistes = this._artisteRepository.FindAll().ToList();
             this.model.Styles = this._styleRepository.FindAll().ToList();
             return this.View(this.model);
@@ -115,24 +119,32 @@
         /// <returns>La vue index mis à jour</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ActionName("editAsk")]
+        [ActionName("edit")]
         [Route("[action]")]
-        public IActionResult EditAsk(TitreViewModel model, int id)
+        public IActionResult Edit(TitreViewModel model, int id)
         {
             try
             {
             //     if (ModelState.IsValid)
             //     {
                     var listIdStyle = this.Request.Form["ListeStyles"].ToList();
+                    model.Titre.IdTitre = id;
+                    model.Titre.DateCreation = _dateCréation;
                     // var idArtiste = titre.IdArtiste;
                     // titre.DateCreation = DateTime.Now;
                     // var toto = this.model.Titre.TitresStyles.Select(ts => ts.IdStyle);
-                    // if(listIdStyle != toto)
-                    // {
-                    //     Console.WriteLine("Yes");
-                    //     // this._titreRepository.UpdateStyles(model.Titre, listIdStyle);
-                    // }
-                    model.Titre.IdTitre = id;
+                    if(listIdStyle != _editStylesTitre)
+                    {
+                        var listRemove = _editStylesTitre.Except(listIdStyle);
+                        var listAdd = listIdStyle.Except(_editStylesTitre);
+                    }
+
+                    //this._titreRepository.UpdateStyles(model.Titre, listIdStyle);
+                    listIdStyle.ForEach(idStyle => model.Titre.TitresStyles.Add(new TitreStyle(){
+                        IdStyle=Int32.Parse(idStyle), 
+                        IdTitre=id
+                        }));
+                    
                     this._titreRepository.Update(model.Titre);
                     return this.RedirectToAction(nameof(Index));
             //     }

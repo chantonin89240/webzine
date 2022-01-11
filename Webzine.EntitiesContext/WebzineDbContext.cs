@@ -15,7 +15,7 @@
 
         public DbSet<Commentaire>? Commentaires { get; set; }
 
-        public DbSet<TitreStyle>? TitreStyles { get; set; }
+        public DbSet<TitreStyle>? TitresStyles { get; set; }
 
         public WebzineDbContext()
         {
@@ -40,80 +40,38 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Table Artiste init
-            modelBuilder.Entity<Artiste>(
-                a =>
-                {
-                    a.ToTable("Artiste");
-
-                    a.Property("IdArtiste").ValueGeneratedOnAdd();
-                    a.Property("Nom");
-                    a.Property("Biographie");
-
-                    a.HasKey(a => a.IdArtiste);
-                });
-
             // Table TitreStyle init
             modelBuilder.Entity<TitreStyle>(
                 ts =>
                 {
-                    ts.ToTable("TitreStyle");
-                    ts.Property("IdTitre");
-                    ts.Property("IdStyle");
                     ts.HasKey(ts => new
                     {
                         ts.IdStyle,
                         ts.IdTitre,
                     });
+                    ts.HasOne(ts => ts.Style).WithMany(s => s.TitresStyles).HasForeignKey(ts => ts.IdStyle);
+                    ts.HasOne(ts => ts.Titre).WithMany(s => s.TitresStyles).HasForeignKey(ts => ts.IdTitre);
                 });
 
             // Table Style init
             modelBuilder.Entity<Style>(
                 s =>
                 {
-                    s.ToTable("Style");
-                    s.Property("IdStyle").ValueGeneratedOnAdd();
-                    s.Property("Libelle");
-
-                    s.HasKey(s => s.IdStyle);
-                    s.HasMany(s => s.TitresStyles).WithOne(ts => ts.Style).HasForeignKey("IdStyle");
+                    s.HasMany(s => s.TitresStyles).WithOne(ts => ts.Style).HasForeignKey(ts => ts.IdStyle);
                 });
 
             // Table Titre init
             modelBuilder.Entity<Titre>(
                 t =>
                 {
-                    t.ToTable("Titre");
-
-                    t.Property("IdTitre").ValueGeneratedOnAdd();
-                    t.Property("Libelle");
-                    t.Property("Chronique");
-                    t.Property("UrlJaquette");
-                    t.Property("UrlEcoute");
-                    t.Property("DateCreation").HasColumnType("datetime");
-                    t.Property("DateSortie").HasColumnType("date");
-                    t.Property("Duree");
-                    t.Property("NbLectures");
-                    t.Property("NbLikes");
-
-                    t.HasKey(t => t.IdTitre);
-                    t.HasOne(t => t.Artiste).WithMany(a => a.Titres).HasForeignKey("IdArtiste");
-                    t.HasMany(t => t.TitresStyles).WithOne(ts => ts.Titre).HasForeignKey("IdTitre");
+                    t.HasOne(t => t.Artiste).WithMany(a => a.Titres).HasForeignKey(t => t.IdArtiste);
                 });
 
             // Table Commentaire init
             modelBuilder.Entity<Commentaire>(
                 c =>
                 {
-                    c.ToTable("Commentaire");
-
-                    c.Property("IdCommentaire").ValueGeneratedOnAdd();
-                    c.Property("Auteur");
-                    c.Property("Contenu");
-                    c.Property("DateCreation").HasColumnType("datetime");
-
-                    c.HasKey(c => c.IdCommentaire);
-                    c.HasOne(c => c.Titre).WithMany(t => t.Commentaires).HasForeignKey("IdTitre");
+                    c.HasOne(c => c.Titre).WithMany(t => t.Commentaires).HasForeignKey(c => c.IdTitre);
                 });
 
             base.OnModelCreating(modelBuilder);

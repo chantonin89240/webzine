@@ -123,5 +123,11 @@
             //this.titres.Find(t => t == titre).updateDbTitle(................);
             throw new NotImplementedException();
         }
+
+        public void UpdateStyles(Titre titre, List<string> listeStyles)
+        {
+            //this.titres.Find(t => t == titre).updateDbTitle(................);
+            throw new NotImplementedException();
+        }
     }
 }

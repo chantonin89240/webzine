@@ -12,6 +12,7 @@
         /// <summary>
         /// ID du Titre.
         /// </summary>
+        [Key]
         public int IdTitre { get; set; }
 
         /// <summary>
@@ -88,15 +89,15 @@
         /// <summary>
         /// Nombre de Lectures de la chronique du Titre.
         /// </summary>
-        [Display(Name = "nombre de lectures")]
         [Required]
+        [Display(Name = "nombre de lectures")]
         public int NbLectures { get; set; }
 
         /// <summary>
         /// Nombre de Likes du titre.
         /// </summary>
-        [Display(Name = "nombre de likes")]
         [Required]
+        [Display(Name = "nombre de likes")]
         public int NbLikes { get; set; }
 
         /// <summary>
