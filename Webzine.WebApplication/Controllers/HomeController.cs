@@ -27,9 +27,10 @@
         public IActionResult Index()
         {
             _logger.LogInformation("Hello, this is the index!");
-            this.model.Titres = _titreRepository.FindAll().ToList();
-             _logger.LogInformation("Log en place - Reste plus qu'à les rendre croustillant");
-            return this.View(model);
+            this.model.Titres = (List<Entity.Titre>)this._titreRepository.FindAll().ToList().OrderBy(t => t.DateSortie);
+
+            _logger.LogInformation("Log en place - Reste plus qu'à les rendre croustillant");
+            return this.View(this.model);
         }
     }
 }
