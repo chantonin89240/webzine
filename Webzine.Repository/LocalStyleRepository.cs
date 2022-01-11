@@ -13,7 +13,7 @@
         /// <param name="style"></param>
         public void Add(Style style)
         {
-            var styles = this.rechercheStyle(style);
+            var styles = this.Styles.FirstOrDefault(s => s.Libelle.ToLower() == style.Libelle.ToLower());
             if (styles == null)
             {
                 this.Styles.Add(style);
@@ -55,17 +55,6 @@
         public void Update(Style style)
         {
             this.Styles.Find(a => a == style);
-        }
-
-        /// <summary>
-        /// Recherche si le style libelle existe déjà pour l'ajout et la modification
-        /// </summary>
-        /// <param name="style"></param>
-        /// <returns></returns>
-        public Style rechercheStyle(Style style)
-        {
-            var styles = this.Styles.FirstOrDefault(s => s.Libelle.ToLower() == style.Libelle.ToLower());
-            return styles;
         }
 
     }

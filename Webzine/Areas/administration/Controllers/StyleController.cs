@@ -16,7 +16,7 @@
         private StyleViewModel model = new StyleViewModel();
 
         [BindProperty]
-        public Style  style { get; set; }
+        public Style style { get; set; }
 
         public StyleController(IStyleRepository styleRepository)
         {
@@ -45,7 +45,12 @@
             return this.View();
         }
 
-        [HttpPost]
+        /// <summary>
+        /// method qui créer un style 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost] 
         [ValidateAntiForgeryToken]
         [ActionName("creer")]
         public async Task<IActionResult> Creer(StyleViewModel model)
@@ -54,15 +59,9 @@
             {
                 if (this.ModelState.IsValid)
                 {
-                    //var styleIsOk = this._styleRepository.rechercheStyle(model.Style);
-                    //if (styleIsOk == true)
-                    //{
-
-                        this._styleRepository.Add(model.Style);
-                        var tot = model.Style;
-                        return RedirectToAction(nameof(Index));
-                    //}
-                    
+                    this._styleRepository.Add(model.Style);
+                    var tot = model.Style;
+                    return RedirectToAction(nameof(Index));
                 }
             }
             catch (DbUpdateException /* ex */)
@@ -86,6 +85,36 @@
             var style = this._styleRepository.Find(id);
             this.model.Style = style;
             return this.View(this.model);
+        }
+
+        /// <summary>
+        /// method qui réalise la modification du style
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("modifier")]
+        public async Task<IActionResult> Modifier(StyleViewModel model, int id)
+        {
+            try
+            {
+                if (this.ModelState.IsValid)
+                {
+                    model.Style.IdStyle = id;
+                    this._styleRepository.Update(model.Style);
+                    var tot = model.Style;
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch (DbUpdateException /* ex */)
+            {
+                //Log the error (uncomment ex variable name and write a log.
+                ModelState.AddModelError("", "Unable to save changes. " +
+                    "Try again, and if the problem persists " +
+                    "see your system administrator.");
+            }
+            return this.View(model.Style);
         }
 
         /// <summary>
