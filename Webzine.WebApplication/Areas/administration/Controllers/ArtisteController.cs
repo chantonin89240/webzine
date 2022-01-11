@@ -107,11 +107,11 @@
             return this.View(this.model);
         }
 
-/// <summary>
-/// Supprime un artiste
-/// </summary>
-/// <param name="id"></param>
-/// <returns></returns>
+        /// <summary>
+        /// Supprime un artiste
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ActionName("supprimer")]
         public IActionResult ValiderSuppression(int id)
         {
