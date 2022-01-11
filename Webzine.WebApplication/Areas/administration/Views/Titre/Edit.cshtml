@@ -44,7 +44,7 @@
         <div class="mb-3 row">
 			<label for="dateSortieTitre" class="col-sm-2 col-form-label">Date de sortie<span style="color: red;">*</span></label>
 			<div class="col-sm-4">
-				<input name="model.Titre.DateSortie" class="form-control" asp-for="@Model.Titre.DateSortie" asp-format="{0:yyyy-MM-dd}" required/>
+				<input asp-for="@Model.Titre.DateSortie" asp-format="{0:yyyy-MM-dd}" name="model.Titre.DateSortie" class="form-control" required/>
 			</div>
 
             <label for="dureeTitre" class="col-sm-2 col-form-label">Durèe en seconde<span style="color: red;">*</span></label>

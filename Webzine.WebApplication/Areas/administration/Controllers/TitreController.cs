@@ -154,7 +154,6 @@
         /// </summary>
         /// <param name="id">ID du <see cref="Titre"/> à supprimer.</param>
         /// <returns>Page de vérification de suppression.</returns>
-        [Route("[action]")]
         public IActionResult Delete(int id)
         {
             this.model.Titre = this._titreRepository.Find(id);
@@ -168,8 +167,6 @@
         /// <param name="id"></param>
         /// <returns>La vue Index mise à jour</returns>
         [HttpPost]
-        [Route("[action]")]
-        [ActionName("deleteAsk")]
         public IActionResult DeleteAsk(int id)
         {
             try

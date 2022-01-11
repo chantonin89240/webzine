@@ -10,7 +10,6 @@
 
 # File vscode
 .vscode
-.vs
 
 # File Mac
 .DS_Store
