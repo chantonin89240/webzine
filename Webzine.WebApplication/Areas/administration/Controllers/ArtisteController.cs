@@ -16,7 +16,7 @@
         private IArtisteRepository _artisteRepository;
         private ArtisteViewModel model = new ArtisteViewModel();
 
-        public ArtisteController (IArtisteRepository artisteRepository)
+        public ArtisteController(IArtisteRepository artisteRepository)
         {
             this._artisteRepository = artisteRepository;
 
@@ -41,12 +41,12 @@
             return this.View();
         }
 
-        [ActionName("Create")]
+        [ActionName("Creer")]
         /// <summary>
         /// Crée un artiste
         /// </summary>
         /// <returns>Vue pour la création d'un <see cref="Artiste"/>.</returns>
-        public IActionResult Create(ArtisteViewModel model)
+        public IActionResult Creer(ArtisteViewModel model)
         {
             try
             {
@@ -58,7 +58,7 @@
             }
             catch
             {
-                this.ModelState.AddModelError("", "Error");
+                this.ModelState.AddModelError(" ", "Error");
             }
             return this.View(model.Artiste);
         }
