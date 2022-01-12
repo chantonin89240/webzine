@@ -11,7 +11,8 @@
     {
         private readonly ILogger<HomeController> _logger;
         private ITitreRepository _titreRepository;
-        private TitreViewModel model = new TitreViewModel();
+        //private TitreViewModel model = new TitreViewModel();
+        private HomeViewModel model = new HomeViewModel();
         private IStyleRepository _styleRepository;
 
         public HomeController(ITitreRepository titreRepository, IStyleRepository styleRepository ,ILogger<HomeController> logger)
@@ -24,12 +25,16 @@
 
         // GET: HomeController
         // [Route("page")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
             _logger.LogInformation("Hello, this is the index!");
-            this.model.Titres = _titreRepository.FindAll().ToList();
-             _logger.LogInformation("Log en place - Reste plus qu'à les rendre croustillant");
-            return this.View(model);
+            _logger.LogInformation("Log en place - Reste plus qu'à les rendre croustillant");
+
+            // pageNumber ?? 0 = opération de fusion null, renvoi 0 si pageNumber est null
+            this.model.Page = pageNumber ?? 0;
+            this.model.Titres = this.model.titrePourPage(pageNumber ?? 0);
+            
+            return this.View(this.model);
         }
     }
 }

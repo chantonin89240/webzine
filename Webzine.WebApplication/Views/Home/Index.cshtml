@@ -1,15 +1,15 @@
 ﻿@{
     var i = 0;
     var j = 0;
+    var pageDes = @Model.Page - 1;
+    var pageAsc = Model.Page + 1;
 }
+@model Webzine.WebApplication.ViewModels.HomeViewModel;
 
 <h2 class="mb-3">Derniers titres chroniqués</h2>
 <ul class="list-unstyled">
     @foreach(var titre in Model.Titres)
     {
-        if (i < 3)
-        {
-            i++;
             <li>
                 <div class="card bg-light mb-3">
                     <div class="row">
@@ -28,9 +28,16 @@
                                     <i class="fas fa-tags"></i> Style :
                                     @foreach (var ts in @titre.TitresStyles)
                                     {
-                                        <a href="/Titre/TitresStyle?id=@ts.IdStyle" class="text-decoration-none">
-                                            <span>@ts.Style.Libelle</span>
-                                        </a>
+                                        @if(ts == null)
+                                        {
+                                            <p>pas de style</p>
+                                        }
+                                        else
+                                        {
+                                             @*<a href="/Titre/TitresStyle?id=@ts.IdStyle" class="text-decoration-none">
+                                                <span>@ts.Style.Libelle</span>
+                                            </a>*@
+                                        }
                                     }
                                 </p>
                             </div>
@@ -38,21 +45,39 @@
                     </div>
                 </div>
             </li>
-        }
-        else
-        {
-            break;
-        }
+       
     }
 </ul>
+
 <div class="d-flex justify-content-between mb-3">
-    <button type="button" class="btn btn-secondary">
-        <span style="vertical-align: middle; margin-left: 5px;"><< Titres plus récents</span>
-    </button>
-    <button type="button" class="btn btn-secondary">
-        <span style="vertical-align: middle;margin-right: 5px;">Titres plus anciens >></span>
-    </button>
+    @if(Model.Page <= 0)
+    {
+        <a class="btn btn-secondary" disabled>
+            <span style="vertical-align: middle; margin-left: 5px;">Titres plus récents</span>
+        </a>
+    }
+    else
+    {
+        <a class="btn btn-secondary" asp-route-pageNumber="@pageDes">
+            <span style="vertical-align: middle; margin-left: 5px;">Titres plus récents</span>
+        </a>
+    }
+
+    @if (Model.Page >= Model.pageCount(Model.titreTotal))
+    {
+        <a class="btn btn-secondary" disabled>
+            <span style="vertical-align: middle;margin-right: 5px;">Titres plus anciens >></span>
+        </a>
+    }
+    else
+    {
+        <a class="btn btn-secondary" asp-route-pageNumber="@pageAsc">
+            <span style="vertical-align: middle;margin-right: 5px;">Titres plus anciens >></span>
+        </a>
+    }  
 </div>
+
+
 <div>
     <h2 class="mt-4 mb-3">Titres les plus populaires</h2>
 	<div class="row">
