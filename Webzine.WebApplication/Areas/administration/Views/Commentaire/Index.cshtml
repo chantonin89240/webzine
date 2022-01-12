@@ -27,7 +27,7 @@
                 <td>@commentaire.Auteur</td>
                 <td>@commentaire.Contenu</td>
                 <td class="text-center">@commentaire.DateCreation.ToString("dd/MM/yyyy")</td>
-                <td class="d-flex justify-content-center"><a href="/administration/commentaire/suppression/@commentaire.IdCommentaire"><i class="fas fa-trash"></i></a></td>            </tr>
+                <td class="d-flex justify-content-center"><a asp-area="administration" asp-controller="Commentaire" asp-action="delete" asp-route-id="@commentaire.IdCommentaire"><i class="fas fa-trash"></i></a></td>            </tr>
         }
         </tbody>
 	</table>

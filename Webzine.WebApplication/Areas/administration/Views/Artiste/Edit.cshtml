@@ -7,7 +7,7 @@
 	<hr />
 
 	<!-- formulaire de modification d'un artiste -->
-	<form class="formAdmin" method="post" asp-action="Editer" asp-route-id="@Model.Artiste.IdArtiste">
+	<form class="formAdmin" method="post" asp-action="edit" asp-route-id="@Model.Artiste.IdArtiste">
 		<div class="mb-3 row">
 			<label for="nomArtiste" class="col-sm-2 col-form-label">Nom de l'artiste<span class="etoileRequired">*</span></label>
 			<div class="col-sm-10">

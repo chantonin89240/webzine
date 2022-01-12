@@ -17,15 +17,15 @@
             <h2>Supprimer un commentaire</h2>
 	        <hr />
 
-	        <div>
+	        <form method="post" asp-area="administration" asp-controller="commentaire" asp-action="delete" asp-route-id="@Model.ContextCommentaire.IdCommentaire" >
 		        <p class="row ms-0">Etes-vous sûr de vouloir supprimer le commentaire suivant ?</p>
                 <p>@Model.ContextCommentaire.Contenu</p>
-                <p>-- @Model.ContextCommentaire.Auteur le @Model.ContextCommentaire.DateCreation sur <a href="/Titre/Titre?idTitre=@Model.ContextTitre.IdTitre">@Model.ContextTitre.Libelle</a></p>
+                <p>-- @Model.ContextCommentaire.Auteur le @Model.ContextCommentaire.DateCreation sur <a asp-area="" asp-controller="titre" asp-action="titre" asp-route-idTitre="@Model.ContextTitre.IdTitre">@Model.ContextTitre.Libelle</a></p>
 
-		        <a asp-action="supprimer" asp-route-id="@Model.ContextCommentaire.IdCommentaire" class="btn btn-danger">Supprimer</a>
+		        <button type="submit" class="btn btn-danger">Supprimer</button>
+            </form>
 
 		        <a class="row text-decoration-none ms-0 mt-4" asp-action="Index" >Retour à l'administration des commentaires</a>
-            </div>
         }
     }
 </div>

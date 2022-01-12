@@ -10,7 +10,8 @@
 	<hr />
 
 	<!-- formulaire de création d'un artiste -->
-	<form class="formAdmin" method="post" asp-action="Creer">
+	<div asp-validation-summary=All></div>
+	<form class="formAdmin" method="post" asp-area="administration" asp-controller="artiste" asp-action="create">
 		<div class="mb-3 row">
 			<label for="nomArtiste" class="col-sm-2 col-form-label">Nom de l'artiste<span class="etoileRequired">*</span></label>
 			<div class="col-sm-10">

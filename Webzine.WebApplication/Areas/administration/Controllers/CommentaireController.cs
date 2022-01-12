@@ -10,6 +10,7 @@
     /// Contrôleur des vues en rapport aux <see cref="Commentaire"/>s.
     /// </summary>
     [Area("administration")]
+    [Route("[controller]")]
     public class CommentaireController : Controller
     {
         private ICommentaireRepository commentaireRepository;
@@ -25,6 +26,8 @@
         /// Génère la page listant tous les <see cref="Commentaire"/>s dans la partie Administrateur.
         /// </summary>
         /// <returns>Page de tous les <see cref="Commentaire"/>s.</returns>
+        [Route("")]
+        [HttpGet("[action]")]
         public IActionResult Index()
         {
             List<Commentaire> commentaires = this.commentaireRepository.FindAll().ToList();
@@ -39,8 +42,9 @@
         /// </summary>
         /// <param name="id">id du <see cref="Commentaire"/> qui sera effacé.</param>
         /// <returns>Page web de vérification.</returns>
-        [ActionName("suppression")]
-        public IActionResult Suppression(int id)
+        [HttpGet("[action]")]
+        [ActionName("")]
+        public IActionResult delete(int id)
         {
             List<Commentaire> commentaires = this.commentaireRepository.FindAll().ToList();
             List<Titre> titres = this.titreRepository.FindAll().ToList();
@@ -52,14 +56,17 @@
                 Commentaires = commentaires,
                 Titres = titres,
                 ContextCommentaire = contextComment,
-                ContextTitre = titres.FirstOrDefault(title => title.IdTitre==contextComment.IdTitre),
+                ContextTitre = titres.FirstOrDefault(title => title.IdTitre == contextComment.IdTitre),
             };
 
             return this.View(model);
         }
 
-        [ActionName("supprimer")]
-        public IActionResult Supprimer(int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("delete")]
+        [Route("[action]")]
+        public IActionResult delete(CommentairesViewModel model,int id)
 		{
             commentaireRepository.Delete(id);
             return this.RedirectToAction("Index");
