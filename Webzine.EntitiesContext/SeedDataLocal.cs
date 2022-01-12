@@ -58,6 +58,8 @@
             });
             context.AddRange(Commentaires);
 
+            context.SaveChanges();
+
             var TitresStyles = TitreFactory.CreateTitre().SelectMany(t => t.TitresStyles).Select(ts => new TitreStyle {
                 IdTitre = ts.IdTitre,
                 IdStyle = ts.IdStyle,
