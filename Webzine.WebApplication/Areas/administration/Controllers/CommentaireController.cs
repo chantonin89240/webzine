@@ -43,7 +43,6 @@
         /// <param name="id">id du <see cref="Commentaire"/> qui sera effacé.</param>
         /// <returns>Page web de vérification.</returns>
         [HttpGet("[action]")]
-        [ActionName("")]
         public IActionResult delete(int id)
         {
             List<Commentaire> commentaires = this.commentaireRepository.FindAll().ToList();

@@ -53,26 +53,26 @@
     @if(Model.Page <= 0)
     {
         <a class="btn btn-secondary" disabled>
-            <span style="vertical-align: middle; margin-left: 5px;">Titres plus récents</span>
+            <span class="align-middle ms-1" style="vertical-align: middle; margin-left: 5px;">&#60;&#60; Titres plus récents</span>
         </a>
     }
     else
     {
         <a class="btn btn-secondary" asp-route-pageNumber="@pageDes">
-            <span style="vertical-align: middle; margin-left: 5px;">Titres plus récents</span>
+            <span class="align-middle ms-1">&#60;&#60; Titres plus récents</span>
         </a>
     }
 
     @if (Model.Page >= Model.PageCount(Model.TitreTotal))
     {
         <a class="btn btn-secondary" disabled>
-            <span style="vertical-align: middle;margin-right: 5px;">Titres plus anciens >></span>
+            <span class="align-middle ms-1">Titres plus anciens &#62;&#62;</span>
         </a>
     }
     else
     {
         <a class="btn btn-secondary" asp-route-pageNumber="@pageAsc">
-            <span style="vertical-align: middle;margin-right: 5px;">Titres plus anciens >></span>
+            <span class="align-middle ms-1">Titres plus anciens &#62;&#62;</span>
         </a>
     }  
 </div>
