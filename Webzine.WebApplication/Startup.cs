@@ -2,6 +2,7 @@ namespace Webzine.WebApplication
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.EntityFrameworkCore;
+    using Npgsql.EntityFrameworkCore.PostgreSQL;
     using Microsoft.Extensions.Configuration;
     using NLog.Web;
     using Webzine.EntitiesContext;
@@ -11,6 +12,7 @@ namespace Webzine.WebApplication
     public static class Startup
     {
         public static string dataPath;
+        public static string sgbd;
         public static WebApplication Initialize(string [] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -62,6 +64,7 @@ namespace Webzine.WebApplication
         public static void ConfigureServices(WebApplicationBuilder builder)
         {
             dataPath = builder.Configuration.GetValue<string>("DataRepository");
+            sgbd = builder.Configuration.GetValue<string>("SGBD");
 
             // NLog: Setup NLog for Dependency injection
             // problème au lancement de l'app, l'app bloque en mode debug, et bloque sur le chargement de la config dans launchsettings.json en mode no debug
@@ -72,10 +75,28 @@ namespace Webzine.WebApplication
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages().AddRazorRuntimeCompilation();            
 
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
             if(dataPath == "Database")
             {
                 builder.Services.AddDbContext<WebzineDbContext>(
-                    options => options.UseSqlite(builder.Configuration.GetConnectionString("WebzineDbContext"))
+                
+                    options => {
+                        switch (sgbd)
+                        {
+                            case "PostgreSql":
+                                options.UseNpgsql(builder.Configuration.GetConnectionString("WebzineDbPostgreSql"));
+                                break;
+                            case "Sqlite":
+                                options.UseSqlite(builder.Configuration.GetConnectionString("WebzineDbSqlite"));
+                                break;
+                            case "SqlServer":
+                                options.UseSqlServer(builder.Configuration.GetConnectionString("WebzineDbSQLServer"));
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                 );
                 
                 builder.Services.AddScoped<ITitreRepository, DbTitreRepository>();

@@ -6,7 +6,7 @@
     /// <summary>
     /// Entité représentant un Artiste.
     /// </summary>
-    // [Table("Artiste")]
+    [Table("Artistes")]
     public class Artiste
     {
         /// <summary>
@@ -14,6 +14,7 @@
         /// Non nullable.
         /// </summary>
         [Key]
+        [Column("IdArtiste")]
         public int IdArtiste { get; set; }
 
         /// <summary>
@@ -22,11 +23,13 @@
         [MinLength(1)]
         [MaxLength(50)]
         [Display(Name = "Nom de l'artiste")]
+        [Column("Nom")]
         public string? Nom { get; set; }
 
         /// <summary>
         /// Biographie de l'artiste.
         /// </summary>
+        [Column("Biographie")]
         public string? Biographie { get; set; }
 
         /// <summary>
