@@ -11,6 +11,7 @@
     /// Représente le contröleur pour les vues en rapport aux <see cref="Artiste"/>s dans la partie Administration.
     /// </summary>
     [Area("administration")]
+    [Route("[controller]")]
     public class ArtisteController : Controller
     {
         private IArtisteRepository _artisteRepository;
@@ -26,6 +27,8 @@
         /// Renvoie la vue sur chemin "/administration/<see cref="Artiste"/>".
         /// </summary>
         /// <returns>vue d'ensemble de tous les <see cref="Artiste"/>s.</returns>
+        [Route("")]
+        [HttpGet("[action]")]
         public IActionResult Index()
         {
             this.model.Artistes = this._artisteRepository.FindAll().ToList();
@@ -36,25 +39,29 @@
         /// Renvoie la vue sur chemin "/administration/Artiste/Creation".
         /// </summary>
         /// <returns>Vue pour la création d'un <see cref="Artiste"/>.</returns>
-        public IActionResult Creation()
+        [HttpGet("[action]")]
+        public IActionResult Create()
         {
             return this.View();
         }
 
-        [ActionName("Creer")]
         /// <summary>
         /// Crée un artiste
         /// </summary>
         /// <returns>Vue pour la création d'un <see cref="Artiste"/>.</returns>
-        public IActionResult Creer(ArtisteViewModel model)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("create")]
+        [Route("[action]")]
+        public IActionResult Create(ArtisteViewModel model)
         {
             try
             {
-                if (this.ModelState.IsValid)
-                {
+                // if (this.ModelState.IsValid)
+                // {
                     this._artisteRepository.Add(model.Artiste);
                     return this.RedirectToAction(nameof(this.Index));
-                }
+                // }
             }
             catch
             {
@@ -68,6 +75,7 @@
         /// </summary>
         /// <param name="idArtiste">Id de l'<see cref="Artiste"/> géré par la vue.</param>
         /// <returns>Vue web pour l'édition d'un <see cref="Artiste"/> qui sera modifié.</returns>
+        [HttpGet("[action]")]
         public IActionResult Edit(int id)
         {
             var artiste = this._artisteRepository.Find(id);
@@ -75,17 +83,20 @@
             return this.View(this.model);
         }
 
-        [ActionName("Editer")]
-        public IActionResult Editer(ArtisteViewModel model, int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("edit")]
+        [Route("[action]")]
+        public IActionResult Edit(ArtisteViewModel model, int id)
         {
             try
             {
-                if (this.ModelState.IsValid)
-                {
+                // if (this.ModelState.IsValid)
+                // {
                     model.Artiste.IdArtiste = id;
                     this._artisteRepository.Update(model.Artiste);
                     return this.RedirectToAction(nameof(this.Index));
-                }
+                // }
             }
             catch
             {
@@ -100,7 +111,8 @@
         /// </summary>
         /// <param name="idArtiste">ID de l'<see cref="Artiste"/> à supprimer par la vue.</param>
         /// <returns>Vue web pour la suppression d'un <see cref="Artiste"/>.</returns>
-        public IActionResult Suppression(int id)
+        [HttpGet("[action]")]
+        public IActionResult delete(int id)
         {
             var artiste = this._artisteRepository.Find(id);
             this.model.Artiste = artiste;
@@ -112,8 +124,11 @@
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [ActionName("supprimer")]
-        public IActionResult ValiderSuppression(int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("delete")]
+        [Route("[action]")]
+        public IActionResult delete(ArtisteViewModel model, int id)
         {
             var artiste = this._artisteRepository.Find(id);
             this._artisteRepository.Delete(artiste);

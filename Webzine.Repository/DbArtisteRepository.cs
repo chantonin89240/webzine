@@ -1,16 +1,16 @@
-﻿using Webzine.EntitiesContext;
+﻿using Microsoft.EntityFrameworkCore;
+using Webzine.EntitiesContext;
 using Webzine.Entity;
 using Webzine.Repository.Contracts;
 
 namespace Webzine.Repository
 {
-    public  class DbArtisteRepository : IArtisteRepository
+    public class DbArtisteRepository : IArtisteRepository
     {
         private WebzineDbContext _context;
         public DbArtisteRepository(WebzineDbContext context){
             this._context = context;
         }
-
 
         /// <summary>
         /// Adds an <see cref="Artiste"/> to the local repository.
@@ -19,9 +19,15 @@ namespace Webzine.Repository
         /// <exception cref="NotImplementedException">Not yet implemented.</exception>
         public void Add(Artiste artiste)
         {
-            throw new NotImplementedException();
+            // recherceh si l' artiste existe déjà
+            var artistes = this._context.Artistes.FirstOrDefault(art => art.Nom.ToLower() == artiste.Nom.ToLower());
 
-            // artistes.Add(artiste);
+            // s'il n'existe pas on le crée
+            if (artistes == null)
+            {
+                this._context.Add(artiste);
+                this._context.SaveChanges();
+            }
         }
 
         /// <summary>
@@ -54,8 +60,6 @@ namespace Webzine.Repository
         {
             IEnumerable<Artiste> artistes = this._context.Artistes.ToList();
             return artistes;
-
-            // .FindAll(a => a.IdArtiste != null).ToList();
         }
 
         /// <summary>
@@ -65,8 +69,22 @@ namespace Webzine.Repository
         /// <exception cref="NotImplementedException">Not yet implemented.</exception>
         public void Update(Artiste artiste)
         {
-           this._context.Artistes.Update(artiste);
+            var artistes = this._context.Artistes.Where(a => a.IdArtiste != artiste.IdArtiste);
+            var result = false;
+            foreach (var artis in artistes)
+            {
+                if (artiste.Nom == artis.Nom )
+                {
+                    result = true;
+                }
+            }
+            if (result != true )
+            {
+                this._context.Artistes.Update(artiste);
+                this._context.SaveChanges();
+            }
 
+            this._context.Entry(artiste).State = EntityState.Modified;
         }
     }
 }

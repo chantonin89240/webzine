@@ -179,9 +179,12 @@
         {
             try
             {
+            //     if (ModelState.IsValid)
+            //     {
                 var titre = this._titreRepository.Find(id);
                 this._titreRepository.Delete(titre);
                 return this.RedirectToAction(nameof(Index));
+            //      }
             }
             catch (DbUpdateException ex )
             {

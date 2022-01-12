@@ -12,7 +12,9 @@
 
         public Style? Style { get; set; }
 
-        public List<Artiste>? Artistes { get; set; }
+        public IEnumerable<Artiste>? Artistes { get; set; }
+
+        public Artiste Artiste { get; set; }
 
         public string FormatLength(Titre titre)
         {
