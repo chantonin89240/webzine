@@ -11,14 +11,14 @@
         private IArtisteRepository _artisteRepository;
         private ITitreRepository _titreRepository;
 
-        RechercheController(IArtisteRepository artisteRepository, ITitreRepository titreRepository)
+        public RechercheController(IArtisteRepository artisteRepository, ITitreRepository titreRepository)
         {
             this._artisteRepository = artisteRepository;
             this._titreRepository = titreRepository;
         }
 
-        //[HttpPost]
-        public IActionResult Index(string searchedItem)
+        [HttpPost]
+        public IActionResult Index()
         {
             string searchedItemm = Request.Form["searchedItem"].ToString();
             List<Artiste> artistes = _artisteRepository.FindAll().Where(A => A.Nom.ToLower().Contains(searchedItemm.ToLower())).ToList();
