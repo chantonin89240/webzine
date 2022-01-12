@@ -34,7 +34,7 @@
             this.model.Titres = this._titreRepository.FindAll().ToList();
 
             this.model.Titres = this.model.TitrePourPage(pageNumber ?? 0);
-            this.model.Titres.ForEach(title => title.TitresStyles.ForEach(ts => ts.Style = this._styleRepository.Find(ts.IdStyle)));
+            this.model.Titres.ForEach(title => title.TitresStyles.ToList().ForEach(ts => ts.Style = this._styleRepository.Find(ts.IdStyle)));
 
             return this.View(this.model);
         }

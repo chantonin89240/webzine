@@ -5,7 +5,7 @@
 
     public class HomeViewModel
     {
-        public List<Titre> Titres { get; set; } = TitreFactory.CreateTitre().ToList();
+        public List<Titre> Titres { get; set; } = TitreFactory.CreateTitre2().ToList();
         public List<Titre> TitresPOP { get; set; } = TitreFactory.CreateTitre2().ToList();
         public int Page { get; set; }
         public int titreTotal { get; set; } = 3;
