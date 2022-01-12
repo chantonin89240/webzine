@@ -11,11 +11,13 @@ namespace Webzine.WebApplication.Controllers
     {
         private ICommentaireRepository commentaireRepository;
         private ITitreRepository titreRepository;
-        CommentaireController(ICommentaireRepository commentaireRepository, ITitreRepository titreRepository)
+
+        public CommentaireController(ICommentaireRepository commentaireRepository, ITitreRepository titreRepository)
         {
             this.commentaireRepository = commentaireRepository;
             this.titreRepository = titreRepository;
         }
+
         [HttpPost]
         public ActionResult Index(Commentaire model)
         {

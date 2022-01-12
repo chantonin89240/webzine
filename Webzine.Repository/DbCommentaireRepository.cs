@@ -14,7 +14,7 @@ namespace Webzine.Repository
         public void Add(Commentaire commentaire)
         {
             this._context.Add(commentaire);
-            //this._context.SaveChanges();
+            this._context.SaveChanges();
         }
 
         public void Delete(int id)
@@ -25,9 +25,7 @@ namespace Webzine.Repository
 
         public Commentaire Find(int id)
         {
-            {
-                return this._context.Commentaires.Find(id);
-            }
+            return this._context.Commentaires.Find(id);
         }
 
         public IEnumerable<Commentaire> FindAll()
