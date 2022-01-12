@@ -28,13 +28,16 @@
 
         public static void InitialisationDB(WebzineDbContext context)
         {
-            IEnumerable<Style> Styles = StyleFactory.GetStyles().Select(style => new Style { Libelle = style.Libelle }).OrderBy(s => s.Libelle);
-            context.AddRange(Styles);
 
-            IEnumerable<Artiste> Artistes = ArtisteFactory.CreateArtiste(10);
+            int defaultAmount = 10;
+
+            IEnumerable<Style> Styles = StyleFactory.GetStyles();
+            context.AddRange(Styles.Select(style => new Style { Libelle = style.Libelle }).OrderBy(s => s.Libelle));
+
+            IEnumerable<Artiste> Artistes = ArtisteFactory.CreateArtiste(defaultAmount);
             context.AddRange(Artistes.Select(artiste => new Artiste { Nom = artiste.Nom, Biographie = artiste.Biographie }));
 
-            IEnumerable<Titre> Titres = TitreFactory.CreateTitre(10, Artistes, Styles);
+            IEnumerable<Titre> Titres = TitreFactory.CreateTitre(defaultAmount, Artistes, Styles);
             context.AddRange(Titres.Select(titre => new Titre
             {
                 IdArtiste = titre.IdArtiste,
@@ -51,7 +54,7 @@
 
             context.SaveChanges();
 
-            IEnumerable<Commentaire> commentaires = CommentaireFactory.CreateCommentaire(10, Titres);
+            IEnumerable<Commentaire> commentaires = CommentaireFactory.CreateCommentaire(defaultAmount, Titres);
             context.AddRange(commentaires.Select(comment => new Commentaire
             {
                 Auteur = comment.Auteur,
@@ -60,11 +63,20 @@
                 IdTitre = comment.IdTitre,
             }));
 
-            IEnumerable<TitreStyle> titreStyles = Titres.SelectMany(t => t.TitresStyles).Select(ts => new TitreStyle {
-                IdTitre = ts.IdTitre,
-                IdStyle = ts.IdStyle,
-            }).ToList();
+            context.SaveChanges();
+
+            IEnumerable<TitreStyle> titreStyles = Titres.SelectMany(t =>
+                t.TitresStyles
+            ).Select(t =>
+                new TitreStyle()
+                {
+                    IdStyle = t.IdStyle,
+                    IdTitre = t.IdTitre,
+                }
+            ).ToList();
             context.AddRange(titreStyles);
+
+
 
             context.SaveChanges();
         }

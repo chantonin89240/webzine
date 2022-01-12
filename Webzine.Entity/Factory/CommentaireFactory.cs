@@ -15,9 +15,12 @@
                     f.Internet.UserName(),
                     f.Rant.Review(),
                     f.Date.Past(),
-                    f.Random.Int(0, 10),
+                    0,
                     new Titre()))
-                .FinishWith((f, c) => c.Titre = f.PickRandom(titres));
+                .FinishWith((f, c) => {
+                    c.Titre = f.PickRandom(titres);
+                    c.IdTitre = c.Titre.IdTitre;
+                });
 
 
             return faker.Generate(amount);

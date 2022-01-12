@@ -1,6 +1,7 @@
 ﻿namespace Webzine.Entity.Factory
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using Bogus;
 
@@ -26,13 +27,16 @@
                         Commentaires = new List<Commentaire>(),
                         TitresStyles = new List<TitreStyle>(),
                         IdArtiste = fake.Random.Int(1, artistes.Count()),
-                    }).FinishWith((f, t) =>
+                    }).FinishWith((fake, title) =>
                     {
-                        t.Artiste = artistes.First(a => a.IdArtiste == t.IdArtiste);
-                        Style style = f.PickRandom(styles);
-                        t.TitresStyles.ToList().Add(new TitreStyle { IdTitre = t.IdTitre, IdStyle = style.IdStyle, Style = style, Titre = t });
-                        style = f.PickRandom(styles);
-                        t.TitresStyles.ToList().Add(new TitreStyle { IdTitre = t.IdTitre, IdStyle = style.IdStyle, Style = style, Titre = t });
+                        title.Artiste = artistes.First(a => a.IdArtiste == title.IdArtiste);
+                        Style style = fake.PickRandom(styles);
+                        title.TitresStyles = title.TitresStyles.Append(new TitreStyle { IdTitre = title.IdTitre, IdStyle = style.IdStyle }).ToList();
+                        Style otherStyle = fake.PickRandom(styles);
+                        if (otherStyle.IdStyle != style.IdStyle)
+                        {
+                            title.TitresStyles = title.TitresStyles.Append(new TitreStyle { IdTitre = title.IdTitre, IdStyle = otherStyle.IdStyle }).ToList();
+                        }
                     });
 
             return faker.Generate(amount);

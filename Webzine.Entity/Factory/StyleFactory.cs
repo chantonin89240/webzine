@@ -8,7 +8,7 @@
              {
                 new Style()
                 {
-                    IdStyle = 999,
+                    IdStyle = 1,
                     Libelle = "Pop",
                 },
                 new Style()
@@ -22,91 +22,91 @@
                     Libelle = "Rap/Hip Hop",
                 },
                 new Style(){
-                    IdStyle = 152,
+                    IdStyle = 4,
                     Libelle =  "Rock",
                 },
                 new Style(){
-                    IdStyle = 113,
+                    IdStyle = 5,
                     Libelle =  "Dance",
                 },
                 new Style(){
-                    IdStyle = 165,
+                    IdStyle = 6,
                     Libelle =  "R&B",
                 },
                 new Style(){
-                    IdStyle = 85,
+                    IdStyle = 7,
                     Libelle =  "Alternative",
                 },
                 new Style(){
-                    IdStyle = 106,
+                    IdStyle = 8,
                     Libelle =  "Electro",
                 },
                 new Style(){
-                    IdStyle = 466,
+                    IdStyle = 9,
                     Libelle =  "Folk",
                 },
                 new Style(){
-                    IdStyle = 144,
+                    IdStyle = 10,
                     Libelle =  "Reggae",
                 },
                 new Style(){
-                    IdStyle = 129,
+                    IdStyle = 11,
                     Libelle =  "Jazz",
                 },
                 new Style(){
-                    IdStyle = 52,
+                    IdStyle = 12,
                     Libelle =  "Chanson française",
                 },
                 new Style(){
-                    IdStyle = 84,
+                    IdStyle = 13,
                     Libelle =  "Country",
                 },
                 new Style(){
-                    IdStyle = 98,
+                    IdStyle = 14,
                     Libelle =  "Classique",
                 },
                 new Style(){
-                    IdStyle = 17,
+                    IdStyle = 15,
                     Libelle =  "Films/Jeux vidéo",
                 },
                 new Style(){
-                    IdStyle = 464,
+                    IdStyle = 16,
                     Libelle =  "Metal",
                 },
                 new Style(){
-                    IdStyle = 169,
+                    IdStyle = 17,
                     Libelle =  "Soul & Funk",
                 },
                 new Style(){
-                    IdStyle = 153,
+                    IdStyle = 18,
                     Libelle =  "Blues",
                 },
                 new Style(){
-                    IdStyle = 95,
+                    IdStyle = 19,
                     Libelle =  "Jeunesse",
                 },
                 new Style(){
-                    IdStyle = 197,
+                    IdStyle = 20,
                     Libelle =  "Latino",
                 },
                 new Style(){
-                    IdStyle = 99,
+                    IdStyle = 21,
                     Libelle =  "Musique africaine",
                 },
                 new Style(){
-                    IdStyle = 12,
+                    IdStyle = 22,
                     Libelle =  "Musique arabe",
                 },
                 new Style(){
-                    IdStyle = 16,
+                    IdStyle = 23,
                     Libelle =  "Musique asiatique",
                 },
                 new Style(){
-                    IdStyle = 75,
+                    IdStyle = 24,
                     Libelle =  "Musique brésilienne",
                 },
                 new Style(){
-                    IdStyle = 81,
+                    IdStyle = 25,
                     Libelle =  "Musique indienne",
                 },
              };

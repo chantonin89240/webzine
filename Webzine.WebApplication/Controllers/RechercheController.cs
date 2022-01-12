@@ -3,7 +3,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Webzine.ViewModels;
     using Webzine.Repository.Contracts;
-    using Webzine.Repository;
+   
     using Webzine.Entity;
 
     public class RechercheController : Controller
@@ -17,12 +17,12 @@
             this._titreRepository = titreRepository;
         }
 
-        [HttpPost]
-        public IActionResult Index()
+        //[HttpPost]
+        public IActionResult Index(string searchedItem)
         {
-            string searchedItem = Request.Form["searchedItem"].ToString();
-            List<Artiste> artistes = _artisteRepository.FindAll().Where(A => A.Nom.ToLower().Contains(searchedItem.ToLower())).ToList();
-            List<Titre> titres = _titreRepository.FindAll().Where(T => T.Libelle.ToLower().Contains(searchedItem.ToLower())).ToList();
+            string searchedItemm = Request.Form["searchedItem"].ToString();
+            List<Artiste> artistes = _artisteRepository.FindAll().Where(A => A.Nom.ToLower().Contains(searchedItemm.ToLower())).ToList();
+            List<Titre> titres = _titreRepository.FindAll().Where(T => T.Libelle.ToLower().Contains(searchedItemm.ToLower())).ToList();
             artistes.ForEach(artiste =>
             {
                 artiste.Titres.ToList().ForEach(artisteTitre =>
@@ -35,7 +35,7 @@
             });
             titres = titres.OrderBy(T => T.Libelle).ToList();
 
-            RechercheViewModel model = new RechercheViewModel(artistes, titres, searchedItem);
+            RechercheViewModel model = new RechercheViewModel(artistes, titres, searchedItemm);
             //model.Rechercher()
 
             return this.View(model);
