@@ -172,8 +172,8 @@ namespace Webzine.WebApplication
                 // ///////////////////// //
                 endpoints.MapControllerRoute(
                     name: "accueil",
-                    pattern: "page/{id}",
-                    defaults: new { controller = "home", action = "index" });
+                    pattern: "page/{pageNumber?}",
+                    defaults: new { controller = "home", action = "Index" });
                 
                 endpoints.MapControllerRoute(
                 name: "areas",

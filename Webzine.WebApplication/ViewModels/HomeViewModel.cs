@@ -6,19 +6,34 @@
     public class HomeViewModel
     {
         public List<Titre> Titres { get; set; } = TitreFactory.CreateTitre().ToList();
-
-
         public List<Titre> TitresPOP { get; set; } = TitreFactory.CreateTitre2().ToList();
+        public int Page { get; set; }
+        public int titreTotal { get; set; } = 3;
 
-
+        /// <summary>
+        /// retourne ne nombre de page total
+        /// </summary>
+        /// <param name="titreTotal"></param>
+        /// <returns></returns>
         public int pageCount(int titreTotal)
         {
-            return (Titres.Count() / titreTotal) - ((Titres.Count() / titreTotal) % 1) +1;
+            return (this.Titres.Count() - 1 / titreTotal) - (((this.Titres.Count() - 1) / titreTotal) % 1);
         }
 
-        public List<Titre> titrePourPage(int titreTotal, int page)
+        /// <summary>
+        /// retourne la liste des titres par page
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public List<Titre> titrePourPage(int page)
         {
-            List<Titre> output = (List<Titre>)this.Titres.Chunk(titreTotal).ElementAt(page).ToList().OrderBy(t => t.DateCreation);
+            int countPage = this.pageCount(this.titreTotal);
+            if (countPage < page)
+            {
+                page = countPage;
+            }
+
+            List<Titre> output = this.Titres.OrderByDescending(t => t.DateCreation).Chunk(this.titreTotal).ElementAt(page).ToList();
 
             return output;
         }

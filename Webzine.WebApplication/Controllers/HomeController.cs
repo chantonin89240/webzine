@@ -3,8 +3,6 @@
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Repository.Contracts;
     using Webzine.WebApplication.ViewModels;
-    using Webzine.Entity;
-    using Webzine.WebApplication.Controllers.Components;
 
     /// <summary>
     /// Page d'accueil.
@@ -32,9 +30,9 @@
             _logger.LogInformation("Hello, this is the index!");
             _logger.LogInformation("Log en place - Reste plus qu'à les rendre croustillant");
 
-            int pageSize = 3;
             // pageNumber ?? 0 = opération de fusion null, renvoi 0 si pageNumber est null
-            this.model.titrePourPage(pageSize, pageNumber ?? 0);
+            this.model.Page = pageNumber ?? 0;
+            this.model.Titres = this.model.titrePourPage(pageNumber ?? 0);
             
             return this.View(this.model);
         }
