@@ -7,7 +7,7 @@
     /// <summary>
     /// Entité représentant un Style.
     /// </summary>
-    // [Table("Style")]
+    [Table("Styles")]
     public class Style
     {
         /// <summary>
@@ -15,6 +15,7 @@
         /// Unique.
         /// </summary>
         [Key]
+        [Column("IdStyle")]
         public int IdStyle { get; set; }
 
         /// <summary>
@@ -24,6 +25,7 @@
         [Required(ErrorMessage = "Libellé requis.")]
         [MinLength(2, ErrorMessage ="Taille mini : 2 caractères")]
         [MaxLength(50, ErrorMessage = "Taille maxi : 50 caractères")]
+        [Column("Libelle")]
         public string Libelle { get; set; }
 
         /// <summary>

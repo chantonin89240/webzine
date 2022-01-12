@@ -9,19 +9,20 @@
     /// <summary>
     /// Entité représentant un Titre.
     /// </summary>
-    // [Table("Titre")]
+    [Table("Titres")]
     public class Titre
     {
         /// <summary>
         /// ID du Titre.
         /// </summary>
         [Key]
+        [Column("IdTitre")]
         public int IdTitre { get; set; }
 
         /// <summary>
         /// ID de l'artiste créateur du Titre.
         /// </summary>
-        
+        [Column("IdArtiste")]
         public int IdArtiste { get; set; }
 
         /// <summary>
@@ -37,6 +38,7 @@
         [Required]
         [MinLength(1)]
         [MaxLength(200)]
+        [Column("Libelle")]
         public string? Libelle { get; set; }
 
         /// <summary>
@@ -45,6 +47,7 @@
         [Required]
         [MinLength(10)]
         [MaxLength(4000)]
+        [Column("Chronique")]
         public string? Chronique { get; set; }
 
         /// <summary>
@@ -53,6 +56,7 @@
         [Required]
         [Display(Name = "jaquette de l'album")]
         [MaxLength(250)]
+        [Column("UrlJaquette")]
         public string? UrlJaquette { get; set; }
 
         /// <summary>
@@ -61,11 +65,13 @@
         [Display(Name = "url d'écoute")]
         [MinLength(13)]
         [MaxLength(250)]
+        [Column("UrlEcoute")]
         public string? UrlEcoute { get; set; }
 
         /// <summary>
         /// WARN:TBD.
         /// </summary>
+        [Column("Lien")]
         public string? Lien { get; set; }
 
         /// <summary>
@@ -73,7 +79,8 @@
         /// </summary>
         [Required]
         [Display(Name = "date de création")]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
+        [Column("DateCreation")]
         public DateTime DateCreation { get; set; }
 
         /// <summary>
@@ -83,12 +90,14 @@
         [Display(Name = "date de sortie")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [Column("DateSortie")]
         public DateTime DateSortie { get; set; }
 
         /// <summary>
         /// Durée du titre. En Secondes.
         /// </summary>
         [Display(Name = "durée en secondes")]
+        [Column("Duree")]
         public int Duree { get; set; }
 
         /// <summary>
@@ -96,6 +105,7 @@
         /// </summary>
         [Required]
         [Display(Name = "nombre de lectures")]
+        [Column("NbLectures")]
         public int NbLectures { get; set; }
 
         /// <summary>
@@ -103,6 +113,7 @@
         /// </summary>
         [Required]
         [Display(Name = "nombre de likes")]
+        [Column("NbLikes")]
         public int NbLikes { get; set; }
 
         /// <summary>

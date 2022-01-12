@@ -6,31 +6,31 @@
     /// <summary>
     /// Entité représentant un lien entre un Titre et un Style.
     /// </summary>
-    // [Table("TitreStyle")]
+    [Table("TitresStyles")]
     public class TitreStyle
     {
         /// <summary>
         /// ID du Style du lien.
         /// </summary>
-        // [Key]
+        [Key]
         public int IdStyle { get; set; }
 
         /// <summary>
         /// ID du Titre du lien.
         /// </summary>
-        // [Key]
+        [Key]
         public int IdTitre { get; set; }
 
         /// <summary>
         /// Objet Titre.
         /// </summary>
-        // [ForeignKey(nameof(IdTitre))]
+        [ForeignKey(nameof(IdTitre))]
         public Titre Titre { get; set; }
 
         /// <summary>
         /// Objet Style.
         /// </summary>
-        // [ForeignKey(nameof(IdStyle))]
+        [ForeignKey(nameof(IdStyle))]
         public Style Style { get; set; }
 
         

@@ -8,7 +8,7 @@
     /// <summary>
     /// Entité pour gérer les données d'un commentaire.
     /// </summary>
-    // [Table("Commentaire")]
+    [Table("Commentaires")]
     public class Commentaire
     {
         /// <summary>
@@ -17,6 +17,7 @@
         /// Non Null.
         /// </summary>
         [Key]
+        [Column("IdCommentaire")]
         public int IdCommentaire { get; set; }
 
         /// <summary>
@@ -27,6 +28,7 @@
         [Required]
         [MinLength(2)]
         [MaxLength(30)]
+        [Column("Auteur")]
         public string? Auteur { get; set; }
 
         /// <summary>
@@ -37,6 +39,7 @@
         [Required]
         [MinLength(10)]
         [MaxLength(1000)]
+        [Column("Contenu")]
         public string? Contenu { get; set; }
 
         /// <summary>
@@ -45,12 +48,14 @@
         /// </summary>
         [Required]
         [Display(Name = "Date de création")]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
+        [Column("DateCreation")]
         public DateTime DateCreation { get; set; }
 
         /// <summary>
         /// ID du titre ou est créé le commentaire.
         /// </summary>
+        [Column("IdTitre")]
         public int IdTitre { get; set; }
 
         /// <summary>
