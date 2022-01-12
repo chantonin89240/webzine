@@ -34,8 +34,6 @@
         public Style Style { get; set; }
 
         public TitreStyle(){
-            Titre = new Titre();
-            Style = new Style();
         }
 
         public TitreStyle(int idStyle, int idTitre) : this()

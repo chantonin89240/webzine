@@ -63,7 +63,7 @@
                 .Include(t => t.Commentaires)
                 .Include(t => t.TitresStyles)
                 .ThenInclude(ts => ts.Style);
-                
+
             return titres;
         }
 
