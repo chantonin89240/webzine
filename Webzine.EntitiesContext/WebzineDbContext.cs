@@ -34,20 +34,20 @@
             modelBuilder.Entity<TitreStyle>(
                 ts =>
                 {
-                    // ts.HasKey(ts => new
-                    // {
-                    //     ts.IdStyle,
-                    //     ts.IdTitre,
-                    // });
-                    // ts.HasOne(ts => ts.Style).WithMany(s => s.TitresStyles).HasForeignKey(ts => ts.IdStyle);
-                    // ts.HasOne(ts => ts.Titre).WithMany(s => s.TitresStyles).HasForeignKey(ts => ts.IdTitre);
+                    ts.HasKey(ts => new
+                    {
+                        ts.IdStyle,
+                        ts.IdTitre,
+                    });
+                    ts.HasOne(ts => ts.Style).WithMany(s => s.TitresStyles).HasForeignKey(ts => ts.IdStyle);
+                    ts.HasOne(ts => ts.Titre).WithMany(s => s.TitresStyles).HasForeignKey(ts => ts.IdTitre);
                 });
 
             // Table Style init
             modelBuilder.Entity<Style>(
                 style =>
                 {
-                    style.HasMany(s => s.TitresStyles).WithOne(ts => ts.Style).HasForeignKey(s => s.IdStyle);
+                    // style.HasMany(s => s.TitresStyles).WithOne(ts => ts.Style).HasForeignKey(s => s.IdStyle);
                 });
 
             // Table Titre init
@@ -55,7 +55,7 @@
                 titre =>
                 {
                     titre.HasOne(t => t.Artiste).WithMany(a => a.Titres).HasForeignKey(t => t.IdArtiste);
-                    titre.HasMany(t => t.TitresStyles).WithOne(ts => ts.Titre).HasForeignKey(t => t.IdTitre);
+                    // titre.HasMany(t => t.TitresStyles).WithOne(ts => ts.Titre).HasForeignKey(t => t.IdTitre);
                 });
 
             // Table Commentaire init

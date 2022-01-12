@@ -24,7 +24,7 @@
         [Required(ErrorMessage = "Libellé requis.")]
         [MinLength(2, ErrorMessage ="Taille mini : 2 caractères")]
         [MaxLength(50, ErrorMessage = "Taille maxi : 50 caractères")]
-        public string? Libelle { get; set; }
+        public string Libelle { get; set; }
 
         /// <summary>
         /// Liste de liens aux Titres ayant ce Style.
