@@ -6,30 +6,33 @@ namespace Webzine.Repository
 {
     public class DbCommentaireRepository : ICommentaireRepository
     {
-        WebzineDbContext context = new WebzineDbContext();
+        private WebzineDbContext _context;
+        public DbCommentaireRepository(WebzineDbContext context){
+            this._context = context;
+        }
 
         public void Add(Commentaire commentaire)
         {
-            this.context.Add(commentaire);
-            //this.context.SaveChanges();
+            this._context.Add(commentaire);
+            //this._context.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            this.context.Remove(this.Find(id));
-            this.context.SaveChanges();
+            this._context.Remove(this.Find(id));
+            this._context.SaveChanges();
         }
 
         public Commentaire Find(int id)
         {
             {
-                return this.context.Commentaires.Find(id);
+                return this._context.Commentaires.Find(id);
             }
         }
 
         public IEnumerable<Commentaire> FindAll()
         {
-            return this.context.Commentaires;
+            return this._context.Commentaires;
         }
     }
 }

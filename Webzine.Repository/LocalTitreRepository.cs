@@ -110,7 +110,7 @@
         public IEnumerable<Titre> SearchByStyle(string libelle)
         {
             var idStyle = this.styles.First(s => s.Libelle.Contains(libelle)).IdStyle;
-            return this.titres.FindAll(t => t.TitresStyles.Exists(item => item.IdStyle == idStyle));
+            return this.titres.FindAll(t => t.TitresStyles.ToList().Exists(item => item.IdStyle == idStyle));
         }
 
         /// <summary>
@@ -124,7 +124,7 @@
             throw new NotImplementedException();
         }
 
-        public void UpdateStyles(Titre titre, List<string> listeStyles)
+        public void UpdateStyles(int IdTitre, List<string> listRemove, List<string> listAdd)
         {
             //this.titres.Find(t => t == titre).updateDbTitle(................);
             throw new NotImplementedException();

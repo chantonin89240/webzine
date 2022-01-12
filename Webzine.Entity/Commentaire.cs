@@ -2,10 +2,13 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
 
     /// <summary>
     /// Entité pour gérer les données d'un commentaire.
     /// </summary>
+    // [Table("Commentaire")]
     public class Commentaire
     {
         /// <summary>
@@ -53,6 +56,7 @@
         /// <summary>
         /// Titre ou est créé le commentaire.
         /// </summary>
+        [ForeignKey(nameof(IdTitre))]
         public Titre? Titre { get; set; }
 
         /// <summary>

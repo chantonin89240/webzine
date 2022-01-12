@@ -10,7 +10,7 @@
     /// Représente le controlleur pour la partie des <see cref="Titre"/>s dans la zone d'administration.
     /// </summary>
     [Area("administration")]
-    [Route("[area]/[controller]/")]
+    [Route("[controller]")]
     public class TitreController : Controller
     {
         private ITitreRepository _titreRepository;
@@ -33,9 +33,8 @@
         /// <returns>
         /// La vue correspondante à l'administration des <see cref="Titre"/>s.
         /// </returns>
-        [HttpGet]
         [Route("")]
-        [Route("[action]")]
+        [HttpGet("[action]")]
         public IActionResult Index()
         {   
             var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
@@ -52,7 +51,7 @@
         /// <returns>
         /// Une page permettant la création d'un nouveau <see cref="Titre"/>.
         /// </returns>
-        [Route("[action]")]
+        [HttpGet("[action]")]
         public IActionResult Create()
         {
             this.model.Artistes = this._artisteRepository.FindAll().ToList();
@@ -68,9 +67,9 @@
         /// <returns>La vue index mis à jour</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ActionName("createAsk")]
+        [ActionName("create")]
         [Route("[action]")]
-        public IActionResult CreateAsk(TitreViewModel model)
+        public IActionResult Create(TitreViewModel model)
         {
             try
             {
@@ -99,7 +98,7 @@
         /// </summary>
         /// <param name="id">ID Du <see cref="Titre"/> à éditer.</param>
         /// <returns>La page de modification d'un <see cref="Titre"/></returns>
-        [Route("[action]")]
+        [HttpGet("[action]")]
         public IActionResult Edit(int id)
         {
             this.model.Titre = this._titreRepository.Find(id);
@@ -130,20 +129,13 @@
                     var listIdStyle = this.Request.Form["ListeStyles"].ToList();
                     model.Titre.IdTitre = id;
                     model.Titre.DateCreation = _dateCréation;
-                    // var idArtiste = titre.IdArtiste;
                     // titre.DateCreation = DateTime.Now;
-                    // var toto = this.model.Titre.TitresStyles.Select(ts => ts.IdStyle);
                     if(listIdStyle != _editStylesTitre)
                     {
-                        var listRemove = _editStylesTitre.Except(listIdStyle);
-                        var listAdd = listIdStyle.Except(_editStylesTitre);
+                        var listRemove = _editStylesTitre.Except(listIdStyle).ToList();
+                        var listAdd = listIdStyle.Except(_editStylesTitre).ToList();
+                        this._titreRepository.UpdateStyles(id, listRemove, listAdd);
                     }
-
-                    //this._titreRepository.UpdateStyles(model.Titre, listIdStyle);
-                    listIdStyle.ForEach(idStyle => model.Titre.TitresStyles.Add(new TitreStyle(){
-                        IdStyle=Int32.Parse(idStyle), 
-                        IdTitre=id
-                        }));
                     
                     this._titreRepository.Update(model.Titre);
                     return this.RedirectToAction(nameof(Index));
@@ -166,6 +158,7 @@
         /// </summary>
         /// <param name="id">ID du <see cref="Titre"/> à supprimer.</param>
         /// <returns>Page de vérification de suppression.</returns>
+        [HttpGet("[action]")]
         public IActionResult Delete(int id)
         {
             this.model.Titre = this._titreRepository.Find(id);
@@ -179,7 +172,10 @@
         /// <param name="id"></param>
         /// <returns>La vue Index mise à jour</returns>
         [HttpPost]
-        public IActionResult DeleteAsk(int id)
+        [ValidateAntiForgeryToken]
+        [ActionName("delete")]
+        [Route("[action]")]
+        public IActionResult Delete(TitreViewModel model, int id)
         {
             try
             {

@@ -9,107 +9,118 @@
 
     public class DbTitreRepository : ITitreRepository
     {
-        private WebzineDbContext context = new WebzineDbContext();
+        private WebzineDbContext _context;
+        public DbTitreRepository(WebzineDbContext context){
+            this._context = context;
+        }
+
         public void Add(Titre titre)
         {
             // titre.Artiste = null;
             // context.Entry(titre.Artiste).State = EntityState.Modified;
             titre.DateCreation = DateTime.Now;
-            this.context.Titres.Add(titre);
-            context.SaveChanges();
+            this._context.Titres.Add(titre);
+            this._context.SaveChanges();
         }
 
         public void AddStyles(Titre titre, List<string> listeStyles)
         {   
             listeStyles.ForEach(style =>
-                this.context.TitresStyles.Add(new TitreStyle(){
+                this._context.TitresStyles.Add(new TitreStyle(){
                     IdTitre = titre.IdTitre,
                     IdStyle = Int32.Parse(style),
                 }));
-            context.SaveChanges();
+            this._context.SaveChanges();
         }
 
         public int Count()
         {
-            return this.context.Titres.Count();
+            return this._context.Titres.Count();
         }
 
         public void Delete(Titre titre)
         {
-            this.context.Titres.Remove(titre);
-            this.context.SaveChanges();
+            this._context.Titres.Remove(titre);
+            this._context.SaveChanges();
         }
 
         public Titre Find(int idTitre)
         {
-            var titre = this.context.Titres
+            var titre = this._context.Titres
                 .Include(t => t.Artiste)
                 .Include(t => t.TitresStyles)
                 .ThenInclude(ts => ts.Style)
                 .FirstOrDefault(t => t.IdTitre == idTitre);
-            // titre.Artiste = this.context.Artistes.FirstOrDefault(a => a.IdArtiste == titre.IdArtiste);
-            // titre.TitresStyles = this.context.TitreStyles.Where(s => s.IdTitre == titre.IdTitre).ToList();
+            // titre.Artiste = this._context.Artistes.FirstOrDefault(a => a.IdArtiste == titre.IdArtiste);
+            // titre.TitresStyles = this._context.TitreStyles.Where(s => s.IdTitre == titre.IdTitre).ToList();
             return titre;
         }
 
         public IEnumerable<Titre> FindAll()
         {
-            var titres = this.context.Titres
-                .Include(t => t.TitresStyles)
-                .ThenInclude(ts => ts.Style)
+            var titres = this._context.Titres
                 .Include(t => t.Artiste)
-                .Include(t => t.Commentaires);
+                .Include(t => t.Commentaires)
+                .Include(t => t.TitresStyles)
+                .ThenInclude(ts => ts.Style);
+                
             return titres;
         }
 
         public IEnumerable<Titre> FindTitres(int offset, int limit)
         {
-            var titres = this.context.Titres.Skip(limit).Take(offset);
+            var titres = this._context.Titres.Skip(limit).Take(offset);
             return titres;
         }
 
         public void IncrementNbLectures(Titre titre)
         {
-            this.context.Titres.First(t => t == titre).NbLectures++;
+            this._context.Titres.First(t => t == titre).NbLectures++;
         }
 
         public void IncrementNbLikes(Titre titre)
         {
-            this.context.Titres.First(t => t == titre).NbLikes++;
-            this.context.SaveChanges();
+            this._context.Titres.First(t => t == titre).NbLikes++;
+            this._context.SaveChanges();
         }
 
         public IEnumerable<Titre> Search(string mot)
         {
-            var titres = this.context.Titres.Where(t => t.Libelle.Contains(mot));
+            var titres = this._context.Titres.Where(t => t.Libelle.Contains(mot));
             return titres;
         }
 
 
         public IEnumerable<Titre> SearchByStyle(string libelle)
         {
-            var idStyle = this.context.Styles.First(s => s.Libelle == libelle).IdStyle;
-            var titres = this.context.Titres.ToList().FindAll(t => this.context.TitresStyles.ToList().FindAll(ts => ts.IdStyle == idStyle).Exists(ts => ts.IdTitre == t.IdTitre));
+            var idStyle = this._context.Styles.First(s => s.Libelle == libelle).IdStyle;
+            var titres = this._context.Titres.ToList().FindAll(t => this._context.TitresStyles.ToList().FindAll(ts => ts.IdStyle == idStyle).Exists(ts => ts.IdTitre == t.IdTitre));
             return titres;
         }
 
         public void Update(Titre titre)
         {
             // titre.DateCreation = DateTime.Now;
-            this.context.Titres.Update(titre);
+            this._context.Titres.Update(titre);
             // titre.TitresStyles.ForEach(ts => context.Set<TitreStyle>().Add(ts));
             // context.Entry(titre).State = EntityState.Modified;
-            this.context.SaveChanges();
+            this._context.SaveChanges();
         }
 
-        public void UpdateStyles(Titre titre, List<string> listeStyles)
+        public void UpdateStyles(int idTitre, List<string> listRemove, List<string> listAdd)
         {
-            listeStyles.ForEach(style =>
-                this.context.TitresStyles.Add(new TitreStyle(){
+            listAdd.ForEach(style =>
+                this._context.TitresStyles.Add(new TitreStyle(){
                     IdStyle = Int32.Parse(style),
-                    IdTitre = titre.IdTitre,
+                    IdTitre = idTitre,
                 }));
-            context.SaveChanges();
+
+            listRemove.ForEach(style =>
+                this._context.TitresStyles.Remove(new TitreStyle(){
+                    IdStyle = Int32.Parse(style),
+                    IdTitre = idTitre,
+                }));
+            this._context.SaveChanges();
         }
     }
 }
