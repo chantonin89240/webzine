@@ -33,9 +33,9 @@
         [ForeignKey(nameof(IdStyle))]
         public Style Style { get; set; }
 
-        
         public TitreStyle(){
         }
+
         public TitreStyle(int idStyle, int idTitre) : this()
         {
             this.IdStyle = idStyle;

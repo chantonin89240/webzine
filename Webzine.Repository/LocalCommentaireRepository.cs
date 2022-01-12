@@ -9,7 +9,7 @@
     /// </summary>
     public class LocalCommentaireRepository : ICommentaireRepository
     {
-        private List<Commentaire> commentaires = CommentaireFactory.CreateCommentaire().ToList();
+        private List<Commentaire> commentaires = CommentaireFactory.CreateCommentaire(10, TitreFactory.CreateTitre(10, ArtisteFactory.CreateArtiste(10), StyleFactory.GetStyles())).ToList();
 
         /// <summary>
         /// Adds a <see cref="Commentaire"/> to local repository.

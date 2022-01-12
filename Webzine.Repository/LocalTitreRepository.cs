@@ -9,7 +9,7 @@
     /// </summary>
     public class LocalTitreRepository : ITitreRepository
     {
-        private List<Titre> titres = TitreFactory.CreateTitre().ToList();
+        private List<Titre> titres = TitreFactory.CreateTitre(10, ArtisteFactory.CreateArtiste(10), StyleFactory.GetStyles()).ToList();
         private List<Style> styles = StyleFactory.CreateStyle().ToList();
 
         /// <summary>
@@ -23,7 +23,7 @@
 
         public void AddStyles(Titre titre, List<string> styles)
         {
-            
+
         }
 
         /// <summary>

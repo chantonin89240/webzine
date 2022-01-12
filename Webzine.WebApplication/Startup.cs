@@ -51,7 +51,7 @@ namespace Webzine.WebApplication
                 }
                 catch (Exception e)
                 {
-                    var log = services.GetRequiredService<ILogger<Program>>();
+                    ILogger<Program> log = services.GetRequiredService<ILogger<Program>>();
                     log.LogError(e, "An error occurred seeding the DB.");
                 }
             }
@@ -195,7 +195,11 @@ namespace Webzine.WebApplication
                     name: "accueil",
                     pattern: "page/{id}",
                     defaults: new { controller = "home", action = "index" });
-                
+                endpoints.MapControllerRoute(
+                    name: "Recherche",
+                    pattern: "recherche",
+                    defaults: new { area="", controller = "Recherche", action = "Index" });
+
                 endpoints.MapControllerRoute(
                 name: "areas",
                 pattern: "{area:exists}/{controller=Home}/{action}/{id?}");

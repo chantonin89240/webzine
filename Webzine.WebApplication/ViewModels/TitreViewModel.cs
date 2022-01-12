@@ -31,5 +31,14 @@
             output += (titre.Duree % 60).ToString();
             return output;
         }
+
+        public string PreviewString(string longString)
+        {
+            if (longString.Length > 160)
+            {
+                return longString.Substring(0, 157) + "...";
+            }
+            return longString;
+        }
     }
 }

@@ -12,7 +12,7 @@
         /// <summary>
         /// Local Artiste List.
         /// </summary>
-        private List<Artiste> artistes = ArtisteFactory.CreateArtiste().ToList();
+        private List<Artiste> artistes = ArtisteFactory.CreateArtiste(10).ToList();
 
         /// <summary>
         /// Adds an <see cref="Artiste"/> to the local repository.
