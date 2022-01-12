@@ -4,7 +4,7 @@
     var pageDes = @Model.Page - 1;
     var pageAsc = Model.Page + 1;
 }
-@model Webzine.WebApplication.ViewModels.HomeViewModel;
+@model Webzine.WebApplication.ViewModels.TitreViewModel;
 
 <h2 class="mb-3">Derniers titres chroniqués</h2>
 <ul class="list-unstyled">
@@ -34,9 +34,9 @@
                                         }
                                         else
                                         {
-                                             @*<a href="/Titre/TitresStyle?id=@ts.IdStyle" class="text-decoration-none">
+                                             <a href="/Titre/TitresStyle?id=@ts.IdStyle" class="text-decoration-none">
                                                 <span>@ts.Style.Libelle</span>
-                                            </a>*@
+                                            </a>
                                         }
                                     }
                                 </p>
@@ -63,7 +63,7 @@
         </a>
     }
 
-    @if (Model.Page >= Model.pageCount(Model.titreTotal))
+    @if (Model.Page >= Model.PageCount(Model.TitreTotal))
     {
         <a class="btn btn-secondary" disabled>
             <span style="vertical-align: middle;margin-right: 5px;">Titres plus anciens >></span>

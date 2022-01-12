@@ -11,8 +11,7 @@
     {
         private readonly ILogger<HomeController> _logger;
         private ITitreRepository _titreRepository;
-        //private TitreViewModel model = new TitreViewModel();
-        private HomeViewModel model = new HomeViewModel();
+        private TitreViewModel model = new TitreViewModel();
         private IStyleRepository _styleRepository;
 
         public HomeController(ITitreRepository titreRepository, IStyleRepository styleRepository ,ILogger<HomeController> logger)
@@ -32,8 +31,11 @@
 
             // pageNumber ?? 0 = opération de fusion null, renvoi 0 si pageNumber est null
             this.model.Page = pageNumber ?? 0;
-            this.model.Titres = this.model.titrePourPage(pageNumber ?? 0);
-            
+            this.model.Titres = this._titreRepository.FindAll().ToList();
+
+            this.model.Titres = this.model.TitrePourPage(pageNumber ?? 0);
+            this.model.Titres.ForEach(title => title.TitresStyles.ForEach(ts => ts.Style = this._styleRepository.Find(ts.IdStyle)));
+
             return this.View(this.model);
         }
     }

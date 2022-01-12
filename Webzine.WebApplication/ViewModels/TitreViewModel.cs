@@ -13,6 +13,11 @@
 
         public List<Style> StylesTitre { get; set; }
 
+        public int Page { get; set; }
+
+        public int TitreTotal { get; set; } = 3;
+
+
         public Titre Titre { get; set; }
 
         /// <summary>
@@ -29,6 +34,34 @@
             }
 
             output += (titre.Duree % 60).ToString();
+            return output;
+        }
+
+        /// <summary>
+        /// retourne ne nombre de page total
+        /// </summary>
+        /// <param name="titreTotal"></param>
+        /// <returns></returns>
+        public int PageCount(int titreTotal)
+        {
+            return (this.Titres.Count() - 1 / titreTotal) - (((this.Titres.Count() - 1) / titreTotal) % 1);
+        }
+
+        /// <summary>
+        /// retourne la liste des titres par page
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public List<Titre> TitrePourPage(int page)
+        {
+            int countPage = this.PageCount(this.TitreTotal);
+            if (countPage < page)
+            {
+                page = countPage;
+            }
+
+            List<Titre> output = this.Titres.OrderByDescending(t => t.DateCreation).Chunk(this.TitreTotal).ElementAt(page).ToList();
+
             return output;
         }
 
