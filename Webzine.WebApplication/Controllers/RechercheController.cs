@@ -25,7 +25,7 @@
             List<Titre> titres = _titreRepository.FindAll().Where(T => T.Libelle.ToLower().Contains(searchedItem.ToLower())).ToList();
             artistes.ForEach(artiste =>
             {
-                artiste.Titres.ForEach(artisteTitre =>
+                artiste.Titres.ToList().ForEach(artisteTitre =>
                 {
                     if (!titres.Exists(recordedTitre => recordedTitre.Libelle == artisteTitre.Libelle))
                     {

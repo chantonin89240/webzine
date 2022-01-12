@@ -33,23 +33,16 @@
         // [ForeignKey(nameof(IdStyle))]
         public Style Style { get; set; }
 
-        
         public TitreStyle(){
             Titre = new Titre();
             Style = new Style();
         }
+
         public TitreStyle(int idStyle, int idTitre) : this()
         {
             this.IdStyle = idStyle;
             this.IdTitre = idTitre;
         }
-
-        public TitreStyle()
-        {
-            Titre = new Titre();
-            Style= new Style();
-        }
-
 
     }
 }

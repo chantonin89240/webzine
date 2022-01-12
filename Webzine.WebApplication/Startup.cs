@@ -49,7 +49,7 @@ namespace Webzine.WebApplication
                 }
                 catch (Exception e)
                 {
-                    var log = services.GetRequiredService<ILogger<Program>>();
+                    ILogger<Program> log = services.GetRequiredService<ILogger<Program>>();
                     log.LogError(e, "An error occurred seeding the DB.");
                 }
             }

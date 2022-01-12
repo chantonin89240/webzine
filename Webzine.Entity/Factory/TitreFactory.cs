@@ -30,9 +30,9 @@
                     {
                         t.Artiste = artistes.First(a => a.IdArtiste == t.IdArtiste);
                         Style style = f.PickRandom(styles);
-                        t.TitresStyles.Add(new TitreStyle { IdTitre = t.IdTitre, IdStyle = style.IdStyle, Style = style, Titre = t });
+                        t.TitresStyles.ToList().Add(new TitreStyle { IdTitre = t.IdTitre, IdStyle = style.IdStyle, Style = style, Titre = t });
                         style = f.PickRandom(styles);
-                        t.TitresStyles.Add(new TitreStyle { IdTitre = t.IdTitre, IdStyle = style.IdStyle, Style = style, Titre = t });
+                        t.TitresStyles.ToList().Add(new TitreStyle { IdTitre = t.IdTitre, IdStyle = style.IdStyle, Style = style, Titre = t });
                     });
 
             return faker.Generate(amount);
