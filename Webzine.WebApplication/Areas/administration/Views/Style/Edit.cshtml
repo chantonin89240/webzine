@@ -2,17 +2,19 @@
 	For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-
+	@model Webzine.WebApplication.Areas.administration.ViewModels.StyleViewModel
 }
+
 <div class=" p-4">
 	<h2 class="mb-3">Editer un style</h2>
 	<hr />
-	<div class=" p-4">
+
+	<form class="p-4" method="post" asp-action="modifier" asp-route-id="@Model.Style.IdStyle">
 		<div class="input-group mb-5">
 			<label class="d-flex align-items-center me-2" for="libelleInput">Libellé<span class="text-danger">*</span></label>
-			<input type="text" class="form-control me-2 rounded" id="libelleInput" value=@Model.Style.Libelle  aria-describedby="styleCreate" />
+			<input asp-for="@Model.Style.Libelle" value=@Model.Style.Libelle required name="Style.Libelle" class="form-control me-2 rounded col-2" id="libelleInput" aria-describedby="styleCreate" placeholder="Style">
 			<button type="submit" class="btn btn-primary rounded">Sauvegarder</button>
 		</div>
 		<a class="row text-decoration-none" asp-action="Index">Retour à l'administration des styles</a>
-	</div>
+	</form>
 </div>

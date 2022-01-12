@@ -1,16 +1,12 @@
 ﻿@model Webzine.WebApplication.Areas.Admin.ViewModels.TitreViewModel;
 @{
-	string date = "";
-     if (Model.Titre.DateSortie != null) 
-		{ date = DateTime.Parse($"{Model.Titre.DateSortie }").ToString("yyyy-MM-dd");}
 }
 
 <div>
 	<div class="divSup">
 	<h2>Editer un Titre</h2>
 	<hr />
-	@* asp-route-id="@Model.Titre.IdTitre" *@
-	<form class="formAdmin" method="post" asp-area="administration" asp-controller="titre" asp-action="editAsk" asp-route-id="@Model.Titre.IdTitre">
+	<form class="formAdmin" method="post" asp-area="administration" asp-controller="titre" asp-action="edit" asp-route-id="@Model.Titre.IdTitre">
 		<div class="mb-3 row">
 			<label for="nomArtiste" class="col-sm-2 col-form-label">Nom de l'artiste<span style="color: red;">*</span></label>
 			<div class="col-sm-10">

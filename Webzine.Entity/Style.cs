@@ -2,10 +2,12 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     /// <summary>
     /// Entité représentant un Style.
     /// </summary>
+    // [Table("Style")]
     public class Style
     {
         /// <summary>
@@ -18,7 +20,7 @@
         /// <summary>
         /// Libellé / Nom du style.
         /// </summary>
-        [Display(Name = "Libellé")]
+        //[Display(Name = "Libellé")]
         [Required(ErrorMessage = "Libellé requis.")]
         [MinLength(2, ErrorMessage ="Taille mini : 2 caractères")]
         [MaxLength(50, ErrorMessage = "Taille maxi : 50 caractères")]
@@ -27,7 +29,7 @@
         /// <summary>
         /// Liste de liens aux Titres ayant ce Style.
         /// </summary>
-        public List<TitreStyle> TitresStyles { get; set; }
+        public IEnumerable<TitreStyle> TitresStyles { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Style"/> class.

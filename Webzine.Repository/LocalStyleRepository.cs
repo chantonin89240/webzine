@@ -13,7 +13,11 @@
         /// <param name="style"></param>
         public void Add(Style style)
         {
-            Styles.Add(style);
+            var styles = this.Styles.FirstOrDefault(s => s.Libelle.ToLower() == style.Libelle.ToLower());
+            if (styles == null)
+            {
+                this.Styles.Add(style);
+            }
         }
 
         /// <summary>
@@ -22,7 +26,7 @@
         /// <param name="style"></param>
         public void Delete(Style style)
         {
-            Styles.Remove(style);
+            this.Styles.Remove(style);
         }
 
         /// <summary>
@@ -32,7 +36,7 @@
         /// <returns></returns>
         public Style Find(int id)
         {
-            return Styles.First(a => a.IdStyle == id);
+            return this.Styles.First(a => a.IdStyle == id);
         }
 
         /// <summary>
@@ -41,7 +45,7 @@
         /// <returns></returns>
         public IEnumerable<Style> FindAll()
         {
-            return Styles;
+            return this.Styles;
         }
 
         /// <summary>
@@ -50,7 +54,7 @@
         /// <param name="style"></param>
         public void Update(Style style)
         {
-            Styles.Find(a => a == style);
+            this.Styles.Find(a => a == style);
         }
 
     }

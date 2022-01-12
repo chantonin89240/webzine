@@ -28,8 +28,8 @@
         /// <returns>vue d'ensemble de tous les <see cref="Artiste"/>s.</returns>
         public IActionResult Index()
         {
-            model.Artistes = this._artisteRepository.FindAll().ToList();
-            return this.View(model);
+            this.model.Artistes = this._artisteRepository.FindAll().ToList();
+            return this.View(this.model);
         }
 
         /// <summary>
@@ -41,6 +41,28 @@
             return this.View();
         }
 
+        [ActionName("Creer")]
+        /// <summary>
+        /// Crée un artiste
+        /// </summary>
+        /// <returns>Vue pour la création d'un <see cref="Artiste"/>.</returns>
+        public IActionResult Creer(ArtisteViewModel model)
+        {
+            try
+            {
+                if (this.ModelState.IsValid)
+                {
+                    this._artisteRepository.Add(model.Artiste);
+                    return this.RedirectToAction(nameof(this.Index));
+                }
+            }
+            catch
+            {
+                this.ModelState.AddModelError(" ", "Error");
+            }
+            return this.View(model.Artiste);
+        }
+
         /// <summary>
         /// Renvoie la vue sur chemin "/administration/Artiste/Edit?IdArtiste=(Id de l'<see cref="Artiste"/>)".
         /// </summary>
@@ -50,7 +72,27 @@
         {
             var artiste = this._artisteRepository.Find(id);
             this.model.Artiste = artiste;
-            return this.View(model);
+            return this.View(this.model);
+        }
+
+        [ActionName("Editer")]
+        public IActionResult Editer(ArtisteViewModel model, int id)
+        {
+            try
+            {
+                if (this.ModelState.IsValid)
+                {
+                    model.Artiste.IdArtiste = id;
+                    this._artisteRepository.Update(model.Artiste);
+                    return this.RedirectToAction(nameof(this.Index));
+                }
+            }
+            catch
+            {
+                this.ModelState.AddModelError(" ", "Error");
+            }
+
+            return this.View(model.Artiste);
         }
 
         /// <summary>
@@ -62,9 +104,14 @@
         {
             var artiste = this._artisteRepository.Find(id);
             this.model.Artiste = artiste;
-            return this.View(model);
+            return this.View(this.model);
         }
 
+        /// <summary>
+        /// Supprime un artiste
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ActionName("supprimer")]
         public IActionResult ValiderSuppression(int id)
         {
@@ -72,6 +119,5 @@
             this._artisteRepository.Delete(artiste);
             return this.RedirectToAction("Index");
         }
-
     }
 }

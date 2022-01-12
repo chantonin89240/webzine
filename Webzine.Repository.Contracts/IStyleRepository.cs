@@ -34,5 +34,6 @@ namespace Webzine.Repository.Contracts
         /// </summary>
         /// <param name="style"></param>
         void Update(Style style);
+
     }
 }

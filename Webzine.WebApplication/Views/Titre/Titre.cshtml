@@ -15,7 +15,7 @@
 			{
 				foreach (var style in @Model.StylesTitre)
 				{
-					<a href="/Titre/TitresStyle?idStyle=@style.IdStyle">@style.Libelle</a>
+					<a href="/Titre/TitresStyle?id=@style.IdStyle">@style.Libelle</a>
 				}				
 			}
 			else
@@ -47,7 +47,7 @@
 
 <h2>Commentaires</h2>
 <div>
-	@if (@Model.Titre.Commentaires.Count != 0)
+	@if (@Model.Titre.Commentaires.Count() != 0)
 	{
 		@foreach (var leCommentaire in @Model.Titre.Commentaires)
 		{

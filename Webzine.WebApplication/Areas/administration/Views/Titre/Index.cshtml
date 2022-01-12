@@ -29,7 +29,7 @@
 				<td class="text-center">@titre.DateSortie.ToString("dd/MM/yyyy")</td>
 				<td class="text-end">@titre.NbLectures</td>
 				<td class="text-end">@titre.NbLikes</td>
-				<td class="text-end">@titre.Commentaires.Count</td>
+				<td class="text-end">@titre.Commentaires.Count()</td>
 				<td class="d-flex justify-content-center"><a asp-area="administration" asp-controller="titre" asp-action="edit" asp-route-id="@titre.IdTitre"><i class="fas fa-edit me-2"></i></a><a asp-area="administration" asp-controller="titre" asp-action="delete" asp-route-id="@titre.IdTitre"><i class="fas fa-trash"></i></a></td>
 			</tr>
 		}

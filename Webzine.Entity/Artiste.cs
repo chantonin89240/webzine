@@ -1,10 +1,12 @@
 ﻿namespace Webzine.Entity
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     /// <summary>
     /// Entité représentant un Artiste.
     /// </summary>
+    // [Table("Artiste")]
     public class Artiste
     {
         /// <summary>
@@ -30,7 +32,7 @@
         /// <summary>
         /// Liste des Titres créés par l'artiste.
         /// </summary>
-        public List<Titre> Titres { get; set; }
+        public IEnumerable<Titre> Titres { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Artiste"/> class.

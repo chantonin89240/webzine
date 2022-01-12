@@ -67,7 +67,6 @@
         public void Update(Artiste artiste)
         {
             throw new NotImplementedException();
-
         }
     }
 }

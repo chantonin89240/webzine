@@ -50,7 +50,7 @@
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost] 
         [ValidateAntiForgeryToken]
         [ActionName("creer")]
         public async Task<IActionResult> Creer(StyleViewModel model)
@@ -66,10 +66,10 @@
             }
             catch (DbUpdateException /* ex */)
             {
-                //Log the error (uncomment ex variable name and write a log.
-                ModelState.AddModelError("", "Unable to save changes. " +
-                    "Try again, and if the problem persists " +
-                    "see your system administrator.");
+            //Log the error (uncomment ex variable name and write a log.
+            ModelState.AddModelError("", "Unable to save changes. " +
+                "Try again, and if the problem persists " +
+                "see your system administrator.");
             }
             return this.View(model.Style);
         }

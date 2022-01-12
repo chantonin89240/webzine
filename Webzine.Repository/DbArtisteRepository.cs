@@ -6,7 +6,10 @@ namespace Webzine.Repository
 {
     public  class DbArtisteRepository : IArtisteRepository
     {
-        WebzineDbContext context = new WebzineDbContext();
+        private WebzineDbContext _context;
+        public DbArtisteRepository(WebzineDbContext context){
+            this._context = context;
+        }
 
 
         /// <summary>
@@ -28,8 +31,8 @@ namespace Webzine.Repository
         /// <exception cref="NotImplementedException">Not yet implemented.</exception>
         public void Delete(Artiste artiste)
         {
-            context.Remove(artiste);
-            context.SaveChanges();
+            this._context.Remove(artiste);
+            this._context.SaveChanges();
         }
 
         /// <summary>
@@ -39,7 +42,7 @@ namespace Webzine.Repository
         /// <returns><see cref="Artiste"/> with given ID.</returns>
         public Artiste Find(int id)
         {
-            Artiste artiste = this.context.Artistes.First(a => a.IdArtiste == id);
+            Artiste artiste = this._context.Artistes.First(a => a.IdArtiste == id);
             return artiste;
         }
 
@@ -49,7 +52,7 @@ namespace Webzine.Repository
         /// <returns>Whole <see cref="Artiste"/> list.</returns>
         public IEnumerable<Artiste> FindAll()
         {
-            IEnumerable<Artiste> artistes = this.context.Artistes.ToList();
+            IEnumerable<Artiste> artistes = this._context.Artistes.ToList();
             return artistes;
 
             // .FindAll(a => a.IdArtiste != null).ToList();
@@ -62,7 +65,7 @@ namespace Webzine.Repository
         /// <exception cref="NotImplementedException">Not yet implemented.</exception>
         public void Update(Artiste artiste)
         {
-           context.Artistes.Update(artiste);
+           this._context.Artistes.Update(artiste);
 
         }
     }

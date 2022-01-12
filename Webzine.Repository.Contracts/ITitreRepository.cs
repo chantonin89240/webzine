@@ -25,5 +25,6 @@
         IEnumerable<Titre> SearchByStyle(string libelle);
 
         void Update(Titre titre);
+        void UpdateStyles(int idTitre, List<string> listRemove, List<string> listAdd);
     }
 }

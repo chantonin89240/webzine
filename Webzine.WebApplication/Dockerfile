@@ -7,10 +7,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Webzine/Webzine.WebApplication.csproj", "Webzine/"]
-RUN dotnet restore "Webzine/Webzine.WebApplication.csproj"
+COPY ["Webzine.WebApplication/Webzine.WebApplication.csproj", "Webzine.WebApplication/"]
+RUN dotnet restore "Webzine.WebApplication/Webzine.WebApplication.csproj"
 COPY . .
-WORKDIR "/src/Webzine"
+WORKDIR "/src/Webzine.WebApplication"
 RUN dotnet build "Webzine.WebApplication.csproj" -c Release -o /app/build
 
 FROM build AS publish

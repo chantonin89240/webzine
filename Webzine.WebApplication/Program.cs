@@ -1,13 +1,6 @@
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
-using Webzine.EntitiesContext;
-using Webzine.Repository;
-using Webzine.Repository.Contracts;
 using Webzine.WebApplication;
-
   
 var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 logger.Debug("init main");

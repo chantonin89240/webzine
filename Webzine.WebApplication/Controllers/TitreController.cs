@@ -28,7 +28,7 @@
                 IdTitre = titre.IdTitre,
                 Titre = titre,
             };
-            this.model.Titre.TitresStyles.ForEach(ts => model.StylesTitre.Add(this._styleRepository.Find(ts.IdStyle)));
+            this.model.Titre.TitresStyles.ToList().ForEach(ts => model.StylesTitre.Add(this._styleRepository.Find(ts.IdStyle)));
             return this.View(model);
         }
 
