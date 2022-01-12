@@ -4,10 +4,11 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 <h1>R&eacute;sultats de la recherche pour "@Model.SearchedItem"</h1>
-<hr/>
+<hr />
 <h2>Artistes</h2>
 
-@if (Model.Artistes.Count == 0) {
+@if (Model.Artistes.Count == 0)
+{
     <content>Aucun artiste trouv&eacute</content>
 }
 else
@@ -19,7 +20,8 @@ else
 }
 
 <h2>Titres</h2>
-@if (Model.Titres.Count == 0) {
+@if (Model.Titres.Count == 0)
+{
     <content>Aucun titre trouv&eacute</content>
 }
 else
@@ -29,20 +31,34 @@ else
         {
             <li class="media">
                 <a asp-controller="Titre" asp-action="Titre" asp-route-idTitre="@titre.IdTitre">
-                    <img src=@titre.UrlJaquette class="icon mr-3" alt="..."/>
+                    <img src=@titre.UrlJaquette class="icon mr-3" alt="..." />
                 </a>
                 <div class="media-body">
-                    <a asp-controller="Titre" asp-action="Titre" asp-route-idTitre="@titre.IdTitre">
-                        <h5 class="mt-0 mb-1">@titre.Libelle</h5>
-                    </a>
+                    <div class=" d-flex flex-row">
+                        <a asp-controller="Artiste" asp-action="Artiste" asp-route-idArtiste="@titre.IdArtiste">
+                            <h5 class="mt-0 mb-1">@titre.Artiste.Nom</h5>
+                        </a>
+                        -
+                        <a asp-controller="Titre" asp-action="Titre" asp-route-idTitre="@titre.IdTitre">
+                            <h5 class="mt-0 mb-1"> @titre.Libelle</h5>
+                        </a>
+                    </div>
+
                     Durée : @Model.FormatLength(titre)
                 </div>
-            </li>    
+            </li>
         }
     </ul>
 }
 
 <style>
-    .icon { max-width:60px; max-height:60px; margin-bottom:10px }
-    .puce { margin-right:5px;}
+    .icon {
+        max-width: 60px;
+        max-height: 60px;
+        margin-bottom: 10px
+    }
+
+    .puce {
+        margin-right: 5px;
+    }
 </style>
