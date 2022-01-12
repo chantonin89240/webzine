@@ -1,12 +1,15 @@
 ﻿namespace Webzine.Repository
 {
-    using Webzine.EntitiesContext;
     using Webzine.Entity;
     using Webzine.Repository.Contracts;
+    using Webzine.EntitiesContext;
 
     public class DbStyleRepository : IStyleRepository 
     {
-        WebzineDbContext Context = new WebzineDbContext();
+        private WebzineDbContext _context;
+        public DbStyleRepository(WebzineDbContext context){
+            this._context = context;
+        }
 
         /// <summary>
         /// Ajout du style
@@ -14,12 +17,8 @@
         /// <param name="style"></param>
         public void Add(Style style)
         {
-            var styles = this.Context.Styles.FirstOrDefault(s => s.Libelle.ToLower() == style.Libelle.ToLower());
-            if (styles == null)
-            {
-                this.Context.Add(style);
-                this.Context.SaveChanges();
-            }
+            this._context.Add(style);
+            this._context.SaveChanges();
         }
 
         /// <summary>
@@ -28,8 +27,8 @@
         /// <param name="style"></param>
         public void Delete(Style style)
         {
-            this.Context.Remove(style);
-            this.Context.SaveChanges();
+            this._context.Remove(style);
+            this._context.SaveChanges();
         }
 
         /// <summary>
@@ -39,7 +38,7 @@
         /// <returns></returns>
         public Style Find(int id)
         {
-            var style = this.Context.Styles.First(s => s.IdStyle == id);
+            var style = this._context.Styles.First(s => s.IdStyle == id);
             return style;
         }
 
@@ -49,7 +48,7 @@
         /// <returns></returns>
         public IEnumerable<Style> FindAll()
         {
-            IEnumerable<Style> styles = this.Context.Styles.ToList().OrderBy(s => s.Libelle);
+            IEnumerable<Style> styles = this._context.Styles.ToList().OrderBy(s => s.Libelle);
             return styles;
         }
 
@@ -59,12 +58,8 @@
         /// <param name="style"></param>
         public void Update(Style style)
         {
-            var styles = this.Context.Styles.FirstOrDefault(s => s.Libelle.ToLower() == style.Libelle.ToLower());
-            if (styles == null)
-            {
-                this.Context.Update(style);
-                this.Context.SaveChanges();
-            }
+            this._context.Update(style);
+            this._context.SaveChanges();
         }
     }
 }

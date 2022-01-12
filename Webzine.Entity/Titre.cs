@@ -3,26 +3,32 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
 
     /// <summary>
     /// Entité représentant un Titre.
     /// </summary>
+    // [Table("Titre")]
     public class Titre
     {
         /// <summary>
         /// ID du Titre.
         /// </summary>
+        [Key]
         public int IdTitre { get; set; }
 
         /// <summary>
         /// ID de l'artiste créateur du Titre.
         /// </summary>
+        
         public int IdArtiste { get; set; }
 
         /// <summary>
         /// Artiste ayant créé le Titre.
         /// </summary>
-        public Artiste? Artiste { get; set; }
+        [ForeignKey(nameof(IdArtiste))]
+        public Artiste Artiste { get; set; }
 
         /// <summary>
         /// Libellé/Nom du Titre.
@@ -88,26 +94,26 @@
         /// <summary>
         /// Nombre de Lectures de la chronique du Titre.
         /// </summary>
-        [Display(Name = "nombre de lectures")]
         [Required]
+        [Display(Name = "nombre de lectures")]
         public int NbLectures { get; set; }
 
         /// <summary>
         /// Nombre de Likes du titre.
         /// </summary>
-        [Display(Name = "nombre de likes")]
         [Required]
+        [Display(Name = "nombre de likes")]
         public int NbLikes { get; set; }
 
         /// <summary>
         /// Liste de commentaires lié au Titre.
         /// </summary>
-        public List<Commentaire> Commentaires { get; set; }
+        public IEnumerable<Commentaire> Commentaires { get; set; }
 
         /// <summary>
         /// Liste de liens aux Styles du titre.
         /// </summary>
-        public List<TitreStyle> TitresStyles { get; set; }
+        public IEnumerable<TitreStyle> TitresStyles { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Titre"/> class.

@@ -10,12 +10,20 @@ namespace Webzine.WebApplication
 
     public static class Startup
     {
+        public static string dataPath;
         public static WebApplication Initialize(string [] args)
         {
             var builder = WebApplication.CreateBuilder(args);
             ConfigureServices(builder);
             var app = builder.Build();
-            Configure(app);
+            
+
+            // Configure the HTTP request pipeline.
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
 
             using(var scope = app.Services.CreateScope())
             {
@@ -28,10 +36,16 @@ namespace Webzine.WebApplication
                     webzineDbContext.Database.EnsureDeleted();
                     webzineDbContext.Database.EnsureCreated();
 
-                    // Migration de la DB à voir
-                    // services.GetService<DbTitreRepository>().Database.Migrate();
                     // Initialisation de la base de donn�es
-                    SeedDataLocal.InitialisationDB(webzineDbContext);
+                    if(dataPath == "Database")
+                    {
+                        SeedDataLocal.InitialisationDB(webzineDbContext);
+                    }
+                    else
+                    {
+
+                    }
+
                 }
                 catch (Exception e)
                 {
@@ -40,11 +54,15 @@ namespace Webzine.WebApplication
                 }
             }
 
+            Configure(app);
+
             return app;
         }
 
         public static void ConfigureServices(WebApplicationBuilder builder)
         {
+            dataPath = builder.Configuration.GetValue<string>("DataRepository");
+
             // NLog: Setup NLog for Dependency injection
             // problème au lancement de l'app, l'app bloque en mode debug, et bloque sur le chargement de la config dans launchsettings.json en mode no debug
             // builder.Logging.ClearProviders(); 
@@ -52,16 +70,29 @@ namespace Webzine.WebApplication
             builder.Host.UseNLog();
 
             builder.Services.AddControllersWithViews();
-            builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
- 
-            builder.Services.AddScoped<ITitreRepository, DbTitreRepository>();
-            builder.Services.AddScoped<IArtisteRepository, DbArtisteRepository>();
-            builder.Services.AddScoped<ICommentaireRepository, DbCommentaireRepository>();
-            builder.Services.AddScoped<IStyleRepository, DbStyleRepository>();
+            builder.Services.AddRazorPages().AddRazorRuntimeCompilation();            
 
-            builder.Services.AddDbContext<WebzineDbContext>(
-                options => options.UseSqlite(builder.Configuration.GetConnectionString("WebzineDbContext"))
-            );
+            if(dataPath == "Database")
+            {
+                builder.Services.AddDbContext<WebzineDbContext>(
+                    options => options.UseSqlite(builder.Configuration.GetConnectionString("WebzineDbContext"))
+                );
+                
+                builder.Services.AddScoped<ITitreRepository, DbTitreRepository>();
+                builder.Services.AddScoped<IArtisteRepository, DbArtisteRepository>();
+                builder.Services.AddScoped<ICommentaireRepository, DbCommentaireRepository>();
+                builder.Services.AddScoped<IStyleRepository, DbStyleRepository>();
+            }
+            else
+            {
+                builder.Services.AddScoped<ITitreRepository, LocalTitreRepository>();
+                builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
+                builder.Services.AddScoped<ICommentaireRepository, LocalCommentaireRepository>();
+                builder.Services.AddScoped<IStyleRepository, LocalStyleRepository>();
+            }
+
+
+            
         }
 
         public static void Configure(WebApplication app)
@@ -73,7 +104,21 @@ namespace Webzine.WebApplication
 
             app.UseEndpoints(endpoints =>
             {
-                // Route admin action form
+                // Route admin action post form
+                endpoints.MapControllerRoute(
+                    name: "create",
+                    pattern: "{area:exists}/{controller=Home}/create",
+                    defaults: new { action = "create" });
+                endpoints.MapControllerRoute(
+                    name: "delete",
+                    pattern: "{area:exists}/{controller=Home}/delete/{id?}",
+                    defaults: new { action = "delete" });
+                endpoints.MapControllerRoute(
+                    name: "edit",
+                    pattern: "{area:exists}/{controller=Home}/edit/{id:int}",
+                    defaults: new { action = "edit" });
+
+                // Route admin action get
                 endpoints.MapControllerRoute(
                     name: "admin creation",
                     pattern: "{area:exists}/{controller=Home}/create",
@@ -81,35 +126,35 @@ namespace Webzine.WebApplication
                 endpoints.MapControllerRoute(
                     name: "admin deletion",
                     pattern: "{area:exists}/{controller=Home}/delete/{id:int}",
-                    defaults: new { action = "Suppression" });
+                    defaults: new { action = "suppression" });
                 endpoints.MapControllerRoute(
                     name: "admin edition",
                     pattern: "{area:exists}/{controller=Home}/edit/{id:int}",
-                    defaults: new { action = "Edit" });
+                    defaults: new { action = "edit" });
 
                 // Route admin index
                 endpoints.MapControllerRoute(
                     name: "adminCommentIndex",
                     pattern: "/administration/commentaires",
-                    defaults: new { area = "administration", controller = "Commentaire", action = "Index" });
+                    defaults: new { area = "administration", controller = "commentaire", action = "index" });
                 endpoints.MapControllerRoute(
                     name: "adminArtisteIndex",
                     pattern: "/administration/artistes",
-                    defaults: new { area = "administration", controller = "Artiste", action = "Index" });
+                    defaults: new { area = "administration", controller = "artiste", action = "index" });
                 endpoints.MapControllerRoute(
                     name: "adminStyleIndex",
                     pattern: "/administration/styles",
-                    defaults: new { area = "administration", controller = "Style", action = "Index" });
+                    defaults: new { area = "administration", controller = "style", action = "index" });
                 endpoints.MapControllerRoute(
                     name: "adminTitreIndex",
                     pattern: "/administration/titres",
-                    defaults: new { area = "administration", controller = "Titre", action = "Index" });
+                    defaults: new { area = "administration", controller = "titre", action = "index" });
 
                 // Route base 
                 endpoints.MapControllerRoute(
                     name: "contact",
                     pattern: "contact",
-                    defaults: new { controller = "Contact", action = "Contact" });
+                    defaults: new { controller = "contact", action = "contact" });
                 //endpoints.MapControllerRoute(
                 //    name: "artiste",                                // PARTIE POUR ARTISTE! décommenter ne fois qu'il prend un nom (string)
                 //    pattern: "artiste/{nomArtiste}",
@@ -117,7 +162,7 @@ namespace Webzine.WebApplication
                 endpoints.MapControllerRoute(
                     name: "titre",
                     pattern: "titre/{id:int}",
-                    defaults: new { controller = "Titre", action = "Titre" });
+                    defaults: new { controller = "titre", action = "titre" });
                 //endpoints.MapControllerRoute(
                 //    name: "TitreStyle",                             // PARTIE POUR TITRE-STYLE! Décommenter une fois qu'il prend un nom de style (string).
                 //    pattern: "titre/style/{nomStyle}",
