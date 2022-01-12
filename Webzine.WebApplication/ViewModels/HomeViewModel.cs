@@ -5,13 +5,10 @@
 
     public class HomeViewModel
     {
-        public List<Titre> Titres { get;  } = TitreFactory.CreateTitre().Take(3).ToList();
-
+        public List<Titre> Titres { get;  } = TitreFactory.CreateTitre(10, ArtisteFactory.CreateArtiste(10), StyleFactory.GetStyles()).Take(3).ToList();
 
         public List<Titre> TitresPOP { get; } = TitreFactory.CreateTitre2().ToList();
 
-
-     
 
     }
 }

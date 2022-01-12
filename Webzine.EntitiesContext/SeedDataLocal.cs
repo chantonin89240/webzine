@@ -28,14 +28,16 @@
 
         public static void InitialisationDB(WebzineDbContext context)
         {
-            var Styles = StyleFactory.GetStyles().Select(style => new Style { Libelle = style.Libelle }).OrderBy(s => s.Libelle);
+            IEnumerable<Style> Styles = StyleFactory.GetStyles().Select(style => new Style { Libelle = style.Libelle }).OrderBy(s => s.Libelle);
             context.AddRange(Styles);
 
-            var Artistes = ArtisteFactory.CreateArtiste().Select(artiste => new Artiste { Nom =artiste.Nom, Biographie = artiste.Biographie });
-            context.AddRange(Artistes);
+            IEnumerable<Artiste> Artistes = ArtisteFactory.CreateArtiste(10);
+            context.AddRange(Artistes.Select(artiste => new Artiste { Nom = artiste.Nom, Biographie = artiste.Biographie }));
 
-            var Titres = TitreFactory.CreateTitre().Select(titre => new Titre { 
-                IdArtiste = titre.IdArtiste, 
+            IEnumerable<Titre> Titres = TitreFactory.CreateTitre(10, Artistes, Styles);
+            context.AddRange(Titres.Select(titre => new Titre
+            {
+                IdArtiste = titre.IdArtiste,
                 Libelle = titre.Libelle,
                 Chronique = titre.Chronique,
                 UrlJaquette = titre.UrlJaquette,
@@ -45,24 +47,24 @@
                 Duree = titre.Duree,
                 NbLectures = titre.NbLectures,
                 NbLikes = titre.NbLikes,
-            });
-            context.AddRange(Titres);
+            }));
 
             context.SaveChanges();
 
-            var Commentaires = CommentaireFactory.CreateCommentaire().Select(commentaire => new Commentaire {
-                Auteur = commentaire.Auteur,
-                Contenu = commentaire.Contenu,
-                DateCreation = commentaire.DateCreation,
-                IdTitre = commentaire.IdTitre,
-            });
-            context.AddRange(Commentaires);
+            IEnumerable<Commentaire> commentaires = CommentaireFactory.CreateCommentaire(10, Titres);
+            context.AddRange(commentaires.Select(comment => new Commentaire
+            {
+                Auteur = comment.Auteur,
+                Contenu = comment.Contenu,
+                DateCreation = comment.DateCreation,
+                IdTitre = comment.IdTitre,
+            }));
 
-            var TitresStyles = TitreFactory.CreateTitre().SelectMany(t => t.TitresStyles).Select(ts => new TitreStyle {
+            IEnumerable<TitreStyle> titreStyles = Titres.SelectMany(t => t.TitresStyles).Select(ts => new TitreStyle {
                 IdTitre = ts.IdTitre,
                 IdStyle = ts.IdStyle,
             }).ToList();
-            context.AddRange(TitresStyles);
+            context.AddRange(titreStyles);
 
             context.SaveChanges();
         }

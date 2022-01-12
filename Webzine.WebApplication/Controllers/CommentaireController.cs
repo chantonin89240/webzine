@@ -7,11 +7,18 @@ namespace Webzine.WebApplication.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.Repository;
+    using Webzine.Repository.Contracts;
 
     public class CommentaireController : Controller
     {
-        private DbCommentaireRepository commentaireRepository = new DbCommentaireRepository();
-        private LocalTitreRepository localTitreRepository = new LocalTitreRepository();
+        private ICommentaireRepository commentaireRepository;
+        private ITitreRepository titreRepository;
+
+        CommentaireController(ICommentaireRepository commentaireRepository, ITitreRepository titreRepository)
+        {
+            this.commentaireRepository = commentaireRepository;
+            this.titreRepository = titreRepository;
+        }
 
         [HttpPost]
         public ActionResult Index(Commentaire model)
@@ -21,7 +28,7 @@ namespace Webzine.WebApplication.Controllers
                 // Send to Model to save into DB.
                 // WARN: IT WON'T HAVE IT'S CommentaireId SET!
                 model.DateCreation = DateTime.Now;
-                model.Titre = this.localTitreRepository.Find(model.IdTitre);
+                model.Titre = this.titreRepository.Find(model.IdTitre);
                 this.commentaireRepository.Add(model);
             }
 

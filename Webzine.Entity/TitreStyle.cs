@@ -25,5 +25,12 @@
         /// </summary>
         public Style? Style { get; set; }
 
+        public TitreStyle()
+        {
+            Titre = new Titre();
+            Style= new Style();
+        }
+
+
     }
 }
