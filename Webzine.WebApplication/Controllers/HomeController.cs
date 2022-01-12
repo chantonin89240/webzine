@@ -3,6 +3,8 @@
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Repository.Contracts;
     using Webzine.WebApplication.ViewModels;
+    using Webzine.Entity;
+    using Webzine.WebApplication.Controllers.Components;
 
     /// <summary>
     /// Page d'accueil.
@@ -11,7 +13,8 @@
     {
         private readonly ILogger<HomeController> _logger;
         private ITitreRepository _titreRepository;
-        private TitreViewModel model = new TitreViewModel();
+        //private TitreViewModel model = new TitreViewModel();
+        private HomeViewModel model = new HomeViewModel();
         private IStyleRepository _styleRepository;
 
         public HomeController(ITitreRepository titreRepository, IStyleRepository styleRepository ,ILogger<HomeController> logger)
@@ -24,12 +27,15 @@
 
         // GET: HomeController
         // [Route("page")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
             _logger.LogInformation("Hello, this is the index!");
-            this.model.Titres = (List<Entity.Titre>)this._titreRepository.FindAll().ToList().OrderBy(t => t.DateSortie);
-
             _logger.LogInformation("Log en place - Reste plus qu'à les rendre croustillant");
+
+            int pageSize = 3;
+            // pageNumber ?? 0 = opération de fusion null, renvoi 0 si pageNumber est null
+            this.model.titrePourPage(pageSize, pageNumber ?? 0);
+            
             return this.View(this.model);
         }
     }
