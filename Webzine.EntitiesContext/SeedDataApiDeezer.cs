@@ -85,7 +85,7 @@ namespace Webzine.EntitiesContext
                             {
                                 IdTitre = item.id,
                                 Libelle = item.title,
-                                Chronique = "faker.Lorem.Paragraph(1)",
+                                Chronique = faker.Lorem.Paragraph(10),
                                 UrlJaquette = dataTitle.cover_big,
                                 UrlEcoute = "default",
                                 Lien = "",
