@@ -31,7 +31,7 @@
 
             // pageNumber ?? 0 = opération de fusion null, renvoi 0 si pageNumber est null
             this.model.Page = pageNumber ?? 0;
-            this.model.Titres = this._titreRepository.FindAll().ToList();
+            this.model.Titres = this._titreRepository.FindAll().ToList().OrderByDescending(titre => titre.DateCreation).ToList();
 
             this.model.Titres = this.model.TitrePourPage(pageNumber ?? 0);
             this.model.Titres.ForEach(title => title.TitresStyles.ToList().ForEach(ts => ts.Style = this._styleRepository.Find(ts.IdStyle)));
