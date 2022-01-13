@@ -15,7 +15,7 @@
 			{
 				foreach (var style in @Model.StylesTitre)
 				{
-					<a href="/Titre/TitresStyle?id=@style.IdStyle">@style.Libelle</a>
+					<a asp-controller="Titre" asp-action="TitresStyle" asp-route-nomStyle="@style.Libelle">@style.Libelle</a>
 				}				
 			}
 			else

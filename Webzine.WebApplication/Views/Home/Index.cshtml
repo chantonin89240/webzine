@@ -34,7 +34,7 @@
                                         }
                                         else
                                         {
-                                             <a href="/Titre/TitresStyle?id=@ts.IdStyle" class="text-decoration-none">
+                                             <a asp-controller="Titre" asp-action="TitresStyle" asp-route-nomStyle="@ts.Style.Libelle" class="text-decoration-none">
                                                 <span>@ts.Style.Libelle</span>
                                             </a>
                                         }

@@ -194,7 +194,7 @@ namespace Webzine.WebApplication
                 endpoints.MapControllerRoute(
                     name: "TitreStyle",
                     pattern: "titre/style/{nomStyle}",
-                    defaults: new { controller="Titre", action="TitreStyle" });
+                    defaults: new { controller="Titre", action="TitresStyle" });
 
                 // Page d'acceuil
                 endpoints.MapControllerRoute(
