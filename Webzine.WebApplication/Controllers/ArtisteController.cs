@@ -27,9 +27,16 @@
         /// <returns>Vue correspondant à un artiste.</returns>
         public IActionResult Artiste(string nomArtiste)
         {
-            model.Artiste = _artisteRepository.FindAll().First(artiste => artiste.Nom == nomArtiste);
-
-            return this.View(model);
+            string nom = System.Net.WebUtility.UrlDecode(nomArtiste);
+            try
+            {
+                model.Artiste = _artisteRepository.FindAll().First(artiste => artiste.Nom == nom);
+                return this.View(model);
+            }
+            catch (Exception ex)
+            {
+                return this.Redirect("/");
+            }
         }
     }
 }
