@@ -35,5 +35,18 @@ namespace Webzine.Repository.Contracts
         /// <param name="style"></param>
         void Update(Style style);
 
+        /// <summary>
+        /// méthode qui vérifie si le libelle du style existe déjà
+        /// </summary>
+        /// <param name="style"></param>
+        /// <returns></returns>
+        public Style rechercheStyle(Style style);
+
+        /// <summary>
+        /// méthode qui modifie la première lettre du libelle de style en majuscule
+        /// </summary>
+        /// <param name="style"></param>
+        /// <returns></returns>
+        public string boldStyle(Style style);
     }
 }
