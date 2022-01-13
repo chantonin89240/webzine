@@ -1,6 +1,7 @@
 ﻿using Webzine.Repository.Contracts;
 using Webzine.Entity;
 using Webzine.EntitiesContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace Webzine.Repository
 {
@@ -25,12 +26,13 @@ namespace Webzine.Repository
 
         public Commentaire Find(int id)
         {
-            return this._context.Commentaires.Find(id);
+            return this.FindAll().First(comm => comm.IdCommentaire == id);
         }
 
         public IEnumerable<Commentaire> FindAll()
         {
-            return this._context.Commentaires;
+            return this._context.Commentaires
+                .Include(comment => comment.Titre);
         }
     }
 }
