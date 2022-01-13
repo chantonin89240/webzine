@@ -10,7 +10,6 @@
     /// Contrôleur des vues en rapport aux <see cref="Commentaire"/>s.
     /// </summary>
     [Area("administration")]
-    [Route("[controller]")]
     public class CommentaireController : Controller
     {
         private ICommentaireRepository commentaireRepository;
@@ -26,8 +25,7 @@
         /// Génère la page listant tous les <see cref="Commentaire"/>s dans la partie Administrateur.
         /// </summary>
         /// <returns>Page de tous les <see cref="Commentaire"/>s.</returns>
-        [Route("")]
-        [HttpGet("[action]")]
+        [HttpGet]
         public IActionResult Index()
         {
             List<Commentaire> commentaires = this.commentaireRepository.FindAll().ToList();
@@ -42,7 +40,6 @@
         /// </summary>
         /// <param name="id">id du <see cref="Commentaire"/> qui sera effacé.</param>
         /// <returns>Page web de vérification.</returns>
-        [HttpGet("[action]")]
         public IActionResult delete(int id)
         {
             List<Commentaire> commentaires = this.commentaireRepository.FindAll().ToList();
@@ -63,8 +60,6 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ActionName("delete")]
-        [Route("[action]")]
         public IActionResult delete(CommentairesViewModel model,int id)
 		{
             commentaireRepository.Delete(id);
