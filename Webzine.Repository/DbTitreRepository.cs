@@ -112,10 +112,7 @@
 
         public void Update(Titre titre)
         {
-            // titre.DateCreation = DateTime.Now;
             this._context.Titres.Update(titre);
-            // titre.TitresStyles.ForEach(ts => context.Set<TitreStyle>().Add(ts));
-            // context.Entry(titre).State = EntityState.Modified;
             this._context.SaveChanges();
         }
 

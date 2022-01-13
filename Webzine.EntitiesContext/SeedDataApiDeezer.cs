@@ -20,7 +20,7 @@ namespace Webzine.EntitiesContext
             GetStyles();
             context.AddRange(styles);
             context.SaveChanges();
-            List<string> ListeArtiste = new List<string>() {"maalouf", "rondo veneziano", "ntm", "queen", "bob marley", "percival schuttenbach"};
+            List<string> ListeArtiste = new List<string>() {"jazz", "rock", "rap", "reggae", "electro", "percival schuttenbach"};
             ListeArtiste.ForEach(a => GetData(context, a));
         }
         public static void GetStyles()
@@ -75,7 +75,7 @@ namespace Webzine.EntitiesContext
                 List<dynamic> idStyles = new List<dynamic>();
                 List<TitreStyle> titreStyles = new List<TitreStyle>();
                 var genrePositif = dataTitle.genre_id.ToObject<int>();     
-                if(genrePositif > 0)
+                if(genrePositif > 0 && dataTitle.cover_big != null)
                 {
                     foreach (var item in dataTitle.tracks.data)
                     {
