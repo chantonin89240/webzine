@@ -16,7 +16,7 @@
         private ITitreRepository _titreRepository;
         private IStyleRepository _styleRepository;
         private IArtisteRepository _artisteRepository;
-        private TitreViewModel model = new TitreViewModel();
+        private TitreViewModel model;
         private static List<string> _editStylesTitre = new List<string>();
         private static DateTime _dateCréation;
 
@@ -25,6 +25,7 @@
             this._titreRepository = titreRepository;
             this._styleRepository = styleRepository;
             this._artisteRepository = artisteRepository;
+            this.model = new TitreViewModel();
         }
         /// <summary>
         /// GET : /administration/titres/

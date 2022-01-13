@@ -3,6 +3,7 @@ namespace Webzine.WebApplication
     using Microsoft.AspNetCore.Builder;
     using Microsoft.EntityFrameworkCore;
     using Npgsql.EntityFrameworkCore.PostgreSQL;
+    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Configuration;
     using NLog.Web;
     using Webzine.EntitiesContext;
@@ -19,14 +20,6 @@ namespace Webzine.WebApplication
             ConfigureServices(builder);
             var app = builder.Build();
             
-
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Error");
-                app.UseHsts();
-            }
-
             using(var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
@@ -41,7 +34,8 @@ namespace Webzine.WebApplication
                     // Initialisation de la base de donn�es
                     if(dataPath == "Database")
                     {
-                        SeedDataLocal.InitialisationDB(webzineDbContext);
+                        //SeedDataLocal.InitialisationDB(webzineDbContext);
+                        SeedDataApiDeezer.InitializeData(webzineDbContext);
                     }
                     else
                     {
@@ -63,8 +57,8 @@ namespace Webzine.WebApplication
 
         public static void ConfigureServices(WebApplicationBuilder builder)
         {
-            dataPath = builder.Configuration.GetValue<string>("DataRepository");
-            sgbd = builder.Configuration.GetValue<string>("SGBD");
+            dataPath = builder.Configuration.GetSection("Configuration").GetValue<string>("DataRepository");
+            sgbd = builder.Configuration.GetSection("Configuration").GetValue<string>("SGBD");
 
             // NLog: Setup NLog for Dependency injection
             // problème au lancement de l'app, l'app bloque en mode debug, et bloque sur le chargement de la config dans launchsettings.json en mode no debug
@@ -73,7 +67,7 @@ namespace Webzine.WebApplication
             builder.Host.UseNLog();
 
             builder.Services.AddControllersWithViews();
-            builder.Services.AddRazorPages().AddRazorRuntimeCompilation();            
+            builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
@@ -85,6 +79,7 @@ namespace Webzine.WebApplication
                         switch (sgbd)
                         {
                             case "PostgreSql":
+                                
                                 options.UseNpgsql(builder.Configuration.GetConnectionString("WebzineDbPostgreSql"));
                                 break;
                             case "Sqlite":
@@ -110,17 +105,19 @@ namespace Webzine.WebApplication
                 builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
                 builder.Services.AddScoped<ICommentaireRepository, LocalCommentaireRepository>();
                 builder.Services.AddScoped<IStyleRepository, LocalStyleRepository>();
-            }
-
-
-            
+            }    
         }
 
         public static void Configure(WebApplication app)
         {
+            // Configure the HTTP request pipeline.
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

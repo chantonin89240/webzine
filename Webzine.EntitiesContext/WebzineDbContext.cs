@@ -15,16 +15,14 @@
 
         public DbSet<TitreStyle>? TitresStyles { get; set; }
 
-        public WebzineDbContext(DbContextOptions<WebzineDbContext> DbContextOptions)
-            : base(DbContextOptions)
+        public WebzineDbContext(DbContextOptions<WebzineDbContext> Options)
+            : base(Options)
         {
-            // this.Database.Migrate();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.LogTo(NLog.LogManager.GetCurrentClassLogger().Info, Microsoft.Extensions.Logging.LogLevel.Information);
-
             base.OnConfiguring(optionsBuilder);
         }
 
