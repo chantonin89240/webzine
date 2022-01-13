@@ -34,7 +34,7 @@
 
         public IActionResult TitresStyle(string nomStyle)
         {
-            this.model.LibelleStyle = nomStyle;
+            this.model.LibelleStyle = System.Net.WebUtility.UrlDecode(nomStyle);
             this.model.Titres = this._titreRepository.SearchByStyle(nomStyle).ToList();
             return this.View(model);
         }

@@ -94,12 +94,13 @@
 
         public IEnumerable<Titre> SearchByStyle(string libelle)
         {
-            if (!this._context.Styles.ToList().Exists(s => s.Libelle == libelle))
+            string decoded = System.Net.WebUtility.UrlDecode(libelle);
+            if (!this._context.Styles.ToList().Exists(s => s.Libelle == decoded))
             {
                 return Enumerable.Empty<Titre>();
             }
 
-            var idStyle = this._context.Styles.FirstOrDefault(s => s.Libelle == libelle).IdStyle;
+            var idStyle = this._context.Styles.FirstOrDefault(s => s.Libelle == decoded).IdStyle;
             var titres = this.FindAll().Where(t => t.TitresStyles.ToList().Exists(ts => ts.IdStyle == idStyle));
             return titres;
         }
