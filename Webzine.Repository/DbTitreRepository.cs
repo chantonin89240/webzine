@@ -95,7 +95,7 @@
         public IEnumerable<Titre> SearchByStyle(string libelle)
         {
             var idStyle = this._context.Styles.First(s => s.Libelle == libelle).IdStyle;
-            var titres = this._context.Titres.ToList().FindAll(t => this._context.TitresStyles.ToList().FindAll(ts => ts.IdStyle == idStyle).Exists(ts => ts.IdTitre == t.IdTitre));
+            var titres = this.FindAll().Where(t => t.TitresStyles.ToList().Exists(ts => ts.IdStyle == idStyle));
             return titres;
         }
 
