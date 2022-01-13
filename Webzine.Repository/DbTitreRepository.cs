@@ -75,12 +75,17 @@
 
         public void IncrementNbLectures(Titre titre)
         {
-            this._context.Titres.First(t => t == titre).NbLectures++;
+            int nbTotal = this._context.Titres.FirstOrDefault(t => t == titre).NbLectures + 1;
+            this._context.Titres.FirstOrDefault(t => t == titre).NbLectures = nbTotal;
+            this._context.Titres.Update(titre);
+            this._context.SaveChanges();
         }
 
         public void IncrementNbLikes(Titre titre)
         {
-            this._context.Titres.First(t => t == titre).NbLikes++;
+            int nbTotal = this._context.Titres.FirstOrDefault(t => t == titre).NbLikes + 1;
+            this._context.Titres.FirstOrDefault(t => t == titre).NbLikes = nbTotal;
+            this._context.Titres.Update(titre);
             this._context.SaveChanges();
         }
 

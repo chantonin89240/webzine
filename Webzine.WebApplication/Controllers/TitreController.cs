@@ -22,6 +22,7 @@
         {
             Titre titre = this._titreRepository.Find(idTitre);
             this.model.Titre = titre;
+            this._titreRepository.IncrementNbLectures(titre);
             this.model.StylesTitre = new List<Style>();
             this.model.Commentaire = new Commentaire()
             {

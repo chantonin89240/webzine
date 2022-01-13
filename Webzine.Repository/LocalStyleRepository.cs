@@ -13,9 +13,9 @@
         /// <param name="style"></param>
         public void Add(Style style)
         {
-            var styles = this.Styles.FirstOrDefault(s => s.Libelle.ToLower() == style.Libelle.ToLower());
-            if (styles == null)
+            if (this.rechercheStyle(style) == null)
             {
+                style.Libelle = this.boldStyle(style);
                 this.Styles.Add(style);
             }
         }
@@ -36,7 +36,8 @@
         /// <returns></returns>
         public Style Find(int id)
         {
-            return this.Styles.First(a => a.IdStyle == id);
+            var style = this.Styles.First(s => s.IdStyle == id);
+            return style;
         }
 
         /// <summary>
@@ -45,7 +46,8 @@
         /// <returns></returns>
         public IEnumerable<Style> FindAll()
         {
-            return this.Styles;
+            IEnumerable<Style> styles = this.Styles.ToList().OrderBy(s => s.Libelle);
+            return styles;
         }
 
         /// <summary>
@@ -54,7 +56,34 @@
         /// <param name="style"></param>
         public void Update(Style style)
         {
-            this.Styles.Find(a => a == style);
+            if (this.rechercheStyle(style) == null)
+            {
+                style.Libelle = this.boldStyle(style);
+                this.Update(style);
+            }
+
+        }
+
+        /// <summary>
+        /// méthode qui vérifie que le style n'existe pas déjà avec le libelle placé en minuscule
+        /// </summary>
+        /// <param name="style"></param>
+        /// <returns></returns>
+        public Style rechercheStyle(Style style)
+        {
+            var styles = this.Styles.FirstOrDefault(s => s.Libelle.ToLower() == style.Libelle.ToLower());
+            return styles;
+        }
+
+        /// <summary>
+        /// méthode qui modifie la première lettre du libelle de style en majuscule
+        /// </summary>
+        /// <param name="style"></param>
+        /// <returns></returns>
+        public string boldStyle(Style style)
+        {
+            var boldStyle = style.Libelle.First().ToString().ToUpper() + style.Libelle.Remove(0, 1).ToLower();
+            return boldStyle;
         }
 
     }

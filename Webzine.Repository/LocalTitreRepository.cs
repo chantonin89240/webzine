@@ -80,7 +80,9 @@
         /// <param name="titre"><see cref="Titre"/> to increment.</param>
         public void IncrementNbLectures(Titre titre)
         {
-            this.titres.First(t => t == titre).NbLectures++;
+            int nbTotal = this.titres.FirstOrDefault(t => t == titre).NbLectures + 1;
+            this.titres.FirstOrDefault(t => t == titre).NbLectures = nbTotal;
+            this.Update(titre);
         }
 
         /// <summary>
@@ -89,7 +91,9 @@
         /// <param name="titre"><see cref="Titre"/> to increment.</param>
         public void IncrementNbLikes(Titre titre)
         {
-            this.titres.First(t => t == titre).NbLikes++;
+            int nbTotal = this.titres.FirstOrDefault(t => t == titre).NbLikes + 1;
+            this.titres.FirstOrDefault(t => t == titre).NbLikes = nbTotal;
+            this.Update(titre);
         }
 
         /// <summary>
