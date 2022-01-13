@@ -34,9 +34,15 @@
 
         public IActionResult TitresStyle(int id)
         {
-            this.model.LibelleStyle = this._styleRepository.Find(id).Libelle;
-            this.model.Titres = this._titreRepository.SearchByStyle(this.model.LibelleStyle).ToList();
-            return this.View(model);
+            string libelle = this._styleRepository.Find(id).Libelle;
+            return this.RedirectToAction("TitreStyle", new { nomStyle = libelle });
+        }
+
+        public IActionResult TitreStyle(string nomStyle)
+        {
+            this.model.LibelleStyle = nomStyle;
+            this.model.Titres = this._titreRepository.SearchByStyle(nomStyle).ToList();
+            return this.View("TitresStyle", model);
         }
 
         public IActionResult like(int id)

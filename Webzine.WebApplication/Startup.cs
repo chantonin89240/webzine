@@ -184,13 +184,10 @@ namespace Webzine.WebApplication
                     name: "titre",
                     pattern: "titre/{id:int}",
                     defaults: new { controller = "titre", action = "titre" });
-                //endpoints.MapControllerRoute(
-                //    name: "TitreStyle",                             // PARTIE POUR TITRE-STYLE! Décommenter une fois qu'il prend un nom de style (string).
-                //    pattern: "titre/style/{nomStyle}",
-                //    defaults: new { controller="Titre", action="TitresStyle" });
-                // ///////////////////// //
-                // **TODO POST METHODS** //
-                // ///////////////////// //
+                endpoints.MapControllerRoute(
+                    name: "TitreStyle",                             // PARTIE POUR TITRE-STYLE! Décommenter une fois qu'il prend un nom de style (string).
+                    pattern: "titre/style/{nomStyle}",
+                    defaults: new { controller="Titre", action="TitreStyle" });
                 endpoints.MapControllerRoute(
                     name: "accueil",
                     pattern: "page/{id}",
