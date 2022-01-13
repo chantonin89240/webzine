@@ -35,6 +35,11 @@ a:active {
     margin-bottom: 4em;
 }
 
+.lienDisabled {
+    pointer-events: none;
+    background-color: #C5C5C5 !important;
+}
+
 .imgJaquetteTitre {
     float: right;
     margin-bottom: 0.8em;
