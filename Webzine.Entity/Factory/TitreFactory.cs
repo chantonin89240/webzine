@@ -27,6 +27,7 @@
                         Commentaires = new List<Commentaire>(),
                         TitresStyles = new List<TitreStyle>(),
                         IdArtiste = fake.Random.Int(1, artistes.Count()),
+                        Duree = fake.Random.Int(60,180)
                     }).FinishWith((fake, title) =>
                     {
                         title.Artiste = artistes.First(a => a.IdArtiste == title.IdArtiste);

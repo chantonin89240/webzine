@@ -49,6 +49,8 @@ namespace Webzine.Repository
         public Artiste Find(int id)
         {
             Artiste artiste = this._context.Artistes.First(a => a.IdArtiste == id);
+            artiste.Titres = this._context.Titres.Where(t => t.IdArtiste == artiste.IdArtiste).ToList();
+
             return artiste;
         }
 
@@ -58,15 +60,15 @@ namespace Webzine.Repository
         /// <returns>Whole <see cref="Artiste"/> list.</returns>
         public IEnumerable<Artiste> FindAll()
         {
-            IEnumerable<Artiste> artistes = this._context.Artistes.ToList();
+            IEnumerable<Artiste> artistes = this._context.Artistes
+                .Include(artiste => artiste.Titres);
             return artistes;
         }
 
         /// <summary>
-        /// Updates an <see cref="Artiste"/> in the repository based on ???.
+        /// Updates an <see cref="Artiste"/> in the repository based on it's ID.
         /// </summary>
         /// <param name="artiste">New or Updated <see cref="Artiste"/></param>
-        /// <exception cref="NotImplementedException">Not yet implemented.</exception>
         public void Update(Artiste artiste)
         {
             var artistes = this._context.Artistes.Where(a => a.IdArtiste != artiste.IdArtiste);

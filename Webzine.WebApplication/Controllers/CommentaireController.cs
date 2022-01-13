@@ -5,7 +5,6 @@ namespace Webzine.WebApplication.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.Repository.Contracts;
-    using Webzine.Repository;
 
     public class CommentaireController : Controller
     {
@@ -29,6 +28,7 @@ namespace Webzine.WebApplication.Controllers
                 model.Titre = this.titreRepository.Find(model.IdTitre);
                 this.commentaireRepository.Add(model);
             }
+
             return this.Redirect("Titre/Titre?idTitre=" + model.IdTitre);
         }
     }

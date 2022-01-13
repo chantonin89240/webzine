@@ -48,6 +48,7 @@
         {
             var titre = this._context.Titres
                 .Include(t => t.Artiste)
+                .Include(t => t.Commentaires)
                 .Include(t => t.TitresStyles)
                 .ThenInclude(ts => ts.Style)
                 .FirstOrDefault(t => t.IdTitre == idTitre);
