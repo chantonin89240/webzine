@@ -171,27 +171,38 @@ namespace Webzine.WebApplication
                     pattern: "/administration/titres",
                     defaults: new { area = "administration", controller = "titre", action = "index" });
 
-                // Route base 
+                // Routes menant sur la webzine de base (hors administration)
+                // Page Contacts
                 endpoints.MapControllerRoute(
                     name: "contact",
                     pattern: "contact",
                     defaults: new { controller = "contact", action = "contact" });
-                //endpoints.MapControllerRoute(
-                //    name: "artiste",                                // PARTIE POUR ARTISTE! décommenter ne fois qu'il prend un nom (string)
-                //    pattern: "artiste/{nomArtiste}",
-                //    defaults: new { controller = "Artiste", action = "Artiste" });
+
+                // Page pour un artiste
+                endpoints.MapControllerRoute(
+                    name: "artiste",                                // PARTIE POUR ARTISTE! décommenter ne fois qu'il prend un nom (string)
+                    pattern: "artiste/{nomArtiste}",
+                    defaults: new { controller = "Artiste", action = "Artiste" });
+
+                // Page pour un article sur un titre
                 endpoints.MapControllerRoute(
                     name: "titre",
                     pattern: "titre/{id:int}",
                     defaults: new { controller = "titre", action = "titre" });
+
+                // Page pour les titres avec un style
                 endpoints.MapControllerRoute(
-                    name: "TitreStyle",                             // PARTIE POUR TITRE-STYLE! Décommenter une fois qu'il prend un nom de style (string).
+                    name: "TitreStyle",
                     pattern: "titre/style/{nomStyle}",
                     defaults: new { controller="Titre", action="TitreStyle" });
+
+                // Page d'acceuil
                 endpoints.MapControllerRoute(
                     name: "accueil",
                     pattern: "page/{id}",
                     defaults: new { controller = "home", action = "index" });
+
+                // Page Recherches
                 endpoints.MapControllerRoute(
                     name: "Recherche",
                     pattern: "recherche",

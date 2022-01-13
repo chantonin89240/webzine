@@ -23,11 +23,11 @@
         /// <summary>
         /// Produit la vue Artiste.
         /// </summary>
-        /// <param name="idArtiste">id de l'Artiste documenté par la vue.</param>
+        /// <param name="nomArtiste">nom de l'Artiste documenté par la vue.</param>
         /// <returns>Vue correspondant à un artiste.</returns>
-        public IActionResult Artiste(int idArtiste)
+        public IActionResult Artiste(string nomArtiste)
         {
-            model.Artiste = _artisteRepository.Find(idArtiste);
+            model.Artiste = _artisteRepository.FindAll().First(artiste => artiste.Nom == nomArtiste);
 
             return this.View(model);
         }

@@ -18,7 +18,7 @@
 							</div>
 							<div class="col-md-11">
 								<div class="card-body" style="margin-top:0px; padding-top:0px; top:0px;">
-									<h5 class="card-title"><a class="text-decoration-none" asp-controller="artiste" asp-action="artiste" asp-route-idArtiste="@titre.Artiste.IdArtiste">@titre.Artiste.Nom</a> - <a class="text-decoration-none" asp-action="titre" asp-route-idTitre="@titre.IdTitre">@titre.Libelle</a></h5>
+									<h5 class="card-title"><a class="text-decoration-none" asp-controller="artiste" asp-action="artiste" asp-route-nomArtiste="@titre.Artiste.Nom">@titre.Artiste.Nom</a> - <a class="text-decoration-none" asp-action="titre" asp-route-idTitre="@titre.IdTitre">@titre.Libelle</a></h5>
 									<p class="card-text"><small class="text-muted">Durée : @Model.FormatLength(titre)</small></p>
 								</div>
 							</div>
