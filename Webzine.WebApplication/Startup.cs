@@ -84,7 +84,7 @@ namespace Webzine.WebApplication
                             case "PostgreSql":
                                 options.UseNpgsql(builder.Configuration.GetConnectionString("WebzineDbPostgreSql"));
                                 break;
-                            case "Sqlite":
+                            case "SQLite":
                                 options.UseSqlite(builder.Configuration.GetConnectionString("WebzineDbSqlite"));
                                 break;
                             case "SqlServer":
