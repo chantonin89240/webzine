@@ -1,6 +1,4 @@
 ﻿@{
-    var i = 0;
-    var j = 0;
     var pageDes = @Model.Page - 1;
     var pageAsc = Model.Page + 1;
 }
@@ -10,49 +8,48 @@
 <ul class="list-unstyled">
     @foreach(var titre in Model.Titres)
     {
-            <li>
-                <div class="card bg-light mb-3">
-                    <div class="row">
-                        <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                            <img src=@titre.UrlJaquette class="card-img-top" alt="...">
-                        </div>
-                        <div class="d-flex flex-column justify-content-between card-body col-xxl-8 col-xl-8 col-lg-5 col-md-12 col-sm-border-12 col-xs-border-12 m-1">
-                            <h5><a asp-controller="Artiste" asp-action="Artiste" asp-route-nomArtiste="@titre.Artiste.Nom">@titre.Artiste.Nom </a> - <a asp-controller="Titre" asp-action="Titre" asp-route-idTitre="@titre.IdTitre">@titre.Libelle</a></h5>
-                            <p class="card-text row p-3" >@Model.PreviewString(titre.Chronique)</p>
-                            <div class="row ms-1 d-flex ">
-                                <a href="/Titre/Titre?idTitre=@titre.IdTitre" class="btn btn-primary text-nowrap col-xxl-3 col-xl-3 col-lg-3 col-md-2 col-sm-12 col-xs-12 m-1" style="min-width: 120px; max-width: 120px;">Lire la suite</a>
-                                <p class="text-nowrap col-xxl-3 col-xl-3 col-lg-5 col-md-10 col-sm-border-12 col-xs-12 ms-4 m-1">
-                                    <i class="fas fa-calendar"></i><span class="ms-1">@titre.DateSortie</span>
-                                </p>
-                                <p class="col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-border-12 col-xs-12 text-nowrap m-1">
-                                    <i class="fas fa-tags"></i> Style :
-                                    @foreach (var ts in @titre.TitresStyles)
+        <li>
+            <div class="card bg-light mb-3">
+                <div class="row">
+                    <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                        <img src=@titre.UrlJaquette class="card-img-top" alt="...">
+                    </div>
+                    <div class="d-flex flex-column justify-content-between card-body col-xxl-8 col-xl-8 col-lg-5 col-md-12 col-sm-border-12 col-xs-border-12 m-1">
+                        <h5><a asp-controller="Artiste" asp-action="Artiste" asp-route-nomArtiste="@titre.Artiste.Nom">@titre.Artiste.Nom </a> - <a asp-controller="Titre" asp-action="Titre" asp-route-idTitre="@titre.IdTitre">@titre.Libelle</a></h5>
+                        <p class="card-text row p-3" >@Model.PreviewString(titre.Chronique)</p>
+                        <div class="row ms-1 d-flex ">
+                            <a href="/Titre/Titre?idTitre=@titre.IdTitre" class="btn btn-primary text-nowrap col-xxl-3 col-xl-3 col-lg-3 col-md-2 col-sm-12 col-xs-12 m-1" style="min-width: 120px; max-width: 120px;">Lire la suite</a>
+                            <p class="text-nowrap col-xxl-3 col-xl-3 col-lg-5 col-md-10 col-sm-border-12 col-xs-12 m-1">
+                                <i class="fas fa-calendar"></i><span class="ms-1">@titre.DateSortie</span>
+                            </p>
+                            <p class="col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-border-12 col-xs-12 text-nowrap m-1">
+                                <i class="fas fa-tags"></i> Style :
+                                @foreach (var ts in @titre.TitresStyles)
+                                {
+                                    @if(ts == null)
                                     {
-                                        @if(ts == null)
-                                        {
-                                            <p>pas de style</p>
-                                        }
-                                        else
-                                        {
-                                             <a asp-controller="Titre" asp-action="TitresStyle" asp-route-nomStyle="@ts.Style.Libelle" class="text-decoration-none">
-                                                <span>@ts.Style.Libelle</span>
-                                            </a>
-                                        }
+                                        <p>pas de style</p>
                                     }
-                                </p>
-                            </div>
+                                    else
+                                    {
+                                            <a asp-controller="Titre" asp-action="TitresStyle" asp-route-nomStyle="@ts.Style.Libelle" class="text-decoration-none">
+                                            <span>@ts.Style.Libelle</span>
+                                        </a>
+                                    }
+                                }
+                            </p>
                         </div>
                     </div>
                 </div>
-            </li>
-       
+            </div>
+        </li> 
     }
 </ul>
 
 <div class="d-flex justify-content-between mb-3">
     @if(Model.Page <= 0)
     {
-        <a class="btn btn-secondary lienDisabled">
+        <a class="btn btn-secondary disabled">
             <span style="vertical-align: middle; margin-left: 5px;">&lt&lt Titres plus récents</span>
         </a>
     }
@@ -65,7 +62,7 @@
 
     @if (Model.Page >= Model.PageCount(Model.TitreTotal))
     {
-        <a class="btn btn-secondary lienDisabled">
+        <a class="btn btn-secondary disabled">
             <span style="vertical-align: middle;margin-right: 5px;">Titres plus anciens &gt&gt</span>
         </a>
     }
@@ -77,31 +74,36 @@
     }  
 </div>
 
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
 
 <div>
     <h2 class="mt-4 mb-3">Titres les plus populaires</h2>
 	<div class="row">
-		@foreach(var titre in Model.Titres)
+		@foreach(var titre in Model.TitresPopulaires)
         {
-            if (j < 3)
-            {
-                j++;
-                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-5 col-xs-5">	
-                    <div class="card mb-3 bg-light">
-                        <img class="card-img-top img-fluid" src=@titre.UrlJaquette alt="Card image cap">
-                        <div class="card-body">
-                            <a  asp-controller="Titre" asp-action="Titre" asp-route-idTitre="@titre.IdTitre" style="text-decoration: none;">@titre.Libelle</a>
-                            <div class="">
-                                <p>par <a  asp-controller="Artiste" asp-action="Artiste" asp-route-nomArtiste="@titre.Artiste.Nom" style="text-decoration: none;">@titre.Artiste.Nom</a></p>
-                            </div>
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-5 col-xs-5">	
+                <div class="card mb-3 bg-light">
+                    <img class="card-img-top img-fluid" src=@titre.UrlJaquette alt="Card image cap">
+                    <div class="card-body">
+                        <a  asp-controller="Titre" asp-action="Titre" asp-route-idTitre="@titre.IdTitre" style="text-decoration: none;">@titre.Libelle</a>
+                        <div class="">
+                            <p>par <a  asp-controller="Artiste" asp-action="Artiste" asp-route-nomArtiste="@titre.Artiste.Nom" style="text-decoration: none;">@titre.Artiste.Nom</a></p>
                         </div>
                     </div>
                 </div>
-            }
-            else
-            {
-                break;
-            }
+            </div>
         }
 	</div>
 </div>

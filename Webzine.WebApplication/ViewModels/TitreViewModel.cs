@@ -8,6 +8,7 @@
     public class TitreViewModel
     {
         public List<Titre> Titres { get; set; }
+        public List<Titre> TitresPopulaires { get; set; }
 
         public string LibelleStyle { get; set; }
 
@@ -38,17 +39,19 @@
         }
 
         /// <summary>
-        /// retourne ne nombre de page total
+        /// Retourne le nombre de page total.
         /// </summary>
         /// <param name="titreTotal"></param>
         /// <returns></returns>
         public int PageCount(int titreTotal)
-        {
+        {   
+            // var p = Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(this.Titres.Count)/titreTotal));
+
             return (this.Titres.Count() - 1 / titreTotal) - (((this.Titres.Count() - 1) / titreTotal) % 1);
         }
 
         /// <summary>
-        /// retourne la liste des titres par page
+        /// Retourne la liste des titres par page.
         /// </summary>
         /// <param name="page"></param>
         /// <returns></returns>
