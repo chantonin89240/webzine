@@ -30,13 +30,14 @@
             _logger.LogInformation("Hello, this is the index!");
             _logger.LogInformation("Log en place - Reste plus qu'à les rendre croustillant");
 
-            // pageNumber ?? 0 = opération de fusion null, renvoi 0 si pageNumber est null
-            this.model.Page = pageNumber ?? 0;
+            int page = pageNumber ?? 1;
+            this.model.Page = page;
 
-            // Impossible d'avoir deux valeur pour le meme objet??????
-            this.model.Titres = this._titreRepository.FindAll().OrderByDescending(titre => titre.DateCreation).ToList();
+            int total = 3;
 
-            this.model.Titres = this.model.TitrePourPage(pageNumber ?? 0);
+            this.model.PageMax = (int)Math.Floor((double)this._titreRepository.Count() / total) + 1;
+
+            this.model.Titres = this._titreRepository.FindTitres((page - 1) * total, total).ToList();
 
             this.model.Titres.ForEach(title => title.TitresStyles.ToList().ForEach(ts => ts.Style = this._styleRepository.Find(ts.IdStyle)));
 

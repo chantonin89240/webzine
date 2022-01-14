@@ -105,7 +105,12 @@ namespace Webzine.WebApplication
                 builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
                 builder.Services.AddScoped<ICommentaireRepository, LocalCommentaireRepository>();
                 builder.Services.AddScoped<IStyleRepository, LocalStyleRepository>();
-            }    
+            }
+
+            //StreamReader r = new StreamReader("../appsettings.json");
+            //string json = r.ReadToEnd();
+            //int t = builder.Configuration.GetSection("HomePageDisplay").GetValue<int>("NumberOfCardChronic");
+            //builder.Services.AddScoped();
         }
 
         public static void Configure(WebApplication app)
@@ -193,10 +198,11 @@ namespace Webzine.WebApplication
                     pattern: "titre/style/{nomStyle}",
                     defaults: new { controller="Titre", action="TitresStyle" });
 
+
                 // Page d'acceuil
                 endpoints.MapControllerRoute(
                     name: "accueil",
-                    pattern: "page/{id}",
+                    pattern: "page/{pageNumber}",
                     defaults: new { controller = "home", action = "index" });
 
                 // Page Recherches

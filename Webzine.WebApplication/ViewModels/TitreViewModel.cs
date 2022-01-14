@@ -16,7 +16,7 @@
 
         public int Page { get; set; }
 
-        public int TitreTotal { get; set; } = 3;
+        public int PageMax { get; set; }
 
 
         public Titre Titre { get; set; }
@@ -48,24 +48,6 @@
             // var p = Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(this.Titres.Count)/titreTotal));
 
             return (this.Titres.Count() - 1 / titreTotal) - (((this.Titres.Count() - 1) / titreTotal) % 1);
-        }
-
-        /// <summary>
-        /// Retourne la liste des titres par page.
-        /// </summary>
-        /// <param name="page"></param>
-        /// <returns></returns>
-        public List<Titre> TitrePourPage(int page)
-        {
-            int countPage = this.PageCount(this.TitreTotal);
-            if (countPage < page)
-            {
-                page = countPage;
-            }
-
-            List<Titre> output = this.Titres.OrderByDescending(t => t.DateCreation).Chunk(this.TitreTotal).ElementAt(page).ToList();
-
-            return output;
         }
 
         public string PreviewString(string longString)
