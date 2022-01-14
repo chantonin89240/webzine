@@ -9,12 +9,18 @@ namespace Webzine.WebApplication
     using Webzine.EntitiesContext;
     using Webzine.Repository;
     using Webzine.Repository.Contracts;
+    using Webzine.Services;
 
     public static class Startup
     {
         public static string dataPath;
         public static string sgbd;
 
+        /// <summary>
+        /// Méthode d'initialisation de l'application
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns>Application configurer prête à être lancer</returns>
         public static WebApplication Initialize(string [] args)
 
         {
@@ -29,19 +35,20 @@ namespace Webzine.WebApplication
                     var webzineDbContext = services.GetRequiredService<WebzineDbContext>();
 
                     // Supprime et cr�e la base de donn�es
-                    // webzineDbContext.Database.EnsureDeleted();
-                    // webzineDbContext.Database.EnsureCreated();
+                    webzineDbContext.Database.EnsureDeleted();
+                    webzineDbContext.Database.EnsureCreated();
 
                     // Initialisation de la base de donn�es
                     switch (dataPath)
                     {
                         case "Database":
-                            // SeedDataApiDeezer.InitializeData(webzineDbContext);
+                            SeedDataApiDeezer.InitializeData(webzineDbContext);
                             break;
                         case "Local":
                             SeedDataLocal.InitialisationDB(webzineDbContext);
                             break;
                         default:
+                            // Si il y a une erreur elle sera déjà remonter dans ConfigureServices();
                             throw new InvalidOperationException();
                     }
                 }
@@ -57,6 +64,10 @@ namespace Webzine.WebApplication
             return app;
         }
 
+        /// <summary>
+        /// Configuration des services du conteneur
+        /// </summary>
+        /// <param name="builder"></param>
         public static void ConfigureServices(WebApplicationBuilder builder)
         {
             dataPath = builder.Configuration.GetSection("Configuration").GetValue<string>("DataRepository");
@@ -72,7 +83,10 @@ namespace Webzine.WebApplication
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
+            // Définition du comportement de la création de champs type Datetime dans PostgreSQL (timestamp)
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+            builder.Services.AddScoped<IModeratorServices, ModeratorServices>();
 
             if(dataPath == "Database")
             {
@@ -91,6 +105,7 @@ namespace Webzine.WebApplication
                                 options.UseSqlServer(builder.Configuration.GetConnectionString("WebzineDbSQLServer"));
                                 break;
                             default:
+                                // log erreur configuration type SGBDR
                                 break;
                         }
                     }
@@ -101,15 +116,26 @@ namespace Webzine.WebApplication
                 builder.Services.AddScoped<ICommentaireRepository, DbCommentaireRepository>();
                 builder.Services.AddScoped<IStyleRepository, DbStyleRepository>();
             }
-            else
+            else if(dataPath == "Local")
             {
                 builder.Services.AddScoped<ITitreRepository, LocalTitreRepository>();
                 builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
                 builder.Services.AddScoped<ICommentaireRepository, LocalCommentaireRepository>();
                 builder.Services.AddScoped<IStyleRepository, LocalStyleRepository>();
             }
+            else
+            {
+                // log erreur configuration type de données
+                throw new NotImplementedException();
+            }
         }
 
+        /// <summary>
+        /// Configuration de redirection des requête HTTP 
+        /// Configuration des chemins des fichiers staiques vers wwwroot
+        /// Configuration du routing
+        /// </summary>
+        /// <param name="app"></param>
         public static void Configure(WebApplication app)
         {
             // Configure the HTTP request pipeline.
@@ -118,6 +144,7 @@ namespace Webzine.WebApplication
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
