@@ -5,6 +5,7 @@
     using Webzine.Repository.Contracts;
     using Webzine.WebApplication.ViewModels;
 
+    
     public class TitreController : Controller
     {
         private ITitreRepository _titreRepository;
@@ -40,33 +41,15 @@
             return this.View(model);
         }
 
-        public IActionResult like(int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("liker")]
+        public IActionResult Liker(int id)
         {
             Titre titre = this._titreRepository.Find(id);
             this._titreRepository.IncrementNbLikes(titre);
 
-            return this.Redirect("../../Titre/Titre?idTitre=" + id);
+            return this.RedirectToAction("Titre", new {idTitre = id});
         }
-
-                /// <summary>
-        /// POST : /titre/liker
-        /// action de like un titre.
-        /// </summary>
-        /// <returns></returns>
-        // 
-        // public IActionResult Liker(TitreViewModel model)
-        // {
-        //     try
-        //     {
-        //         this._titreRepository.IncrementNbLikes(model.Titre);
-        //     }
-        //     catch (DbUpdateException ex )
-        //     {
-        //         //Log the error (uncomment ex variable name and write a log).
-        //         ModelState.AddModelError("", "Unable to save changes. " +
-        //         "Try again, and if the problem persists " +
-        //         "see your system administrator.");
-        //     }
-        // }
     }
 }
