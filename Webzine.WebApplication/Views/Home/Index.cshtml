@@ -47,7 +47,7 @@
 </ul>
 
 <div class="d-flex justify-content-between mb-3">
-    @if(Model.Page <= 0)
+    @if(Model.Page <= 1)
     {
         <a class="btn btn-secondary disabled">
             <span style="vertical-align: middle; margin-left: 5px;">&lt&lt Titres plus récents</span>
@@ -60,7 +60,7 @@
         </a>
     }
 
-    @if (Model.Page >= Model.PageCount(Model.TitreTotal))
+    @if (Model.Page >= Model.PageMax)
     {
         <a class="btn btn-secondary disabled">
             <span style="vertical-align: middle;margin-right: 5px;">Titres plus anciens &gt&gt</span>
