@@ -21,8 +21,8 @@
             this._titreRepository = titreRepository;
             this._styleRepository = styleRepository;
             this.model = new TitreViewModel();
-            _logger = logger;
-            _logger.LogDebug(1, "NLog injected into TitreController");
+            this._logger = logger;
+            this._logger.LogDebug(1, "NLog injected into TitreController");
             this.configuration = configuration;
         }
 
@@ -30,8 +30,8 @@
         // [Route("page")]
         public async Task<IActionResult> Index(int? pageNumber)
         {
-            _logger.LogInformation("Hello, this is the index!");
-            _logger.LogInformation("Log en place - Reste plus qu'à les rendre croustillant");
+            this._logger.LogInformation("Hello, this is the index!");
+            this._logger.LogInformation("Log en place - Reste plus qu'à les rendre croustillant");
 
             int page = pageNumber ?? 1;
             this.model.Page = page;
