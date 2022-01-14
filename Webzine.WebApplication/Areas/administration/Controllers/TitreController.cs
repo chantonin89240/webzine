@@ -11,7 +11,6 @@
     /// Représente le controlleur pour la partie des <see cref="Titre"/>s dans la zone d'administration.
     /// </summary>
     [Area("administration")]
-    [Route("[controller]")]
     public class TitreController : Controller
     {
         private ITitreRepository _titreRepository;
@@ -30,6 +29,7 @@
             this.model = new TitreViewModel();
             this.moderator = new Moderator(titreRepository);
         }
+
         /// <summary>
         /// GET : /administration/titres/
         /// Page par défaut du controlleur: Une vue d'ensemble de tous les <see cref="Titre"/>s, en mode d'administration.
@@ -37,10 +37,8 @@
         /// <returns>
         /// La vue correspondante à l'administration des <see cref="Titre"/>s.
         /// </returns>
-        [Route("")]
-        [HttpGet("[action]")]
         public IActionResult Index()
-        {   
+        {
             var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             logger.Debug("Entrée dans index.");
             this.model.Titres = this._titreRepository.FindAll().ToList();
@@ -55,7 +53,6 @@
         /// <returns>
         /// Une page permettant la création d'un nouveau <see cref="Titre"/>.
         /// </returns>
-        [HttpGet("[action]")]
         public IActionResult Create()
         {
             this.model.Artistes = this._artisteRepository.FindAll().ToList();
@@ -72,7 +69,6 @@
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("create")]
-        [Route("[action]")]
         public IActionResult Create(TitreViewModel model)
         {
 
@@ -83,19 +79,18 @@
 
                     var listIdStyle = this.Request.Form["ListeStyles"].ToList();
 
-                    moderator.ModerationText(model.Titre, listIdStyle);
-                    //this._titreRepository.Add(model.Titre);
-                    //this._titreRepository.AddStyles(model.Titre, listIdStyle);  
+                    this.moderator.ModerationText(model.Titre, listIdStyle);
+                    // this._titreRepository.Add(model.Titre);
+                    // this._titreRepository.AddStyles(model.Titre, listIdStyle);  
                     return this.RedirectToAction(nameof(Index));
                 }
             }
             catch (DbUpdateException  ex )
             {
-                //Log the error (uncomment ex variable name and write a log).
-                ModelState.AddModelError("", "Unable to save changes. " +
-                "Try again, and if the problem persists " +
-                "see your system administrator.");
+                // Log the error (uncomment ex variable name and write a log).
+                ModelState.AddModelError(string.Empty, "Unable to save changes. " + "Try again, and if the problem persists " + "see your system administrator.");
             }
+
             return this.View(model.Titre);
         }
 
@@ -106,7 +101,6 @@
         /// </summary>
         /// <param name="id">ID Du <see cref="Titre"/> à éditer.</param>
         /// <returns>La page de modification d'un <see cref="Titre"/></returns>
-        [HttpGet("[action]")]
         public IActionResult Edit(int id)
         {
             this.model.Titre = this._titreRepository.Find(id);
@@ -127,13 +121,12 @@
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("edit")]
-        [Route("[action]")]
         public IActionResult Edit(TitreViewModel model, int id)
         {
             try
             {
-            //     if (ModelState.IsValid)
-            //     {
+                if (this.ModelState.IsValid)
+                {
                     var listIdStyle = this.Request.Form["ListeStyles"].ToList();
                     model.Titre.IdTitre = id;
                     model.Titre.DateCreation = _dateCréation;
@@ -144,18 +137,17 @@
                         var listAdd = listIdStyle.Except(_editStylesTitre).ToList();
                         this._titreRepository.UpdateStyles(id, listRemove, listAdd);
                     }
-                    
+
                     this._titreRepository.Update(model.Titre);
-                    return this.RedirectToAction(nameof(Index));
-            //     }
+                    return this.RedirectToAction(nameof(this.Index));
+                }
             }
-            catch (DbUpdateException  ex )
+            catch (DbUpdateException ex)
             {
-                //Log the error (uncomment ex variable name and write a log).
-                ModelState.AddModelError("", "Unable to save changes. " +
-                "Try again, and if the problem persists " +
-                "see your system administrator.");
+                // Log the error (uncomment ex variable name and write a log).
+                this.ModelState.AddModelError(string.Empty, "Unable to save changes. " + "Try again, and if the problem persists " + "see your system administrator.");
             }
+
             return this.View(model.Titre);
         }
 
@@ -166,7 +158,6 @@
         /// </summary>
         /// <param name="id">ID du <see cref="Titre"/> à supprimer.</param>
         /// <returns>Page de vérification de suppression.</returns>
-        [HttpGet("[action]")]
         public IActionResult Delete(int id)
         {
             this.model.Titre = this._titreRepository.Find(id);
@@ -182,25 +173,23 @@
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("delete")]
-        [Route("[action]")]
         public IActionResult Delete(TitreViewModel model, int id)
         {
             try
             {
-            //     if (ModelState.IsValid)
-            //     {
-                var titre = this._titreRepository.Find(id);
-                this._titreRepository.Delete(titre);
-                return this.RedirectToAction(nameof(Index));
-            //      }
+                if (this.ModelState.IsValid)
+                {
+                    var titre = this._titreRepository.Find(id);
+                    this._titreRepository.Delete(titre);
+                    return this.RedirectToAction(nameof(Index));
+                }
             }
             catch (DbUpdateException ex )
             {
-                //Log the error (uncomment ex variable name and write a log).
-                ModelState.AddModelError("", "Unable to save changes. " +
-                "Try again, and if the problem persists " +
-                "see your system administrator.");
+                // Log the error (uncomment ex variable name and write a log).
+                this.ModelState.AddModelError(string.Empty, "Unable to save changes. " + " Try again, and if the problem persists " + " see your system administrator.");
             }
+
             return this.View();
         }
     }

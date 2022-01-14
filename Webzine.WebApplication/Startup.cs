@@ -84,7 +84,7 @@ namespace Webzine.WebApplication
                             case "PostgreSql":
                                 options.UseNpgsql(builder.Configuration.GetConnectionString("WebzineDbPostgreSql"));
                                 break;
-                            case "Sqlite":
+                            case "SQLite":
                                 options.UseSqlite(builder.Configuration.GetConnectionString("WebzineDbSqlite"));
                                 break;
                             case "SqlServer":
@@ -126,10 +126,6 @@ namespace Webzine.WebApplication
             {
                 // Route admin action post form
                 endpoints.MapControllerRoute(
-                    name: "create",
-                    pattern: "{area:exists}/{controller=Home}/create",
-                    defaults: new { action = "create" });
-                endpoints.MapControllerRoute(
                     name: "delete",
                     pattern: "{area:exists}/{controller=Home}/delete/{id?}",
                     defaults: new { action = "delete" });
@@ -140,10 +136,6 @@ namespace Webzine.WebApplication
 
                 // Route admin action get
                 endpoints.MapControllerRoute(
-                    name: "admin creation",
-                    pattern: "{area:exists}/{controller=Home}/create",
-                    defaults: new { action = "creation" });
-                endpoints.MapControllerRoute(
                     name: "admin deletion",
                     pattern: "{area:exists}/{controller=Home}/delete/{id:int}",
                     defaults: new { action = "suppression" });
@@ -151,6 +143,21 @@ namespace Webzine.WebApplication
                     name: "admin edition",
                     pattern: "{area:exists}/{controller=Home}/edit/{id:int}",
                     defaults: new { action = "edit" });
+
+                endpoints.MapControllerRoute(
+                    name: "create",
+                    pattern: "{area:exists}/{controller=Home}/create",
+                    defaults: new { action = "create" });
+                endpoints.MapControllerRoute(
+                    name: "admin creation",
+                    pattern: "{area:exists}/{controller=Home}/create",
+                    defaults: new { action = "creation" });
+
+                // Page pour les titres avec un style
+                endpoints.MapControllerRoute(
+                    name: "TitreStyle",
+                    pattern: "titre/style/{nomStyle}",
+                    defaults: new { controller = "Titre", action = "TitresStyle" });
 
                 // Route admin index
                 endpoints.MapControllerRoute(
@@ -171,11 +178,6 @@ namespace Webzine.WebApplication
                     defaults: new { area = "administration", controller = "titre", action = "index" });
 
                 // Routes menant sur la webzine de base (hors administration)
-                // Page Contacts
-                endpoints.MapControllerRoute(
-                    name: "contact",
-                    pattern: "contact",
-                    defaults: new { controller = "contact", action = "contact" });
 
                 // Page pour un artiste
                 endpoints.MapControllerRoute(
@@ -189,12 +191,6 @@ namespace Webzine.WebApplication
                     pattern: "titre/{id:int}",
                     defaults: new { controller = "titre", action = "titre" });
 
-                // Page pour les titres avec un style
-                endpoints.MapControllerRoute(
-                    name: "TitreStyle",
-                    pattern: "titre/style/{nomStyle}",
-                    defaults: new { controller="Titre", action="TitresStyle" });
-
                 // Page d'acceuil
                 endpoints.MapControllerRoute(
                     name: "accueil",
@@ -206,6 +202,12 @@ namespace Webzine.WebApplication
                     name: "Recherche",
                     pattern: "recherche",
                     defaults: new { area="", controller = "Recherche", action = "Index" });
+
+                // Page Contacts
+                endpoints.MapControllerRoute(
+                    name: "contact",
+                    pattern: "contact",
+                    defaults: new { controller = "contact", action = "contact" });
 
                 endpoints.MapControllerRoute(
                 name: "areas",
