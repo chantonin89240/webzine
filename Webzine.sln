@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.EntitiesContext", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.WebApplication", "Webzine.WebApplication\Webzine.WebApplication.csproj", "{9D5082C3-EB86-4B58-91EC-A20446B6564D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webzine.Service", "Webzine.Service\Webzine.Service.csproj", "{4EE45F21-E026-4B23-B323-7E82324E856F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{9D5082C3-EB86-4B58-91EC-A20446B6564D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D5082C3-EB86-4B58-91EC-A20446B6564D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D5082C3-EB86-4B58-91EC-A20446B6564D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EE45F21-E026-4B23-B323-7E82324E856F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EE45F21-E026-4B23-B323-7E82324E856F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EE45F21-E026-4B23-B323-7E82324E856F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EE45F21-E026-4B23-B323-7E82324E856F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
