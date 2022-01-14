@@ -1,10 +1,11 @@
 ﻿namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.Entity;
     using Microsoft.EntityFrameworkCore;
+    // using Webzine.Entity;
     using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Areas.Admin.ViewModels;
+    // using Webzine.Services;
 
     /// <summary>
     /// Représente le controlleur pour la partie des <see cref="Titre"/>s dans la zone d'administration.
@@ -72,10 +73,14 @@
         [Route("[action]")]
         public IActionResult Create(TitreViewModel model)
         {
+
+            // Moderator moderator = new Moderator();
+
             try
             {
                 // if (ModelState.IsValid)
                 // {
+                    
                     var listIdStyle = this.Request.Form["ListeStyles"].ToList();
                     this._titreRepository.Add(model.Titre);
                     this._titreRepository.AddStyles(model.Titre, listIdStyle);  
@@ -89,7 +94,7 @@
                 "Try again, and if the problem persists " +
                 "see your system administrator.");
             }
-            return this.View();
+            return this.View(model.Titre);
         }
 
         /// <summary>
