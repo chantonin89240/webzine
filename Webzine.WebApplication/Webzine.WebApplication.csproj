@@ -47,6 +47,7 @@
     <ProjectReference Include="..\Webzine.Entity\Webzine.Entity.csproj" />
     <ProjectReference Include="..\Webzine.Repository.Contracts\Webzine.Repository.Contracts.csproj" />
     <ProjectReference Include="..\Webzine.Repository\Webzine.Repository.csproj" />
+    <ProjectReference Include="..\Webzine.Services\Webzine.Services.csproj" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties stylecop_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

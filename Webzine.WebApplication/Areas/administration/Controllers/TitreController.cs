@@ -2,10 +2,10 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
-    // using Webzine.Entity;
+    using Webzine.Entity;
     using Webzine.Repository.Contracts;
+    using Webzine.Services;
     using Webzine.WebApplication.Areas.Admin.ViewModels;
-    // using Webzine.Services;
 
     /// <summary>
     /// Représente le controlleur pour la partie des <see cref="Titre"/>s dans la zone d'administration.
@@ -18,6 +18,7 @@
         private IStyleRepository _styleRepository;
         private IArtisteRepository _artisteRepository;
         private TitreViewModel model;
+        private Moderator moderator;
         private static List<string> _editStylesTitre = new List<string>();
         private static DateTime _dateCréation;
 
@@ -27,6 +28,7 @@
             this._styleRepository = styleRepository;
             this._artisteRepository = artisteRepository;
             this.model = new TitreViewModel();
+            this.moderator = new Moderator(titreRepository);
         }
         /// <summary>
         /// GET : /administration/titres/
@@ -74,18 +76,18 @@
         public IActionResult Create(TitreViewModel model)
         {
 
-            // Moderator moderator = new Moderator();
-
             try
             {
-                // if (ModelState.IsValid)
-                // {
-                    
+                if (ModelState.IsValid)
+                {
+
                     var listIdStyle = this.Request.Form["ListeStyles"].ToList();
-                    this._titreRepository.Add(model.Titre);
-                    this._titreRepository.AddStyles(model.Titre, listIdStyle);  
+
+                    moderator.ModerationText(model.Titre, listIdStyle);
+                    //this._titreRepository.Add(model.Titre);
+                    //this._titreRepository.AddStyles(model.Titre, listIdStyle);  
                     return this.RedirectToAction(nameof(Index));
-                // }
+                }
             }
             catch (DbUpdateException  ex )
             {
