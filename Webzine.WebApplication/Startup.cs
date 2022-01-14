@@ -14,13 +14,14 @@ namespace Webzine.WebApplication
     {
         public static string dataPath;
         public static string sgbd;
+
         public static WebApplication Initialize(string [] args)
+
         {
             var builder = WebApplication.CreateBuilder(args);
             ConfigureServices(builder);
             var app = builder.Build();
-            
-            using(var scope = app.Services.CreateScope())
+            using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
                 try
@@ -28,20 +29,21 @@ namespace Webzine.WebApplication
                     var webzineDbContext = services.GetRequiredService<WebzineDbContext>();
 
                     // Supprime et cr�e la base de donn�es
-                    // webzineDbContext.Database.EnsureDeleted();
-                   // webzineDbContext.Database.EnsureCreated();
+                    webzineDbContext.Database.EnsureDeleted();
+                    webzineDbContext.Database.EnsureCreated();
 
                     // Initialisation de la base de donn�es
-                    if(dataPath == "Database")
+                    switch (dataPath)
                     {
-                        // SeedDataLocal.InitialisationDB(webzineDbContext);
-                        SeedDataApiDeezer.InitializeData(webzineDbContext);
+                        case "Database":
+                            SeedDataApiDeezer.InitializeData(webzineDbContext);
+                            break;
+                        case "Local":
+                            SeedDataLocal.InitialisationDB(webzineDbContext);
+                            break;
+                        default:
+                            throw new InvalidOperationException();
                     }
-                    else
-                    {
-
-                    }
-
                 }
                 catch (Exception e)
                 {
@@ -62,10 +64,11 @@ namespace Webzine.WebApplication
 
             // NLog: Setup NLog for Dependency injection
             // problème au lancement de l'app, l'app bloque en mode debug, et bloque sur le chargement de la config dans launchsettings.json en mode no debug
-            // builder.Logging.ClearProviders(); 
+            // builder.Logging.ClearProviders();
             builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
             builder.Host.UseNLog();
 
+            // Ajout des services dans le conteneur
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
@@ -74,12 +77,11 @@ namespace Webzine.WebApplication
             if(dataPath == "Database")
             {
                 builder.Services.AddDbContext<WebzineDbContext>(
-                
-                    options => {
+                    options =>
+                    {
                         switch (sgbd)
                         {
                             case "PostgreSql":
-                                
                                 options.UseNpgsql(builder.Configuration.GetConnectionString("WebzineDbPostgreSql"));
                                 break;
                             case "Sqlite":
@@ -93,7 +95,7 @@ namespace Webzine.WebApplication
                         }
                     }
                 );
-                
+
                 builder.Services.AddScoped<ITitreRepository, DbTitreRepository>();
                 builder.Services.AddScoped<IArtisteRepository, DbArtisteRepository>();
                 builder.Services.AddScoped<ICommentaireRepository, DbCommentaireRepository>();
@@ -106,11 +108,6 @@ namespace Webzine.WebApplication
                 builder.Services.AddScoped<ICommentaireRepository, LocalCommentaireRepository>();
                 builder.Services.AddScoped<IStyleRepository, LocalStyleRepository>();
             }
-
-            //StreamReader r = new StreamReader("../appsettings.json");
-            //string json = r.ReadToEnd();
-            //int t = builder.Configuration.GetSection("HomePageDisplay").GetValue<int>("NumberOfCardChronic");
-            //builder.Services.AddScoped();
         }
 
         public static void Configure(WebApplication app)
@@ -197,7 +194,6 @@ namespace Webzine.WebApplication
                     name: "TitreStyle",
                     pattern: "titre/style/{nomStyle}",
                     defaults: new { controller="Titre", action="TitresStyle" });
-
 
                 // Page d'acceuil
                 endpoints.MapControllerRoute(
