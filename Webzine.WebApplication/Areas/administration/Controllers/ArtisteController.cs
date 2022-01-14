@@ -52,11 +52,11 @@
         {
             try
             {
-                // if (this.ModelState.IsValid)
-                // {
+                if (this.ModelState.IsValid)
+                {
                     this._artisteRepository.Add(model.Artiste);
                     return this.RedirectToAction(nameof(this.Index));
-                // }
+                }
             }
             catch
             {
@@ -84,12 +84,12 @@
         {
             try
             {
-                // if (this.ModelState.IsValid)
-                // {
+                if (this.ModelState.IsValid)
+                {
                     model.Artiste.IdArtiste = id;
                     this._artisteRepository.Update(model.Artiste);
                     return this.RedirectToAction(nameof(this.Index));
-                // }
+                }
             }
             catch
             {

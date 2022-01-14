@@ -69,8 +69,22 @@
 
         public IEnumerable<Titre> FindTitres(int offset, int limit)
         {
-            var titres = this._context.Titres.Skip(offset).Take(limit);          
-            return titres;
+            try
+            {
+                var titres = this._context.Titres.OrderByDescending(t => t.DateCreation).Skip(offset);
+                if (titres.ToList().Count() < limit)
+                {
+                    return titres;
+                }
+                else
+                {
+                    return titres.Take(limit);
+                }
+            }
+            catch
+            {
+                return new List<Titre>();
+            }
         }
 
         public void IncrementNbLectures(Titre titre)
