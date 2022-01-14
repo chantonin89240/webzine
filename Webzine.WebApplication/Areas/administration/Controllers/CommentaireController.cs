@@ -2,7 +2,6 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
-    using Webzine.Repository;
     using Webzine.Repository.Contracts;
     using Webzine.ViewModels;
 
@@ -25,7 +24,6 @@
         /// Génère la page listant tous les <see cref="Commentaire"/>s dans la partie Administrateur.
         /// </summary>
         /// <returns>Page de tous les <see cref="Commentaire"/>s.</returns>
-        [HttpGet]
         public IActionResult Index()
         {
             List<Commentaire> commentaires = this.commentaireRepository.FindAll().ToList();
