@@ -23,7 +23,9 @@
 				<a href="/admin/style/creation">il n'y a pas de style ! en ajouter</a>
 			}
 		</p>
-		<a class="col-xxl-1 col-xl-1 col-lg-1 col-md-12 col-sm-12 col-xs-12 btn btn-outline-primary" asp-controller="Titre" asp-action="liker" asp-route-id="@Model.Titre.IdTitre"><i class="fas fa-thumbs-up"></i> Like</a>
+	<form method="post"  class="col-xxl-1 col-xl-1 col-lg-1 col-md-12 col-sm-12 col-xs-12" asp-area="" asp-controller="Titre" asp-action="liker" asp-route-id="@Model.Titre.IdTitre">
+		<button type="submit" class=" btn btn-outline-primary"><i class="fas fa-thumbs-up"></i> Like</button>
+		</form>
 		<a class="col-xxl-1 col-xl-1 col-lg-6 col-md-12 col-sm-12 col-xs-12  offset-1 align-text-bottom" asp-area="administration" asp-controller="Titre" asp-action="Edit" asp-route-id="@Model.Titre.IdTitre"><i class="fas fa-edit"></i> Editer</a>
 	</section>
 
