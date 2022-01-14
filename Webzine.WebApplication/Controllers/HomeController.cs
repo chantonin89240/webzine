@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Repository.Contracts;
+    using Webzine.Repository;
     using Webzine.WebApplication.ViewModels;
 
     /// <summary>
@@ -13,7 +14,6 @@
         private ITitreRepository _titreRepository;
         private TitreViewModel model;
         private IStyleRepository _styleRepository;
-
         public HomeController(ITitreRepository titreRepository, IStyleRepository styleRepository ,ILogger<HomeController> logger)
         {
             this._titreRepository = titreRepository;
@@ -32,10 +32,15 @@
 
             // pageNumber ?? 0 = opération de fusion null, renvoi 0 si pageNumber est null
             this.model.Page = pageNumber ?? 0;
-            this.model.Titres = this._titreRepository.FindAll().ToList().OrderByDescending(titre => titre.DateCreation).ToList();
+
+            // Impossible d'avoir deux valeur pour le meme objet??????
+            this.model.Titres = this._titreRepository.FindAll().OrderByDescending(titre => titre.DateCreation).ToList();
 
             this.model.Titres = this.model.TitrePourPage(pageNumber ?? 0);
+
             this.model.Titres.ForEach(title => title.TitresStyles.ToList().ForEach(ts => ts.Style = this._styleRepository.Find(ts.IdStyle)));
+
+            this.model.TitresPopulaires = this._titreRepository.FindAll().OrderByDescending(titre => titre.NbLectures).Take(3).ToList();
 
             return this.View(this.model);
         }

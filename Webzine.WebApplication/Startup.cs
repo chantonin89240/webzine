@@ -34,7 +34,7 @@ namespace Webzine.WebApplication
                     // Initialisation de la base de donn�es
                     if(dataPath == "Database")
                     {
-                        //SeedDataLocal.InitialisationDB(webzineDbContext);
+                        // SeedDataLocal.InitialisationDB(webzineDbContext);
                         SeedDataApiDeezer.InitializeData(webzineDbContext);
                     }
                     else

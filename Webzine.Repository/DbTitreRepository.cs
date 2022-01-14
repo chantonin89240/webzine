@@ -52,13 +52,12 @@
                 .Include(t => t.TitresStyles)
                 .ThenInclude(ts => ts.Style)
                 .FirstOrDefault(t => t.IdTitre == idTitre);
-            // titre.Artiste = this._context.Artistes.FirstOrDefault(a => a.IdArtiste == titre.IdArtiste);
-            // titre.TitresStyles = this._context.TitreStyles.Where(s => s.IdTitre == titre.IdTitre).ToList();
+
             return titre;
         }
 
         public IEnumerable<Titre> FindAll()
-        {
+        {   
             var titres = this._context.Titres
                 .Include(t => t.Artiste)
                 .Include(t => t.Commentaires)
@@ -70,7 +69,7 @@
 
         public IEnumerable<Titre> FindTitres(int offset, int limit)
         {
-            var titres = this._context.Titres.Skip(limit).Take(offset);
+            var titres = this._context.Titres.Skip(offset).Take(limit);          
             return titres;
         }
 

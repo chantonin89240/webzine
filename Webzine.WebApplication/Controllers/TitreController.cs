@@ -47,5 +47,26 @@
 
             return this.Redirect("../../Titre/Titre?idTitre=" + id);
         }
+
+                /// <summary>
+        /// POST : /titre/liker
+        /// action de like un titre.
+        /// </summary>
+        /// <returns></returns>
+        // 
+        // public IActionResult Liker(TitreViewModel model)
+        // {
+        //     try
+        //     {
+        //         this._titreRepository.IncrementNbLikes(model.Titre);
+        //     }
+        //     catch (DbUpdateException ex )
+        //     {
+        //         //Log the error (uncomment ex variable name and write a log).
+        //         ModelState.AddModelError("", "Unable to save changes. " +
+        //         "Try again, and if the problem persists " +
+        //         "see your system administrator.");
+        //     }
+        // }
     }
 }
