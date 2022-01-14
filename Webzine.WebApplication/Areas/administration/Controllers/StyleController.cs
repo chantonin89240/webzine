@@ -123,15 +123,8 @@
         public IActionResult Delete(StyleViewModel model, int id)
         {
             var style = this._styleRepository.Find(id);
-            if (this.ModelState.IsValid)
-            {
-                this._styleRepository.Delete(style);
-                return this.RedirectToAction("Index");
-            }
-            else
-            {
-                return this.View(style);
-            }
+            this._styleRepository.Delete(style);
+            return this.RedirectToAction("Index");
         }
     }
 }

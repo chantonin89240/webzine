@@ -74,8 +74,8 @@
 
             try
             {
-                if (ModelState.IsValid)
-                {
+                // if (ModelState.IsValid)
+                // {
 
                     var listIdStyle = this.Request.Form["ListeStyles"].ToList();
 
@@ -83,7 +83,7 @@
                     // this._titreRepository.Add(model.Titre);
                     // this._titreRepository.AddStyles(model.Titre, listIdStyle);  
                     return this.RedirectToAction(nameof(Index));
-                }
+                // }
             }
             catch (DbUpdateException  ex )
             {
@@ -125,8 +125,8 @@
         {
             try
             {
-                if (this.ModelState.IsValid)
-                {
+                // if (this.ModelState.IsValid)
+                // {
                     var listIdStyle = this.Request.Form["ListeStyles"].ToList();
                     model.Titre.IdTitre = id;
                     model.Titre.DateCreation = _dateCréation;
@@ -140,7 +140,7 @@
 
                     this._titreRepository.Update(model.Titre);
                     return this.RedirectToAction(nameof(this.Index));
-                }
+                //}
             }
             catch (DbUpdateException ex)
             {
@@ -177,12 +177,12 @@
         {
             try
             {
-                if (this.ModelState.IsValid)
-                {
+                // if (this.ModelState.IsValid)
+                // {
                     var titre = this._titreRepository.Find(id);
                     this._titreRepository.Delete(titre);
                     return this.RedirectToAction(nameof(Index));
-                }
+                // }
             }
             catch (DbUpdateException ex )
             {
