@@ -28,14 +28,14 @@ namespace Webzine.WebApplication
                     var webzineDbContext = services.GetRequiredService<WebzineDbContext>();
 
                     // Supprime et cr�e la base de donn�es
-                    // webzineDbContext.Database.EnsureDeleted();
-                    // webzineDbContext.Database.EnsureCreated();
+                    webzineDbContext.Database.EnsureDeleted();
+                    webzineDbContext.Database.EnsureCreated();
 
                     // Initialisation de la base de donn�es
                     if(dataPath == "Database")
                     {
                         // SeedDataLocal.InitialisationDB(webzineDbContext);
-                        // SeedDataApiDeezer.InitializeData(webzineDbContext);
+                        SeedDataApiDeezer.InitializeData(webzineDbContext);
                     }
                     else
                     {

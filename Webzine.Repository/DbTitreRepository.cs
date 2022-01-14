@@ -69,7 +69,7 @@
 
         public IEnumerable<Titre> FindTitres(int offset, int limit)
         {
-            var titres = this._context.Titres.Skip(offset).Take(limit);            
+            var titres = this._context.Titres.Skip(offset).Take(limit);          
             return titres;
         }
 
