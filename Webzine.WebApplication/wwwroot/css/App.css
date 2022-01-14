@@ -86,6 +86,14 @@ a:active {
     .imPopHome{
         max-height: 50vh;
     }
+    .respSectionTitre{
+        flex-flow: column;
+        text-align: center;
+    }
+        .respSectionTitre p, a {
+            margin-bottom: 1em !important;
+            offset: none;
+        }
 }
 
 /* css partie form admin editer / create */

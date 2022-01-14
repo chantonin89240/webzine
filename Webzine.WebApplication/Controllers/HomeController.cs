@@ -14,13 +14,16 @@
         private ITitreRepository _titreRepository;
         private TitreViewModel model;
         private IStyleRepository _styleRepository;
-        public HomeController(ITitreRepository titreRepository, IStyleRepository styleRepository ,ILogger<HomeController> logger)
+        private readonly IConfiguration configuration;
+
+        public HomeController(ITitreRepository titreRepository, IStyleRepository styleRepository ,ILogger<HomeController> logger, IConfiguration configuration)
         {
             this._titreRepository = titreRepository;
             this._styleRepository = styleRepository;
             this.model = new TitreViewModel();
             _logger = logger;
             _logger.LogDebug(1, "NLog injected into TitreController");
+            this.configuration = configuration;
         }
 
         // GET: HomeController
@@ -33,7 +36,7 @@
             int page = pageNumber ?? 1;
             this.model.Page = page;
 
-            int total = 3;
+            int total = this.configuration.GetSection("Configuration").GetSection("HomePageDisplay").GetValue<int>("NbCardChronic");
 
             this.model.PageMax = (int)Math.Floor((double)this._titreRepository.Count() / total) + 1;
 
