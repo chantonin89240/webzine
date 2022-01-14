@@ -52,7 +52,7 @@
 <div class="d-flex justify-content-between mb-3">
     @if(Model.Page <= 0)
     {
-        <a class="btn btn-secondary lienDisabled">
+        <a class="btn btn-secondary disabled">
             <span style="vertical-align: middle; margin-left: 5px;">&lt&lt Titres plus récents</span>
         </a>
     }
@@ -65,7 +65,7 @@
 
     @if (Model.Page >= Model.PageCount(Model.TitreTotal))
     {
-        <a class="btn btn-secondary lienDisabled">
+        <a class="btn btn-secondary disabled">
             <span style="vertical-align: middle;margin-right: 5px;">Titres plus anciens &gt&gt</span>
         </a>
     }
