@@ -11,7 +11,7 @@
 		<div class="mb-3 row">
 			<label for="nomArtiste" class="col-sm-2 col-form-label">Nom de l'artiste<span style="color: red;">*</span></label>
 			<div class="col-sm-10">
-				<select name="model.Titre.IdArtiste" class="form-select" asp-for="Artiste">
+				<select name="model.Titre.IdArtiste" class="form-select" asp-for="Titre.Artiste">
 					@* asp-items="Model.Artistes" *@
 					@foreach(var artiste in Model.Artistes)
 					{

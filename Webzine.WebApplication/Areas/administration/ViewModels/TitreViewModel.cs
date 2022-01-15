@@ -14,7 +14,7 @@
 
         public IEnumerable<Artiste>? Artistes { get; set; }
 
-        public Artiste Artiste { get; set; }
+        public Artiste? Artiste { get; set; }
 
         public string FormatLength(Titre titre)
         {

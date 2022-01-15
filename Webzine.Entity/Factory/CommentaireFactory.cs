@@ -15,7 +15,7 @@
                     f.Internet.UserName(),
                     f.Rant.Review(),
                     f.Date.Past(),
-                    0,
+                    f.Random.Number(1, amount),
                     new Titre()))
                 .FinishWith((f, c) => {
                     c.Titre = f.PickRandom(titres);

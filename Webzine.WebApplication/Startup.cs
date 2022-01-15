@@ -37,12 +37,11 @@ namespace Webzine.WebApplication
                     // Supprime et cr�e la base de donn�es
                     webzineDbContext.Database.EnsureDeleted();
                     webzineDbContext.Database.EnsureCreated();
-
                     // Initialisation de la base de donn�es
                     switch (dataPath)
                     {
                         case "Database":
-                            SeedDataApiDeezer.InitializeData(webzineDbContext);
+                            // SeedDataApiDeezer.InitializeData(webzineDbContext);
                             break;
                         case "Local":
                             SeedDataLocal.InitialisationDB(webzineDbContext);
@@ -88,29 +87,29 @@ namespace Webzine.WebApplication
 
             builder.Services.AddScoped<IModeratorServices, ModeratorServices>();
 
+            builder.Services.AddDbContext<WebzineDbContext>(
+                options =>
+                {
+                    switch (sgbd)
+                    {
+                        case "PostgreSql":
+                            options.UseNpgsql(builder.Configuration.GetConnectionString("WebzineDbPostgreSql"));
+                            break;
+                        case "SQLite":
+                            options.UseSqlite(builder.Configuration.GetConnectionString("WebzineDbSqlite"));
+                            break;
+                        case "SqlServer":
+                            options.UseSqlServer(builder.Configuration.GetConnectionString("WebzineDbSQLServer"));
+                            break;
+                        default:
+                            // log erreur configuration type SGBDR
+                            break;
+                    }
+                }
+            );
+
             if(dataPath == "Database")
             {
-                builder.Services.AddDbContext<WebzineDbContext>(
-                    options =>
-                    {
-                        switch (sgbd)
-                        {
-                            case "PostgreSql":
-                                options.UseNpgsql(builder.Configuration.GetConnectionString("WebzineDbPostgreSql"));
-                                break;
-                            case "SQLite":
-                                options.UseSqlite(builder.Configuration.GetConnectionString("WebzineDbSqlite"));
-                                break;
-                            case "SqlServer":
-                                options.UseSqlServer(builder.Configuration.GetConnectionString("WebzineDbSQLServer"));
-                                break;
-                            default:
-                                // log erreur configuration type SGBDR
-                                break;
-                        }
-                    }
-                );
-
                 builder.Services.AddScoped<ITitreRepository, DbTitreRepository>();
                 builder.Services.AddScoped<IArtisteRepository, DbArtisteRepository>();
                 builder.Services.AddScoped<ICommentaireRepository, DbCommentaireRepository>();

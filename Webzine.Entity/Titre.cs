@@ -29,7 +29,7 @@
         /// Artiste ayant créé le Titre.
         /// </summary>
         [ForeignKey(nameof(IdArtiste))]
-        public Artiste Artiste { get; set; }
+        public Artiste? Artiste { get; set; }
 
         /// <summary>
         /// Libellé/Nom du Titre.
@@ -133,6 +133,7 @@
         {
             this.Commentaires = new List<Commentaire>();
             this.TitresStyles = new List<TitreStyle>();
+            this.Artiste = new Artiste();
         }
 
         /// <summary>
@@ -151,12 +152,11 @@
         /// <param name="duree">Durée du Titre en Secondes.</param>
         /// <param name="nbLecture">Nombre de lectures de la chronique.</param>
         /// <param name="nbLike">Nombre de Likes du Titre.</param>
-        public Titre(int idTitre, int idArtiste, Artiste artiste, string libelle, string chronique, string urlJaquette, string urlEcoute, string lien, DateTime dateCreation, DateTime dateSortie, int duree, int nbLecture, int nbLike)
+        public Titre(int idTitre, int idArtiste, string libelle, string chronique, string urlJaquette, string urlEcoute, string lien, DateTime dateCreation, DateTime dateSortie, int duree, int nbLecture, int nbLike)
             : this()
         {
             this.IdTitre = idTitre;
             this.IdArtiste = idArtiste;
-            this.Artiste = artiste;
             this.Libelle = libelle;
             this.Chronique = chronique;
             this.UrlJaquette = urlJaquette;

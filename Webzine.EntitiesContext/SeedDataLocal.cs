@@ -19,47 +19,51 @@
             context.AddRange(Styles.Select(style => new Style { Libelle = style.Libelle }).OrderBy(s => s.Libelle));
 
             IEnumerable<Artiste> Artistes = ArtisteFactory.CreateArtiste(defaultAmount);
-            context.AddRange(Artistes.Select(artiste => new Artiste { Nom = artiste.Nom, Biographie = artiste.Biographie }));
+            context.AddRange(Artistes.ToList());
+            //context.AddRange(Artistes.Select(artiste => new Artiste { Nom = artiste.Nom, Biographie = artiste.Biographie }));
 
             IEnumerable<Titre> Titres = TitreFactory.CreateTitre(defaultAmount, Artistes, Styles);
-            context.AddRange(Titres.Select(titre => new Titre
-            {
-                IdArtiste = titre.IdArtiste,
-                Libelle = titre.Libelle,
-                Chronique = titre.Chronique,
-                UrlJaquette = titre.UrlJaquette,
-                UrlEcoute = titre.UrlEcoute,
-                DateCreation = titre.DateCreation,
-                DateSortie = titre.DateSortie,
-                Duree = titre.Duree,
-                NbLectures = titre.NbLectures,
-                NbLikes = titre.NbLikes,
-            }));
+            context.AddRange(Titres.ToList());
+            // context.AddRange(Titres.Select(titre => new Titre
+            // {
+            //     IdArtiste = titre.IdArtiste,
+            //     Libelle = titre.Libelle,
+            //     Chronique = titre.Chronique,
+            //     UrlJaquette = titre.UrlJaquette,
+            //     UrlEcoute = titre.UrlEcoute,
+            //     DateCreation = titre.DateCreation,
+            //     DateSortie = titre.DateSortie,
+            //     Duree = titre.Duree,
+            //     NbLectures = titre.NbLectures,
+            //     NbLikes = titre.NbLikes,
+            // }));
 
             context.SaveChanges();
 
             IEnumerable<Commentaire> commentaires = CommentaireFactory.CreateCommentaire(defaultAmount, Titres);
-            context.AddRange(commentaires.Select(comment => new Commentaire
-            {
-                Auteur = comment.Auteur,
-                Contenu = comment.Contenu,
-                DateCreation = comment.DateCreation,
-                IdTitre = comment.IdTitre,
-            }));
+            context.AddRange(commentaires.ToList());
+            // context.AddRange(commentaires.Select(comment => new Commentaire
+            // {
+            //     Auteur = comment.Auteur,
+            //     Contenu = comment.Contenu,
+            //     DateCreation = comment.DateCreation,
+            //     IdTitre = comment.IdTitre,
+            // }));
 
             context.SaveChanges();
 
-            IEnumerable<TitreStyle> titreStyles = Titres.SelectMany(t =>
-                t.TitresStyles
-            ).Select(t =>
-                new TitreStyle()
-                {
-                    IdStyle = t.IdStyle,
-                    IdTitre = t.IdTitre,
-                }
-            ).ToList();
-            context.AddRange(titreStyles);
-            context.SaveChanges();
+            // IEnumerable<TitreStyle> titreStyles = Titres.SelectMany(t =>
+            //     t.TitresStyles
+            // ).Select(t =>
+            //     new TitreStyle()
+            //     {
+            //         IdStyle = t.IdStyle,
+            //         IdTitre = t.IdTitre,
+            //     }
+            // ).ToList();
+
+            // context.AddRange(titreStyles.ToList());
+            // context.SaveChanges();
         }
     }
 }

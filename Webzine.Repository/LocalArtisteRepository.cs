@@ -1,18 +1,18 @@
 ﻿namespace Webzine.Repository
 {
     using Webzine.Entity;
-    using Webzine.Entity.Factory;
+    using Webzine.EntitiesContext;
     using Webzine.Repository.Contracts;
 
     /// <summary>
-    /// Represent the local repository for Artistes.
+    /// Represent the local repository for this._context.Artistes.
     /// </summary>
     public class LocalArtisteRepository : IArtisteRepository
     {
-        /// <summary>
-        /// Local Artiste List.
-        /// </summary>
-        private List<Artiste> artistes = ArtisteFactory.CreateArtiste(10).ToList();
+        private WebzineDbContext _context;
+        public LocalArtisteRepository(WebzineDbContext context){
+            this._context = context;
+        }
 
         /// <summary>
         /// Adds an <see cref="Artiste"/> to the local repository.
@@ -21,9 +21,7 @@
         /// <exception cref="NotImplementedException">Not yet implemented.</exception>
         public void Add(Artiste artiste)
         {
-            throw new NotImplementedException();
-
-            // artistes.Add(artiste);
+            this._context.Artistes.Add(artiste);
         }
 
         /// <summary>
@@ -33,9 +31,7 @@
         /// <exception cref="NotImplementedException">Not yet implemented.</exception>
         public void Delete(Artiste artiste)
         {
-            throw new NotImplementedException();
-
-            // artistes.Remove(artiste);
+            this._context.Artistes.Remove(artiste);
         }
 
         /// <summary>
@@ -45,7 +41,7 @@
         /// <returns><see cref="Artiste"/> with given ID.</returns>
         public Artiste Find(int id)
         {
-            return this.artistes.First(a => a.IdArtiste == id);
+            return this._context.Artistes.First(a => a.IdArtiste == id);
         }
 
         /// <summary>
@@ -54,9 +50,7 @@
         /// <returns>Whole <see cref="Artiste"/> list.</returns>
         public IEnumerable<Artiste> FindAll()
         {
-            return artistes;
-
-                // .FindAll(a => a.IdArtiste != null).ToList();
+            return this._context.Artistes;
         }
 
         /// <summary>
@@ -66,7 +60,7 @@
         /// <exception cref="NotImplementedException">Not yet implemented.</exception>
         public void Update(Artiste artiste)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

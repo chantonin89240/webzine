@@ -70,19 +70,23 @@
         [ActionName("create")]
         public IActionResult Create(TitreViewModel model)
         {
+            var modelY = model;
+            var modelS = ModelState;
+            /// Développer le comportement lorsque que les chanp ne sont pas correctement requis --> Chronique mini 10 caracteres
             try
             {
-                // if (ModelState.IsValid)
-                // {
+                if (ModelState.IsValid)
+                {
                     var listIdStyle = this.Request.Form["ListeStyles"].ToList();
 
                     if(!this._moderator.ModerationCreateChronique(model.Titre, listIdStyle))
                     {
                         ModelState.AddModelError(string.Empty, "Votre chronique ne respecte pas la charte du site");
+                        return this.View(model.Titre);
                     }
 
                     return this.RedirectToAction(nameof(Index));
-                // }
+                }
             }
             catch (DbUpdateException  ex )
             {
@@ -124,8 +128,8 @@
         {
             try
             {
-                // if (this.ModelState.IsValid)
-                // {
+                if (this.ModelState.IsValid)
+                {
                     var newIdStyle = this.Request.Form["ListeStyles"].ToList();
                     model.Titre.IdTitre = id;
                     model.Titre.DateCreation = _dateCréation;
@@ -133,10 +137,11 @@
                     if(!this._moderator.ModerationEditChronique(model.Titre, newIdStyle, _editOldIdStyle))
                     {
                         ModelState.AddModelError(string.Empty, "Votre chronique ne respecte pas la charte du site");
+                        return this.View(model.Titre);
                     }
                     
                     return this.RedirectToAction(nameof(this.Index));
-                //}
+                }
             }
             catch (DbUpdateException ex)
             {

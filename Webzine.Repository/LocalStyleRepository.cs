@@ -1,12 +1,15 @@
 ﻿namespace Webzine.Repository
 {
     using Webzine.Entity;
-    using Webzine.Entity.Factory;
+    using Webzine.EntitiesContext;
     using Webzine.Repository.Contracts;
 
     public class LocalStyleRepository : IStyleRepository
     {
-        public List<Style> Styles = StyleFactory.CreateStyle().ToList();
+        private WebzineDbContext _context;
+        public LocalStyleRepository(WebzineDbContext context){
+            this._context = context;
+        }
 
         /// <summary>
         /// Ajout d'un style        /// </summary>
@@ -16,7 +19,7 @@
             if (this.rechercheStyle(style) == null)
             {
                 style.Libelle = this.boldStyle(style);
-                this.Styles.Add(style);
+                this._context.Styles.Add(style);
             }
         }
 
@@ -26,7 +29,7 @@
         /// <param name="style"></param>
         public void Delete(Style style)
         {
-            this.Styles.Remove(style);
+            this._context.Styles.Remove(style);
         }
 
         /// <summary>
@@ -36,7 +39,7 @@
         /// <returns></returns>
         public Style Find(int id)
         {
-            var style = this.Styles.First(s => s.IdStyle == id);
+            var style = this._context.Styles.First(s => s.IdStyle == id);
             return style;
         }
 
@@ -46,7 +49,7 @@
         /// <returns></returns>
         public IEnumerable<Style> FindAll()
         {
-            IEnumerable<Style> styles = this.Styles.ToList().OrderBy(s => s.Libelle);
+            IEnumerable<Style> styles = this._context.Styles.ToList().OrderBy(s => s.Libelle);
             return styles;
         }
 
@@ -71,7 +74,7 @@
         /// <returns></returns>
         public Style rechercheStyle(Style style)
         {
-            var styles = this.Styles.FirstOrDefault(s => s.Libelle.ToLower() == style.Libelle.ToLower());
+            var styles = this._context.Styles.FirstOrDefault(s => s.Libelle.ToLower() == style.Libelle.ToLower());
             return styles;
         }
 
