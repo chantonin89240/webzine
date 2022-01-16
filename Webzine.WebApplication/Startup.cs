@@ -13,7 +13,7 @@ namespace Webzine.WebApplication
 
     public static class Startup
     {
-        public static string dataPath;
+        public static string dataSetting;
         public static string sgbd;
 
         /// <summary>
@@ -22,40 +22,54 @@ namespace Webzine.WebApplication
         /// <param name="args"></param>
         /// <returns>Application configurer prête à être lancer</returns>
         public static WebApplication Initialize(string [] args)
-
         {
             var builder = WebApplication.CreateBuilder(args);
             ConfigureServices(builder);
             var app = builder.Build();
-            using (var scope = app.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                try
-                {
-                    var webzineDbContext = services.GetRequiredService<WebzineDbContext>();
+            var keywordsResearchApi = builder.Configuration.GetSection("Configuration").GetSection("KeywordSearchApiDeezer").Get<List<string>>();
 
-                    // Supprime et cr�e la base de donn�es
-                    webzineDbContext.Database.EnsureDeleted();
-                    webzineDbContext.Database.EnsureCreated();
-                    // Initialisation de la base de donn�es
-                    switch (dataPath)
-                    {
-                        case "Database":
-                            // SeedDataApiDeezer.InitializeData(webzineDbContext);
-                            break;
-                        case "Local":
-                            SeedDataLocal.InitialisationDB(webzineDbContext);
-                            break;
-                        default:
-                            // Si il y a une erreur elle sera déjà remonter dans ConfigureServices();
-                            throw new InvalidOperationException();
-                    }
-                }
-                catch (Exception e)
+            if(dataSetting == "Database" || dataSetting == "LocalWithDatabase")
+            {
+                using (var scope = app.Services.CreateScope())
                 {
-                    ILogger<Program> log = services.GetRequiredService<ILogger<Program>>();
-                    log.LogError(e, "An error occurred seeding the DB.");
+                    var services = scope.ServiceProvider;
+                    try
+                    {
+                        var webzineDbContext = services.GetRequiredService<WebzineDbContext>();
+
+                        // Supprime et cr�e la base de donn�es
+                        webzineDbContext.Database.EnsureDeleted();
+                        webzineDbContext.Database.EnsureCreated();   
+                        
+                        // Initialisation de la base de donn�es
+                        switch (dataSetting)
+                        {
+                            case "Database":
+                                SeedDataApiDeezer.InitializeData(webzineDbContext, keywordsResearchApi);
+                                break;
+                            case "LocalWithDatabase":
+                                SeedDataLocal.InitialisationDB(webzineDbContext);
+                                break;
+                            default:
+                                // Si il y a une erreur elle sera déjà remonter dans ConfigureServices();
+                                throw new InvalidOperationException();
+                        }
+                        
+                    }
+                    catch (Exception e)
+                    {
+                        ILogger<Program> log = services.GetRequiredService<ILogger<Program>>();
+                        log.LogError(e, "An error occurred seeding the DB.");
+                    }   
                 }
+            }
+            else if(dataSetting == "Local")
+            {
+                // Log Data Factory direct
+            }
+            else
+            {
+                // Log erreur configuration
             }
 
             Configure(app);
@@ -69,7 +83,7 @@ namespace Webzine.WebApplication
         /// <param name="builder"></param>
         public static void ConfigureServices(WebApplicationBuilder builder)
         {
-            dataPath = builder.Configuration.GetSection("Configuration").GetValue<string>("DataRepository");
+            dataSetting = builder.Configuration.GetSection("Configuration").GetValue<string>("DataRepository");
             sgbd = builder.Configuration.GetSection("Configuration").GetValue<string>("SGBD");
 
             // NLog: Setup NLog for Dependency injection
@@ -85,8 +99,7 @@ namespace Webzine.WebApplication
             // Définition du comportement de la création de champs type Datetime dans PostgreSQL (timestamp)
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-            builder.Services.AddScoped<IModeratorServices, ModeratorServices>();
-
+            // Entities Context
             builder.Services.AddDbContext<WebzineDbContext>(
                 options =>
                 {
@@ -108,14 +121,15 @@ namespace Webzine.WebApplication
                 }
             );
 
-            if(dataPath == "Database")
+            // Repository
+            if(dataSetting == "Database")
             {
                 builder.Services.AddScoped<ITitreRepository, DbTitreRepository>();
                 builder.Services.AddScoped<IArtisteRepository, DbArtisteRepository>();
                 builder.Services.AddScoped<ICommentaireRepository, DbCommentaireRepository>();
                 builder.Services.AddScoped<IStyleRepository, DbStyleRepository>();
             }
-            else if(dataPath == "Local")
+            else if(dataSetting == "Local" || dataSetting == "LocalWithDatabase")
             {
                 builder.Services.AddScoped<ITitreRepository, LocalTitreRepository>();
                 builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
@@ -127,6 +141,9 @@ namespace Webzine.WebApplication
                 // log erreur configuration type de données
                 throw new NotImplementedException();
             }
+
+            // Bussiness Logic Layer
+            builder.Services.AddScoped<IModeratorServices, ModeratorServices>();
         }
 
         /// <summary>

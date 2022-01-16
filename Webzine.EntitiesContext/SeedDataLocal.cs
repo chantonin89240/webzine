@@ -9,20 +9,24 @@
     /// </summary>
     public static class SeedDataLocal
     {
+        private static IEnumerable<Style> Styles;
+        private static IEnumerable<Artiste> Artistes;
+        private static IEnumerable<Titre> Titres;
+        private static IEnumerable<Commentaire> Commentaires;
 
         public static void InitialisationDB(WebzineDbContext context)
         {
+            int defaultAmount = 20;
 
-            int defaultAmount = 10;
+            Styles = StyleFactory.GetStyles();
+            context.AddRange(Styles.ToList());
+            // context.AddRange(Styles.Select(style => new Style { Libelle = style.Libelle }).OrderBy(s => s.Libelle));
 
-            IEnumerable<Style> Styles = StyleFactory.GetStyles();
-            context.AddRange(Styles.Select(style => new Style { Libelle = style.Libelle }).OrderBy(s => s.Libelle));
-
-            IEnumerable<Artiste> Artistes = ArtisteFactory.CreateArtiste(defaultAmount);
+            Artistes = ArtisteFactory.CreateArtiste(defaultAmount);
             context.AddRange(Artistes.ToList());
-            //context.AddRange(Artistes.Select(artiste => new Artiste { Nom = artiste.Nom, Biographie = artiste.Biographie }));
+            // context.AddRange(Artistes.Select(artiste => new Artiste { Nom = artiste.Nom, Biographie = artiste.Biographie }));
 
-            IEnumerable<Titre> Titres = TitreFactory.CreateTitre(defaultAmount, Artistes, Styles);
+            Titres = TitreFactory.CreateTitre(defaultAmount, Artistes, Styles);
             context.AddRange(Titres.ToList());
             // context.AddRange(Titres.Select(titre => new Titre
             // {
@@ -40,8 +44,8 @@
 
             context.SaveChanges();
 
-            IEnumerable<Commentaire> commentaires = CommentaireFactory.CreateCommentaire(defaultAmount, Titres);
-            context.AddRange(commentaires.ToList());
+            Commentaires = CommentaireFactory.CreateCommentaire(defaultAmount, Titres);
+            context.AddRange(Commentaires.ToList());
             // context.AddRange(commentaires.Select(comment => new Commentaire
             // {
             //     Auteur = comment.Auteur,

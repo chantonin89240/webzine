@@ -3,6 +3,7 @@
     using Webzine.Entity;
     using Webzine.Repository.Contracts;
     using Webzine.EntitiesContext;
+    using Microsoft.EntityFrameworkCore;
 
     /// <summary>
     /// Represents the local repository for <see cref="Titre"/>s.
@@ -62,7 +63,13 @@
         /// <returns>whole <see cref="Titre"/> List.</returns>
         public IEnumerable<Titre> FindAll()
         {
-            return this._context.Titres;
+            var titres = this._context.Titres
+                .Include(t => t.Artiste)
+                .Include(t => t.Commentaires)
+                .Include(t => t.TitresStyles)
+                .ThenInclude(ts => ts.Style);
+
+            return titres;
         }
 
         /// <summary>

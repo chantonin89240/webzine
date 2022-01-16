@@ -7,7 +7,7 @@ namespace Webzine.EntitiesContext
     {
         private static List<Style> styles = new List<Style>();
         private static List<Artiste> artistes = new List<Artiste>();
-        private static List<string> ListeMotCles = new List<string>() {"jazz", "rock", "rap", "reggae", "electro", "percival schuttenbach"};
+        private static Dictionary<Artiste, Object> albums = new Dictionary<Artiste, Object>();
 
         /// <summary>
         /// Connection à une serveur HTTP.
@@ -27,10 +27,11 @@ namespace Webzine.EntitiesContext
         /// ListeMotCles peut être alimenter de nom d'artiste ou de style de musique.
         /// </summary>
         /// <param name="context"></param>
-        public static void InitializeData(WebzineDbContext context)
+        public static void InitializeData(WebzineDbContext context, List<string> ListeMotCles)
         {
             GetStyles(context);         
             ListeMotCles.ForEach(a => GetData(context, a));
+            GetTitres(context);
         }
 
         /// <summary>
@@ -68,7 +69,6 @@ namespace Webzine.EntitiesContext
         public static void GetData(WebzineDbContext context, string nomArtist)
         {
             #region ----- Enregistrement des artistes ------
-            Dictionary<Artiste, Object> albums = new Dictionary<Artiste, Object>();
 
             var Json = GetDataFromHttpClient("https://api.deezer.com/search/album?q=" + nomArtist);
             dynamic dynamic = JsonConvert.DeserializeObject<dynamic>(Json);
@@ -85,26 +85,32 @@ namespace Webzine.EntitiesContext
                         Nom = item.artist.name,
                         Biographie = faker.Lorem.Paragraph(2),
                     };
-
                     artistes.Add(artiste);
+                    albums.Add(artiste, item.id);
 
                     context.Add(artiste);
-                    context.SaveChanges();
-
-                    albums.Add(artiste, item.id);
                 }
-            } 
-            #endregion
+            }
+            
+            context.SaveChanges();
+            #endregion  
+        }
 
+        public static void GetTitres(WebzineDbContext context)
+        {
+            var faker = new Faker();
+            
             // Pour chaque album associé à un artiste dans le dictionnaire "albums"
             albums.ToList().ForEach(album =>
             {
+                List<Titre> titres = new List<Titre>();
+                List<TitreStyle> titreStyles = new List<TitreStyle>();
                 // Demande d'un album par son ID
                 var JsonTitle = GetDataFromHttpClient("https://api.deezer.com/album/" + album.Value);
                 dynamic dataTitle = JsonConvert.DeserializeObject<dynamic>(JsonTitle);
-                List<Titre> titres = new List<Titre>();
+
                 List<dynamic> idStyles = new List<dynamic>();
-                List<TitreStyle> titreStyles = new List<TitreStyle>();
+                
                 var genrePositif = dataTitle.genre_id.ToObject<int>();  
 
                 // L'enregistrement se fait si le genre est positif car il existe des titres ayant l'ID "-1"
@@ -124,17 +130,16 @@ namespace Webzine.EntitiesContext
                                 UrlJaquette = dataTitle.cover_big,
                                 UrlEcoute = "https://www.youtube.com/embed/ow00U-slPYk",
                                 Duree = item.duration,
-                                IdArtiste = dataTitle.artist.id,
+                                IdArtiste = item.artist.id,
                                 DateCreation = DateTime.Now,
                                 DateSortie = dataTitle.release_date,
                                 NbLikes = faker.Random.Int(0, 1000),
                                 NbLectures = faker.Random.Int(0, 1000),
                             };
                             titres.Add(titre);
+                            context.Add(titre);
                         }
                     }
-
-                    context.AddRange(titres);
                     context.SaveChanges();
                     #endregion
 
@@ -142,8 +147,6 @@ namespace Webzine.EntitiesContext
                     foreach (var item in dataTitle.genres.data)
                     {
                         var type = item.id.ToObject<int>();
-                        var stylesType = styles;
-
                         // Certains albums possèdent plusieurs style et 
                         // certains ID de style n'existent pas dans la liste des genre importé précédement
                         if(styles.Any(s => s.IdStyle == type))
@@ -156,14 +159,13 @@ namespace Webzine.EntitiesContext
                         
                             titreStyles.Add(new TitreStyle { IdStyle = idstyle, IdTitre = titre.IdTitre });
                     })); 
-                    var toto2 = titreStyles;
 
                     context.AddRange(titreStyles);
                     context.SaveChanges();
                     #endregion
                 }
-            });
-            
+            }); 
+            context.SaveChanges();
         }
     }
 }

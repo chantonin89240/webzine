@@ -52,8 +52,8 @@
             modelBuilder.Entity<Titre>(
                 titre =>
                 {
-                    titre.Property("DateCreation").HasColumnType("Date");
-                    titre.Property("DateSortie").HasColumnType("Date");
+                    // titre.Property("DateCreation").HasColumnType("Date");
+                    // titre.Property("DateSortie").HasColumnType("Date");
                     titre.HasOne(t => t.Artiste).WithMany(a => a.Titres).HasForeignKey(t => t.IdArtiste);
                     // titre.HasMany(t => t.TitresStyles).WithOne(ts => ts.Titre).HasForeignKey(t => t.IdTitre);
                 });
@@ -62,7 +62,7 @@
             modelBuilder.Entity<Commentaire>(
                 comment =>
                 {
-                    comment.Property("DateCreation").HasColumnType("Date");
+                    // comment.Property("DateCreation").HasColumnType("Date");
                     comment.HasOne(c => c.Titre).WithMany(t => t.Commentaires).HasForeignKey(c => c.IdTitre);
                 });
 
