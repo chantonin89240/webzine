@@ -24,7 +24,7 @@
             this._logger = logger;
             this._logger.LogDebug(1, "NLog injected into TitreController");
             this.configuration = configuration;
-            this.nbCardChronic = this.configuration.GetSection("Configuration").GetSection("HomePageDisplay").GetValue<int>("NbCardChronic");
+            this.nbCardChronic = this.configuration.GetSection("Configuration").GetValue<int>("HomePageDisplay");
         }
 
         // GET: HomeController

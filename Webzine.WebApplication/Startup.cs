@@ -5,6 +5,7 @@ namespace Webzine.WebApplication
     using Npgsql.EntityFrameworkCore.PostgreSQL;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Configuration;
+    using NLog;
     using NLog.Web;
     using Webzine.EntitiesContext;
     using Webzine.Repository;
@@ -16,6 +17,8 @@ namespace Webzine.WebApplication
         public static string dataSetting;
         public static string sgbd;
 
+        public static ILogger logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+
         /// <summary>
         /// Méthode d'initialisation de l'application
         /// </summary>
@@ -23,6 +26,7 @@ namespace Webzine.WebApplication
         /// <returns>Application configurer prête à être lancer</returns>
         public static WebApplication Initialize(string [] args)
         {
+            
             var builder = WebApplication.CreateBuilder(args);
             ConfigureServices(builder);
             var app = builder.Build();
@@ -34,15 +38,21 @@ namespace Webzine.WebApplication
                 using (var scope = app.Services.CreateScope())
                 {
                     var services = scope.ServiceProvider;
+                    
                     try
                     {
+                        logger.Debug("Contruction DbContext.");
                         var webzineDbContext = services.GetRequiredService<WebzineDbContext>();
-
+                        logger.Debug("DbContext construit.");
                         // Supprime et cr�e la base de donn�es
                         if(resetDb == "on")
                         {
+                            logger.Debug("Suppression de la base de données existante.");
                             webzineDbContext.Database.EnsureDeleted();
-                            webzineDbContext.Database.EnsureCreated();   
+                            logger.Debug("Base de données supprimée.");
+                            logger.Debug("Création de la base de données.");
+                            webzineDbContext.Database.EnsureCreated();
+                            logger.Debug("Base de données créée.");
                         }
                         
                         // Initialisation de la base de donn�es
@@ -51,32 +61,38 @@ namespace Webzine.WebApplication
                             case "Database":
                                 if(resetDb == "on")
                                 {
+                                    logger.Debug("Initialisation Db avec l'API Deezer.");
                                     SeedDataApiDeezer.InitializeData(webzineDbContext, keywordsResearchApi);
+                                    logger.Debug("Startup.cs - Initialisation Db à partie de l'API deezer complete.");
                                 }
                                 break;
                             case "LocalWithDatabase":
+                                logger.Debug("Initialisation Db avec Local Repository.");
                                 SeedDataLocal.InitialisationDB(webzineDbContext);
+                                logger.Debug("Initialisation Db avec Local Repository complete.");
                                 break;
                             default:
                                 // Si il y a une erreur elle sera déjà remonter dans ConfigureServices();
-                                throw new InvalidOperationException();
+                                break;
                         }
                         
                     }
                     catch (Exception e)
                     {
                         ILogger<Program> log = services.GetRequiredService<ILogger<Program>>();
-                        log.LogError(e, "An error occurred seeding the DB.");
+                        log.LogError(e, "Une erreur est survenue dans le processus d'initialisation de la base de données.");
                     }   
                 }
             }
             else if(dataSetting == "Local")
             {
                 // Log Data Factory direct
+                logger.Debug("Configuration Local Repository sans Db.");
             }
             else
             {
                 // Log erreur configuration
+                logger.Debug("Erreur configuration DataRepository");
             }
 
             Configure(app);
@@ -90,6 +106,8 @@ namespace Webzine.WebApplication
         /// <param name="builder"></param>
         public static void ConfigureServices(WebApplicationBuilder builder)
         {
+            logger.Debug("Début de la configuration des services.");
+
             dataSetting = builder.Configuration.GetSection("Configuration").GetValue<string>("DataRepository");
             sgbd = builder.Configuration.GetSection("Configuration").GetValue<string>("SGBD");
 
@@ -129,6 +147,8 @@ namespace Webzine.WebApplication
                             break;
                         default:
                             // log erreur configuration type SGBDR
+                            logger.Debug("La configuration de SGBD dans appsettings.json n'est pas correcte");
+                            throw new NotImplementedException();
                             break;
                     }
                 }
@@ -152,6 +172,7 @@ namespace Webzine.WebApplication
             else
             {
                 // log erreur configuration type de données
+                logger.Debug("La configuration de DataRepository dans appsettings.json n'est pas correcte");
                 throw new NotImplementedException();
             }
 
