@@ -1,92 +1,89 @@
-﻿@model Webzine.WebApplication.Areas.Admin.ViewModels.TitreViewModel;
-@{
+﻿@{
+	@model Webzine.WebApplication.Areas.Admin.ViewModels.TitreViewModel;
+	var SelectListArtiste = new SelectList(Model.Artistes, "IdArtiste", "Nom");
+	var SelectListStyle = new SelectList(Model.Styles, "IdStyle", "Libelle");
 }
-
 <div>
 	<div class="divSup">
 	<h2>Ajouter un Titre</h2>
 	<hr />
-	<div asp-validation-summary=All></div>
 	<form class="formAdmin" method="post" asp-area="administration" asp-controller="titre" asp-action="create">
-		<div class="mb-3 row">
-			<label for="nomArtiste" class="col-sm-2 col-form-label">Nom de l'artiste<span style="color: red;">*</span></label>
+		<div class="text-danger" asp-validation-summary=All></div>
+		<div class="form-group mb-3 row">
+			<label asp-for="Titre.Artiste.Nom" class="col-sm-2 col-form-label">Nom de l'artiste<span style="color: red;">*</span></label>
 			<div class="col-sm-10">
-				<select name="model.Titre.IdArtiste" class="form-select" asp-for="Titre.Artiste">
-					@* asp-items="Model.Artistes" *@
-					@foreach(var artiste in Model.Artistes)
-					{
-						<option name="model.Titre.IdArtiste" value="@artiste.IdArtiste">@artiste.Nom</option>
-					}
-				</select>
+				<select asp-for="Titre.Artiste.Nom" name="model.Titre.IdArtiste" asp-items="SelectListArtiste" class="form-select" ></select>
 			</div>
 		</div>
-
-		<div class="mb-3 row">
-			<label for="libelleTitre" class="col-sm-2 col-form-label">Titre<span style="color: red;">*</span></label>
+		<div class="form-group mb-3 row">
+			<label asp-for="Titre.Libelle" class="col-sm-2 col-form-label">Titre<span style="color: red;">*</span></label>
 			<div class="col-sm-10">
-				<input name="model.Titre.Libelle" type="text" class="form-control" id="libelleTitre" required placeholder="Libelle du Titre"></input>
+				<input asp-for="Titre.Libelle" name="model.Titre.Libelle" type="text" class="form-control" id="libelleTitre" placeholder="Libellé du Titre"></input>
 			</div>
+			<span asp-validation-for="Titre.Libelle" class="text-danger col-10 offset-2"></span>
 		</div>
 
-        <div class="mb-3 row">
-			<label for="chroniqueTitre" class="col-sm-2 col-form-label">Chronique<span style="color: red;">*</span></label>
+        <div class="form-group mb-3 row">
+			<label asp-for="Titre.Chronique" class="col-sm-2 col-form-label">Chronique<span style="color: red;">*</span></label>
 			<div class="col-sm-10">
-				<textarea name="model.Titre.Chronique" class="form-control" id="chroniqueTitre" rows="8" required placeholder="Chronique du Titre"></textarea>
+				<textarea asp-for="Titre.Chronique" name="model.Titre.Chronique" class="form-control" id="chroniqueTitre" rows="8" placeholder="Chronique du Titre"></textarea>
 			</div>
+			<span asp-validation-for="Titre.Chronique" class="text-danger col-10 offset-2"></span>
 		</div>
 
-        <div class="mb-3 row">
-			<label for="dateSortieTitre" class="col-sm-2 col-form-label">Date de sortie<span style="color: red;">*</span></label>
+        <div class="form-group mb-3 row">
+			<label asp-for="Titre.DateSortie" class="col-sm-2 col-form-label">Date de sortie<span style="color: red;">*</span></label>
 			<div class="col-sm-4">
-				<input name="model.Titre.DateSortie" type="date" class="form-control" id="dateSortieTitre" required></input>
+				<input asp-for="Titre.DateSortie" name="model.Titre.DateSortie" type="date" value="" class="form-control" id="dateSortieTitre"></input>
 			</div>
 
-            <label for="dureeTitre" class="col-sm-2 col-form-label">Durèe en seconde<span style="color: red;">*</span></label>
+            <label asp-for="Titre.Duree" class="col-sm-2 col-form-label">Durèe en seconde<span style="color: red;">*</span></label>
 			<div class="col-sm-4" style="display: inline-flex;">
-				<input name="model.Titre.Duree" type="number" class="form-control" id="dureeTitre" required></input>
+				<input asp-for="Titre.Duree" name="model.Titre.Duree" type="number" class="form-control date" id="dureeTitre"></input>
 				<label class="input-group-text">Secondes</label>
 			</div>
-            
+			<span asp-validation-for="Titre.DateSortie" class="text-danger col-4 offset-2"></span>
+			<span asp-validation-for="Titre.Duree" class="text-danger col-4 offset-2"></span>
 		</div>
 
-        <div class="mb-3 row">
-			<label for="jaquetteTitre" class="col-sm-2 col-form-label">Jaquette de l'album<span style="color: red;">*</span></label>
+        <div class="form-group mb-3 row">
+			<label asp-for="Titre.UrlJaquette" class="col-sm-2 col-form-label">Jaquette de l'album<span style="color: red;">*</span></label>
 			<div class="col-sm-10">
-				<input name="model.Titre.UrlJaquette" type="text" class="form-control" id="jaquetteTitre" required placeholder="Jaquette de l'album"></input>
+				<input asp-for="Titre.UrlJaquette" name="model.Titre.UrlJaquette" type="text" class="form-control" id="jaquetteTitre" placeholder="Jaquette de l'album"></input>
 			</div>
+			<span asp-validation-for="Titre.UrlJaquette" class="text-danger col-10 offset-2"></span>
 		</div>
 
-        <div class="mb-3 row">
-			<label for="urlEcouteTitre" class="col-sm-2 col-form-label">URL d'écoute</label>
+        <div class="form-group mb-3 row">
+			<label asp-for="Titre.UrlEcoute" class="col-sm-2 col-form-label">URL d'écoute</label>
 			<div class="col-sm-10">
-				<input name="model.Titre.UrlEcoute" type="text" class="form-control" id="urlEcouteTitre" placeholder="URL d'écoute"></input>
+				<input asp-for="Titre.UrlEcoute" name="model.Titre.UrlEcoute" type="text" class="form-control" id="urlEcouteTitre" placeholder="URL d'écoute"></input>
 			</div>
+			<span asp-validation-for="Titre.UrlEcoute" class="text-danger col-10 offset-2"></span>
 		</div>
 
-        <div class="mb-5 row">
+        <div class="form-group mb-5 row">
 			<label for="styleTitre" class="col-sm-2 col-form-label">Style</label>
 			<div class="col-sm-10">
-				<section class="row">
-					@foreach(var style in Model.Styles)
-					{
-						<div class="col-sm-4">
-							<div class="form-check">
-								<input name="ListeStyles" class="form-check-input" type="checkbox" value="@style.IdStyle" id="@style.Libelle">
-								<label class="form-check-label" for="@style.Libelle">@style.Libelle</label>
+				<div class="row">
+						@foreach(var style in Model.Styles)
+						{
+							<div class="col-sm-4 text-nowrap">
+									<input name="ListeStyles" class="form-check-input" type="checkbox" value="@style.IdStyle" id="@style.Libelle">
+									<label class="form-check-label" for="@style.Libelle">@style.Libelle</label>
 							</div>
-						</div>
-					}
-				</section>
+						}
+				</div>
 			</div>
 		</div>
 
 		<div class="mb-3 row">
-			<label class="col-sm-2 col-form-label"></label>
-			<div class="col-sm-10">
+			<div class="col-sm-10 offset-2">
 				<button type="submit" class="btn btn-primary">Sauvegarder</button>
 			</div>
 		</div>
 	</form>
-
-	<a class="row text-decoration-none ms-0" asp-area="administration" asp-controller="titre" asp-action="Index">Retour à l'administration des titres</a>
+	<div class="row">
+		<a class="text-decoration-none offset-2" asp-area="administration" asp-controller="titre" asp-action="Index">Retour à l'administration des titres</a>
+	</div>
 </div>

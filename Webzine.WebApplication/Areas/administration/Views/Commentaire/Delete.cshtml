@@ -20,7 +20,9 @@
 	        <form method="post" asp-area="administration" asp-controller="commentaire" asp-action="delete" asp-route-id="@Model.ContextCommentaire.IdCommentaire" >
 		        <p class="row ms-0">Etes-vous sûr de vouloir supprimer le commentaire suivant ?</p>
                 <p>@Model.ContextCommentaire.Contenu</p>
-                <p>-- @Model.ContextCommentaire.Auteur le @Model.ContextCommentaire.DateCreation sur <a asp-area="" asp-controller="titre" asp-action="titre" asp-route-idTitre="@Model.ContextTitre.IdTitre">@Model.ContextTitre.Libelle</a></p>
+                <p >-- @Model.ContextCommentaire.Auteur<span class="text-muted"> le @Model.ContextCommentaire.DateCreation.ToString("dd/MM/yyyy à HH:mm") sur </span>
+                    <a asp-area="" asp-controller="artiste" asp-action="artiste" asp-route-nomArtiste="@Model.ContextTitre.Artiste.Nom">@Model.ContextTitre.Artiste.Nom - </a>
+                    <a asp-area="" asp-controller="titre" asp-action="titre" asp-route-idTitre="@Model.ContextTitre.IdTitre">@Model.ContextTitre.Libelle</a></p>
 
 		        <button type="submit" class="btn btn-danger">Supprimer</button>
             </form>

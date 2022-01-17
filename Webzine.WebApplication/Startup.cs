@@ -27,6 +27,7 @@ namespace Webzine.WebApplication
             ConfigureServices(builder);
             var app = builder.Build();
             var keywordsResearchApi = builder.Configuration.GetSection("Configuration").GetSection("KeywordSearchApiDeezer").Get<List<string>>();
+            var resetDb = builder.Configuration.GetSection("Configuration").GetSection("ResetDb").Get<string>();
 
             if(dataSetting == "Database" || dataSetting == "LocalWithDatabase")
             {
@@ -38,14 +39,20 @@ namespace Webzine.WebApplication
                         var webzineDbContext = services.GetRequiredService<WebzineDbContext>();
 
                         // Supprime et cr�e la base de donn�es
-                        webzineDbContext.Database.EnsureDeleted();
-                        webzineDbContext.Database.EnsureCreated();   
+                        if(resetDb == "on")
+                        {
+                            webzineDbContext.Database.EnsureDeleted();
+                            webzineDbContext.Database.EnsureCreated();   
+                        }
                         
                         // Initialisation de la base de donn�es
                         switch (dataSetting)
                         {
                             case "Database":
-                                SeedDataApiDeezer.InitializeData(webzineDbContext, keywordsResearchApi);
+                                if(resetDb == "on")
+                                {
+                                    SeedDataApiDeezer.InitializeData(webzineDbContext, keywordsResearchApi);
+                                }
                                 break;
                             case "LocalWithDatabase":
                                 SeedDataLocal.InitialisationDB(webzineDbContext);
@@ -94,7 +101,13 @@ namespace Webzine.WebApplication
 
             // Ajout des services dans le conteneur
             builder.Services.AddControllersWithViews();
-            builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+            builder.Services.AddRazorPages()
+                .AddRazorRuntimeCompilation()
+                .AddMvcOptions(options =>
+                    {
+                        options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
+                            _ => "Veuillez entrer une date.");
+                    });
 
             // Définition du comportement de la création de champs type Datetime dans PostgreSQL (timestamp)
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);

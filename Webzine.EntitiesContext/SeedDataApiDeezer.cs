@@ -105,6 +105,8 @@ namespace Webzine.EntitiesContext
             {
                 List<Titre> titres = new List<Titre>();
                 List<TitreStyle> titreStyles = new List<TitreStyle>();
+                Random rand = new Random();
+
                 // Demande d'un album par son ID
                 var JsonTitle = GetDataFromHttpClient("https://api.deezer.com/album/" + album.Value);
                 dynamic dataTitle = JsonConvert.DeserializeObject<dynamic>(JsonTitle);
@@ -117,6 +119,9 @@ namespace Webzine.EntitiesContext
                 // et si l'url de l'image "cover_big" est différent de null
                 if(genrePositif > 0 && dataTitle.cover_big != null)
                 {
+                    var dateAPI = dataTitle.release_date.ToObject<string>();
+                    var date = Convert.ToDateTime(dateAPI + " " + rand.Next(7, 23) +":"+ rand.Next(0,60) +":"+ rand.Next(0,60));
+                    
                     #region ----- Enregistrement des titres ------
                     foreach (var item in dataTitle.tracks.data)
                     {
@@ -132,10 +137,11 @@ namespace Webzine.EntitiesContext
                                 Duree = item.duration,
                                 IdArtiste = item.artist.id,
                                 DateCreation = DateTime.Now,
-                                DateSortie = dataTitle.release_date,
+                                DateSortie = date,
                                 NbLikes = faker.Random.Int(0, 1000),
                                 NbLectures = faker.Random.Int(0, 1000),
                             };
+                            var control = titre;
                             titres.Add(titre);
                             context.Add(titre);
                         }
