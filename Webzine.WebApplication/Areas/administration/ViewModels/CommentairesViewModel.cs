@@ -29,29 +29,5 @@
         /// Récupère ou modifie le titre associé au commentaire.
         /// </summary>
         public Titre ContextTitre { get; set; } = new Titre();
-
-        public CommentairesViewModel()
-        {
-
-        }
-
-        public CommentairesViewModel(IEnumerable<Commentaire> commentaires, IEnumerable<Titre> titres)
-        {
-            this.Commentaires = commentaires.ToList();
-            this.Titres = titres.ToList();
-        }
-
-        /// <summary>
-        /// Génère une instance de <see cref="CommentairesViewModel"/>.
-        /// </summary>
-        /// <param name="commentaires"></param>
-        /// <param name="titres"></param>
-        /// <param name="idCommentaire"></param>
-        public CommentairesViewModel(IEnumerable<Commentaire> commentaires, IEnumerable<Titre> titres, int idCommentaire)
-            : this(commentaires, titres)
-        {
-            this.ContextCommentaire = this.Commentaires.FirstOrDefault( C => C.IdCommentaire == idCommentaire);
-            this.ContextTitre = this.Titres.FirstOrDefault(T => T.IdTitre == ContextCommentaire.IdTitre);
-        }
     }
 }

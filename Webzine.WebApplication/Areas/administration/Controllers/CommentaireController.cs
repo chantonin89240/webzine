@@ -13,11 +13,13 @@
     {
         private ICommentaireRepository commentaireRepository;
         private ITitreRepository titreRepository;
+        private CommentairesViewModel model;
 
         public CommentaireController(ICommentaireRepository commentaireRepository, ITitreRepository titreRepository)
         {
             this.commentaireRepository = commentaireRepository;
             this.titreRepository = titreRepository;
+            this.model = new CommentairesViewModel();
         }
 
         /// <summary>
@@ -26,11 +28,9 @@
         /// <returns>Page de tous les <see cref="Commentaire"/>s.</returns>
         public IActionResult Index()
         {
-            List<Commentaire> commentaires = this.commentaireRepository.FindAll().ToList();
-            List<Titre> titres = this.titreRepository.FindAll().ToList();
-
-            CommentairesViewModel model = new CommentairesViewModel(commentaires, titres);
-            return this.View(model);
+            this.model.Commentaires = this.commentaireRepository.FindAll().ToList();
+            this.model.Titres = this.titreRepository.FindAll().ToList();
+            return this.View(this.model);
         }
 
         /// <summary>
@@ -40,28 +40,18 @@
         /// <returns>Page web de vérification.</returns>
         public IActionResult delete(int id)
         {
-            List<Commentaire> commentaires = this.commentaireRepository.FindAll().ToList();
-            List<Titre> titres = this.titreRepository.FindAll().ToList();
+            this.model.ContextCommentaire = this.commentaireRepository.Find(id);
+            this.model.ContextTitre = this.titreRepository.Find(this.model.ContextCommentaire.IdTitre);
 
-            Commentaire? contextComment = commentaires.FirstOrDefault(comm => comm.IdCommentaire == id);
-
-            CommentairesViewModel model = new CommentairesViewModel()
-            {
-                Commentaires = commentaires,
-                Titres = titres,
-                ContextCommentaire = contextComment,
-                ContextTitre = titres.FirstOrDefault(title => title.IdTitre == contextComment.IdTitre),
-            };
-
-            return this.View(model);
+            return this.View(this.model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult delete(CommentairesViewModel model,int id)
-		{
-            commentaireRepository.Delete(id);
+        {
+            this.commentaireRepository.Delete(id);
             return this.RedirectToAction("Index");
-		}
+        }
     }
 }
