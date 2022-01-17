@@ -8,11 +8,11 @@
 	<table class="table table-bordered table-striped table-hover">
 		<thead> 
 			<tr class="table-secondary">
-				<th class="" scope="col">Artiste</th>
-				<th class="" scope="col">Titre</th>
-				<th class="text-center d-sm-none d-md-none d-xxl-block d-xl-block d-lg-block" scope="col">Durée</th>
-				<th class="text-center" scope="col">Date de sortie</th>
-				<th class="text-center d-none d-xxl-block d-xl-block d-lg-block d-md-block" scope="col"><i class="fas fa-eye"></i></th>
+				<th class=" d-none d-xxl-block d-xl-block d-lg-block d-md-block" scope="col">Artiste</th>
+				<th class="col-3" scope="col">Titre</th>
+				<th class=" text-center d-none d-xxl-block d-xl-block d-lg-block" scope="col">Durée</th>
+				<th class="text-center " scope="col">Date de sortie</th>
+				<th class="text-center d-none d-xxl-block d-xl-block d-lg-block" scope="col"><i class="fas fa-eye"></i></th>
 				<th class="text-center" scope="col"><i class="fas fa-thumbs-up"></i></th>
 				<th class="text-center d-none d-xxl-block d-xl-block d-lg-block" scope="col"><i class="fas fa-comment"></i></th>
 				<th class="text-center" scope="col">Actions</th>
@@ -23,11 +23,11 @@
 			@foreach (var titre in Model.Titres)
 			{
 				<tr >
-					<td class="" scope="row">@titre.Artiste.Nom</td>
+					<td class=" d-none d-xxl-block d-xl-block d-lg-block d-md-block" scope="row">@titre.Artiste.Nom</td>
 					<td class="">@titre.Libelle</td>
 					<td class="text-center d-none d-xxl-block d-xl-block d-lg-block">@Model.FormatLength(titre)</td>
 					<td class="text-center">@titre.DateSortie.ToString("dd/MM/yyyy")</td>
-					<td class="text-end d-none d-xxl-block d-xl-block d-lg-block d-md-block">@titre.NbLectures</td>
+					<td class="text-end d-none d-xxl-block d-xl-block d-lg-block">@titre.NbLectures</td>
 					<td class="text-end">@titre.NbLikes</td>
 					<td class="text-end d-none d-xxl-block d-xl-block d-lg-block">@titre.Commentaires.Count()</td>
 					<td class="text-center"><a asp-area="administration" asp-controller="titre" asp-action="edit" asp-route-id="@titre.IdTitre"><i class="fas fa-edit me-2"></i></a><a asp-area="administration" asp-controller="titre" asp-action="delete" asp-route-id="@titre.IdTitre"><i class="fas fa-trash"></i></a></td>
