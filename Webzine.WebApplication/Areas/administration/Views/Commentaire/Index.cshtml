@@ -1,7 +1,8 @@
 ﻿@using Webzine.Entity
 @model Webzine.ViewModels.CommentairesViewModel
 
-<div class="p-4">
+
+<div class="p-3">
 	<h2 class="mb-4">Commentaires</h2>
     <hr />
 
@@ -9,27 +10,27 @@
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr class="table-active">
-				<th class="col-3" scope="col"><span class="d-flex justify-content-center">Titre</span></th>
-				<th class="col-1" scope="col"><span class="d-flex justify-content-center">Nom</span></th>
-                <th class="col-4" scope="col"><span class="d-flex justify-content-center">Commentaire</span></th>
-                <th class="col-2" scope="col"><span class="d-flex justify-content-center">Date de création</span></th>
-                <th class="col-2" scope="col"><span class="d-flex justify-content-center">Actions</span></th>
+				<th class="col-3 text-center" scope="col"><span class="text-center">Titre</span></th>
+				<th class="col-1 text-center" scope="col"><span class="text-center">Nom</span></th>
+                <th class="col-4  text-center" scope="col"><span class="text-center">Commentaire</span></th>
+                <th class="col-2 text-center" scope="col"><span class="text-center">Date de création</span></th>
+                <th class="col-2  text-center" scope="col"><span class="text-center">Actions</span></th>
             </tr>
         </thead>
 
 		<tbody>
         @foreach(Commentaire commentaire in Model.Commentaires)
-        {
+        {   
+            
             <tr>
-                <td class="text-center"><a href="/Titre/Titre?idTitre=@Model.Titres.FirstOrDefault(Title => Title.IdTitre == commentaire.IdTitre).IdTitre">
+                <td class=" text-center"><a href="/Titre/Titre?idTitre=@Model.Titres.FirstOrDefault(Title => Title.IdTitre == commentaire.IdTitre).IdTitre">
                     @Model.Titres.FirstOrDefault(Title => Title.IdTitre == commentaire.IdTitre).Libelle</a>
                     </td>
-                <td>@commentaire.Auteur</td>
-                <td>@commentaire.Contenu</td>
-                <td class="text-center">@commentaire.DateCreation.ToString("dd/MM/yyyy HH:mm")</td>
-                <td class="d-flex justify-content-center"><a asp-area="administration" asp-controller="commentaire" asp-action="delete" asp-route-id="@commentaire.IdCommentaire"><i class="fas fa-trash"></i></a></td>            </tr>
+                <td class="">@commentaire.Auteur</td>
+                <td class=" text-break" >@commentaire.Contenu</td>
+                <td class=" text-center">@commentaire.DateCreation.ToString("dd/MM/yyyy HH:mm")</td>
+                <td class=" text-center"><a asp-area="administration" asp-controller="commentaire" asp-action="delete" asp-route-id="@commentaire.IdCommentaire"><i class="fas fa-trash"></i></a></td>            </tr>
         }
         </tbody>
 	</table>
-
 </div>
