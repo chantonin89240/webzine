@@ -35,7 +35,7 @@
             int page = pageNumber ?? 1;
             this.model.Page = page;
 
-            this.model.PageMax = (int)Math.Floor((double)this._titreRepository.Count() / nbCardChronic) + 1;
+            this.model.PageMax = (int)Math.Floor((double)(this._titreRepository.Count()-1) / nbCardChronic) + 1;
 
             this.model.Titres = this._titreRepository.FindTitres((page - 1) * nbCardChronic, nbCardChronic).ToList();
 
