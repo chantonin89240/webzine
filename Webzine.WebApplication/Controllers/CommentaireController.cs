@@ -1,6 +1,4 @@
-﻿
-
-namespace Webzine.WebApplication.Controllers
+﻿namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
@@ -29,7 +27,7 @@ namespace Webzine.WebApplication.Controllers
                 this.commentaireRepository.Add(model);
             }
 
-            return this.Redirect("Titre/Titre?idTitre=" + model.IdTitre);
+            return this.RedirectToAction("Titre","Titre", new { idTitre = model.IdTitre });
         }
     }
 }

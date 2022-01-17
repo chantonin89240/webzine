@@ -12,12 +12,12 @@
     /// </summary>
     public class ArtisteController : Controller
     {
-        private IArtisteRepository _artisteRepository;
+        private IArtisteRepository artisteRepository;
         private ArtisteViewModel model = new ArtisteViewModel();
 
         public ArtisteController(IArtisteRepository artisteRepository)
         {
-            this._artisteRepository = artisteRepository;
+            this.artisteRepository = artisteRepository;
         }
 
         /// <summary>
@@ -30,8 +30,8 @@
             string nom = System.Net.WebUtility.UrlDecode(nomArtiste);
             try
             {
-                model.Artiste = _artisteRepository.FindAll().First(artiste => artiste.Nom == nom);
-                return this.View(model);
+                model.Artiste = this.artisteRepository.FindAll().First(artiste => artiste.Nom == nom);
+                return this.View(this.model);
             }
             catch (Exception ex)
             {
