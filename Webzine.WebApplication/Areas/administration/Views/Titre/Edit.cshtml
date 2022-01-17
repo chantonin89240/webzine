@@ -8,6 +8,8 @@
 	<div class="divSup">
 	<h2>Editer un Titre</h2>
 	<hr />
+
+	<!-- formulaire de modification de titre -->
 	<form class="formAdmin" method="post" asp-area="administration" asp-controller="titre" asp-action="edit" asp-route-id="@Model.Titre.IdTitre">
 		<div class="text-danger" asp-validation-summary=All></div>
 		<div class="mb-3 row">
@@ -111,5 +113,6 @@
 		</div>
 	</form>
 
+	<!-- lien de retour vers la page Index de titre admin -->
 	<a class="row text-decoration-none ms-0" asp-area="administration" asp-controller="titre" asp-action="Index">Retour à l'administration des titres</a>
 </div>

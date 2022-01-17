@@ -10,12 +10,12 @@
 	<hr />
 
 	<!-- formulaire de création d'un artiste -->
-	<div asp-validation-summary=All></div>
 	<form class="formAdmin" method="post" asp-area="administration" asp-controller="artiste" asp-action="create">
+	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 		<div class="mb-3 row">
 			<label for="nomArtiste" class="col-sm-2 col-form-label">Nom de l'artiste<span class="etoileRequired">*</span></label>
 			<div class="col-sm-10">
-				<input asp-for="@Model.Artiste.Nom" name="Artiste.Nom" aria-describedby="artisteCreate" type="text" class="form-control" id="nomArtiste" required placeholder="Nom de l'artiste">
+				<input asp-for="@Model.Artiste.Nom" name="Artiste.Nom" aria-describedby="artisteCreate" type="text" class="form-control" id="nomArtiste" placeholder="Nom de l'artiste">
 			</div>
 		</div>
 
@@ -32,8 +32,9 @@
 				<button type="submit" class="btn btn-primary">Sauvegarder</button>
 			</div>
 		</div>
+		<span asp-validation-for="Artiste.Nom" class="text-danger"></span>
 	</form>
 
-	<!-- lien de retour vers la page Index de artiste admin-->
+	<!-- lien de retour vers la page Index de artiste admin -->
 	<a class="row text-decoration-none ms-0" asp-action="Index">Retour à l'administration des artistes</a>
 </div>

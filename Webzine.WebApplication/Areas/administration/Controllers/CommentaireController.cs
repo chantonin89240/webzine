@@ -15,6 +15,7 @@
         private ITitreRepository titreRepository;
         private CommentairesViewModel model;
 
+        // contructeur de CommentaireController
         public CommentaireController(ICommentaireRepository commentaireRepository, ITitreRepository titreRepository)
         {
             this.commentaireRepository = commentaireRepository;

@@ -1,8 +1,6 @@
 ﻿namespace Webzine.ViewModels
 {
     using Webzine.Entity;
-    using Webzine.Entity.Factory;
-    using Webzine.Repository;
 
     /// <summary>
     /// Modèle utilisé par les vue d'administration des commentaires.

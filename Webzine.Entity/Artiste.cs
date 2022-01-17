@@ -20,8 +20,9 @@
         /// <summary>
         /// Nom de l'artiste.
         /// </summary>
-        [MinLength(1)]
-        [MaxLength(50)]
+        [Required(ErrorMessage = "Libellé requis.")]
+        [MinLength(1, ErrorMessage = "Veuillez saisir le nom de l'artiste (de 1 à 50 caractères).")]
+        [MaxLength(50, ErrorMessage = "Veuillez saisir le nom de l'artiste (de 1 à 50 caractères).")]
         [Display(Name = "Nom de l'artiste")]
         [Column("Nom")]
         public string? Nom { get; set; }

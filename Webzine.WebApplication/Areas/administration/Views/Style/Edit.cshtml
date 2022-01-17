@@ -9,6 +9,7 @@
 	<h2 class="mb-3">Editer un style</h2>
 	<hr />
 
+	<!-- formulaire de modification de style -->
 	<form class="p-4" method="post" asp-area="administration" asp-controller="style" asp-action="edit" asp-route-id="@Model.Style.IdStyle">
 		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 		<div class="input-group mb-1 col-6 w-50">
@@ -18,5 +19,7 @@
 		</div>
 		<span asp-validation-for="Style.Libelle" class="text-danger"></span>
 	</form>
+
+	<!-- lien de retour vers la page Index de style admin -->
 	<a class="row text-decoration-none" asp-action="Index">Retour à l'administration des styles</a>
 </div>

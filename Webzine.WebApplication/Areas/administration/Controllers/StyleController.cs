@@ -14,6 +14,7 @@
         private IStyleRepository _styleRepository;
         private StyleViewModel model;
 
+        // constructeur de StyleControlleur
         public StyleController(IStyleRepository styleRepository)
         {
             this._styleRepository = styleRepository;
@@ -40,7 +41,7 @@
         }
 
         /// <summary>
-        /// method qui créer un style 
+        /// methode qui créer le style passé en paramètre
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -61,8 +62,7 @@
             catch (DbUpdateException /* ex */)
             {
                 // Log the error (uncomment ex variable name and write a log.
-                ModelState.AddModelError(string.Empty, "Impossible d'enregistrer le style. Essayez encore, et si le problème persiste, contactez l'administrateur.");
-            
+                this.ModelState.AddModelError(string.Empty, "Impossible d'enregistrer le style. Essayez encore, et si le problème persiste, contactez l'administrateur.");
             }
 
             return this.View();
@@ -80,7 +80,7 @@
         }
 
         /// <summary>
-        /// method qui réalise la modification du style
+        /// methode qui réalise la modification du style passé en paramètre
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -118,6 +118,12 @@
             return this.View(this.model);
         }
 
+        /// <summary>
+        /// methode qui supprime le style passé en paramètre 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("delete")]

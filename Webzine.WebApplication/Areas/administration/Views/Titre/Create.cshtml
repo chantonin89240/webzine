@@ -7,6 +7,8 @@
 	<div class="divSup">
 	<h2>Ajouter un Titre</h2>
 	<hr />
+
+	<!-- formulaire d'ajout de titre -->
 	<form class="formAdmin" method="post" asp-area="administration" asp-controller="titre" asp-action="create">
 		<div class="text-danger" asp-validation-summary=All></div>
 		<div class="form-group mb-3 row">
@@ -83,6 +85,8 @@
 			</div>
 		</div>
 	</form>
+
+	<!-- lien de retour vers la page Index de titre admin -->
 	<div class="row">
 		<a class="text-decoration-none offset-2" asp-area="administration" asp-controller="titre" asp-action="Index">Retour à l'administration des titres</a>
 	</div>

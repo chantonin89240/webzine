@@ -22,8 +22,9 @@
         /// Libellé / Nom du style.
         /// </summary>
         [Required(ErrorMessage = "Libellé requis.")]
-        [MinLength(2, ErrorMessage = "Veuillez saisir un libellé pour votre titre (de 2 à 50 caractères).")]
-        [MaxLength(50, ErrorMessage = "Veuillez saisir un libellé pour votre titre (de 2 à 50 caractères).")]
+        [MinLength(2, ErrorMessage = "Veuillez saisir le libellé du style (de 2 à 50 caractères).")]
+        [MaxLength(50, ErrorMessage = "Veuillez saisir le libellé du style (de 2 à 50 caractères).")]
+        [Display(Name = "Libellé")]
         [Column("Libelle")]
         public string Libelle { get; set; }
 

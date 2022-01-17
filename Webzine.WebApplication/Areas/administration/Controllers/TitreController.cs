@@ -25,6 +25,7 @@
         private static DateTime _dateCréation;
         private static List<Style>? _stylesListForCheckbox;
 
+        // construccteur de TitreController
         public TitreController(ITitreRepository titreRepository, IStyleRepository styleRepository, IArtisteRepository artisteRepository, IModeratorServices moderator)
         {
             this._titreRepository = titreRepository;

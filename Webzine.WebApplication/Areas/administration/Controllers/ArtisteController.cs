@@ -1,6 +1,7 @@
 ﻿namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
     using Webzine.EntitiesContext;
     using Webzine.Entity;
     using Webzine.Repository;
@@ -16,11 +17,7 @@
         private IArtisteRepository artisteRepository;
         private ArtisteViewModel model = new ArtisteViewModel();
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ArtisteController"/> class.
-        /// Contrôleur pour les vues d'administration d'artistes.
-        /// </summary>
-        /// <param name="artisteRepository">Repos contenant les Artistes.</param>
+        // constructeur de ArtisteController
         public ArtisteController(IArtisteRepository artisteRepository)
         {
             this.artisteRepository = artisteRepository;
@@ -60,15 +57,17 @@
                 if (this.ModelState.IsValid)
                 {
                     this.artisteRepository.Add(model.Artiste);
+
                     return this.RedirectToAction(nameof(this.Index));
                 }
             }
-            catch
+            catch (DbUpdateException)
             {
-                this.ModelState.AddModelError(" ", "Error");
+                // Log the error (uncomment ex variable name and write a log.
+                this.ModelState.AddModelError(string.Empty, "Impossible d'enregistrer l'artiste. Essayez encore, et si le problème persiste, contactez l'administrateur.");
             }
 
-            return this.View(model.Artiste);
+            return this.View();
         }
 
         /// <summary>
