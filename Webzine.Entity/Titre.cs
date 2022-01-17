@@ -33,6 +33,7 @@
         /// <summary>
         /// Libellé/Nom du Titre.
         /// </summary>
+        [Display(Name = "Titre")]
         [Required(ErrorMessage = "Veuillez saisir un libellé pour votre titre (de 1 à 200 caractères).")]
         [MinLength(1, ErrorMessage = "Veuillez saisir un libellé pour votre titre (de 1 à 200 caractères).")]
         [MaxLength(200, ErrorMessage = "Veuillez saisir un libellé pour votre titre (de 1 à 200 caractères).")]
@@ -42,6 +43,7 @@
         /// <summary>
         /// Chronique liée au Titre.
         /// </summary>
+        [Display(Name = "Chronique")]
         [Required(ErrorMessage = "Veuillez saisir votre chronique (de 10 à 4000 caractères).")]
         [MinLength(10, ErrorMessage ="Veuillez saisir votre chronique (de 10 à 4000 caractères).")]
         [MaxLength(4000, ErrorMessage ="Veuillez saisir votre chronique (de 10 à 4000 caractères).")]
@@ -52,6 +54,7 @@
         /// URL de la Jaquette de l'Album lié au Titre.
         /// </summary>
         [Required(ErrorMessage = "Veuillez saisir un lien pour la jaquette de votre titre.")]
+        [Display(Name = "jaquette de l'album")]
         [MaxLength(250, ErrorMessage ="Maximum 250 caractères")]
         [Column("UrlJaquette")]
         public string? UrlJaquette { get; set; }
@@ -59,6 +62,7 @@
         /// <summary>
         /// Lien pour écouter au Titre.
         /// </summary>
+        [Display(Name = "url d'écoute")]
         [MinLength(13, ErrorMessage ="Minimum 13 caractères")]
         [MaxLength(250, ErrorMessage ="Maximum 250 caractères")]
         [Column("UrlEcoute")]
@@ -73,6 +77,8 @@
         /// <summary>
         /// Date de création de la chronique du Titre.
         /// </summary>
+        [Required]
+        [Display(Name = "date de création")]
         [DataType(DataType.Date)]
         [Column("DateCreation")]
         public DateTime DateCreation { get; set; }
@@ -81,6 +87,7 @@
         /// Date de la sortie du Titre.
         /// </summary>
         // [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
+        [Display(Name = "date de sortie")]
         [Required(ErrorMessage = "Veuillez sélectioner une date de sortie pour votre titre.AAAA")]
         [DataType(DataType.Date, ErrorMessage = "Veuillez sélectioner une date de sortie pour votre titre.")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
@@ -90,6 +97,7 @@
         /// <summary>
         /// Durée du titre. En Secondes.
         /// </summary>
+        [Display(Name = "durée en secondes")]
         [Range(1, 1000000, ErrorMessage = "Entrez la durée de votre titre en secondes.")]
         [Required]
         // [RegularExpression("([0-9]+)", ErrorMessage = "Entrez la durée de votre titres en secondes.")]
@@ -99,12 +107,16 @@
         /// <summary>
         /// Nombre de Lectures de la chronique du Titre.
         /// </summary>
+        [Required]
+        [Display(Name = "nombre de lectures")]
         [Column("NbLectures")]
         public int NbLectures { get; set; }
 
         /// <summary>
         /// Nombre de Likes du titre.
         /// </summary>
+        [Required]
+        [Display(Name = "nombre de likes")]
         [Column("NbLikes")]
         public int NbLikes { get; set; }
 
