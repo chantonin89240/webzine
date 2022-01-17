@@ -27,7 +27,7 @@
                 this.commentaireRepository.Add(model);
             }
 
-            return this.Redirect("Titre/Titre?idTitre=" + model.IdTitre);
+            return this.RedirectToAction("Titre","Titre", new { idTitre = model.IdTitre });
         }
     }
 }

@@ -47,18 +47,6 @@
         }
 
         /// <summary>
-        /// Retourne le nombre de page total.
-        /// </summary>
-        /// <param name="titreTotal">Quantité de titres sur une page.</param>
-        /// <returns>Quantité de pages qui contiennent des titres.</returns>
-        public int PageCount(int titreTotal)
-        {
-            // var p = Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(this.Titres.Count)/titreTotal));
-
-            return (this.Titres.Count() - (1 / titreTotal)) - (((this.Titres.Count() - 1) / titreTotal) % 1);
-        }
-
-        /// <summary>
         /// Modifie la taille d'une chaine de charactères sous 160 charactères. Utilisé pour prévoir la chronique d'un titre.
         /// </summary>
         /// <param name="longString">Longue chaine de caractères a raccourcir (si besoin).</param>

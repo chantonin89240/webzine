@@ -19,7 +19,7 @@
                         <h5><a asp-controller="Artiste" asp-action="Artiste" asp-route-nomArtiste="@titre.Artiste.Nom">@titre.Artiste.Nom </a> - <a asp-controller="Titre" asp-action="Titre" asp-route-idTitre="@titre.IdTitre">@titre.Libelle</a></h5>
                         <p class="card-text row p-3" >@Model.PreviewString(titre.Chronique)</p>
                         <div class="row ms-1 d-flex ">
-                            <a href="/Titre/Titre?idTitre=@titre.IdTitre" class="btn btn-primary text-nowrap col-xxl-3 col-xl-3 col-lg-3 col-md-2 col-sm-12 col-xs-12 m-1" style="min-width: 120px; max-width: 120px;">Lire la suite</a>
+                            <a asp-controller="titre" asp-action="titre" asp-route-idTitre="@titre.IdTitre" class="btn btn-primary text-nowrap col-xxl-3 col-xl-3 col-lg-3 col-md-2 col-sm-12 col-xs-12 m-1" style="min-width: 120px; max-width: 120px;">Lire la suite</a>
                             <p class="text-nowrap col-xxl-3 col-xl-3 col-lg-5 col-md-10 col-sm-border-12 col-xs-12 m-1">
                                 <i class="fas fa-calendar"></i><span class="ms-1">@titre.DateSortie</span>
                             </p>

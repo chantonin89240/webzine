@@ -235,17 +235,37 @@ namespace Webzine.WebApplication
 
                 // Routes menant sur la webzine de base (hors administration)
 
+
                 // Page pour un artiste
                 endpoints.MapControllerRoute(
                     name: "artiste",                                // PARTIE POUR ARTISTE! décommenter ne fois qu'il prend un nom (string)
                     pattern: "artiste/{nomArtiste}",
                     defaults: new { controller = "Artiste", action = "Artiste" });
 
+                /*                                  prépa bonus
+                 * endpoints.MapControllerRoute(
+                    name: "titre",
+                    pattern: "titre/{idTitre:int}/{nomArtiste}/{nomTitre}",
+                    defaults: new { controller = "titre", action = "titre" });
+                 */
+
                 // Page pour un article sur un titre
                 endpoints.MapControllerRoute(
                     name: "titre",
-                    pattern: "titre/{id:int}",
+                    pattern: "titre/{idTitre:int}",
                     defaults: new { controller = "titre", action = "titre" });
+
+                //Liker un titre
+                endpoints.MapControllerRoute(
+                    name: "Liker Titre",
+                    pattern: "titre/liker",
+                    defaults: new { controller = "titre", action = "Liker" });
+
+                // Commenter un titre
+                endpoints.MapControllerRoute(
+                    name: "Commenter Titre",
+                    pattern: "titre/commenter",
+                    defaults: new { controller = "commentaire", action = "index" });
 
                 // Page d'acceuil
                 endpoints.MapControllerRoute(
