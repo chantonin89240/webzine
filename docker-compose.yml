@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  webzine.webapplication:
+    image: ${DOCKER_REGISTRY-}webzinewebapplication
+    build:
+      context: .
+      dockerfile: Webzine.WebApplication/Dockerfile
