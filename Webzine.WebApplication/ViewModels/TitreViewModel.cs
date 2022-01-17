@@ -45,9 +45,9 @@
         /// <returns></returns>
         public int PageCount(int titreTotal)
         {   
-            // var p = Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(this.Titres.Count)/titreTotal));
+            // Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(this.Titres.Count)/titreTotal));
 
-            return (this.Titres.Count() - 1 / titreTotal) - (((this.Titres.Count() - 1) / titreTotal) % 1);
+            return Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(this.Titres.Count)/titreTotal));
         }
 
         public string PreviewString(string longString)

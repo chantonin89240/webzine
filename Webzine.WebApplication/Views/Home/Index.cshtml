@@ -1,6 +1,28 @@
 ﻿@{
-    var pageDes = @Model.Page - 1;
+    var pageDes = Model.Page - 1;
     var pageAsc = Model.Page + 1;
+    int offsetBegin = 0;
+    int offsetEnd =12;
+    if(Model.Page < 2)
+    {
+        offsetBegin = 1;
+        offsetEnd = 12;
+
+    }
+    else if(Model.Page < 8){
+        offsetBegin = 0;
+        offsetEnd = 12;
+    }
+    else if(Model.Page > Model.PageMax-8)
+    {
+        offsetBegin = -12;
+        offsetEnd = 0;
+    }
+    else
+    {
+        offsetBegin = -6;
+        offsetEnd = 6;
+    }
 
 }
 @model Webzine.WebApplication.ViewModels.TitreViewModel;
@@ -90,9 +112,13 @@
         </li>
     }
     <li class="page-item"><a class="page-link" asp-route-pageNumber="1">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">...</a></li>
+
+    @if(Model.Page > 2)
+    {
+        <li class="page-item"><a class="page-link" href="#">...</a></li>
+    }
     
-    @for(var i = Model.Page; i < Model.Page+8; i++)
+    @for(var i = Model.Page + @offsetBegin; i < Model.Page + @offsetEnd; i++)
     {
         if(@i == Model.Page)
         {
@@ -104,8 +130,14 @@
         }
     }
 
-    <li class="page-item"><a class="page-link" href="#">...</a></li>
+    @if(Model.Page <= Model.PageMax-2)
+    {
+        <li class="page-item"><a class="page-link" href="#">...</a></li>
+    }
+
+
     <li class="page-item"><a class="page-link" asp-route-pageNumber="@Model.PageMax">@Model.PageMax</a></li>
+    
     @if (Model.Page == Model.PageMax)
     {
         <li class="page-item  disabled">
