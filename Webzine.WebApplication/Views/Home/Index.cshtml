@@ -1,6 +1,7 @@
 ﻿@{
     var pageDes = Model.Page - 1;
     var pageAsc = Model.Page + 1;
+
     int offsetBegin = 0;
     int offsetEnd =12;
     if(Model.Page < 2)
@@ -13,10 +14,15 @@
         offsetBegin = 0;
         offsetEnd = 12;
     }
-    else if(Model.Page > Model.PageMax-8)
+    else if(Model.Page > Model.PageMax-8 && Model.Page < Model.PageMax)
     {
         offsetBegin = -12;
         offsetEnd = 0;
+    }
+    else if(Model.Page == Model.PageMax)
+    {
+        offsetBegin = -12;
+        offsetEnd = -1;
     }
     else
     {
@@ -104,51 +110,53 @@
             <li class="page-item disabled">
                 <a class="page-link" asp-route-pageNumber="@pageDes" tabindex="-1" aria-disabled="true">Précédent</a>
             </li>
+             <li class="page-item active"><a class="page-link" asp-route-pageNumber="1">1</a></li>
         }
         else
         {
             <li class="page-item">
                 <a class="page-link" asp-route-pageNumber="@pageDes" tabindex="-1" aria-disabled="false">Précédent</a>
             </li>
+             <li class="page-item"><a class="page-link" asp-route-pageNumber="1">1</a></li>
         }
-        <li class="page-item"><a class="page-link" asp-route-pageNumber="1">1</a></li>
+       
 
     @if(Model.Page > 2)
     {
-        <li class="page-item"><a class="page-link" href="#">...</a></li>
+        <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
 
     }
-    @for(var i = Model.Page + @offsetBegin; i < Model.Page + @offsetEnd; i++)
+    @for(var i = Model.Page + @offsetBegin; i <= Model.Page + @offsetEnd; i++)
         {
-            if (@i == Model.Page)
+            if (@i == Model.Page && @i != Model.PageMax)
             {
                 <li class="page-item active" aria-current="page"><a class="page-link" asp-route-pageNumber="@i">@i</a></li>
             }
             else
             {
-                <li class="page-item"><a class="page-link" asp-route-pageNumber="@i">@i</a></li>
+                <li class="page-item d-none d-xxl-block d-xl-block d-lg-block"><a class="page-link" asp-route-pageNumber="@i">@i</a></li>
             }
         }
 
-    @if(Model.Page <= Model.PageMax-2)
+    @if(Model.Page < Model.PageMax-1)
     {
-        <li class="page-item"><a class="page-link" href="#">...</a></li>
+        <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
     }
 
-    <li class="page-item"><a class="page-link" asp-route-pageNumber="@Model.PageMax">@Model.PageMax</a></li>
-    
-        @if (Model.Page == Model.PageMax)
-        {
-            <li class="page-item  disabled">
-                <a class="page-link" asp-route-pageNumber="@pageAsc" aria-disabled="true">Suivant</a>
-            </li>
-        }
-        else
-        {
-            <li class="page-item">
-                <a class="page-link" asp-route-pageNumber="@pageAsc" aria-disabled="false">Suivant</a>
-            </li>
-        }
+    @if (Model.Page == Model.PageMax)
+    {
+        <li class="page-item active"><a class="page-link" asp-route-pageNumber="@Model.PageMax">@Model.PageMax</a></li>
+        <li class="page-item disabled">
+            <a class="page-link" asp-route-pageNumber="@pageAsc" aria-disabled="true">Suivant</a>
+        </li>
+    }
+    else
+    {
+        <li class="page-item"><a class="page-link" asp-route-pageNumber="@Model.PageMax">@Model.PageMax</a></li>
+        <li class="page-item">
+            <a class="page-link" asp-route-pageNumber="@pageAsc" aria-disabled="false">Suivant</a>
+        </li>
+    }
     </ul>
 </nav>
 
