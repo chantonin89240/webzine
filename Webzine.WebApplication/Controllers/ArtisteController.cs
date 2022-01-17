@@ -15,6 +15,11 @@
         private IArtisteRepository artisteRepository;
         private ArtisteViewModel model = new ArtisteViewModel();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ArtisteController"/> class.
+        /// Prepares data for the controller to call the view.
+        /// </summary>
+        /// <param name="artisteRepository">Artiste repository model.</param>
         public ArtisteController(IArtisteRepository artisteRepository)
         {
             this.artisteRepository = artisteRepository;
@@ -30,10 +35,10 @@
             string nom = System.Net.WebUtility.UrlDecode(nomArtiste);
             try
             {
-                model.Artiste = this.artisteRepository.FindAll().First(artiste => artiste.Nom == nom);
+                this.model.Artiste = this.artisteRepository.FindAll().First(artiste => artiste.Nom == nom);
                 return this.View(this.model);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return this.Redirect("/");
             }

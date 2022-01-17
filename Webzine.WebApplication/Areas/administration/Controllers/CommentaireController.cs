@@ -38,7 +38,8 @@
         /// </summary>
         /// <param name="id">id du <see cref="Commentaire"/> qui sera effacé.</param>
         /// <returns>Page web de vérification.</returns>
-        public IActionResult delete(int id)
+        [ActionName("delete")]
+        public IActionResult Delete(int id)
         {
             this.model.ContextCommentaire = this.commentaireRepository.Find(id);
             this.model.ContextTitre = this.titreRepository.Find(this.model.ContextCommentaire.IdTitre);
@@ -46,9 +47,15 @@
             return this.View(this.model);
         }
 
+        /// <summary>
+        /// Supprime un Commentaire dans la base de donnée.
+        /// </summary>
+        /// <param name="id">ID du commentaire à effacer.</param>
+        /// <returns>Vue Index.</returns>
         [HttpPost]
+        [ActionName("delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult delete(CommentairesViewModel model,int id)
+        public IActionResult ConfirmedDelete(int id)
         {
             this.commentaireRepository.Delete(id);
             return this.RedirectToAction("Index");
