@@ -7,6 +7,7 @@
     using Webzine.Services;
     using Webzine.WebApplication.Areas.Admin.ViewModels;
 
+
     /// <summary>
     /// Représente le controlleur pour la partie des <see cref="Titre"/>s dans la zone d'administration.
     /// </summary>
@@ -16,18 +17,21 @@
         private ITitreRepository _titreRepository;
         private IStyleRepository _styleRepository;
         private IArtisteRepository _artisteRepository;
+        private IModeratorServices _moderator;
         private TitreViewModel model;
-        private Moderator moderator;
-        private static List<string> _editStylesTitre = new List<string>();
+        private static List<string>? _editOldIdStyle;
+        private static List<Artiste>? _editArtisteSelect;
+        private static Artiste? _editTitreArtiste;
         private static DateTime _dateCréation;
+        private static List<Style>? _stylesListForCheckbox;
 
-        public TitreController(ITitreRepository titreRepository, IStyleRepository styleRepository, IArtisteRepository artisteRepository)
+        public TitreController(ITitreRepository titreRepository, IStyleRepository styleRepository, IArtisteRepository artisteRepository, IModeratorServices moderator)
         {
             this._titreRepository = titreRepository;
             this._styleRepository = styleRepository;
             this._artisteRepository = artisteRepository;
+            this._moderator = moderator;
             this.model = new TitreViewModel();
-            this.moderator = new Moderator(titreRepository);
         }
 
         /// <summary>
@@ -42,7 +46,6 @@
             var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             logger.Debug("Entrée dans index.");
             this.model.Titres = this._titreRepository.FindAll().ToList();
-            // this.model.Titres.ForEach(t => this.model.DateToString(t));
             return this.View(this.model);
         }
 
@@ -55,8 +58,10 @@
         /// </returns>
         public IActionResult Create()
         {
-            this.model.Artistes = this._artisteRepository.FindAll().ToList();
-            this.model.Styles = this._styleRepository.FindAll().ToList();
+            _editArtisteSelect = this._artisteRepository.FindAll().ToList();
+            _stylesListForCheckbox = this._styleRepository.FindAll().ToList();
+            this.model.Artistes = _editArtisteSelect;
+            this.model.Styles = _stylesListForCheckbox;
             return this.View(this.model);
         }
 
@@ -71,27 +76,33 @@
         [ActionName("create")]
         public IActionResult Create(TitreViewModel model)
         {
-
+            var listIdStyle = this.Request.Form["ListeStyles"].ToList();
+            model.Styles = _stylesListForCheckbox;
+            model.Artistes = _editArtisteSelect;
+            listIdStyle.ForEach(id => 
+                model.Titre.TitresStyles.Append
+                ( 
+                    new TitreStyle() { IdStyle=Convert.ToInt32(id), IdTitre = model.Titre.IdTitre}
+                )
+            );
             try
             {
-                // if (ModelState.IsValid)
-                // {
-
-                    var listIdStyle = this.Request.Form["ListeStyles"].ToList();
-
-                    this.moderator.ModerationText(model.Titre, listIdStyle);
-                    // this._titreRepository.Add(model.Titre);
-                    // this._titreRepository.AddStyles(model.Titre, listIdStyle);  
+                if (ModelState.IsValid) 
+                {
+                    if(!this._moderator.ModerationCreateChronique(model.Titre, listIdStyle))
+                    {          
+                        ModelState.AddModelError(string.Empty, "Votre chronique ne respecte pas la charte du site");
+                        return this.View(model);
+                    }
                     return this.RedirectToAction(nameof(Index));
-                // }
+                }
             }
             catch (DbUpdateException  ex )
             {
                 // Log the error (uncomment ex variable name and write a log).
-                ModelState.AddModelError(string.Empty, "Unable to save changes. " + "Try again, and if the problem persists " + "see your system administrator.");
+                ModelState.AddModelError(string.Empty, "Impossible d'enregistrer le titre. Essayez encore, et si le problème persiste, contactez l'administrateur.");
             }
-
-            return this.View(model.Titre);
+            return this.View(model);
         }
 
         /// <summary>
@@ -104,10 +115,12 @@
         public IActionResult Edit(int id)
         {
             this.model.Titre = this._titreRepository.Find(id);
-            _editStylesTitre = this.model.Titre.TitresStyles.Select(ts => ts.IdStyle.ToString()).Distinct().ToList();
+            _editOldIdStyle = this.model.Titre.TitresStyles.Select(ts => ts.IdStyle.ToString()).Distinct().ToList();
             _dateCréation = this.model.Titre.DateCreation;
-            this.model.Artistes = this._artisteRepository.FindAll().ToList();
-            this.model.Styles = this._styleRepository.FindAll().ToList();
+            _editArtisteSelect = this._artisteRepository.FindAll().ToList();
+            _stylesListForCheckbox = this._styleRepository.FindAll().ToList();
+            this.model.Artistes = _editArtisteSelect;
+            this.model.Styles = _stylesListForCheckbox;
             return this.View(this.model);
         }
 
@@ -123,32 +136,38 @@
         [ActionName("edit")]
         public IActionResult Edit(TitreViewModel model, int id)
         {
+            var newIdStyle = this.Request.Form["ListeStyles"].ToList();
+            model.Titre.IdTitre = id;
+            model.Titre.DateCreation = _dateCréation;
+            model.Artistes = _editArtisteSelect;
+            model.Styles =_stylesListForCheckbox;
+            newIdStyle.ForEach(id => 
+                model.Titre.TitresStyles.Append
+                ( 
+                    new TitreStyle() { IdStyle=Convert.ToInt32(id), IdTitre = model.Titre.IdTitre}
+                )
+            );
+            
             try
             {
-                // if (this.ModelState.IsValid)
-                // {
-                    var listIdStyle = this.Request.Form["ListeStyles"].ToList();
-                    model.Titre.IdTitre = id;
-                    model.Titre.DateCreation = _dateCréation;
-                    // titre.DateCreation = DateTime.Now;
-                    if(listIdStyle != _editStylesTitre)
+                if (this.ModelState.IsValid)
+                {
+                    if(!this._moderator.ModerationEditChronique(model.Titre, newIdStyle, _editOldIdStyle))
                     {
-                        var listRemove = _editStylesTitre.Except(listIdStyle).ToList();
-                        var listAdd = listIdStyle.Except(_editStylesTitre).ToList();
-                        this._titreRepository.UpdateStyles(id, listRemove, listAdd);
+                        ModelState.AddModelError(string.Empty, "Votre chronique ne respecte pas la charte du site");
+                        return this.View(model);
                     }
-
-                    this._titreRepository.Update(model.Titre);
+                    
                     return this.RedirectToAction(nameof(this.Index));
-                //}
+                }
             }
             catch (DbUpdateException ex)
             {
                 // Log the error (uncomment ex variable name and write a log).
-                this.ModelState.AddModelError(string.Empty, "Unable to save changes. " + "Try again, and if the problem persists " + "see your system administrator.");
+                this.ModelState.AddModelError(string.Empty, "Impossible de sauvegarder les modifications. Essayez encore, et si le problème persiste, contactez l'administrateur.");
             }
 
-            return this.View(model.Titre);
+            return this.View(model);
         }
 
         /// <summary>
@@ -177,17 +196,14 @@
         {
             try
             {
-                // if (this.ModelState.IsValid)
-                // {
-                    var titre = this._titreRepository.Find(id);
-                    this._titreRepository.Delete(titre);
-                    return this.RedirectToAction(nameof(Index));
-                // }
+                var titre = this._titreRepository.Find(id);
+                this._titreRepository.Delete(titre);
+                return this.RedirectToAction(nameof(Index));
             }
             catch (DbUpdateException ex )
             {
                 // Log the error (uncomment ex variable name and write a log).
-                this.ModelState.AddModelError(string.Empty, "Unable to save changes. " + " Try again, and if the problem persists " + " see your system administrator.");
+                this.ModelState.AddModelError(string.Empty, "Inpossible de supprimer le titre. Essayez encore, et si le problème persiste, contactez l'administrateur.");
             }
 
             return this.View();

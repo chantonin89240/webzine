@@ -47,7 +47,7 @@
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("create")]
-        public async Task<IActionResult> Create(StyleViewModel model)
+        public IActionResult Create(StyleViewModel model)
         {
             try
             {
@@ -61,10 +61,11 @@
             catch (DbUpdateException /* ex */)
             {
                 // Log the error (uncomment ex variable name and write a log.
-                ModelState.AddModelError(string.Empty, "Unable to save changes. " + "Try again, and if the problem persists " +"see your system administrator.");
+                ModelState.AddModelError(string.Empty, "Impossible d'enregistrer le style. Essayez encore, et si le problème persiste, contactez l'administrateur.");
+            
             }
 
-            return this.View(model.Style);
+            return this.View();
         }
 
         /// <summary>
@@ -100,10 +101,10 @@
             catch (DbUpdateException /* ex */)
             {
                 // Log the error (uncomment ex variable name and write a log.
-                this.ModelState.AddModelError(string.Empty, "Unable to save changes. " +"Try again, and if the problem persists " +"see your system administrator.");
+                this.ModelState.AddModelError(string.Empty, "Impossible de sauvegarder les modifications. Essayez encore, et si le problème persiste, contactez l'administrateur.");
             }
 
-            return this.View(model.Style);
+            return this.View(model);
         }
 
         /// <summary>

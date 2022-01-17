@@ -1,7 +1,7 @@
 ﻿namespace Webzine.Repository
 {
     using Webzine.Entity;
-    using Webzine.Entity.Factory;
+    using Webzine.EntitiesContext;
     using Webzine.Repository.Contracts;
 
     /// <summary>
@@ -9,7 +9,11 @@
     /// </summary>
     public class LocalCommentaireRepository : ICommentaireRepository
     {
-        private List<Commentaire> commentaires = CommentaireFactory.CreateCommentaire(10, TitreFactory.CreateTitre(10, ArtisteFactory.CreateArtiste(10), StyleFactory.GetStyles())).ToList();
+        
+        private WebzineDbContext _context;
+        public LocalCommentaireRepository(WebzineDbContext context){
+            this._context = context;
+        }
 
         /// <summary>
         /// Adds a <see cref="Commentaire"/> to local repository.
@@ -17,7 +21,7 @@
         /// <param name="commentaire"><see cref="Commentaire"/> to add.</param>
         public void Add(Commentaire commentaire)
         {
-            this.commentaires.Add(commentaire);
+            this._context.Commentaires.Add(commentaire);
         }
 
         /// <summary>
@@ -26,9 +30,9 @@
         /// <param name="id">ID of the <see cref="Commentaire"/> to remove.</param>
         public void Delete(int id)
         {
-            if (this.commentaires.Exists(comm => comm.IdCommentaire == id))
+            if (this._context.Commentaires.ToList().Exists(comm => comm.IdCommentaire == id))
             {
-                this.commentaires.Remove(this.Find(id));
+                this._context.Commentaires.Remove(this.Find(id));
             }
         }
 
@@ -39,9 +43,9 @@
         /// <returns><see cref="Commentaire"/> in repository with requested ID.</returns>
         public Commentaire Find(int id)
         {
-            if (this.commentaires.Exists(comm => comm.IdCommentaire == id))
+            if (this._context.Commentaires.ToList().Exists(comm => comm.IdCommentaire == id))
             {
-                return this.commentaires.First(comm => comm.IdCommentaire == id);
+                return this._context.Commentaires.First(comm => comm.IdCommentaire == id);
             }
             else { return new Commentaire(); }
         }
@@ -52,7 +56,7 @@
         /// <returns><see cref="Commentaire"/> list.</returns>
         public IEnumerable<Commentaire> FindAll()
         {
-            return this.commentaires.FindAll(comm => comm is not null);
+            return this._context.Commentaires.ToList().FindAll(comm => comm is not null);
         }
 
 

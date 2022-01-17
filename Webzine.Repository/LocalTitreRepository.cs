@@ -1,16 +1,19 @@
 ﻿namespace Webzine.Repository
 {
     using Webzine.Entity;
-    using Webzine.Entity.Factory;
     using Webzine.Repository.Contracts;
+    using Webzine.EntitiesContext;
+    using Microsoft.EntityFrameworkCore;
 
     /// <summary>
     /// Represents the local repository for <see cref="Titre"/>s.
     /// </summary>
     public class LocalTitreRepository : ITitreRepository
     {
-        private List<Titre> titres = TitreFactory.CreateTitre(10, ArtisteFactory.CreateArtiste(10), StyleFactory.GetStyles()).ToList();
-        private List<Style> styles = StyleFactory.CreateStyle().ToList();
+        private WebzineDbContext _context;
+        public LocalTitreRepository(WebzineDbContext context){
+            this._context = context;
+        }
 
         /// <summary>
         /// Adds a <see cref="Titre"/> to local repository.
@@ -18,7 +21,7 @@
         /// <param name="titre"><see cref="Titre"/> to add.</param>
         public void Add(Titre titre)
         {
-            this.titres.Add(titre);
+            this._context.Titres.Add(titre);
         }
 
         public void AddStyles(Titre titre, List<string> styles)
@@ -32,7 +35,7 @@
         /// <returns>how many <see cref="Titre"/>s are in the repository.</returns>
         public int Count()
         {
-            return this.titres.Count;
+            return this._context.Titres.Count();
         }
 
         /// <summary>
@@ -41,7 +44,7 @@
         /// <param name="titre"><see cref="Titre"/> to remove.</param>
         public void Delete(Titre titre)
         {
-            this.titres.Remove(titre);
+            this._context.Titres.Remove(titre);
         }
 
         /// <summary>
@@ -51,7 +54,7 @@
         /// <returns><see cref="Titre"/> with given ID.</returns>
         public Titre Find(int idTitre)
         {
-            return this.titres.First(t => t.IdTitre == idTitre);
+            return this._context.Titres.First(t => t.IdTitre == idTitre);
         }
 
         /// <summary>
@@ -60,7 +63,13 @@
         /// <returns>whole <see cref="Titre"/> List.</returns>
         public IEnumerable<Titre> FindAll()
         {
-            return this.titres;
+            var titres = this._context.Titres
+                .Include(t => t.Artiste)
+                .Include(t => t.Commentaires)
+                .Include(t => t.TitresStyles)
+                .ThenInclude(ts => ts.Style);
+
+            return titres;
         }
 
         /// <summary>
@@ -71,7 +80,8 @@
         /// <returns>List of <see cref="Titre"/>s.</returns>
         public IEnumerable<Titre> FindTitres(int offset, int limit)
         {
-            return this.titres.Skip(limit).Take(offset);
+            var titres = this._context.Titres.Skip(offset).Take(limit);
+            return this._context.Titres.Skip(offset).Take(limit);
         }
 
         /// <summary>
@@ -80,9 +90,9 @@
         /// <param name="titre"><see cref="Titre"/> to increment.</param>
         public void IncrementNbLectures(Titre titre)
         {
-            int nbTotal = this.titres.FirstOrDefault(t => t == titre).NbLectures + 1;
-            this.titres.FirstOrDefault(t => t == titre).NbLectures = nbTotal;
-            this.Update(titre);
+            int nbTotal = this._context.Titres.FirstOrDefault(t => t == titre).NbLectures + 1;
+            this._context.Titres.FirstOrDefault(t => t == titre).NbLectures = nbTotal;
+            // this.Update(titre);
         }
 
         /// <summary>
@@ -91,9 +101,9 @@
         /// <param name="titre"><see cref="Titre"/> to increment.</param>
         public void IncrementNbLikes(Titre titre)
         {
-            int nbTotal = this.titres.FirstOrDefault(t => t == titre).NbLikes + 1;
-            this.titres.FirstOrDefault(t => t == titre).NbLikes = nbTotal;
-            this.Update(titre);
+            int nbTotal = this._context.Titres.FirstOrDefault(t => t == titre).NbLikes + 1;
+            this._context.Titres.FirstOrDefault(t => t == titre).NbLikes = nbTotal;
+            // this.Update(titre);
         }
 
         /// <summary>
@@ -103,7 +113,7 @@
         /// <returns><see cref="Titre"/>s containing given keyword.</returns>
         public IEnumerable<Titre> Search(string mot)
         {
-            return this.titres.Where(t => t.Libelle.Contains(mot));
+            return this._context.Titres.Where(t => t.Libelle.Contains(mot));
         }
 
         /// <summary>
@@ -113,8 +123,8 @@
         /// <returns><see cref="Titre"/>s with the given Style.</returns>
         public IEnumerable<Titre> SearchByStyle(string libelle)
         {
-            var idStyle = this.styles.First(s => s.Libelle.Contains(libelle)).IdStyle;
-            return this.titres.FindAll(t => t.TitresStyles.ToList().Exists(item => item.IdStyle == idStyle));
+            var idStyle = this._context.Styles.First(s => s.Libelle.Contains(libelle)).IdStyle;
+            return this._context.Titres.ToList().FindAll(t => t.TitresStyles.ToList().Exists(item => item.IdStyle == idStyle));
         }
 
         /// <summary>
@@ -124,13 +134,13 @@
         /// <exception cref="NotImplementedException">Not yet implemented.</exception>
         public void Update(Titre titre)
         {
-            //this.titres.Find(t => t == titre).updateDbTitle(................);
+            //this._context.Titres.Find(t => t == titre).updateDbTitle(................);
             throw new NotImplementedException();
         }
 
         public void UpdateStyles(int IdTitre, List<string> listRemove, List<string> listAdd)
         {
-            //this.titres.Find(t => t == titre).updateDbTitle(................);
+            //this._context.Titres.Find(t => t == titre).updateDbTitle(................);
             throw new NotImplementedException();
         }
     }

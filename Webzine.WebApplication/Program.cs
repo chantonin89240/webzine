@@ -9,6 +9,7 @@ try
 {
   var app = Startup.Initialize(args);
   app.Run();
+  logger.Debug("App is running");
 }
 catch (Exception exception)
 {

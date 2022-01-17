@@ -9,47 +9,74 @@ namespace Webzine.WebApplication
     using Webzine.EntitiesContext;
     using Webzine.Repository;
     using Webzine.Repository.Contracts;
+    using Webzine.Services;
 
     public static class Startup
     {
-        public static string dataPath;
+        public static string dataSetting;
         public static string sgbd;
 
+        /// <summary>
+        /// Méthode d'initialisation de l'application
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns>Application configurer prête à être lancer</returns>
         public static WebApplication Initialize(string [] args)
-
         {
             var builder = WebApplication.CreateBuilder(args);
             ConfigureServices(builder);
             var app = builder.Build();
-            using (var scope = app.Services.CreateScope())
+            var keywordsResearchApi = builder.Configuration.GetSection("Configuration").GetSection("KeywordSearchApiDeezer").Get<List<string>>();
+            var resetDb = builder.Configuration.GetSection("Configuration").GetSection("ResetDb").Get<string>();
+
+            if(dataSetting == "Database" || dataSetting == "LocalWithDatabase")
             {
-                var services = scope.ServiceProvider;
-                try
+                using (var scope = app.Services.CreateScope())
                 {
-                    var webzineDbContext = services.GetRequiredService<WebzineDbContext>();
-
-                    // Supprime et cr�e la base de donn�es
-                    webzineDbContext.Database.EnsureDeleted();
-                    webzineDbContext.Database.EnsureCreated();
-
-                    // Initialisation de la base de donn�es
-                    switch (dataPath)
+                    var services = scope.ServiceProvider;
+                    try
                     {
-                        case "Database":
-                            SeedDataApiDeezer.InitializeData(webzineDbContext);
-                            break;
-                        case "Local":
-                            SeedDataLocal.InitialisationDB(webzineDbContext);
-                            break;
-                        default:
-                            throw new InvalidOperationException();
+                        var webzineDbContext = services.GetRequiredService<WebzineDbContext>();
+
+                        // Supprime et cr�e la base de donn�es
+                        if(resetDb == "on")
+                        {
+                            webzineDbContext.Database.EnsureDeleted();
+                            webzineDbContext.Database.EnsureCreated();   
+                        }
+                        
+                        // Initialisation de la base de donn�es
+                        switch (dataSetting)
+                        {
+                            case "Database":
+                                if(resetDb == "on")
+                                {
+                                    SeedDataApiDeezer.InitializeData(webzineDbContext, keywordsResearchApi);
+                                }
+                                break;
+                            case "LocalWithDatabase":
+                                SeedDataLocal.InitialisationDB(webzineDbContext);
+                                break;
+                            default:
+                                // Si il y a une erreur elle sera déjà remonter dans ConfigureServices();
+                                throw new InvalidOperationException();
+                        }
+                        
                     }
+                    catch (Exception e)
+                    {
+                        ILogger<Program> log = services.GetRequiredService<ILogger<Program>>();
+                        log.LogError(e, "An error occurred seeding the DB.");
+                    }   
                 }
-                catch (Exception e)
-                {
-                    ILogger<Program> log = services.GetRequiredService<ILogger<Program>>();
-                    log.LogError(e, "An error occurred seeding the DB.");
-                }
+            }
+            else if(dataSetting == "Local")
+            {
+                // Log Data Factory direct
+            }
+            else
+            {
+                // Log erreur configuration
             }
 
             Configure(app);
@@ -57,9 +84,13 @@ namespace Webzine.WebApplication
             return app;
         }
 
+        /// <summary>
+        /// Configuration des services du conteneur
+        /// </summary>
+        /// <param name="builder"></param>
         public static void ConfigureServices(WebApplicationBuilder builder)
         {
-            dataPath = builder.Configuration.GetSection("Configuration").GetValue<string>("DataRepository");
+            dataSetting = builder.Configuration.GetSection("Configuration").GetValue<string>("DataRepository");
             sgbd = builder.Configuration.GetSection("Configuration").GetValue<string>("SGBD");
 
             // NLog: Setup NLog for Dependency injection
@@ -70,46 +101,70 @@ namespace Webzine.WebApplication
 
             // Ajout des services dans le conteneur
             builder.Services.AddControllersWithViews();
-            builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+            builder.Services.AddRazorPages()
+                .AddRazorRuntimeCompilation()
+                .AddMvcOptions(options =>
+                    {
+                        options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
+                            _ => "Veuillez entrer une date.");
+                    });
 
+            // Définition du comportement de la création de champs type Datetime dans PostgreSQL (timestamp)
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-            if(dataPath == "Database")
-            {
-                builder.Services.AddDbContext<WebzineDbContext>(
-                    options =>
+            // Entities Context
+            builder.Services.AddDbContext<WebzineDbContext>(
+                options =>
+                {
+                    switch (sgbd)
                     {
-                        switch (sgbd)
-                        {
-                            case "PostgreSql":
-                                options.UseNpgsql(builder.Configuration.GetConnectionString("WebzineDbPostgreSql"));
-                                break;
-                            case "SQLite":
-                                options.UseSqlite(builder.Configuration.GetConnectionString("WebzineDbSqlite"));
-                                break;
-                            case "SqlServer":
-                                options.UseSqlServer(builder.Configuration.GetConnectionString("WebzineDbSQLServer"));
-                                break;
-                            default:
-                                break;
-                        }
+                        case "PostgreSql":
+                            options.UseNpgsql(builder.Configuration.GetConnectionString("WebzineDbPostgreSql"));
+                            break;
+                        case "SQLite":
+                            options.UseSqlite(builder.Configuration.GetConnectionString("WebzineDbSqlite"));
+                            break;
+                        case "SqlServer":
+                            options.UseSqlServer(builder.Configuration.GetConnectionString("WebzineDbSQLServer"));
+                            break;
+                        default:
+                            // log erreur configuration type SGBDR
+                            break;
                     }
-                );
+                }
+            );
 
+            // Repository
+            if(dataSetting == "Database")
+            {
                 builder.Services.AddScoped<ITitreRepository, DbTitreRepository>();
                 builder.Services.AddScoped<IArtisteRepository, DbArtisteRepository>();
                 builder.Services.AddScoped<ICommentaireRepository, DbCommentaireRepository>();
                 builder.Services.AddScoped<IStyleRepository, DbStyleRepository>();
             }
-            else
+            else if(dataSetting == "Local" || dataSetting == "LocalWithDatabase")
             {
                 builder.Services.AddScoped<ITitreRepository, LocalTitreRepository>();
                 builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
                 builder.Services.AddScoped<ICommentaireRepository, LocalCommentaireRepository>();
                 builder.Services.AddScoped<IStyleRepository, LocalStyleRepository>();
             }
+            else
+            {
+                // log erreur configuration type de données
+                throw new NotImplementedException();
+            }
+
+            // Bussiness Logic Layer
+            builder.Services.AddScoped<IModeratorServices, ModeratorServices>();
         }
 
+        /// <summary>
+        /// Configuration de redirection des requête HTTP 
+        /// Configuration des chemins des fichiers staiques vers wwwroot
+        /// Configuration du routing
+        /// </summary>
+        /// <param name="app"></param>
         public static void Configure(WebApplication app)
         {
             // Configure the HTTP request pipeline.
@@ -118,6 +173,7 @@ namespace Webzine.WebApplication
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
