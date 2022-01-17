@@ -28,7 +28,7 @@
         /// <returns>vue d'ensemble de tous les <see cref="Artiste"/>s.</returns>
         public IActionResult Index()
         {
-            this.model.Artistes = this._artisteRepository.FindAll().ToList();
+            this.model.Artistes = this._artisteRepository.FindAll().OrderBy(a => a.Nom).ToList();
             return this.View(this.model);
         }
 

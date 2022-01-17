@@ -8,7 +8,8 @@ namespace Webzine.Repository
     public class DbArtisteRepository : IArtisteRepository
     {
         private WebzineDbContext _context;
-        public DbArtisteRepository(WebzineDbContext context){
+        public DbArtisteRepository(WebzineDbContext context)
+        {
             this._context = context;
         }
 
@@ -19,12 +20,14 @@ namespace Webzine.Repository
         /// <exception cref="NotImplementedException">Not yet implemented.</exception>
         public void Add(Artiste artiste)
         {
-            // recherceh si l' artiste existe déjà
-            var artistes = this._context.Artistes.FirstOrDefault(art => art.Nom.ToLower() == artiste.Nom.ToLower());
+            var art = artiste.Nom;
+
 
             // s'il n'existe pas on le crée
-            if (artistes == null)
+            if (this.rechercheArtiste(artiste) == null)
             {
+                artiste.Nom = art;
+                artiste.Nom = this.boldArtiste(artiste);
                 this._context.Add(artiste);
                 this._context.SaveChanges();
             }
@@ -70,23 +73,29 @@ namespace Webzine.Repository
         /// </summary>
         /// <param name="artiste">New or Updated <see cref="Artiste"/></param>
         public void Update(Artiste artiste)
-        {
-            var artistes = this._context.Artistes.Where(a => a.IdArtiste != artiste.IdArtiste);
-            var result = false;
-            foreach (var artis in artistes)
+        {            var artistes = this._context.Artistes.Where(a => a.IdArtiste != artiste.IdArtiste).FirstOrDefault(art => art.Nom.ToLower() == artiste.Nom.ToLower());
+            if (artistes == null)
             {
-                if (artiste.Nom == artis.Nom )
-                {
-                    result = true;
-                }
-            }
-            if (result != true )
-            {
-                this._context.Artistes.Update(artiste);
+                artiste.Nom = this.boldArtiste(artiste);
+                this._context.Update(artiste);
                 this._context.SaveChanges();
             }
 
+
             this._context.Entry(artiste).State = EntityState.Modified;
+        }
+
+        public Artiste rechercheArtiste(Artiste artiste)
+        {
+            var artistes = this._context.Artistes.FirstOrDefault(art => art.Nom.ToLower() == artiste.Nom.ToLower());
+            return artistes;
+        }
+
+        public string boldArtiste(Artiste artiste)
+        {
+            var bold = artiste.Nom.First().ToString().ToUpper() + artiste.Nom.Remove(0, 1);
+            return bold;
+
         }
     }
 }
