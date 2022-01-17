@@ -8,48 +8,36 @@
 
     public class RechercheController : Controller
     {
-        private IArtisteRepository _artisteRepository;
-        private ITitreRepository _titreRepository;
+        private IArtisteRepository artisteRepository;
+        private ITitreRepository titreRepository;
+        private RechercheViewModel model;
 
         public RechercheController(IArtisteRepository artisteRepository, ITitreRepository titreRepository)
         {
-            this._artisteRepository = artisteRepository;
-            this._titreRepository = titreRepository;
+            this.artisteRepository = artisteRepository;
+            this.titreRepository = titreRepository;
+            this.model = new RechercheViewModel();
         }
 
         [HttpPost]
         public IActionResult Index()
         {
-            string searchedItemm = Request.Form["searchedItem"].ToString();
-            List<Artiste> artistes = _artisteRepository.FindAll().Where(A => A.Nom.ToLower().Contains(searchedItemm.ToLower())).ToList();
-            List<Titre> titres = _titreRepository.FindAll().Where(T => T.Libelle.ToLower().Contains(searchedItemm.ToLower())).ToList();
-            artistes.ForEach(artiste =>
+            this.model.SearchedItem = this.Request.Form["searchedItem"].ToString();
+            this.model.Artistes = this.artisteRepository.FindAll().Where(A => A.Nom.ToLower().Contains(this.model.SearchedItem.ToLower())).ToList();
+            this.model.Titres = this.titreRepository.FindAll().Where(T => T.Libelle.ToLower().Contains(this.model.SearchedItem.ToLower())).ToList();
+            this.model.Artistes.ForEach(artiste =>
             {
                 artiste.Titres.ToList().ForEach(artisteTitre =>
                 {
-                    if (!titres.Exists(recordedTitre => recordedTitre.Libelle == artisteTitre.Libelle))
+                    if (!this.model.Titres.Exists(recordedTitre => recordedTitre.Libelle == artisteTitre.Libelle))
                     {
-                        titres.Add(artisteTitre);
+                        this.model.Titres.Add(artisteTitre);
                     }
                 });
             });
-            titres = titres.OrderBy(T => T.Libelle).ToList();
+            this.model.Titres = this.model.Titres.OrderBy(T => T.Libelle).ToList();
 
-            RechercheViewModel model = new RechercheViewModel(artistes, titres, searchedItemm);
-            //model.Rechercher()
-
-            return this.View(model);
+            return this.View(this.model);
         }
-
-        //[HttpPost]
-        //public IActionResult Rechercher()
-        //{
-
-
-        //    //get recherche viewmodel
-
-        //    return this.View(model);
-        //}
-
     }
 }
