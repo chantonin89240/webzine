@@ -12,11 +12,12 @@
     public class StyleController : Controller
     {
         private IStyleRepository _styleRepository;
-        private StyleViewModel model = new StyleViewModel();
+        private StyleViewModel model;
 
         public StyleController(IStyleRepository styleRepository)
         {
             this._styleRepository = styleRepository;
+            this.model = new StyleViewModel();
         }
 
         /// <summary>
@@ -25,7 +26,6 @@
         /// <returns></returns>
         public IActionResult Index()
         {
-            var style = 
             this.model.Styles = this._styleRepository.FindAll().ToList();
             return this.View(this.model);
         }

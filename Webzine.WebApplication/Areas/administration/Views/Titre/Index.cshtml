@@ -1,40 +1,41 @@
 ﻿@model Webzine.WebApplication.Areas.Admin.ViewModels.TitreViewModel
 
-<div class="p-4">
+<div class="p-3">
 <h2 class="mb-3">Titres</h2>
 <hr />
 <a asp-area="administration" asp-controller="titre" asp-action="create" class="btn btn-primary mb-3"><i class="fas fa-plus me-2"></i>Ajouter un nouveau titre</a>
-
-<table class="table table-bordered table-striped">
-	<thead> 
-		<tr class="table-active">
-			<th class="col-2" scope="col"><span>Artiste</span></th>
-			<th class="col-3" scope="col"><span>Titre</span></th>
-			<th class="col-1" scope="col"><span class="d-flex justify-content-center">Durée</span></th>
-			<th class="col-2" scope="col"><span class="d-flex justify-content-center">Date de sortie</span></th>
-			<th class="col-1" scope="col"><span class="d-flex justify-content-center"><i class="fas fa-eye"></i></span></th>
-			<th class="col-1" scope="col"><span class="d-flex justify-content-center"><i class="fas fa-thumbs-up"></i></span></th>
-			<th class="col-1" scope="col"><span class="d-flex justify-content-center"><i class="fas fa-comment"></i></span></th>
-			<th class="col-2" scope="col"><span class="d-flex justify-content-center">Actions</span></th>
-		</tr>
-	</thead>
-	<tbody>
-		
-		@foreach (var titre in Model.Titres)
-		{
-			<tr >
-				<td>@titre.Artiste.Nom</td>
-				<td>@titre.Libelle</td>
-				<td class="text-center">@Model.FormatLength(titre)</td>
-				<td class="text-center">@titre.DateSortie.ToString("dd/MM/yyyy")</td>
-				<td class="text-end">@titre.NbLectures</td>
-				<td class="text-end">@titre.NbLikes</td>
-				<td class="text-end">@titre.Commentaires.Count()</td>
-				<td class="d-flex justify-content-center"><a asp-area="administration" asp-controller="titre" asp-action="edit" asp-route-id="@titre.IdTitre"><i class="fas fa-edit me-2"></i></a><a asp-area="administration" asp-controller="titre" asp-action="delete" asp-route-id="@titre.IdTitre"><i class="fas fa-trash"></i></a></td>
+<div class="table-responsive">
+	<table class="table table-bordered table-striped table-hover">
+		<thead> 
+			<tr class="table-secondary">
+				<th class="" scope="col">Artiste</th>
+				<th class="" scope="col">Titre</th>
+				<th class="text-center d-sm-none d-md-none d-xxl-block d-xl-block d-lg-block" scope="col">Durée</th>
+				<th class="text-center" scope="col">Date de sortie</th>
+				<th class="text-center d-none d-xxl-block d-xl-block d-lg-block d-md-block" scope="col"><i class="fas fa-eye"></i></th>
+				<th class="text-center" scope="col"><i class="fas fa-thumbs-up"></i></th>
+				<th class="text-center d-none d-xxl-block d-xl-block d-lg-block" scope="col"><i class="fas fa-comment"></i></th>
+				<th class="text-center" scope="col">Actions</th>
 			</tr>
-		}
+		</thead>
+		<tbody>
+			
+			@foreach (var titre in Model.Titres)
+			{
+				<tr >
+					<td class="" scope="row">@titre.Artiste.Nom</td>
+					<td class="">@titre.Libelle</td>
+					<td class="text-center d-none d-xxl-block d-xl-block d-lg-block">@Model.FormatLength(titre)</td>
+					<td class="text-center">@titre.DateSortie.ToString("dd/MM/yyyy")</td>
+					<td class="text-end d-none d-xxl-block d-xl-block d-lg-block d-md-block">@titre.NbLectures</td>
+					<td class="text-end">@titre.NbLikes</td>
+					<td class="text-end d-none d-xxl-block d-xl-block d-lg-block">@titre.Commentaires.Count()</td>
+					<td class="text-center"><a asp-area="administration" asp-controller="titre" asp-action="edit" asp-route-id="@titre.IdTitre"><i class="fas fa-edit me-2"></i></a><a asp-area="administration" asp-controller="titre" asp-action="delete" asp-route-id="@titre.IdTitre"><i class="fas fa-trash"></i></a></td>
+				</tr>
+			}
 
-	</tbody>
-</table>
+		</tbody>
+	</table>
+</div>
 
 </div>
