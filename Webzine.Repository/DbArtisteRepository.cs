@@ -5,12 +5,20 @@ using Webzine.Repository.Contracts;
 
 namespace Webzine.Repository
 {
+    /// <summary>
+    /// Database repository for <see cref="Artiste"/>s.
+    /// </summary>
     public class DbArtisteRepository : IArtisteRepository
     {
-        private WebzineDbContext _context;
+        private WebzineDbContext context;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DbArtisteRepository"/> class.
+        /// </summary>
+        /// <param name="context">Database Context.</param>
         public DbArtisteRepository(WebzineDbContext context)
         {
-            this._context = context;
+            this.context = context;
         }
 
         /// <summary>
@@ -28,8 +36,8 @@ namespace Webzine.Repository
             {
                 artiste.Nom = art;
                 artiste.Nom = this.boldArtiste(artiste);
-                this._context.Add(artiste);
-                this._context.SaveChanges();
+                this.context.Add(artiste);
+                this.context.SaveChanges();
             }
         }
 
@@ -40,8 +48,8 @@ namespace Webzine.Repository
         /// <exception cref="NotImplementedException">Not yet implemented.</exception>
         public void Delete(Artiste artiste)
         {
-            this._context.Remove(artiste);
-            this._context.SaveChanges();
+            this.context.Remove(artiste);
+            this.context.SaveChanges();
         }
 
         /// <summary>
@@ -51,8 +59,8 @@ namespace Webzine.Repository
         /// <returns><see cref="Artiste"/> with given ID.</returns>
         public Artiste Find(int id)
         {
-            Artiste artiste = this._context.Artistes.First(a => a.IdArtiste == id);
-            artiste.Titres = this._context.Titres.Where(t => t.IdArtiste == artiste.IdArtiste).ToList();
+            Artiste artiste = this.context.Artistes.First(a => a.IdArtiste == id);
+            artiste.Titres = this.context.Titres.Where(t => t.IdArtiste == artiste.IdArtiste).ToList();
 
             return artiste;
         }
@@ -63,7 +71,7 @@ namespace Webzine.Repository
         /// <returns>Whole <see cref="Artiste"/> list.</returns>
         public IEnumerable<Artiste> FindAll()
         {
-            IEnumerable<Artiste> artistes = this._context.Artistes
+            IEnumerable<Artiste> artistes = this.context.Artistes
                 .Include(artiste => artiste.Titres);
             return artistes;
         }
@@ -73,21 +81,21 @@ namespace Webzine.Repository
         /// </summary>
         /// <param name="artiste">New or Updated <see cref="Artiste"/></param>
         public void Update(Artiste artiste)
-        {            var artistes = this._context.Artistes.Where(a => a.IdArtiste != artiste.IdArtiste).FirstOrDefault(art => art.Nom.ToLower() == artiste.Nom.ToLower());
+        {            var artistes = this.context.Artistes.Where(a => a.IdArtiste != artiste.IdArtiste).FirstOrDefault(art => art.Nom.ToLower() == artiste.Nom.ToLower());
             if (artistes == null)
             {
                 artiste.Nom = this.boldArtiste(artiste);
-                this._context.Update(artiste);
-                this._context.SaveChanges();
+                this.context.Update(artiste);
+                this.context.SaveChanges();
             }
 
 
-            this._context.Entry(artiste).State = EntityState.Modified;
+            this.context.Entry(artiste).State = EntityState.Modified;
         }
 
         public Artiste rechercheArtiste(Artiste artiste)
         {
-            var artistes = this._context.Artistes.FirstOrDefault(art => art.Nom.ToLower() == artiste.Nom.ToLower());
+            var artistes = this.context.Artistes.FirstOrDefault(art => art.Nom.ToLower() == artiste.Nom.ToLower());
             return artistes;
         }
 
