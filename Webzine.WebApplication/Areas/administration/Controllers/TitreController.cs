@@ -131,9 +131,9 @@
         /// POST : /administration/titres/edit?id=
         /// action du formulaire de modification d'un titre.
         /// </summary>
-        /// <param name="model"></param>
-        /// <param name="id"></param>
-        /// <returns>La vue index mis à jour</returns>
+        /// <param name="model"><see cref="TitreViewModel"/> chargé avec le titre modifié.</param>
+        /// <param name="id">ID du titre mis à jour.</param>
+        /// <returns>La vue index mis à jour.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("edit")]
@@ -148,25 +148,27 @@
             model.Titre.Libelle = TitreEdit.Libelle;
             model.Styles =_stylesListForCheckbox;
 
-            newIdStyle.ForEach(idStyle => {
-                var ts = new TitreStyle(){
+            newIdStyle.ForEach(idStyle =>
+            {
+                var ts = new TitreStyle()
+                {
                     IdStyle = Convert.ToInt32(idStyle),
-                    IdTitre = model.Titre.IdTitre};
-
-                    model.Titre.TitresStyles.Add(ts);
+                    IdTitre = model.Titre.IdTitre,
+                };
+                model.Titre.TitresStyles.Add(ts);
             }
             );
-            
+
             try
             {
                 if (this.ModelState.IsValid)
                 {
-                    if(!this._moderator.ModerationEditChronique(model.Titre, newIdStyle, TitreEdit.TitresStyles.Select(ts => ts.IdStyle.ToString()).Distinct().ToList()))
+                    if (!this._moderator.ModerationEditChronique(model.Titre, newIdStyle, TitreEdit.TitresStyles.Select(ts => ts.IdStyle.ToString()).Distinct().ToList()))
                     {
-                        ModelState.AddModelError(string.Empty, "Votre chronique ne respecte pas la charte du site");
+                        this.ModelState.AddModelError(string.Empty, "Votre chronique ne respecte pas la charte du site");
                         return this.View(model);
                     }
-                    
+
                     return this.RedirectToAction(nameof(this.Index));
                 }
             }
@@ -196,8 +198,9 @@
         /// POST : /administration/artiste/delete/1
         /// action du formulaire de suppression d'un titre.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>La vue Index mise à jour</returns>
+        /// <param name="model">Modèle en cas d'Erreur.</param>
+        /// <param name="id">Id du commentaire à effacer.</param>
+        /// <returns>La vue Index mise à jour.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("delete")]
@@ -207,12 +210,12 @@
             {
                 var titre = this._titreRepository.Find(id);
                 this._titreRepository.Delete(titre);
-                return this.RedirectToAction(nameof(Index));
+                return this.RedirectToAction(nameof(this.Index));
             }
-            catch (DbUpdateException ex )
+            catch (DbUpdateException ex)
             {
                 // Log the error (uncomment ex variable name and write a log).
-                this.ModelState.AddModelError(string.Empty, "Inpossible de supprimer le titre. Essayez encore, et si le problème persiste, contactez l'administrateur.");
+                this.ModelState.AddModelError(string.Empty, "Impossible de supprimer le titre. Essayez encore, et si le problème persiste, contactez l'administrateur.");
             }
 
             return this.View();

@@ -9,36 +9,48 @@
     /// </summary>
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private ITitreRepository _titreRepository;
-        private TitreViewModel model;
-        private IStyleRepository _styleRepository;
         private readonly IConfiguration configuration;
+        private readonly ILogger<HomeController> logger;
+        private ITitreRepository titreRepository;
+        private TitreViewModel model;
+        private IStyleRepository styleRepository;
         private int nbCardChronic;
 
+        /// <summary>
+        /// Initialize une instance de classe <see cref="HomeController"/>.
+        /// </summary>
+        /// <param name="titreRepository">Repos de Titres.</param>
+        /// <param name="styleRepository">Repos de Styles.</param>
+        /// <param name="logger">Log d'erreurs.</param>
+        /// <param name="configuration">configuration.</param>
         public HomeController(ITitreRepository titreRepository, IStyleRepository styleRepository ,ILogger<HomeController> logger, IConfiguration configuration)
         {
-            this._titreRepository = titreRepository;
-            this._styleRepository = styleRepository;
+            this.titreRepository = titreRepository;
+            this.styleRepository = styleRepository;
             this.model = new TitreViewModel();
-            this._logger = logger;
-            this._logger.LogDebug(1, "NLog injected into TitreController");
+            this.logger = logger;
+            this.logger.LogDebug(1, "NLog injected into TitreController");
             this.configuration = configuration;
             this.nbCardChronic = this.configuration.GetSection("Configuration").GetValue<int>("HomePageDisplay");
         }
 
         // GET: HomeController
-        public async Task<IActionResult> Index(int? pageNumber)
+        /// <summary>
+        /// Accesseur de la page Index.
+        /// </summary>
+        /// <param name="pageNumber">Numéro de la page.</param>
+        /// <returns>Page index avec les titres correspondant au numéro de page.</returns>
+        public IActionResult Index(int? pageNumber)
         {
-            this._logger.LogInformation("Affichage Index HomeController");
+            this.logger.LogInformation("Affichage Index HomeController");
 
             int page = pageNumber ?? 1;
             this.model.Page = page;
 
             if (this.nbCardChronic > 0)
             {
-                this.model.PageMax = (int)Math.Floor((double)(this._titreRepository.Count() - 1) / nbCardChronic) + 1;
-                this.model.Titres = this._titreRepository.FindTitres((page - 1) * nbCardChronic, nbCardChronic).ToList();
+                this.model.PageMax = (int)Math.Floor((double)(this.titreRepository.Count() - 1) / nbCardChronic) + 1;
+                this.model.Titres = this.titreRepository.FindTitres((page - 1) * nbCardChronic, nbCardChronic).ToList();
             }
             else
             {
@@ -46,9 +58,8 @@
                 this.model.Titres = new List<Entity.Titre>();
             }
 
-            this.model.Titres.ForEach(title => title.TitresStyles.ToList().ForEach(ts => ts.Style = this._styleRepository.Find(ts.IdStyle)));
-            this.model.TitresPopulaires = this._titreRepository.FindAll().OrderByDescending(titre => titre.NbLectures).Take(3).ToList();
-
+            this.model.Titres.ForEach(title => title.TitresStyles.ToList().ForEach(ts => ts.Style = this.styleRepository.Find(ts.IdStyle)));
+            this.model.TitresPopulaires = this.titreRepository.FindAll().OrderByDescending(titre => titre.NbLectures).Take(3).ToList();
 
             return this.View(this.model);
         }

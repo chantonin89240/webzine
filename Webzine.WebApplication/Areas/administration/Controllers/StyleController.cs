@@ -11,13 +11,13 @@
     [Area("administration")]
     public class StyleController : Controller
     {
-        private IStyleRepository _styleRepository;
+        private IStyleRepository styleRepository;
         private StyleViewModel model;
 
         // constructeur de StyleControlleur
         public StyleController(IStyleRepository styleRepository)
         {
-            this._styleRepository = styleRepository;
+            this.styleRepository = styleRepository;
             this.model = new StyleViewModel();
         }
 
@@ -27,7 +27,7 @@
         /// <returns></returns>
         public IActionResult Index()
         {
-            this.model.Styles = this._styleRepository.FindAll().ToList();
+            this.model.Styles = this.styleRepository.FindAll().ToList();
             return this.View(this.model);
         }
 
@@ -54,7 +54,7 @@
             {
                 if (this.ModelState.IsValid)
                 {
-                    this._styleRepository.Add(model.Style);
+                    this.styleRepository.Add(model.Style);
 
                     return this.RedirectToAction(nameof(this.Index));
                 }
@@ -75,7 +75,7 @@
         /// <returns></returns>
         public IActionResult Edit(int id)
         {
-            this.model.Style = this._styleRepository.Find(id);
+            this.model.Style = this.styleRepository.Find(id);
             return this.View(this.model);
         }
 
@@ -94,7 +94,7 @@
                 if (this.ModelState.IsValid)
                 {
                     model.Style.IdStyle = id;
-                    this._styleRepository.Update(model.Style);
+                    this.styleRepository.Update(model.Style);
                     return this.RedirectToAction(nameof(this.Index));
                 }
             }
@@ -114,7 +114,7 @@
         /// <returns></returns>
         public IActionResult Delete(int id)
         {
-            this.model.Style = this._styleRepository.Find(id);
+            this.model.Style = this.styleRepository.Find(id);
             return this.View(this.model);
         }
 
@@ -129,8 +129,8 @@
         [ActionName("delete")]
         public IActionResult Delete(StyleViewModel model, int id)
         {
-            var style = this._styleRepository.Find(id);
-            this._styleRepository.Delete(style);
+            var style = this.styleRepository.Find(id);
+            this.styleRepository.Delete(style);
             return this.RedirectToAction("Index");
         }
     }

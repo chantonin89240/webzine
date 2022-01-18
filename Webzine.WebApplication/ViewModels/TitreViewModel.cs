@@ -7,8 +7,6 @@
     /// </summary>
     public class TitreViewModel
     {
-        // NEEDS FURTHER REVIEW WITH ANTONIN!
-
 
         public List<Titre> Titres { get; set; }
 
