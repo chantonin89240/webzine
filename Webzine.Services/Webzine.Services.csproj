@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Webzine.Services.Contracts\Webzine.Services.Contracts.csproj" />
     <ProjectReference Include="..\Webzine.Entity\Webzine.Entity.csproj" />
     <ProjectReference Include="..\Webzine.Repository.Contracts\Webzine.Repository.Contracts.csproj" />
+    <ProjectReference Include="..\Webzine.Services.Contracts\Webzine.Services.Contracts.csproj" />
   </ItemGroup>
 </Project>
