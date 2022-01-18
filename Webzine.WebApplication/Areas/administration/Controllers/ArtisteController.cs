@@ -101,9 +101,10 @@
                     return this.RedirectToAction(nameof(this.Index));
                 }
             }
-            catch
+            catch (DbUpdateException)
             {
-                this.ModelState.AddModelError(" ", "Error");
+                // Log the error (uncomment ex variable name and write a log.
+                this.ModelState.AddModelError(string.Empty, "Impossible d'enregistrer l'artiste. Essayez encore, et si le problème persiste, contactez l'administrateur.");
             }
 
             return this.View(model.Artiste);
