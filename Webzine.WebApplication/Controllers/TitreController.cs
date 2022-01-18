@@ -56,10 +56,10 @@
         }
 
         /// <summary>
-        /// Post method to send a commentaire.
+        /// Méthode pour envoyer un commentaire.
         /// </summary>
-        /// <param name="comment">Sent <see cref="Commentaire"/>.</param>
-        /// <returns>Returns to the Titre page the Commentaire was sent from.</returns>
+        /// <param name="comment"><see cref="Commentaire"/> envoyé.</param>
+        /// <returns>Renvoie sur la page titre.</returns>
         [HttpPost]
         [ActionName("commenter")]
         public ActionResult Comment(Commentaire comment)

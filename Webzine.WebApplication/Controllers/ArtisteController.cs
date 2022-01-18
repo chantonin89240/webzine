@@ -1,4 +1,5 @@
-﻿namespace Webzine.WebApplication.Controllers
+﻿
+namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
@@ -16,8 +17,8 @@
         private ArtisteViewModel model = new ArtisteViewModel();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArtisteController"/> class.
-        /// Prepares data for the controller to call the view.
+        /// Initialize une nouvelle instance de la classe <see cref="ArtisteController"/>.
+        /// prépare les données à utiliser dans la vue.
         /// </summary>
         /// <param name="artisteRepository">Artiste repository model.</param>
         public ArtisteController(IArtisteRepository artisteRepository)

@@ -25,9 +25,9 @@
         /// Non Null.
         /// </summary>
         [Display(Name = "Nom")]
-        [Required]
-        [MinLength(2)]
-        [MaxLength(30)]
+        [Required(ErrorMessage = "Merci de renseigner un nom.")]
+        [MinLength(2, ErrorMessage = "Une seule lettre n'est pas un nom.")]
+        [MaxLength(30, ErrorMessage = "Longueur de nom maximum: 30 caractères.")]
         [Column("Auteur")]
         public string? Auteur { get; set; }
 
@@ -36,9 +36,9 @@
         /// Non Null.
         /// </summary>
         [Display(Name = "Commentaire")]
-        [Required]
-        [MinLength(10)]
-        [MaxLength(1000)]
+        [Required(ErrorMessage = "Merci d'écrire votre commentaire.")]
+        [MinLength(10, ErrorMessage = "Un commentaire contient au moins 10 caractères.")]
+        [MaxLength(1000, ErrorMessage = "Commentaire trop long: maximum 1000 caractères.")]
         [Column("Contenu")]
         public string? Contenu { get; set; }
 
