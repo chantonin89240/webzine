@@ -20,7 +20,7 @@
 			}
 			else
 			{
-				<a href="/admin/style/creation">il n'y a pas de style ! en ajouter</a>
+				<a asp-area="administration" asp-controller="Titre" asp-action="Edit" asp-route-id="@Model.Titre.IdTitre">il n'y a pas de style ! en ajouter</a>
 			}
 		</p>
 	<form method="post"  class="col-xxl-1 col-xl-1 col-lg-1 col-md-12 col-sm-12 col-xs-12" asp-area="" asp-controller="Titre" asp-action="liker">
@@ -61,7 +61,7 @@
 		{
 			<div class="mb-3 row">
 				<div class="col-sm-2 iconCommentaire">
-					<i class="fas fa-user" style="width: 4em; height: 4em"></i>
+					<i class="fas fa-user"></i>
 				</div>				
 				<div class="col-sm-10">
 					<p>@leCommentaire.Auteur, le @leCommentaire.DateCreation.ToString("dd/MM/yyyy à HH:mm")</p>

@@ -4,28 +4,28 @@
 @{
 	@model Webzine.Entity.Commentaire
 }
-
-	<form method="post" asp-action="commenter">
-		<div class="mb-3 row">
-			<label for="nomCommentaire" class="col-sm-2 col-form-label">Nom <span style="color: red;">*</span></label>
-			<div class="col-sm-10">
-				<input asp-for="Auteur" type="text" class="form-control" id="nomCommentaire" placeholder="Votre nom (exemple : Emmanuel)"> 
-				<span asp-validation-for="Auteur" class="text-danger"></span>
-			</div>
+<!-- formulaire de créationd'un commentaire -->
+<form method="post" asp-action="commenter">
+	<div class="mb-3 row">
+		<label for="nomCommentaire" class="col-sm-2 col-form-label">Nom <span class="text-danger">*</span></label>
+		<div class="col-sm-10">
+			<input asp-for="Auteur" type="text" class="form-control" id="nomCommentaire" placeholder="Votre nom (exemple : Emmanuel)"> 
+			<span asp-validation-for="Auteur" class="text-danger"></span>
 		</div>
-		<div class="mb-3 row">
-			<label for="contenuCommentaire" class="col-sm-2 col-form-label">Commentaire <span style="color: red;">*</span></label>
-			<div class="col-sm-10">
-				<textarea asp-for="Contenu" class="form-control" id="contenuCommentaire" rows="3" placeholder="Votre commentaire..."></textarea> 
-				<span asp-validation-for="Contenu" class="text-danger"></span>
-			</div>
+	</div>
+	<div class="mb-3 row">
+		<label for="contenuCommentaire" class="col-sm-2 col-form-label">Commentaire <span class="text-danger">*</span></label>
+		<div class="col-sm-10">
+			<textarea asp-for="Contenu" class="form-control" id="contenuCommentaire" rows="3" placeholder="Votre commentaire..."></textarea> 
+			<span asp-validation-for="Contenu" class="text-danger"></span>
 		</div>
-		<div class="mb-3 row">
-			<label class="col-sm-2 col-form-label"></label>
-			<div class="col-sm-10">
-				<button type="submit" id="commentaireSubmit" class="btn btn-primary">Envoyer</button>
-			</div>
+	</div>
+	<div class="mb-3 row">
+		<label class="col-sm-2 col-form-label"></label>
+		<div class="col-sm-10">
+			<button type="submit" id="commentaireSubmit" class="btn btn-primary">Envoyer</button>
 		</div>
-		<input type="hidden" asp-for="IdTitre" value="@Model.IdTitre"/>
-	</form>
+	</div>
+	<input type="hidden" asp-for="IdTitre" value="@Model.IdTitre"/>
+</form>
 

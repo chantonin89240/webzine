@@ -4,9 +4,6 @@ h1 {
     font-size: 3em !important;
     margin-bottom: 3vh !important;
 }
-h2{
-
-}
 a:link {
     text-decoration: none;
 }
@@ -55,9 +52,10 @@ a:active {
     text-align: right;
 }
 
-.iconCommentaire i{
-    
-}
+    .iconCommentaire i {
+        width: 4em;
+        height: 4em
+    }
 .contact {
     text-align: center;
     margin-bottom: 3em;
@@ -67,6 +65,10 @@ a:active {
     max-height: 33vh;
 }
 .iconRechercheStyle{
+    width: 7em;
+    height: 7em;
+}
+.iconRechercheStyleimg{
     width: 5em;
     height: 5em;
 }
