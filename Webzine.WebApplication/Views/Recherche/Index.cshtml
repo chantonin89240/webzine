@@ -15,7 +15,7 @@ else
 {
     foreach (Artiste A in Model.Artistes)
     {
-        <li class="list-unstyled"><i class="fas fa-user puce"></i><a asp-controller="Artiste" asp-action="Artiste" asp-route-nomArtiste="@A.Nom">@A.Nom</a></li>
+        <li class="list-unstyled"><i class="fas fa-user mr-2"></i><a asp-controller="Artiste" asp-action="Artiste" asp-route-nomArtiste="@A.Nom">@A.Nom</a></li>
     }
 }
 
@@ -30,9 +30,9 @@ else
         @foreach (Titre titre in Model.Titres)
         {
             <li class="media">
-                <div>
+                <div class="iconRechercheStyle">
                     <a asp-controller="Titre" asp-action="Titre" asp-route-idTitre="@titre.IdTitre">
-                        <img src=@titre.UrlJaquette class="iconRechercheStyle mr-3 mb-5" alt="..." />
+                        <img src=@titre.UrlJaquette class="iconRechercheStyleimg mr-3 mb-5" alt="..." />
                     </a>
                 </div>
                 <div class="media-body">
