@@ -49,6 +49,7 @@
         {
             Titre titre = this._titreRepository.Find(model.Titre.IdTitre);
             this._titreRepository.IncrementNbLikes(titre);
+            this._titreRepository.DecrementNbLectures(titre);
 
             return this.RedirectToAction("Titre", new {idTitre = model.Titre.IdTitre});
         }

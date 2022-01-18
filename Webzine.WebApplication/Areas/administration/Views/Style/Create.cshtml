@@ -14,8 +14,9 @@
 		<div class="input-group mb-4 col-6 libelleStyle">
 			<label asp-for="Style.Libelle" class="d-flex align-items-center me-2" for="libelleInput">Libellé<span class="text-danger">*</span></label>
 			<input asp-for="Style.Libelle" name="Style.Libelle" class="form-control me-2 rounded col-2" id="libelleInput" aria-describedby="styleCreate" placeholder="Style">	
+			<button type="submit" class="btn btn-primary rounded">Sauvegarder</button>
 		</div>
-		<button type="submit" class="btn btn-primary rounded">Sauvegarder</button>
+		
 		<span asp-validation-for="Style.Libelle" class="text-danger"></span>
 	</form>
 

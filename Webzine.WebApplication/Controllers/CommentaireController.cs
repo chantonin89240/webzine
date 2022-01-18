@@ -25,6 +25,7 @@
                 model.DateCreation = DateTime.Now;
                 model.Titre = this.titreRepository.Find(model.IdTitre);
                 this.commentaireRepository.Add(model);
+                this.titreRepository.DecrementNbLectures(model.Titre);
             }
 
             return this.RedirectToAction("Titre","Titre", new { idTitre = model.IdTitre });

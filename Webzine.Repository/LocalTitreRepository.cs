@@ -95,6 +95,18 @@
             // this.Update(titre);
         }
 
+        public void DecrementNbLectures(Titre titre)
+        {
+            int nbTotal = this._context.Titres.FirstOrDefault(t => t == titre).NbLectures - 1;
+
+            if (nbTotal > 0)
+            {
+                this._context.Titres.FirstOrDefault(t => t == titre).NbLectures = nbTotal;
+                this._context.Titres.Update(titre);
+                this._context.SaveChanges();
+            }
+        }
+
         /// <summary>
         /// increments the NvLikes value within a given <see cref="Titre"/>.
         /// </summary>
