@@ -11,6 +11,7 @@ namespace Webzine.WebApplication
     using Webzine.Repository;
     using Webzine.Repository.Contracts;
     using Webzine.Services;
+    using Webzine.Services.Contracts;
 
     public static class Startup
     {
@@ -26,7 +27,6 @@ namespace Webzine.WebApplication
         /// <returns>Application configurer prête à être lancer</returns>
         public static WebApplication Initialize(string [] args)
         {
-            
             var builder = WebApplication.CreateBuilder(args);
             ConfigureServices(builder);
             var app = builder.Build();
@@ -38,7 +38,6 @@ namespace Webzine.WebApplication
                 using (var scope = app.Services.CreateScope())
                 {
                     var services = scope.ServiceProvider;
-                    
                     try
                     {
                         logger.Debug("Contruction DbContext.");

@@ -5,6 +5,7 @@
     using System.Text;
     using Webzine.Entity;
     using Webzine.Repository.Contracts;
+    using Webzine.Services.Contracts;
 
     public class ModeratorServices : IModeratorServices
     {
