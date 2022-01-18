@@ -1,10 +1,8 @@
 ﻿namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.ViewModels;
     using Webzine.Repository.Contracts;
-   
-    using Webzine.Entity;
+    using Webzine.ViewModels;
 
     public class RechercheController : Controller
     {
@@ -12,6 +10,11 @@
         private ITitreRepository titreRepository;
         private RechercheViewModel model;
 
+        /// <summary>
+        /// Initialize une nouvelle instance de classe <see cref="RechercheController"/>.
+        /// </summary>
+        /// <param name="artisteRepository">Repos d'artistes.</param>
+        /// <param name="titreRepository">repos de titres.</param>
         public RechercheController(IArtisteRepository artisteRepository, ITitreRepository titreRepository)
         {
             this.artisteRepository = artisteRepository;
@@ -19,6 +22,10 @@
             this.model = new RechercheViewModel();
         }
 
+        /// <summary>
+        /// Accesseur à la page de recherche.
+        /// </summary>
+        /// <returns>Page de recherche.</returns>
         [HttpPost]
         public IActionResult Index()
         {

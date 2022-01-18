@@ -5,6 +5,9 @@
     using Webzine.Repository.Contracts;
     using Webzine.WebApplication.ViewModels;
 
+    /// <summary>
+    /// Contrôleur pour les page utilisateur Titre.
+    /// </summary>
     public class TitreController : Controller
     {
         private ITitreRepository _titreRepository;
@@ -12,6 +15,12 @@
         private ICommentaireRepository _commentaireRepository;
         private TitreViewModel model = new TitreViewModel();
 
+        /// <summary>
+        /// Initialize une nouvelle instance de classe <see cref="TitreController"/>.
+        /// </summary>
+        /// <param name="commentaireRepository">Repos de Commentaires.</param>
+        /// <param name="titreRepository">Repos de Titres.</param>
+        /// <param name="styleRepository">Repos de Styles.</param>
         public TitreController(ICommentaireRepository commentaireRepository, ITitreRepository titreRepository, IStyleRepository styleRepository)
         {
             this._commentaireRepository = commentaireRepository;
@@ -19,8 +28,12 @@
             this._styleRepository = styleRepository;
         }
 
+        /// <summary>
+        /// Accesseur pour la page présentant un Titre.
+        /// </summary>
+        /// <param name="idTitre">ID du Titre présenté.</param>
+        /// <returns>Action d'accès de la page Titre.</returns>
         // public IActionResult Titre(int idTitre, string artisteNom, string titreNom)
-
         [ActionName("titre")]
         public IActionResult Titre(int idTitre)
         {
@@ -33,10 +46,15 @@
                 IdTitre = titre.IdTitre,
                 Titre = titre,
             };
-            this.model.Titre.TitresStyles.ToList().ForEach(ts => model.StylesTitre.Add(this._styleRepository.Find(ts.IdStyle)));
+            this.model.Titre.TitresStyles.ToList().ForEach(ts => this.model.StylesTitre.Add(this._styleRepository.Find(ts.IdStyle)));
             return this.View(this.model);
         }
 
+        /// <summary>
+        /// Accesseur pour la page présentant les Titres par Style.
+        /// </summary>
+        /// <param name="nomStyle">Nom du Style cherché.</param>
+        /// <returns>Action d'accès sur la page de vue des titres pour un Style.</returns>
         public IActionResult TitresStyle(string nomStyle)
         {
             this.model.LibelleStyle = System.Net.WebUtility.UrlDecode(nomStyle);
@@ -79,7 +97,7 @@
             this.model.Titre = titre;
             this._titreRepository.IncrementNbLectures(titre);
             this.model.StylesTitre = new List<Style>();
-            this.model.Titre.TitresStyles.ToList().ForEach(ts => model.StylesTitre.Add(this._styleRepository.Find(ts.IdStyle)));
+            this.model.Titre.TitresStyles.ToList().ForEach(ts => this.model.StylesTitre.Add(this._styleRepository.Find(ts.IdStyle)));
             this.model.Commentaire = comment;
             return this.View("Titre", this.model);
         }

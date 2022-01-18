@@ -21,7 +21,6 @@
         public ArtisteController(IArtisteRepository artisteRepository)
         {
             this.artisteRepository = artisteRepository;
-
         }
 
         /// <summary>
