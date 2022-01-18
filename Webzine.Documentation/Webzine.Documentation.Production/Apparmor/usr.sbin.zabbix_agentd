@@ -1,0 +1,33 @@
+# Last Modified: Tue Jan  4 13:02:30 2022
+#include <tunables/global>
+
+/usr/sbin/zabbix_agentd flags=(complain) {
+  #include <abstractions/base>
+  #include <abstractions/nameservice>
+  #include <abstractions/openssl>
+
+  /dev/ r,
+  /etc/zabbix/zabbix_agentd.conf r,
+  /etc/zabbix/zabbix_agentd.d/ r,
+  /proc/ r,
+  /proc/*/cmdline r,
+  /proc/*/net/dev r,
+  /proc/loadavg r,
+  /proc/sys/kernel/pid_max r,
+  /sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/VMBUS:00/4df8b3ac-3e0e-4503-93d8-789995008e00/host0/target0:0:0/0:0:0:0/block/sda/sda1/uevent r,
+  /sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/VMBUS:00/4df8b3ac-3e0e-4503-93d8-789995008e00/host0/target0:0:0/0:0:0:0/block/sda/sda2/uevent r,
+  /sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/VMBUS:00/4df8b3ac-3e0e-4503-93d8-789995008e00/host0/target0:0:0/0:0:0:0/block/sda/sda3/uevent r,
+  /sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/VMBUS:00/4df8b3ac-3e0e-4503-93d8-789995008e00/host0/target0:0:0/0:0:0:0/block/sda/stat r,
+  /sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/VMBUS:00/4df8b3ac-3e0e-4503-93d8-789995008e00/host0/target0:0:0/0:0:0:0/block/sda/uevent r,
+  /sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/VMBUS:00/4df8b3ac-3e0e-4503-93d8-789995008e00/host0/target0:0:0/0:0:0:0/type r,
+  /sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/VMBUS:00/a14baf29-b9a6-4559-9ce0-42ad82d7b0e3/net/eth0/operstate r,
+  /sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/VMBUS:00/a14baf29-b9a6-4559-9ce0-42ad82d7b0e3/net/eth0/type r,
+  /usr/bin/dash mrix,
+  /usr/bin/dpkg mrix,
+  /usr/bin/wc mrix,
+  /usr/bin/who mrix,
+  /usr/sbin/zabbix_agentd mr,
+  owner /run/zabbix/zabbix_agentd.pid wk,
+  owner /var/log/zabbix/zabbix_agentd.log rw,
+
+}

@@ -1,0 +1,14 @@
+upstream elk {
+    server 192.168.20.2:5601;
+}
+
+server {
+    listen 5601;
+    location / {
+        proxy_pass http://elk;
+        proxy_set_header    Host $host;
+        
+        proxy_connect_timeout 30;
+        proxy_send_timeout 30;
+    }
+}

@@ -1,0 +1,17 @@
+upstream zabbix-g4 {
+    server 192.168.10.10;
+}
+
+server {
+
+    listen 8080;
+#    server_name zabbix-g4.g1;
+    
+    location / {
+        proxy_pass http://zabbix-g4;
+        proxy_set_header    Host $host;
+        
+        proxy_connect_timeout 30;
+        proxy_send_timeout 30;
+    }
+}

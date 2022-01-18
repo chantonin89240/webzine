@@ -1,0 +1,30 @@
+# Last Modified: Tue Jan  4 12:40:52 2022
+#include <tunables/global>
+
+/usr/sbin/sshd flags=(complain) {
+  #include <abstractions/authentication>
+  #include <abstractions/base>
+  #include <abstractions/consoles>
+  #include <abstractions/dovecot-common>
+  #include <abstractions/nameservice>
+  #include <abstractions/openssl>
+  #include <abstractions/wutmp>
+
+  capability audit_write,
+  capability sys_resource,
+
+  /usr/sbin/sshd mrix,
+  owner /etc/ssh/ssh_host_ecdsa_key r,
+  owner /etc/ssh/ssh_host_ecdsa_key.pub r,
+  owner /etc/ssh/ssh_host_ed25519_key r,
+  owner /etc/ssh/ssh_host_ed25519_key.pub r,
+  owner /etc/ssh/ssh_host_rsa_key r,
+  owner /etc/ssh/ssh_host_rsa_key.pub r,
+  owner /etc/ssh/sshd_config r,
+  owner /etc/ssh/sshd_config.d/ r,
+  owner /proc/*/fd/ r,
+  owner /proc/*/oom_score_adj w,
+  owner /proc/*/uid_map r,
+  owner /proc/sys/kernel/ngroups_max r,
+
+}
