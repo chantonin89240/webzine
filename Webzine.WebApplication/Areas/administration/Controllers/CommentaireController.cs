@@ -9,7 +9,7 @@
     /// Contrôleur des vues en rapport aux <see cref="Commentaire"/>s.
     /// </summary>
     [Area("administration")]
-    public class CommentaireController : Controller
+    public class CommentaireController : Controller 
     {
         private ICommentaireRepository commentaireRepository;
         private ITitreRepository titreRepository;
