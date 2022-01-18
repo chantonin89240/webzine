@@ -35,13 +35,28 @@
             int page = pageNumber ?? 1;
             this.model.Page = page;
 
-            this.model.PageMax = (int)Math.Floor((double)(this._titreRepository.Count()-1) / nbCardChronic) + 1;
+            if (this.nbCardChronic > 0)
+            {
+                this.model.PageMax = (int)Math.Floor((double)(this._titreRepository.Count() - 1) / nbCardChronic) + 1;
+                this.model.Titres = this._titreRepository.FindTitres((page - 1) * nbCardChronic, nbCardChronic).ToList();
+            }
+            else
+            {
+                this.model.PageMax = 1;
+                this.model.Titres = new List<Entity.Titre>();
+            }
 
-            this.model.Titres = this._titreRepository.FindTitres((page - 1) * nbCardChronic, nbCardChronic).ToList();
+            this.model.Titres.ForEach(title => title.TitresStyles.ToList().ForEach(ts => ts.Style = this._styleRepository.Find(ts.IdStyle))) ;
+            int nbPopular = this.configuration.GetSection("Configuration").GetSection("HomePageDisplay").GetValue<int>("NbPopularCard");
 
-            this.model.Titres.ForEach(title => title.TitresStyles.ToList().ForEach(ts => ts.Style = this._styleRepository.Find(ts.IdStyle)));
-
-            this.model.TitresPopulaires = this._titreRepository.FindAll().OrderByDescending(titre => titre.NbLectures).Take(3).ToList();
+            if (nbPopular > 0)
+            {
+                this.model.TitresPopulaires = this._titreRepository.FindAll().OrderByDescending(titre => titre.NbLectures).Take(nbPopular).ToList();
+            }
+            else
+            {
+                this.model.TitresPopulaires = new List<Entity.Titre>();
+            }
 
             return this.View(this.model);
         }
