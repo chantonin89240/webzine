@@ -105,6 +105,15 @@ a:active {
     .libelleStyle{
         width: 100% !important;
     }
+    .middle {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 870px) {
+    .middle {
+        display: none !important;
+    }
 }
 
 

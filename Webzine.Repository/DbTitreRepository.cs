@@ -72,6 +72,10 @@
             try
             {
                 var titres = this._context.Titres.OrderByDescending(t => t.DateCreation).Skip(offset);
+                titres = titres
+                    .Include(t => t.Artiste)
+                    .Include(t => t.TitresStyles)
+                    .ThenInclude(ts => ts.Style);
                 if (titres.ToList().Count() < limit)
                 {
                     return titres;

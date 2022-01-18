@@ -30,7 +30,7 @@
         // GET: HomeController
         public async Task<IActionResult> Index(int? pageNumber)
         {
-            this._logger.LogInformation("Log en place - Reste plus qu'à les rendre croustillant");
+            this._logger.LogInformation("Affichage Index HomeController");
 
             int page = pageNumber ?? 1;
             this.model.Page = page;
@@ -46,17 +46,9 @@
                 this.model.Titres = new List<Entity.Titre>();
             }
 
-            this.model.Titres.ForEach(title => title.TitresStyles.ToList().ForEach(ts => ts.Style = this._styleRepository.Find(ts.IdStyle))) ;
-            int nbPopular = this.configuration.GetSection("Configuration").GetSection("HomePageDisplay").GetValue<int>("NbPopularCard");
+            this.model.Titres.ForEach(title => title.TitresStyles.ToList().ForEach(ts => ts.Style = this._styleRepository.Find(ts.IdStyle)));
+            this.model.TitresPopulaires = this._titreRepository.FindAll().OrderByDescending(titre => titre.NbLectures).Take(3).ToList();
 
-            if (nbPopular > 0)
-            {
-                this.model.TitresPopulaires = this._titreRepository.FindAll().OrderByDescending(titre => titre.NbLectures).Take(nbPopular).ToList();
-            }
-            else
-            {
-                this.model.TitresPopulaires = new List<Entity.Titre>();
-            }
 
             return this.View(this.model);
         }

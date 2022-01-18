@@ -49,21 +49,22 @@
                         <div class="row ms-1 d-flex ">
                             <a asp-controller="titre" asp-action="titre" asp-route-idTitre="@titre.IdTitre" class="btn btn-primary text-nowrap col-xxl-3 col-xl-3 col-lg-3 col-md-2 col-sm-12 col-xs-12 m-1" style="min-width: 120px; max-width: 120px;">Lire la suite</a>
                             <p class="text-nowrap col-xxl-3 col-xl-3 col-lg-5 col-md-10 col-sm-border-12 col-xs-12 m-1">
-                                <i class="fas fa-calendar"></i><span class="ms-1">@titre.DateSortie</span>
+                                <i class="fas fa-calendar"></i><span class="ms-1">@titre.DateCreation.ToString("dd/MM/yyyy  H:mm")</span>
                             </p>
                             <p class="col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-border-12 col-xs-12 text-nowrap m-1">
                                 <i class="fas fa-tags"></i> Style :
-                                @foreach (var ts in @titre.TitresStyles)
+                                @if (titre.TitresStyles.Count() == 0)
                                 {
-                                    @if (ts == null)
+                                    <span>Pas de style, en ajouter<a asp-area="administration" asp-controller="Titre" asp-action="Edit" asp-route-id="@titre.IdTitre"> ici</a></span>
+                                }
+                                else
+                                {
+                                    @foreach (var ts in @titre.TitresStyles)
                                     {
-                                    <p>pas de style</p>
-                                    }
-                                    else
-                                    {
-                                    <a asp-controller="Titre" asp-action="TitresStyle" asp-route-nomStyle="@ts.Style.Libelle" class="text-decoration-none">
-                                        <span>@ts.Style.Libelle</span>
-                                    </a>
+                                        
+                                        <a asp-controller="Titre" asp-action="TitresStyle" asp-route-nomStyle="@ts.Style.Libelle" class="text-decoration-none">
+                                            <span>@ts.Style.Libelle</span>
+                                        </a>
                                     }
                                 }
                             </p>

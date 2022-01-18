@@ -16,8 +16,8 @@
 			<label for="nomArtiste" class="col-sm-2 col-form-label">Nom de l'artiste<span class="etoileRequired">*</span></label>
 			<div class="col-sm-10">
 				<input asp-for="@Model.Artiste.Nom" name="Artiste.Nom" aria-describedby="artisteCreate" type="text" class="form-control" id="nomArtiste" placeholder="Nom de l'artiste">
+				<span asp-validation-for="Artiste.Nom" class="text-danger"></span>
 			</div>
-			<span asp-validation-for="Artiste.Nom" class="text-danger"></span>
 		</div>
 
 		<div class="mb-3 row">

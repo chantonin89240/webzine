@@ -123,12 +123,12 @@
         /// <summary>
         /// Liste de commentaires lié au Titre.
         /// </summary>
-        public IEnumerable<Commentaire> Commentaires { get; set; }
+        public List<Commentaire> Commentaires { get; set; }
 
         /// <summary>
         /// Liste de liens aux Styles du titre.
         /// </summary>
-        public IEnumerable<TitreStyle> TitresStyles { get; set; }
+        public List<TitreStyle> TitresStyles { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Titre"/> class.

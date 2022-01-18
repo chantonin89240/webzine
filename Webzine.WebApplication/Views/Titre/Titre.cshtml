@@ -36,12 +36,18 @@
 	<p>@Model.Titre.Chronique</p>
 </div>
 
-@if(@Model.Titre.UrlEcoute != "" || @Model.Titre.UrlEcoute != null)
-{
-	<iframe class="VideoEcoute" src="@Model.Titre.UrlEcoute" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-}
+<div class="row mt-3">
+	@if(@Model.Titre.UrlEcoute != "" && @Model.Titre.UrlEcoute != null)
+	{
+		<iframe class="VideoEcoute" src="@Model.Titre.UrlEcoute" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	}
+	else
+	{
+		<p class="text-nowrap">Il n'y pas de lien d'écoute pour ce titre, si vous souhaitez en ajouter une cliquez <a asp-area="administration" asp-controller="Titre" asp-action="Edit" asp-route-id="@Model.Titre.IdTitre">ici</a></p>
+	}
+</div>
 
-<div class="formCommentaire">
+<div class="row formCommentaire">
 	<h2>Donne ton avis sur le titre</h2>
 
 	 @await Html.PartialAsync("_Commentaire.cshtml",@Model.Commentaire)

@@ -21,6 +21,7 @@
         private TitreViewModel model;
         private static List<string>? _editOldIdStyle;
         private static List<Artiste>? _editArtisteSelect;
+        private static Titre? TitreEdit;
         private static Artiste? _editTitreArtiste;
         private static DateTime _dateCréation;
         private static List<Style>? _stylesListForCheckbox;
@@ -46,7 +47,7 @@
         {
             var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             logger.Debug("Entrée dans index.");
-            this.model.Titres = this._titreRepository.FindAll().OrderBy(a => a.Artiste.Nom).ThenBy(t => t.Libelle).ToList();
+            this.model.Titres = this._titreRepository.FindAll().OrderByDescending(a => a.DateCreation).ThenBy(t => t.Libelle).ToList();
             return this.View(this.model);
         }
 
@@ -80,6 +81,7 @@
             var listIdStyle = this.Request.Form["ListeStyles"].ToList();
             model.Styles = _stylesListForCheckbox;
             model.Artistes = _editArtisteSelect;
+            // model.Titre.UrlEcoute = "https://www.youtube.com/embed/ow00U-slPYk";
             listIdStyle.ForEach(id => 
                 model.Titre.TitresStyles.Append
                 ( 
@@ -116,8 +118,8 @@
         public IActionResult Edit(int id)
         {
             this.model.Titre = this._titreRepository.Find(id);
+            TitreEdit = this.model.Titre;
             _editOldIdStyle = this.model.Titre.TitresStyles.Select(ts => ts.IdStyle.ToString()).Distinct().ToList();
-            _dateCréation = this.model.Titre.DateCreation;
             _editArtisteSelect = this._artisteRepository.FindAll().OrderBy(a => a.Nom).ToList();
             _stylesListForCheckbox = this._styleRepository.FindAll().OrderBy(s => s.Libelle).ToList();
             this.model.Artistes = _editArtisteSelect;
@@ -138,22 +140,28 @@
         public IActionResult Edit(TitreViewModel model, int id)
         {
             var newIdStyle = this.Request.Form["ListeStyles"].ToList();
-            model.Titre.IdTitre = id;
-            model.Titre.DateCreation = _dateCréation;
+            model.Titre.IdTitre = TitreEdit.IdTitre;
+            model.Titre.DateCreation = TitreEdit.DateCreation;
+            model.Titre.NbLectures = TitreEdit.NbLectures;
+            model.Titre.NbLikes = TitreEdit.NbLikes;
             model.Artistes = _editArtisteSelect;
+            model.Titre.Libelle = TitreEdit.Libelle;
             model.Styles =_stylesListForCheckbox;
-            newIdStyle.ForEach(id => 
-                model.Titre.TitresStyles.Append
-                ( 
-                    new TitreStyle() { IdStyle=Convert.ToInt32(id), IdTitre = model.Titre.IdTitre}
-                )
+
+            newIdStyle.ForEach(idStyle => {
+                var ts = new TitreStyle(){
+                    IdStyle = Convert.ToInt32(idStyle),
+                    IdTitre = model.Titre.IdTitre};
+
+                    model.Titre.TitresStyles.Add(ts);
+            }
             );
             
             try
             {
                 if (this.ModelState.IsValid)
                 {
-                    if(!this._moderator.ModerationEditChronique(model.Titre, newIdStyle, _editOldIdStyle))
+                    if(!this._moderator.ModerationEditChronique(model.Titre, newIdStyle, TitreEdit.TitresStyles.Select(ts => ts.IdStyle.ToString()).Distinct().ToList()))
                     {
                         ModelState.AddModelError(string.Empty, "Votre chronique ne respecte pas la charte du site");
                         return this.View(model);

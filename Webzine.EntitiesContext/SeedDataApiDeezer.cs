@@ -136,7 +136,7 @@ namespace Webzine.EntitiesContext
                                 UrlEcoute = "https://www.youtube.com/embed/ow00U-slPYk",
                                 Duree = item.duration,
                                 IdArtiste = item.artist.id,
-                                DateCreation = DateTime.Now,
+                                DateCreation = new DateTime(rand.Next(1990,2022), rand.Next(1, 12), rand.Next(1,29), rand.Next(7, 23), rand.Next(0,59), rand.Next(0,59)),
                                 DateSortie = date,
                                 NbLikes = faker.Random.Int(0, 1000),
                                 NbLectures = faker.Random.Int(0, 1000),
@@ -167,7 +167,6 @@ namespace Webzine.EntitiesContext
                     })); 
 
                     context.AddRange(titreStyles);
-                    context.SaveChanges();
                     #endregion
                 }
             }); 

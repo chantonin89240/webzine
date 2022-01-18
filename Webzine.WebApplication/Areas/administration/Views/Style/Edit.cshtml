@@ -11,13 +11,12 @@
 
 	<!-- formulaire de modification de style -->
 	<form class="p-4" method="post" asp-area="administration" asp-controller="style" asp-action="edit" asp-route-id="@Model.Style.IdStyle">
-		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 		<div class="input-group mb-4 col-6 libelleStyle">
 			<label asp-for="Style.Libelle" class="d-flex align-items-center me-2" for="libelleInput">Libellé<span class="text-danger">*</span></label>
-			<input asp-for="Style.Libelle" value=@Model.Style.Libelle name="Style.Libelle" class="form-control me-2 rounded col-2" id="libelleInput" aria-describedby="styleCreate" placeholder="Style">
+			<input asp-for="Style.Libelle" name="Style.Libelle" value="@Model.Style.Libelle" class="form-control me-2 rounded col-2" id="libelleInput" aria-describedby="styleCreate" placeholder="Style">
+			<button type="submit" class="btn btn-primary rounded">Sauvegarder</button>
+			<span asp-validation-for="Style.Libelle" class="text-danger col-10 ms-5 ps-3"></span>
 		</div>
-		<button type="submit" class="btn btn-primary rounded">Sauvegarder</button>
-		<span asp-validation-for="Style.Libelle" class="text-danger"></span>
 	</form>
 
 	<!-- lien de retour vers la page Index de style admin -->
