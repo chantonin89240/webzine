@@ -83,14 +83,13 @@
         /// <param name="date">Date de création du Commentaire.</param>
         /// <param name="idTitre">ID du titre ou le commentaire a été fait.</param>
         /// <param name="titre">Titre ou le commentaire a été fait.</param>
-        public Commentaire(int id, string auteur, string contenu, DateTime date, int idTitre, Titre titre)
+        public Commentaire(int id, string auteur, string contenu, DateTime date, int idTitre)
         {
             this.IdCommentaire = id;
             this.Auteur = auteur;
             this.Contenu = contenu;
             this.DateCreation = date;
             this.IdTitre = idTitre;
-            this.Titre = titre;
         }
     }
 }
