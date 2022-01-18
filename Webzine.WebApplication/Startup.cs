@@ -124,7 +124,7 @@ namespace Webzine.WebApplication
                 .AddMvcOptions(options =>
                     {
                         options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
-                            _ => "Veuillez entrer une date.");
+                            _ => "Veuillez choisir une date.");
                     });
 
             // Définition du comportement de la création de champs type Datetime dans PostgreSQL (timestamp)

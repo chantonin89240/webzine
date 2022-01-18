@@ -22,7 +22,7 @@
 
         public int PageMax { get; set; }
 
-        public Titre Titre { get; set; }
+        public Titre? Titre { get; set; }
 
         /// <summary>
         /// Commentaire utilisé pour gérer l'envoi d'un commentaire au serveur.

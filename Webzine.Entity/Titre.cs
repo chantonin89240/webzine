@@ -97,9 +97,9 @@
         /// <summary>
         /// Durée du titre. En Secondes.
         /// </summary>
+        [Required(ErrorMessage = "Entrez la durée de votre titre en secondes.")]
         [Display(Name = "durée en secondes")]
         [Range(1, 1000000, ErrorMessage = "Entrez la durée de votre titre en secondes.")]
-        [Required]
         // [RegularExpression("([0-9]+)", ErrorMessage = "Entrez la durée de votre titres en secondes.")]
         [Column("Duree")]
         public int Duree { get; set; }

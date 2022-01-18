@@ -8,13 +8,12 @@
 	<h2 class="mb-3">Créer un style</h2>
 	<hr />
 	<form class="p-4" method="post" asp-area="administration" asp-controller="style" asp-action="create" >
-		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 		<div class="input-group mb-1 col-6 w-50">
 			<label asp-for="Style.Libelle" class="d-flex align-items-center me-2" for="libelleInput">Libellé<span class="text-danger">*</span></label>
-			<input asp-for="Style.Libelle" name="Style.Libelle" class="form-control me-2 rounded col-2" id="libelleInput" aria-describedby="styleCreate" placeholder="Style">	
+			<input asp-for="Style.Libelle" name="Style.Libelle" class="form-control me-2 rounded" id="libelleInput" aria-describedby="styleCreate" placeholder="Style">	
 			<button type="submit" class="btn btn-primary rounded">Sauvegarder</button>
 		</div>
-		<span asp-validation-for="Style.Libelle" class="text-danger"></span>
+		<span asp-validation-for="Style.Libelle" class="text-danger ms-5 ps-3"></span>
 	</form>
 	<a class="row text-decoration-none" asp-action="Index">Retour à l'administration des styles</a>
 </div>
