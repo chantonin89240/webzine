@@ -63,8 +63,8 @@
         /// Lien pour écouter au Titre.
         /// </summary>
         [Display(Name = "url d'écoute")]
-        [MinLength(13, ErrorMessage ="Minimum 13 caractères")]
-        [MaxLength(250, ErrorMessage ="Maximum 250 caractères")]
+        [MinLength(13, ErrorMessage ="Minimum 13 caractères pour l'url d'écoute")]
+        [MaxLength(250, ErrorMessage = "Maximum 250 caractères pour l'url d'écoute")]
         [Column("UrlEcoute")]
         public string? UrlEcoute { get; set; }
 
