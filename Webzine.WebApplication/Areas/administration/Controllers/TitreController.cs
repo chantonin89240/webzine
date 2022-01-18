@@ -145,7 +145,7 @@
             model.Titre.NbLectures = TitreEdit.NbLectures;
             model.Titre.NbLikes = TitreEdit.NbLikes;
             model.Artistes = _editArtisteSelect;
-            model.Titre.Libelle = TitreEdit.Libelle;
+            
             model.Styles =_stylesListForCheckbox;
 
             newIdStyle.ForEach(idStyle => {
@@ -175,7 +175,7 @@
                 // Log the error (uncomment ex variable name and write a log).
                 this.ModelState.AddModelError(string.Empty, "Impossible de sauvegarder les modifications. Essayez encore, et si le problème persiste, contactez l'administrateur.");
             }
-
+            model.Titre.Libelle = TitreEdit.Libelle;
             return this.View(model);
         }
 

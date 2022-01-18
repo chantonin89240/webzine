@@ -2,6 +2,7 @@ namespace Webzine.EntitiesContext
 {
     using Webzine.Entity;
     using Newtonsoft.Json;
+    using Webzine.Entity.Factory;
     using Bogus;
     public static class SeedDataApiDeezer
     {
@@ -146,6 +147,12 @@ namespace Webzine.EntitiesContext
                             context.Add(titre);
                         }
                     }
+                    if(titres.Count > 0)
+                    {
+                        List<Commentaire> commentaires = CommentaireFactory.CreateCommentaire(10, titres).ToList();
+                        context.AddRange(commentaires);
+                    }
+
                     context.SaveChanges();
                     #endregion
 
@@ -167,6 +174,9 @@ namespace Webzine.EntitiesContext
                     })); 
 
                     context.AddRange(titreStyles);
+
+                    
+                    //context.SaveChanges();
                     #endregion
                 }
             }); 

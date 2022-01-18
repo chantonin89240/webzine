@@ -1,6 +1,5 @@
 ﻿namespace Webzine.EntitiesContext
 {
-    using Newtonsoft.Json;
     using Webzine.Entity.Factory;
     using Webzine.Entity;
 
@@ -44,7 +43,7 @@
 
             context.SaveChanges();
 
-            Commentaires = CommentaireFactory.CreateCommentaire(defaultAmount, Titres);
+            Commentaires = CommentaireFactory.CreateCommentaire(defaultAmount, Titres.ToList());
             context.AddRange(Commentaires.ToList());
             // context.AddRange(commentaires.Select(comment => new Commentaire
             // {
