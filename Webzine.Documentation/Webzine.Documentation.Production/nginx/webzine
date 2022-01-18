@@ -1,0 +1,16 @@
+upstream webzine {
+    server 192.168.30.2:80;
+}
+
+server {
+	listen 80;
+        listen [::]:80;
+
+    location / {
+        proxy_pass http://webzine;
+        proxy_set_header    Host $host;
+        
+        proxy_connect_timeout 30;
+        proxy_send_timeout 30;
+    }
+}

@@ -1,0 +1,9 @@
+# Last Modified: Tue Jan  4 12:19:05 2022
+#include <tunables/global>
+
+/usr/bin/docker-proxy flags=(complain) {
+  #include <abstractions/base>
+
+  /usr/bin/docker-proxy mr,
+
+}

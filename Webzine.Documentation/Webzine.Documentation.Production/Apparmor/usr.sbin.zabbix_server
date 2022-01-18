@@ -1,0 +1,17 @@
+# Last Modified: Fri Jan  7 09:54:27 2022
+#include <tunables/global>
+
+/usr/sbin/zabbix_server flags=(complain) {
+  #include <abstractions/base>
+  #include <abstractions/dovecot-common>
+  #include <abstractions/nameservice>
+  #include <abstractions/openssl>
+  #include <abstractions/postfix-common>
+
+  /etc/gss/mech.d/ r,
+  /usr/sbin/zabbix_server mr,
+  owner /etc/zabbix/zabbix_server.conf r,
+  owner /run/zabbix/zabbix_server.pid wk,
+  owner /var/log/zabbix/zabbix_server.log rw,
+
+}

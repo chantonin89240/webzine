@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <date>2022-01-18T12:11:54Z</date>
+    <groups>
+        <group>
+            <name>Projet Zabbix</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template AppArmor</template>
+            <name>Template AppArmor</name>
+            <groups>
+                <group>
+                    <name>Projet Zabbix</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>AppArmor</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Intrusion</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>log.count[/var/log/syslog,&quot;apparmor=\&quot;ALLOWED\&quot;&quot;]</key>
+                    <applications>
+                        <application>
+                            <name>AppArmor</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{last()}&gt;=5</expression>
+                            <name>Intrusion on {HOST.NAME}</name>
+                            <priority>DISASTER</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Intrusion nom de service</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>log[/var/log/syslog,&quot;apparmor=\&quot;ALLOWED\&quot;&quot;,,,]</key>
+                    <trends>0</trends>
+                    <value_type>LOG</value_type>
+                    <applications>
+                        <application>
+                            <name>AppArmor</name>
+                        </application>
+                    </applications>
+                </item>
+            </items>
+        </template>
+    </templates>
+</zabbix_export>

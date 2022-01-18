@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <date>2022-01-18T12:36:49Z</date>
+    <groups>
+        <group>
+            <name>Projet Zabbix</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Update-SSH</template>
+            <name>Update-SSH</name>
+            <groups>
+                <group>
+                    <name>Projet Zabbix</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Update-SSH</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Update</name>
+                    <key>system.run[apt-show-versions | grep upgradeable | wc -l]</key>
+                    <delay>1d</delay>
+                    <applications>
+                        <application>
+                            <name>Update-SSH</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{last()}=0</expression>
+                            <name>Your system need an update</name>
+                            <priority>INFO</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>SSH</name>
+                    <key>system.run[who]</key>
+                    <delay>1h</delay>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <applications>
+                        <application>
+                            <name>Update-SSH</name>
+                        </application>
+                    </applications>
+                </item>
+            </items>
+        </template>
+    </templates>
+</zabbix_export>

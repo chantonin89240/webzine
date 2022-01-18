@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <date>2022-01-18T12:37:36Z</date>
+    <groups>
+        <group>
+            <name>Projet Zabbix</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template LLD</template>
+            <name>Template LLD</name>
+            <groups>
+                <group>
+                    <name>Projet Zabbix</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Service Discovery</name>
+                </application>
+            </applications>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Services : Découverte de PostgreSQL</name>
+                    <key>service.discovery</key>
+                    <delay>15m</delay>
+                    <filter>
+                        <conditions>
+                            <condition>
+                                <macro>{#SERVICE.NAME}</macro>
+                                <value>^[Pp]ostgres*</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <lifetime>1d</lifetime>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Service : {#SERVICE.NAME}</name>
+                            <key>service.info[{#SERVICE.NAME}]</key>
+                            <delay>5m</delay>
+                            <applications>
+                                <application>
+                                    <name>Service Discovery</name>
+                                </application>
+                            </applications>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+            </discovery_rules>
+        </template>
+    </templates>
+</zabbix_export>

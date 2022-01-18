@@ -1,0 +1,32 @@
+# Last Modified Tue Jan  4 124702 2022
+#include <tunables/global>
+
+/usr/sbin/nginx {
+  #include <abstractions/base>
+  #include <abstractions/dovecot-common>
+  #include <abstractions/nameservice>
+  #include <abstractions/openssl>
+  #include <abstractions/web-data>
+
+  capability dac_override,
+
+  /usr/sbin/nginx mr,
+  /usr/share/nginx/html/index.html r,
+  /var/log/nginx/access.log w,
+  /var/log/nginx/error.log w,
+  owner /etc/nginx/conf.d/ r,
+  owner /etc/nginx/mime.types r,
+  owner /etc/nginx/modules-enabled/ r,
+  owner /etc/nginx/nginx.conf r,
+  owner /var/lib/nginx/proxy/1/00/0000000001 rw,
+  owner /var/lib/nginx/proxy/2/00/0000000002 rw,
+  owner /var/lib/nginx/proxy/3/00/0000000003 rw,
+  owner /var/lib/nginx/proxy/4/00/0000000004 rw,
+  owner /var/lib/nginx/proxy/5/00/0000000005 rw,
+  owner /var/lib/nginx/proxy/6/00/0000000006 rw,
+  owner /var/lib/nginx/proxy/7/ w,
+  owner /var/lib/nginx/proxy/7/00/ w,
+  owner /var/lib/nginx/proxy/7/00/0000000007 rw,
+  owner /var/lib/nginx/proxy/8/ w,
+
+}
