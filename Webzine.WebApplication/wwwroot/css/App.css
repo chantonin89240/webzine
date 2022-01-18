@@ -7,12 +7,6 @@ h1 {
 h2{
 
 }
-span{
-    
-}
-.etoileRequired {
-    color: red;
-}
 a:link {
     text-decoration: none;
 }
@@ -99,6 +93,18 @@ a:active {
 /* css partie form admin editer / create */
 .formAdmin{
     margin-bottom: 4em;
+}
+.libelleStyle {
+    width: 50% !important;
+}
+
+@media screen and (max-width: 630px) {
+    .tableDisplay {
+        display: none !important;
+    }
+    .libelleStyle{
+        width: 100% !important;
+    }
 }
 
 

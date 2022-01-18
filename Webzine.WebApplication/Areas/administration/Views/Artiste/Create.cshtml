@@ -17,6 +17,7 @@
 			<div class="col-sm-10">
 				<input asp-for="@Model.Artiste.Nom" name="Artiste.Nom" aria-describedby="artisteCreate" type="text" class="form-control" id="nomArtiste" placeholder="Nom de l'artiste">
 			</div>
+			<span asp-validation-for="Artiste.Nom" class="text-danger"></span>
 		</div>
 
 		<div class="mb-3 row">
@@ -32,7 +33,7 @@
 				<button type="submit" class="btn btn-primary">Sauvegarder</button>
 			</div>
 		</div>
-		<span asp-validation-for="Artiste.Nom" class="text-danger"></span>
+		
 	</form>
 
 	<!-- lien de retour vers la page Index de artiste admin -->
