@@ -4,7 +4,7 @@
     using Microsoft.EntityFrameworkCore;
     using Webzine.Entity;
     using Webzine.Repository.Contracts;
-    using Webzine.Services;
+    using Webzine.Services.Contracts;
     using Webzine.WebApplication.Areas.Admin.ViewModels;
 
 
