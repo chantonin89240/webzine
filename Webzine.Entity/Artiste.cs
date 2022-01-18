@@ -20,7 +20,7 @@
         /// <summary>
         /// Nom de l'artiste.
         /// </summary>
-        [Required(ErrorMessage = "Libellé requis.")]
+        [Required(ErrorMessage = "le champ nom est vide.")]
         [MinLength(1, ErrorMessage = "Veuillez saisir le nom de l'artiste (de 1 à 50 caractères).")]
         [MaxLength(50, ErrorMessage = "Veuillez saisir le nom de l'artiste (de 1 à 50 caractères).")]
         [Display(Name = "Nom de l'artiste")]

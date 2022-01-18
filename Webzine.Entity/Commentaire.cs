@@ -25,9 +25,9 @@
         /// Non Null.
         /// </summary>
         [Display(Name = "Nom")]
-        [Required(ErrorMessage = "Merci de renseigner un nom.")]
-        [MinLength(2, ErrorMessage = "Une seule lettre n'est pas un nom.")]
-        [MaxLength(30, ErrorMessage = "Longueur de nom maximum: 30 caractères.")]
+        [Required(ErrorMessage = "le champ nom est vide.")]
+        [MinLength(2, ErrorMessage = "le nom doit comporter 2 caractères minimun.")]
+        [MaxLength(30, ErrorMessage = "le nom doit comporter 30 caractères maximun.")]
         [Column("Auteur")]
         public string? Auteur { get; set; }
 
@@ -36,7 +36,7 @@
         /// Non Null.
         /// </summary>
         [Display(Name = "Commentaire")]
-        [Required(ErrorMessage = "Merci d'écrire votre commentaire.")]
+        [Required(ErrorMessage = "le champs commentaire est vide.")]
         [MinLength(10, ErrorMessage = "Un commentaire contient au moins 10 caractères.")]
         [MaxLength(1000, ErrorMessage = "Commentaire trop long: maximum 1000 caractères.")]
         [Column("Contenu")]
