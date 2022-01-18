@@ -3,18 +3,19 @@ using NLog.Web;
 using Webzine.WebApplication;
   
 var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
-logger.Debug("init main");
+logger.Debug("Initialisation de l'application.");
 
 try
 {
   var app = Startup.Initialize(args);
+  logger.Debug("L'application est correctement configurée.");
   app.Run();
-  logger.Debug("App is running");
+  logger.Debug("L'application est démarrée.");
 }
-catch (Exception exception)
+catch (Exception e)
 {
     // NLog: catch setup errors
-    logger.Error(exception, "Stopped program because of exception");
+    logger.Error(e, "L'application a stoppé à cause d'une exception lors de sa configuration.");
     throw;
 }
 finally
