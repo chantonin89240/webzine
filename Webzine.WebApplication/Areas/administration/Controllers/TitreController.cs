@@ -46,7 +46,7 @@
         {
             var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             logger.Debug("Entrée dans index.");
-            this.model.Titres = this._titreRepository.FindAll().ToList();
+            this.model.Titres = this._titreRepository.FindAll().OrderBy(a => a.Artiste.Nom).ThenBy(t => t.Libelle).ToList();
             return this.View(this.model);
         }
 
@@ -59,8 +59,8 @@
         /// </returns>
         public IActionResult Create()
         {
-            _editArtisteSelect = this._artisteRepository.FindAll().ToList();
-            _stylesListForCheckbox = this._styleRepository.FindAll().ToList();
+            _editArtisteSelect = this._artisteRepository.FindAll().OrderBy(a => a.Nom).ToList();
+            _stylesListForCheckbox = this._styleRepository.FindAll().OrderBy(s => s.Libelle).ToList();
             this.model.Artistes = _editArtisteSelect;
             this.model.Styles = _stylesListForCheckbox;
             return this.View(this.model);
@@ -118,8 +118,8 @@
             this.model.Titre = this._titreRepository.Find(id);
             _editOldIdStyle = this.model.Titre.TitresStyles.Select(ts => ts.IdStyle.ToString()).Distinct().ToList();
             _dateCréation = this.model.Titre.DateCreation;
-            _editArtisteSelect = this._artisteRepository.FindAll().ToList();
-            _stylesListForCheckbox = this._styleRepository.FindAll().ToList();
+            _editArtisteSelect = this._artisteRepository.FindAll().OrderBy(a => a.Nom).ToList();
+            _stylesListForCheckbox = this._styleRepository.FindAll().OrderBy(s => s.Libelle).ToList();
             this.model.Artistes = _editArtisteSelect;
             this.model.Styles = _stylesListForCheckbox;
             return this.View(this.model);

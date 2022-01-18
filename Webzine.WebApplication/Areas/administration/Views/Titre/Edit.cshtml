@@ -13,16 +13,16 @@
 	<form class="formAdmin" method="post" asp-area="administration" asp-controller="titre" asp-action="edit" asp-route-id="@Model.Titre.IdTitre">
 		<div class="text-danger" asp-validation-summary=All></div>
 		<div class="mb-3 row">
-			<label for="nomArtiste" class="col-sm-2 col-form-label">Nom de l'artiste<span style="color: red;">*</span></label>
+			<label for="nomArtiste" class="col-sm-2 col-form-label">Nom de l'artiste<span class="text-danger">*</span></label>
 			<div class="col-sm-10">
 				<div class="col-sm-10">
-					<select asp-for="Titre.Artiste.Nom" name="model.Titre.IdArtiste" asp-items="SelectListArtiste" class="form-select" ></select>
+					<select asp-for="Titre.Artiste.IdArtiste" name="model.Titre.IdArtiste" asp-items="SelectListArtiste" class="form-select"></select>
 				</div>
 			</div>
 		</div>
 
 		<div class="mb-3 row">
-			<label asp-for="Titre.Libelle" class="col-sm-2 col-form-label">Titre<span style="color: red;">*</span></label>
+			<label asp-for="Titre.Libelle" class="col-sm-2 col-form-label">Titre<span class="text-danger">*</span></label>
 			<div class="col-sm-10">
 				<input asp-for="Titre.Libelle" name="model.Titre.Libelle" type="text" class="form-control" id="libelleTitre" value="@Model.Titre.Libelle"  placeholder="Libelle du Titre"></input>
 			</div>
@@ -30,7 +30,7 @@
 		</div>
 
         <div class="mb-3 row">
-			<label asp-for="Titre.Chronique" class="col-sm-2 col-form-label">Chronique<span style="color: red;">*</span></label>
+			<label asp-for="Titre.Chronique" class="col-sm-2 col-form-label">Chronique<span class="text-danger">*</span></label>
 			<div class="col-sm-10">
 				<textarea asp-for="Titre.Chronique" name="model.Titre.Chronique" class="form-control" id="chroniqueTitre" rows="8"  placeholder="Chronique du Titre">@Model.Titre.Chronique</textarea>
 			</div>
@@ -38,12 +38,12 @@
 		</div>
 
         <div class="mb-3 row">
-			<label asp-for="Titre.DateSortie" class="col-sm-2 col-form-label">Date de sortie<span style="color: red;">*</span></label>
+			<label asp-for="Titre.DateSortie" class="col-sm-2 col-form-label">Date de sortie<span class="text-danger">*</span></label>
 			<div class="col-sm-4">
 				<input asp-for="Titre.DateSortie" asp-format="{0:yyyy-MM-dd}" name="model.Titre.DateSortie" class="form-control" />
 			</div>
 
-            <label asp-for="Titre.Duree" class="col-sm-2 col-form-label">Durèe en seconde<span style="color: red;">*</span></label>
+            <label asp-for="Titre.Duree" class="col-sm-2 col-form-label">Durèe en seconde<span class="text-danger">*</span></label>
 			<div class="col-sm-4" style="display: inline-flex;">
 				<input asp-for="Titre.Duree" name="model.Titre.Duree" type="number" class="form-control" id="dureeTitre" value="@Model.Titre.Duree" ></input>
 				<label class="input-group-text">Secondes</label>
@@ -53,7 +53,7 @@
 		</div>
 
         <div class="mb-3 row">
-			<label asp-for="Titre.UrlJaquette" class="col-sm-2 col-form-label">Jaquette de l'album<span style="color: red;">*</span></label>
+			<label asp-for="Titre.UrlJaquette" class="col-sm-2 col-form-label">Jaquette de l'album<span class="text-danger">*</span></label>
 			<div class="col-sm-10">
 				<input asp-for="Titre.UrlJaquette" name="model.Titre.UrlJaquette" type="text" class="form-control" id="jaquetteTitre" value="@Model.Titre.UrlJaquette"  placeholder="Jaquette de l'album"></input>
 			</div>
@@ -92,14 +92,14 @@
 		</div>
 
 		<div class="mb-3 row">
-			<label asp-for="Titre.NbLectures" class="col-sm-2 col-form-label">Nb de lectures<span style="color: red;">*</span></label>
+			<label asp-for="Titre.NbLectures" class="col-sm-2 col-form-label">Nb de lectures<span class="text-danger">*</span></label>
 			<div class="col-sm-10">
 				<p name="model.Titre.NbLectures">@Model.Titre.NbLectures</p>
 			</div>
 		</div>
 
         <div class="mb-3 row">
-			<label asp-for="Titre.NbLikes" class="col-sm-2 col-form-label">Nb de likes<span style="color: red;">*</span></label>
+			<label asp-for="Titre.NbLikes" class="col-sm-2 col-form-label">Nb de likes<span class="text-danger">*</span></label>
 			<div class="col-sm-10">
 				<p name="model.Titre.NbLikes">@Model.Titre.NbLikes</p>
 			</div>

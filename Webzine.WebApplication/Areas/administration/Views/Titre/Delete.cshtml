@@ -7,7 +7,7 @@
 	<hr />
 
 	<!-- formulaire de suppression de titre -->
-	<form method="post" asp-area="administration" asp-controller="titre" asp-action="delete" asp-route-id="@Model.Titre.IdTitre" >
+	<form method="post" asp-area="administration" asp-controller="titre" asp-action="delete" asp-route-id="@Model.Titre.IdTitre" class="mb-5">
 		<p class="row ms-0">Etes-vous sûr de vouloir supprimer le titre "@Model.Titre.Libelle" de @Model.Titre.Artiste.Nom ?</p>
 		<button type="submit" class="btn btn-danger">Supprimer</button>
 	</form>
