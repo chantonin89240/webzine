@@ -99,6 +99,18 @@
             this._context.SaveChanges();
         }
 
+        public void DecrementNbLectures(Titre titre)
+        {
+            int nbTotal = this._context.Titres.FirstOrDefault(t => t == titre).NbLectures - 1;
+
+            if(nbTotal > 0)
+            {
+                this._context.Titres.FirstOrDefault(t => t == titre).NbLectures = nbTotal;
+                this._context.Titres.Update(titre);
+                this._context.SaveChanges();
+            }
+        }
+
         public void IncrementNbLikes(Titre titre)
         {
             int nbTotal = this._context.Titres.FirstOrDefault(t => t == titre).NbLikes + 1;
@@ -130,6 +142,8 @@
         public void Update(Titre titre)
         {
             this._context.Titres.Update(titre);
+
+            this._context.Entry(titre).State = EntityState.Modified;
             this._context.SaveChanges();
         }
 

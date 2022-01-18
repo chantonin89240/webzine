@@ -30,35 +30,20 @@ else
         @foreach (Titre titre in Model.Titres)
         {
             <li class="media">
-                <a asp-controller="Titre" asp-action="Titre" asp-route-idTitre="@titre.IdTitre">
-                    <img src=@titre.UrlJaquette class="icon mr-3" alt="..." />
-                </a>
+                <div>
+                    <a asp-controller="Titre" asp-action="Titre" asp-route-idTitre="@titre.IdTitre">
+                        <img src=@titre.UrlJaquette class="iconRechercheStyle mr-3 mb-5" alt="..." />
+                    </a>
+                </div>
                 <div class="media-body">
                     <div class=" d-flex flex-row">
-                        <a asp-controller="Artiste" asp-action="Artiste" asp-route-nomArtiste="@titre.Artiste.Nom">
-                            <h5 class="mt-0 mb-1">@titre.Artiste.Nom</h5>
-                        </a>
-                        -
-                        <a asp-controller="Titre" asp-action="Titre" asp-route-idTitre="@titre.IdTitre">
-                            <h5 class="mt-0 mb-1"> @titre.Libelle</h5>
-                        </a>
+                        <p class="mt-0 mb-1  fs-4"><a asp-controller="Artiste" asp-action="Artiste" asp-route-nomArtiste="@titre.Artiste.Nom">@titre.Artiste.Nom</a> - 
+                            <a asp-controller="Titre" asp-action="Titre" asp-route-idTitre="@titre.IdTitre">@titre.Libelle</a>
+                        </p>
                     </div>
-
-                    Durée : @Model.FormatLength(titre)
+                    <p>Durée : @Model.FormatLength(titre)</p>
                 </div>
             </li>
         }
     </ul>
 }
-
-<style>
-    .icon {
-        max-width: 60px;
-        max-height: 60px;
-        margin-bottom: 10px
-    }
-
-    .puce {
-        margin-right: 5px;
-    }
-</style>

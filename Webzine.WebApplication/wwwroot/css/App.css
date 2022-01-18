@@ -66,6 +66,10 @@ a:active {
 .imPopHome{
     max-height: 33vh;
 }
+.iconRechercheStyle{
+    width: 5em;
+    height: 5em;
+}
 
 @media screen and (max-width: 550px) {
     .imgJaquetteTitre {

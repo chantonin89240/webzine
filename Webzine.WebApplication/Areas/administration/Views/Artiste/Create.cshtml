@@ -13,11 +13,12 @@
 	<form class="formAdmin" method="post" asp-area="administration" asp-controller="artiste" asp-action="create">
 	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 		<div class="mb-3 row">
-			<label for="nomArtiste" class="col-sm-2 col-form-label">Nom de l'artiste<span class="etoileRequired">*</span></label>
+			<label for="nomArtiste" class="col-sm-2 col-form-label">Nom de l'artiste<span class="text-danger">*</span></label>
 			<div class="col-sm-10">
 				<input asp-for="@Model.Artiste.Nom" name="Artiste.Nom" aria-describedby="artisteCreate" type="text" class="form-control" id="nomArtiste" placeholder="Nom de l'artiste">
 				<span asp-validation-for="Artiste.Nom" class="text-danger"></span>
 			</div>
+			
 		</div>
 
 		<div class="mb-3 row">

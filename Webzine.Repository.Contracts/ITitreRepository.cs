@@ -18,6 +18,8 @@
 
         void IncrementNbLectures(Titre titre);
 
+        void DecrementNbLectures(Titre titre);
+
         void IncrementNbLikes(Titre titre);
 
         IEnumerable<Titre> Search(string mot);
