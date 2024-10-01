@@ -17,31 +17,31 @@
 |UrlEcoute      |Lien sur un m&eacute;dia video permettant d'&eacute;couter le Titre
 |Artiste        |(__C#__) Entit&eacute; Artiste Attach&eacute;e au Titre
 |Commentaires   | (__C#__) Entit&eacute;s Commentaire rattach&eacute;s au Titre
----
+
 ## Styles:
 |variable   |description|
 |--------   |-----------|
 |IdStyle    |Num&eacute;ro identifiant du style.
 |Libelle    |Libell&eacute; du style (ex: Rock).
 |TitresStyle| (__C#__) Liste des liens entre les Titres et les Styles
----
+
 ## TitreStyles:
 Correspond &agrave; un lien entre un Titre et un Style dans la base de donn&eacute;es.
-|variable   |description|
-|--------   |-----------|
+|variable   |description
+|--------   |-----------
 |IdStyle    |Num&eacute;ro identifiant du Style de la relation
 |IdTitre    |Num&eacute;ro identifiant du Titre de la relation
 |Style      |(__C#__) Style de la relation
 |Titre      |(__C#__) Titre de la relation
----
+
 ## Artistes:
-|variable   |description|
-|--------   |-----------|
+|variable   |description
+|--------   |-----------
 |IdArtiste  |Num&eacute;ro identifiant de l'Artiste.
 |Nom        |Nom de l'Artiste.
 |Biographie |Biographie de l'Artiste.
 |Titres     |(__C#__) Liste des Titres de l'artiste.
----
+
 ## Commentaires:
 |variable       |description
 |--------       |-----------
